@@ -3,12 +3,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config()
 
-//import helpers
+//import schemas for each collection of documents
 const Customer = require("./db/schema/customer");
 
 
-
-//Connect to database - authentication is in the private string in .env
+//Connect to database - the access string is imported from .env
 mongoose
 .connect(process.env.DB_CONNECTION_STRING)
 .then(() => {console.log("Connected to database")})
@@ -18,17 +17,21 @@ mongoose
 const db = mongoose.connection;
 
 
-
-
 //----------Start the app
 const PORT = 3001;
 const app = express()
-app.use(express.json()) //Sane purpose as body parser
+app.use(express.json()) //Same purpose as body parser
 
 
 app.get("/", (req, res) => {
-    console.log("Home request successful")
-    res.json({hello: "Worldddd"})
+    res.json({
+        message: "Welcome to the Collab||8 server! 🎉",
+        routes: [
+            "GET /users",
+            "GET /chats",
+        ]
+    
+    })
 })
 
 
