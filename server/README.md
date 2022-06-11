@@ -1,4 +1,9 @@
-## Backend Requirements
+## How to use
+
+- `npm start` to run server
+- `npm db:reset` to reset database
+
+### Backend Requirements
 
 - Mongoose
 - Nodemon
@@ -10,11 +15,6 @@ _--Save-dev_
 - Nodemon
 - Dotenv
 
-## Bugs and to-do
-
-[ ] Seed script breaks on database disconnection, must be killed with Ctrl-C
-[ ] Seed script should be reformatted
-
-## Notes for later
+### Notes for later
 
 - When deployed, the script should be 'node', not 'nodemon'

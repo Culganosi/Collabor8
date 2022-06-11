@@ -5,8 +5,6 @@ const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
 
-
-
 //import schemas for each collection of documents
 const User = require("./db/schema/01-users");
 
