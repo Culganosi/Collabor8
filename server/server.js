@@ -1,11 +1,14 @@
 //import packages
 const express = require("express");
 const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
-//import schemas for each collection of documents
-const Customer = require("./db/schema/customer");
 
+
+
+//import schemas for each collection of documents
+const User = require("./db/schema/01-users");
 
 //Connect to database - the access string is imported from .env
 mongoose
@@ -35,30 +38,37 @@ app.get("/", (req, res) => {
 })
 
 
-app.post("/customer", async (req, res) => {
-
-    const newCustomer = new Customer({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName
+//Registration / creating a new user
+//--Creates a new user in the database [x]
+//--Logs the user into a session []
+app.post("/users", async (req, res) => {
+    const newUser = new User({
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 10),
+        userhandle: req.body.userhandle
     })
-
-    Customer.create(newCustomer)
+    User.create(newUser)
     .then(() => {
-        res.send("Customer added")
-    })
-    .catch(err => {
-        // console.log("Error: " + err);
-        res.send(err)
-    })
 
+        //Create cookie session here
+
+        res.status(200).json({message: "success", error: null})
+    })
+    .catch(dbError => {
+        console.log(dbError.message)
+        if (dbError.code === 11000){
+            res.status(400).json({message: "failure", error: "An account with this email already exists"})
+        } else {
+            res.status(400).json({message: "failure", error: dbError.message})
+        }
+    })
 })
 
 
-app.get("/customers", async (req, res) => {
-    Customer.find({}, (err, result) => {
-        res.send(result.map(customer => customer.lastName))
-    })
+//Edit user information (also works for filling out the profile after registration)
+app.patch("/users", async (req, res) => {
 })
+
 
 
 
