@@ -131,7 +131,7 @@ const readline = require('readline').createInterface({
 
 readline.question(`
 Resetting the DB will wipe all your data and replace it with contents of /db/seeds.
-Enter Y if you're sure.\n`, (confirm) => {
+Enter Y/y if you're sure.\n`, (confirm) => {
     
     //IF confirmed: Connect --> ResetDB --> Disconnect
     if (confirm==="Y" || confirm=="y") {
