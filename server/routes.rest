@@ -1,10 +1,14 @@
-#Returns data for the "Browse users" page
-#Requires a body with filtering and sorting options
+# Returns data for the "Browse users" page
+# Requires a body with filtering and sorting options
+# Role and Userhandle can be found by substring 
+# e.g. "developer" will find all types of developers and "ska" will find all userhandles that contain "ska"
 GET http://localhost:3001/users
 Content-Type: application/json
-
 {
-    "filterInput": {"role": "Back-end developer", "skills": ["SQL"]},
+    "filterInput": {
+        "userhandle": "ska", 
+        "role": "developer", 
+        "skills": ["SQL"]},
     "sortInput": "-createdAt" 
 }
 
@@ -80,6 +84,7 @@ Content-Type: application/json
 
 #Returns active proposals only for the "Browse users" page
 #Requires a body with filtering and sorting options
+# Title can be found by substring 
 GET http://localhost:3001/proposals
 Content-Type: application/json
 

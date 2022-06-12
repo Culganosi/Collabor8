@@ -6,14 +6,26 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
         const {filterInput, sortInput} = req.body;
-        const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
-
+        
+        //If the client included a userhandle or a role in the filtering parameter
+        //Modify such that it will find anything where it is a substring, not only an exact match        
+        //https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
+        if (filterInput.userhandle) {
+            filterInput.userhandle = { "$regex": filterInput.userhandle, "$options": "i" }
+        }
+        
+        if (filterInput.role) {
+            filterInput.role = { "$regex": filterInput.role, "$options": "i" }
+        }
+        
         //If the client included a skills list as a filtering parameter
         //Modify so that the skills must INCLUDE the input but don't need to be an identical list
         //https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
-        if  (filterInput.skills) {
+        if (filterInput.skills) {
             filterInput.skills = {$all : filterInput.skills}
         }
+        
+        const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
 
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
