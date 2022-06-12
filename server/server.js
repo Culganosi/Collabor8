@@ -46,6 +46,14 @@ app.get("/", (req, res) => {
             "GET /users/:userId",
             "GET /users/:userId/chat-previews",
             "POST /users",
+            "PATCH /users/userId",
+            "GET /chats/:chatId",
+            "PATCH /chats/:chatId",
+            "GET /proposals",
+            "GET /proposals/:proposalId",
+            "POST /proposals",
+            "PATCH /proposals",
+            "DELETE /proposals/:proposalId",
             "GET /options"
         ]
     })

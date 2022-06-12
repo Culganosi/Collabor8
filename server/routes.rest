@@ -50,10 +50,6 @@ Content-Type: application/json
     "bio": "Ths is an updated bio to test"
 }
 
-###
-
-# All the options for: social media, roles, skills, proposal categories
-GET http://localhost:3001/options
 
 ###
 
@@ -132,3 +128,9 @@ Content-Type: application/json
 
 #When the author deletes their proposal
 DELETE http://localhost:3001/proposals/62a66ea2945d0a144325d5af
+
+
+###
+
+# All the options for: social media, roles, skills, proposal categories
+GET http://localhost:3001/options
