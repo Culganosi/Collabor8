@@ -27,6 +27,8 @@ Content-Type: application/json
     "userhandle": "newUser"
 }
 
+###
 
+GET http://localhost:3001/options
 
 
