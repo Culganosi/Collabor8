@@ -42,8 +42,13 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Create a new proposal
     router.post("/", async (req, res) => {
-         //TODO: 
-    
+          const inputInfo = req.body
+          const newProposal = new Proposal({...inputInfo, createdAt: Date.now()})
+          newProposal.save()
+          .then((insertedProposal) => {
+               res.status(201).json({message: "successs", proposalId: insertedProposal._id})
+          })
+          .catch((error) => res.status(500).json({message: error.message}))
     })
 
     //Edit proposal (change to active/inactive, or change content details)
