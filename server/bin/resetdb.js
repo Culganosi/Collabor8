@@ -93,7 +93,8 @@ const resetDB = async () => {
 
     //Add user entries
     for (let seedUserData of seedUsers) {
-        await User.create(seedUserData)
+        //When adding a user, sort skills in alphabetical order
+        await User.create({...seedUserData, skills: seedUserData.skills.sort()})
         console.log(`Added user @${seedUserData.userhandle}`)
     }
 

@@ -1,0 +1,11 @@
+#Returns data for the "Browse users" page, with new users first
+#Potential todo: filter and sort depending on user choice
+#(or should this be done on the front-end?)
+GET http://localhost:3001/users
+
+###
+
+GET http://localhost:3001/users/62a51ac319c0542d13437a85
+
+
+

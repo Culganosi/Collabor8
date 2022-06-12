@@ -4,9 +4,14 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 
-
 //import schemas for each collection of documents
 const User = require("./db/schema/01-users");
+const Proposal = require("./db/schema/02-proposals");
+const Chat = require("./db/schema/03-chats");
+const Option = require("./db/schema/04-options");
+
+//import routes
+const usersRoutes = require("./routes/users")
 
 //Connect to database - the access string is imported from .env
 mongoose
@@ -14,26 +19,29 @@ mongoose
 .then(() => {console.log("Connected to database")})
 .catch((err) => {console.log("Error: " + err)});
 
-//Store connection to database
-const db = mongoose.connection;
-
 
 //----------Start the app
 const PORT = 3001;
 const app = express()
-app.use(express.json()) //Same purpose as body parser
+app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
 
+//-----Redirect to routes and pass them the database schemas
+app.use("/users", usersRoutes(User))
+
+
+
+//----The home route
 app.get("/", (req, res) => {
     res.json({
         message: "Welcome to the Collab||8 server! 🎉",
         routes: [
             "GET /users",
-            "GET /chats",
+            "GET /users/:userId",
         ]
-    
     })
 })
+
 
 
 //Registration / creating a new user
