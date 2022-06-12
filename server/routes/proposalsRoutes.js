@@ -9,14 +9,14 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
           const {filterInput, sortInput} = req.body;
           
-          if (filterInput.title) {
+          if (filterInput?.title) {
                filterInput.title = { "$regex": filterInput.title, "$options": "i" }
           }
           
           //TODO: This is not right, it should return proposals that seek ANY of the skills listed, not ALL of them
           //Figure out how to do this but keep this for now
           //https://stackoverflow.com/questions/19648841/how-can-i-handle-array-intersection-in-find
-          if  (filterInput.seeking) {
+          if  (filterInput?.seeking) {
                filterInput.seeking = {$all : filterInput.seeking}
           }
           
@@ -40,15 +40,32 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
           res.json(targetProposal)
     })
 
-    //Create a new proposal
+    //Create a new proposal and add it to the list of the authors either active or inactive proposals
     router.post("/", async (req, res) => {
           const inputInfo = req.body
+
+          const author = await User.findById(inputInfo.author)
+          if (!author) {
+               return res.status(404).json({message: "Invalid author ID"})
+          }
+
           const newProposal = new Proposal({...inputInfo, createdAt: Date.now()})
-          newProposal.save()
-          .then((insertedProposal) => {
-               res.status(201).json({message: "successs", proposalId: insertedProposal._id})
-          })
-          .catch((error) => res.status(500).json({message: error.message}))
+          insertedProposal = await newProposal.save()
+
+          if (!insertedProposal) {
+               return res.status(500).json({message: error.message})
+          }
+
+          if (inputInfo.status === "Active") {    
+               author.activeProposals.push(insertedProposal._id)
+          } else {
+               author.inactiveProposals.push(insertedProposal._id)
+          }      
+
+          await author.save();
+
+          return res.status(201).json({message: "successs", proposalId: insertedProposal._id})
+
     })
 
     //Edit proposal (change to active/inactive, or change content details)

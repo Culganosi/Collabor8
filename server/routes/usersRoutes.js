@@ -10,18 +10,18 @@ module.exports = (User, Chat, bcrypt) => {
         //If the client included a userhandle or a role in the filtering parameter
         //Modify such that it will find anything where it is a substring, not only an exact match        
         //https://stackoverflow.com/questions/26814456/how-to-get-all-the-values-that-contains-part-of-a-string-using-mongoose-find
-        if (filterInput.userhandle) {
+        if (filterInput?.userhandle) {
             filterInput.userhandle = { "$regex": filterInput.userhandle, "$options": "i" }
         }
         
-        if (filterInput.role) {
+        if (filterInput?.role) {
             filterInput.role = { "$regex": filterInput.role, "$options": "i" }
         }
         
         //If the client included a skills list as a filtering parameter
         //Modify so that the skills must INCLUDE the input but don't need to be an identical list
         //https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
-        if (filterInput.skills) {
+        if (filterInput?.skills) {
             filterInput.skills = {$all : filterInput.skills}
         }
 
@@ -36,11 +36,9 @@ module.exports = (User, Chat, bcrypt) => {
 
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-        const exclusionParams = {chats: 0, inactiveProposals: 0, "__v": 0}
-        //TODO: 
-        //Replace this with: if the request is coming from a logged in user about themselves
-        //Then let them see the archived proposals too
-        if(false) delete exclusionParams.inactiveProposals;
+        const exclusionParams = {chats: 0, "__v": 0}
+        //TODO: For now showing both active and inactive proposals
+        //But eventually only include inactive for self-profiles
 
         const userData = await User.findById(req.params.userId, exclusionParams).sort("-createdAt")
         res.json(userData)
