@@ -76,8 +76,6 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     //--Logs the user into a session []
     router.post("/", async (req, res) => {
 
-        console.log("in here")
-
         const newUser = new User({
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 10),
@@ -85,13 +83,14 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
         })
         User.create(newUser)
         .then(() => {
-            //Create cookie session here
+            //Create sessions here
             res.status(200).json({message: "success", error: null})
         })
         .catch(dbError => {
-            console.log(dbError.message)
             if (dbError.code === 11000){
-                res.status(400).json({error: false, message: "An account with this email already exists"})
+                let problemInput = "email"
+                if (dbError.keyValue.userhandle) problemInput = "userhandle"
+                res.status(400).json({error: false, message: `An account with this ${problemInput} already exists`})
             } else {
                 res.status(500).json({error: true, message: dbError.message})
             }

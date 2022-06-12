@@ -6,7 +6,6 @@
 ### Backend Requirements
 
 - Mongoose
-- Nodemon
 - Express
 - bcryptjs
 

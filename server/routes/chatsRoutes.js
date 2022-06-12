@@ -7,7 +7,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Get chat history
     router.get("/:chatId", async (req, res) => {
-       // const chatId = req.params.chatId;
+       const chatId = req.params.chatId;
 
 
     })

@@ -11,7 +11,7 @@ Content-Type: application/json
 ###
 
 #Returns data for the user profile page
-#NOTE: If you did a DB reset, this userID will not work anymore, so change it
+#NOTE: If you did a DB reset, this userID will not work anymore, so change it to a user that exists
 GET http://localhost:3001/users/62a5f95625c58e7f389244f6
 
 ###
@@ -27,13 +27,19 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-    "email": "something@something.ca",
+    "email": "something@something.caa",
     "password": "123",
-    "userhandle": "newUser"
+    "userhandle": "newUser2"
 }
 
 ###
 
+# All the options for: social media, roles, skills, proposal categories
 GET http://localhost:3001/options
+
+###
+
+#Get the full chat history
+GET http://localhost:3001/chats/
 
 

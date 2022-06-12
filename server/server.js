@@ -47,6 +47,7 @@ app.get("/", (req, res) => {
             "GET /users/:userId",
             "GET /users/:userId/chat-previews",
             "POST /users",
+            "GET /options"
         ]
     })
 })
