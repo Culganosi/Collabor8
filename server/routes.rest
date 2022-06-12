@@ -40,6 +40,6 @@ GET http://localhost:3001/options
 ###
 
 #Get the full chat history
-GET http://localhost:3001/chats/
+GET http://localhost:3001/chats/62a5f95925c58e7f38924539
 
 
