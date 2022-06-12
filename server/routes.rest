@@ -7,11 +7,23 @@ GET http://localhost:3001/users
 
 #Returns data for the user profile page
 #NOTE: If you did a DB reset, this userID will not work anymore, so change it
-GET http://localhost:3001/users/62a5538a52845d285179cbed
+GET http://localhost:3001/users/62a5d1cd8048c31f3cf12d16
 
 ###
 
-GET http://localhost:3001/users/62a5538a52845d285179cbed/chat-previews
+#Returns data for the chat list of a certain user, those with the most recent messages first
+GET http://localhost:3001/users/62a5d1cd8048c31f3cf12d16/chat-previews
+
+###
+
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+    "email": "something@something.ca",
+    "password": "123",
+    "userhandle": "newUser"
+}
 
 
 

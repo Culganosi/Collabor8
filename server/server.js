@@ -11,6 +11,9 @@ const Chat = require("./db/schema/03-chats");
 const Option = require("./db/schema/04-options");
 
 //import routes
+const chatsRoutes = require("./routes/chats")
+const logRoutes = require("./routes/log")
+const proposalsRoutes = require("./routes/proposals")
 const usersRoutes = require("./routes/users")
 
 //Connect to database - the access string is imported from .env
@@ -26,9 +29,11 @@ const app = express()
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
 
-//-----Redirect to routes and pass them the database schemas
-app.use("/users", usersRoutes(User, Chat, Proposal))
-
+//-----Redirect to routes and pass them things imported above
+app.use("/chats", chatsRoutes(User, Chat, Proposal, bcrypt))
+app.use("/log", logRoutes(User, Chat, Proposal, bcrypt))
+app.use("/proposals", proposalsRoutes(User, Chat, Proposal, bcrypt))
+app.use("/users", usersRoutes(User, Chat, Proposal, bcrypt))
 
 
 //----The home route
@@ -40,7 +45,6 @@ app.get("/", (req, res) => {
             "GET /users/:userId",
             "GET /users/:userId/chat-previews",
             "POST /users",
-            "PATCH /users",
         ]
     })
 })

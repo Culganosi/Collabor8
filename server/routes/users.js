@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, Proposal) => {
+module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
@@ -33,11 +33,11 @@ module.exports = (User, Chat, Proposal) => {
      
         const chatPreviews = []
 
-        const targetUser = await User.findOne({_id: userId}, {chats: 1}).sort("-createdAt")
+        const targetUser = await User.findOne({_id: userId}, {chats: 1})
 
         //Process each chat into a chat preview and add it the list
         for (let chatId of targetUser.chats){
-            const chatData = await Chat.findOne({_id: chatId});
+            const chatData = await Chat.findOne({_id: chatId}).sort("lastMessageAt")
 
             //Don't send the entire chat, only get the info needed for preview
             const lastMessage = chatData.messages[chatData.messages.length - 1];
@@ -51,8 +51,6 @@ module.exports = (User, Chat, Proposal) => {
                 lastMessage,
                 partners,
                 _id: chatData._id,
-                createdAt: chatData.createdAt,
-               
             }
             chatPreviews.push(chatPreview)
         }
@@ -66,7 +64,10 @@ module.exports = (User, Chat, Proposal) => {
     //Registration / creating a new user
     //--Creates a new user in the database [x]
     //--Logs the user into a session []
-    router.post("/users", async (req, res) => {
+    router.post("/", async (req, res) => {
+
+        console.log("in here")
+
         const newUser = new User({
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password, 10),
@@ -74,9 +75,7 @@ module.exports = (User, Chat, Proposal) => {
         })
         User.create(newUser)
         .then(() => {
-
             //Create cookie session here
-
             res.status(200).json({message: "success", error: null})
         })
         .catch(dbError => {
@@ -89,9 +88,8 @@ module.exports = (User, Chat, Proposal) => {
         })
     })
 
-
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/users", async (req, res) => {
+    router.patch("/:userId", async (req, res) => {
     })
 
 
