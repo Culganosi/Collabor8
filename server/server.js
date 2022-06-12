@@ -27,7 +27,7 @@ app.use(express.json()) //Same purpose as body parser, lets server accept JSON a
 
 
 //-----Redirect to routes and pass them the database schemas
-app.use("/users", usersRoutes(User))
+app.use("/users", usersRoutes(User, Chat, Proposal))
 
 
 

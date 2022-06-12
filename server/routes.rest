@@ -5,7 +5,14 @@ GET http://localhost:3001/users
 
 ###
 
-GET http://localhost:3001/users/62a51ac319c0542d13437a85
+#Returns data for the user profile page
+#NOTE: If you did a DB reset, this userID will not work anymore, so change it
+GET http://localhost:3001/users/62a5538a52845d285179cbed
+
+###
+
+GET http://localhost:3001/users/62a5538a52845d285179cbed/chatPreviews
+
 
 
 
