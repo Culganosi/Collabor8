@@ -14,12 +14,13 @@ _--Save-dev_
 - Nodemon
 - Dotenv
 
-### Notes for later
+### Todo
 
-- When deployed, the script should be 'node', not 'nodemon'
-
-### Todo (not crucial)
-
+- Receiving images and S3 storage
 - Changing filter of sought roles in get /proposals
 - More thorough authorization of only the logged in owner being able to see full data of some things
 - Handling different error cases and sending back correct error codes and messages
+
+### Notes for later
+
+- When deployed, the script should be 'node', not 'nodemon'

@@ -52,9 +52,12 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     })
 
     //Edit proposal (change to active/inactive, or change content details)
+    //See Patch route for users for comments
     router.patch("/:proposalId", async (req, res) => {
-         //TODO: 
-
+          const inputFields = req.body;
+          Proposal.updateOne({"_id": req.params.proposalId}, inputFields)
+          .then(() => res.status(200).json({message: "success"}))
+          .catch((error) => res.status(400).json({message: error.message}))
     })
 
     //Permanently delete a proposal

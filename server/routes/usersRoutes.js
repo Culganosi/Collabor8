@@ -109,8 +109,6 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
 
-        console.log(req.body)
-
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
         //Find user by ID and update the fields provided

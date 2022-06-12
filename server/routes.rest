@@ -1,4 +1,8 @@
-# Returns data for the "Browse users" page
+# ----NOTE: For routes that include the ID
+# ----------make sure that documents with those IDs are actually in the database
+
+
+#Returns data for the "Browse users" page
 # Requires a body with filtering and sorting options
 # Role and Userhandle can be found by substring 
 # e.g. "developer" will find all types of developers and "ska" will find all userhandles that contain "ska"
@@ -16,7 +20,6 @@ Content-Type: application/json
 ###
 
 #Returns data for the user profile page
-#NOTE: If you did a DB reset, this userID will not work anymore, so change it to a user that exists
 GET http://localhost:3001/users/62a6641b0869e44489be9fad
 
 ###
@@ -110,5 +113,15 @@ Content-Type: application/json
     "author": "62a6641b0869e44489be9fba",
     "status": "Active",
     "description": "This is some other new request",
-    "seeking": "Full-stack developer"
+    "seeking": ["Full-stack developer"]
+}
+
+###
+
+#When the user creates a new proposal
+PATCH http://localhost:3001/proposals/62a669d235585a8db99241af
+Content-Type: application/json
+
+{
+    "status": "Inactive"
 }
