@@ -89,11 +89,12 @@ Content-Type: application/json
 #Returns active proposals only for the "Browse users" page
 #Requires a body with filtering and sorting options
 # Title can be found by substring 
+# Note: only returns Active proposals
 GET http://localhost:3001/proposals
 Content-Type: application/json
 
 {
-    "filterInput": {"seeking": ["Full-stack developer"]},
+    "filterInput": {"seeking": ["Front-end developer"]},
     "sortInput": "-createdAt" 
 }
 
@@ -101,7 +102,7 @@ Content-Type: application/json
 ###
 
 # Returns details of a proposal to be shown on the individual proposal page
-GET http://localhost:3001/proposals/62a6641d0869e44489be9fdd
+GET http://localhost:3001/proposals/62a66ea2945d0a144325d5af
 
 ###
 
@@ -112,16 +113,22 @@ Content-Type: application/json
 {
     "author": "62a6641b0869e44489be9fba",
     "status": "Active",
-    "description": "This is some other new request",
-    "seeking": ["Full-stack developer"]
+    "title": "Recipe app",
+    "description": "Generate recipes based on your fridge contents",
+    "seeking": ["Front-end developer"]
 }
 
 ###
 
 #When the user creates a new proposal
-PATCH http://localhost:3001/proposals/62a669d235585a8db99241af
+PATCH http://localhost:3001/proposals/62a66ea2945d0a144325d5af
 Content-Type: application/json
 
 {
-    "status": "Inactive"
+    "status": "Active"
 }
+
+###
+
+#When the author deletes their proposal
+DELETE http://localhost:3001/proposals/62a66ea2945d0a144325d5af

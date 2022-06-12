@@ -12,7 +12,7 @@ const Option = require("./db/schema/04-options");
 
 //import routes
 const chatsRoutes = require("./routes/chatsRoutes")
-const logRoutes = require("./routes/logRoutes")
+const authRoutes = require("./routes/authRoutes")
 const optionsRoutes = require("./routes/optionsRoutes")
 const proposalsRoutes = require("./routes/proposalsRoutes")
 const usersRoutes = require("./routes/usersRoutes")
@@ -31,10 +31,10 @@ app.use(express.json()) //Same purpose as body parser, lets server accept JSON a
 
 //-----Redirect to routes and pass them things imported above
 app.use("/chats", chatsRoutes(User, Chat, Proposal, bcrypt))
-app.use("/log", logRoutes(User, Chat, Proposal, bcrypt))
+app.use("/log", authRoutes(User, Chat, Proposal, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Chat, Proposal, bcrypt))
-app.use("/users", usersRoutes(User, Chat, Proposal, bcrypt))
+app.use("/users", usersRoutes(User, Chat, bcrypt))
 
 
 //----The home route

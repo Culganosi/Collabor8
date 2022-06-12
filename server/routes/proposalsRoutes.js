@@ -62,11 +62,10 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Permanently delete a proposal
     router.delete("/:proposalId", async (req, res) => {
-         //TODO: 
-
+         Proposal.findByIdAndRemove(req.params.proposalId)
+         .then(() => res.status(200).json({message: "success"}))
+         .catch((error) => res.status(400).json({message: error.message}))
     })
-
-        
 
     return router;
 
