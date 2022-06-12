@@ -1,5 +1,3 @@
-
-
 const express = require("express");
 const router = express.Router();
 
@@ -11,9 +9,25 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 // DELETE /proposals/:proposalId //When author deletes a proposal
 // PATCH /proposals/:proposalId //When author activates/archives a proposal, or changes the info within it
 
-    //Get minimal info about a proposal for the "browse proposals" page
+    //Get minimal info about proposals for the "browse proposals" page
+    //See GET /users for annotations
     router.get("/", async (req, res) => {
-        //TODO: 
+
+        const {filterInput, sortInput} = req.body;
+        const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1}
+
+        if  (filterInput.seeking) {
+            filterInput.seeking = {$all : filterInput.seeking}
+        }
+
+        console.log(filterInput)
+
+        Proposal
+        .find(filterInput, fieldsToReturn) 
+        .sort(sortInput)
+        .then((proposalData) => res.json(proposalData))
+        .catch(dbError => res.status(500).json({error: dbError.message}))
+
 
     })
 

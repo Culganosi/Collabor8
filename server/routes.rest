@@ -54,6 +54,19 @@ GET http://localhost:3001/chats/62a5f95925c58e7f38924539
 
 ###
 
+#Create a new chat
+#This is called ONLY if the sender has not chatted with the recipient yet, otherwise
+# POST http://localhost:3001/chats/
+# Content-Type: application/json
+# {
+#     "firstMessage": {
+#         "author": "62a5f95625c58e7f389244f6",
+#         "text": "This is a new message"
+#     }
+# }
+
+###
+
 #Add a new message to the chat
 PATCH http://localhost:3001/chats/62a5f95925c58e7f38924539
 Content-Type: application/json
@@ -63,3 +76,14 @@ Content-Type: application/json
     "text": "<3 <3 <3"
 }
 
+###
+
+#Returns active proposals only for the "Browse users" page
+#Requires a body with filtering and sorting options
+GET http://localhost:3001/proposals
+Content-Type: application/json
+
+{
+    "filterInput": {"seeking": ["UX/UI designer"]},
+    "sortInput": "-createdAt" 
+}

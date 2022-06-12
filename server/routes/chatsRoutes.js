@@ -12,6 +12,10 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
        res.json(chatHistory);
     })
 
+    router.post("/", async (req, res) => {
+        //TODO: think through pending chat scenario
+    })
+
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
 

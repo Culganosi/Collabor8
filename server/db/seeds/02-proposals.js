@@ -11,7 +11,7 @@ const seedProposals = [
         status: "Active",
         title: "Personal portfolio",
         description: "I have built a draft of my personal portfolio, but I want someone with a good eye for design to have a look and give me some suggestions about how to make it appealing and easy to navigate. In return I'm open to lending my skills to any project of yours! Please get in touch!",
-        seeking: ["UX/UI Designer"]
+        seeking: ["UX/UI designer"]
     },
     {
         author: "lreardon2", 
