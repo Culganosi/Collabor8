@@ -5,9 +5,19 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
+        const {filterInput, sortInput} = req.body;
+        const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
+
+        //If the client included a skills list as a filtering parameter
+        //Modify so that the skills must INCLUDE the input but don't need to be an identical list
+        //https://stackoverflow.com/questions/18148166/find-document-with-array-that-contains-a-specific-value
+        if  (filterInput.skills) {
+            filterInput.skills = {$all : filterInput.skills}
+        }
+
         User
-        .find({}, {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}) //Return all but only include these fields
-        .sort("-createdAt") //Sort by newest registered first
+        .find(filterInput, fieldsToReturn) //Return all but only include these fields
+        .sort(sortInput)
         .then((userData) => res.json(userData))
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
@@ -37,7 +47,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
         //Process each chat into a chat preview and add it the list
         for (let chatId of targetUser.chats){
-            const chatData = await Chat.findOne({_id: chatId}).sort("lastMessageAt")
+            const chatData = await Chat.findById(chatId).sort("lastMessageAt")
 
             //Don't send the entire chat, only get the info needed for preview
             const lastMessage = chatData.messages[chatData.messages.length - 1];
