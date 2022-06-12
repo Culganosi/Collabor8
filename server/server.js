@@ -38,41 +38,11 @@ app.get("/", (req, res) => {
         routes: [
             "GET /users",
             "GET /users/:userId",
+            "GET /users/:userId/chat-previews",
+            "POST /users",
+            "PATCH /users",
         ]
     })
-})
-
-
-
-//Registration / creating a new user
-//--Creates a new user in the database [x]
-//--Logs the user into a session []
-app.post("/users", async (req, res) => {
-    const newUser = new User({
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10),
-        userhandle: req.body.userhandle
-    })
-    User.create(newUser)
-    .then(() => {
-
-        //Create cookie session here
-
-        res.status(200).json({message: "success", error: null})
-    })
-    .catch(dbError => {
-        console.log(dbError.message)
-        if (dbError.code === 11000){
-            res.status(400).json({message: "failure", error: "An account with this email already exists"})
-        } else {
-            res.status(400).json({message: "failure", error: dbError.message})
-        }
-    })
-})
-
-
-//Edit user information (also works for filling out the profile after registration)
-app.patch("/users", async (req, res) => {
 })
 
 

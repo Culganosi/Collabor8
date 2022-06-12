@@ -26,8 +26,8 @@ module.exports = (User, Chat, Proposal) => {
         res.json(userData)
     })
 
-
-    router.get('/:userId/chatPreviews', async (req, res) => {
+    //For when the user enters the chat and sees a list of all their previous chats
+    router.get('/:userId/chat-previews', async (req, res) => {
 
         const userId = req.params.userId;
      
@@ -61,6 +61,40 @@ module.exports = (User, Chat, Proposal) => {
         res.json(chatPreviews)
 
     });
+
+    
+    //Registration / creating a new user
+    //--Creates a new user in the database [x]
+    //--Logs the user into a session []
+    router.post("/users", async (req, res) => {
+        const newUser = new User({
+            email: req.body.email,
+            password: bcrypt.hashSync(req.body.password, 10),
+            userhandle: req.body.userhandle
+        })
+        User.create(newUser)
+        .then(() => {
+
+            //Create cookie session here
+
+            res.status(200).json({message: "success", error: null})
+        })
+        .catch(dbError => {
+            console.log(dbError.message)
+            if (dbError.code === 11000){
+                res.status(400).json({error: false, message: "An account with this email already exists"})
+            } else {
+                res.status(500).json({error: true, message: dbError.message})
+            }
+        })
+    })
+
+
+    //Edit user information (also works for filling out the profile after registration)
+    router.patch("/users", async (req, res) => {
+    })
+
+
 
 
     return router;

@@ -11,7 +11,7 @@ GET http://localhost:3001/users/62a5538a52845d285179cbed
 
 ###
 
-GET http://localhost:3001/users/62a5538a52845d285179cbed/chatPreviews
+GET http://localhost:3001/users/62a5538a52845d285179cbed/chat-previews
 
 
 
