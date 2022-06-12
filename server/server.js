@@ -29,7 +29,6 @@ const PORT = 3001;
 const app = express()
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
-
 //-----Redirect to routes and pass them things imported above
 app.use("/chats", chatsRoutes(User, Chat, Proposal, bcrypt))
 app.use("/log", logRoutes(User, Chat, Proposal, bcrypt))

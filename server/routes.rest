@@ -52,4 +52,14 @@ GET http://localhost:3001/options
 #Get the full chat history
 GET http://localhost:3001/chats/62a5f95925c58e7f38924539
 
+###
+
+#Add a new message to the chat
+PATCH http://localhost:3001/chats/62a5f95925c58e7f38924539
+Content-Type: application/json
+
+{
+    "author": "62a5f95625c58e7f389244f6",
+    "text": "<3 <3 <3"
+}
 

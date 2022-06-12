@@ -14,7 +14,23 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
-         //TODO: 
+
+        const {author, text} = req.body;
+
+         //TODO: Verify author is authenticated (+ exists in DB?)
+        const targetChat = await Chat.findById(req.params.chatId)
+
+        // //Verify author is a participant of this chat
+        if (!targetChat.participants.includes(author)) {
+            return res.status(404).json({message: "The author of the message must be a participant of the chat"})
+        }
+
+        targetChat.messages.push({author, text, sentAt: Date.now()})
+
+        await targetChat.save();
+
+        return res.status(200).json({message: "success"})
+
 
     })
 
