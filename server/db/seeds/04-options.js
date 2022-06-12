@@ -4,7 +4,7 @@ const skills = {
     data: {
         frontend: ["HTML", "CSS", "SASS", "jQuery", "ReactJS", "VueJS", "AngularJS"],
         backend: ["NodeJS", "Express", "SQL", "MongoDB"], 
-        uxuiproduct: ["Photoshop", "Figma", "UX research"],
+        uxui: ["Photoshop", "Figma", "UX research"],
         other: ["Git", "test-driven development", "VS Code"]
     }
 }
@@ -13,10 +13,10 @@ const roles = {
     title: "roles", 
     data: [
         "UX/UI designer", 
-        "Product designer", 
         "Full-stack developer", 
         "Front-end developer", 
-        "Back-end developer"]
+        "Back-end developer"
+    ]
 }
 
 const socialMedia = {
@@ -34,14 +34,14 @@ const socialMedia = {
     ]
 }
 
-const categories = {
+const proposalCategories = {
     title: "categories", 
     data: ["Category 1", "Category 2", "Category 3"]
 }
 
 
 
-const options = [skills, roles, socialMedia, categories];
+const options = [skills, roles, socialMedia, proposalCategories];
 module.exports = options;
 
 

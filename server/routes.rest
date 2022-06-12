@@ -7,15 +7,17 @@ GET http://localhost:3001/users
 
 #Returns data for the user profile page
 #NOTE: If you did a DB reset, this userID will not work anymore, so change it
-GET http://localhost:3001/users/62a5d1cd8048c31f3cf12d16
+GET http://localhost:3001/users/62a5f26227223f9feb32295a
 
 ###
 
 #Returns data for the chat list of a certain user, those with the most recent messages first
-GET http://localhost:3001/users/62a5d1cd8048c31f3cf12d16/chat-previews
+GET http://localhost:3001/users/62a5f26227223f9feb32295a/chat-previews
 
 ###
 
+#Create a new user after submitting the registration form
+#Note: email and username must both be unique in the database, so same info will not work twice
 POST http://localhost:3001/users
 Content-Type: application/json
 

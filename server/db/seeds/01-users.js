@@ -36,7 +36,7 @@ const seedUsers = [
         "email": "mvillaret2@vinaora.com",
         "password": "4IwmPcBKht44",
         avatar: "https://i.redd.it/ngakkkdiaux21.jpg",
-        role: "Product designer",
+        role: "UX/UI designer",
         bio: "We will write some bios later",
         skills: ["HTML", "CSS", "Figma", "UX research", "Git"],
         socialMedia: [
@@ -108,7 +108,7 @@ const seedUsers = [
         "email": "wboggis8@squarespace.com",
         "password": "P0TQxh",
         avatar: "https://i.kym-cdn.com/photos/images/facebook/001/384/534/e6e.jpg",
-        role: "Product designer",
+        role: "UX/UI designer",
         bio: "We will write some bios later",
         skills: ["HTML", "CSS", "Figma", "UX research"]
     }, 

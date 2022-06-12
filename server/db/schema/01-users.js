@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema ({
     userhandle: {type: String, require: true, unique: true},
     avatar:  String,
     bio:  String,
+    role: String,
     createdAt: {type: Date, immutable: true, default: () => Date.now()},
     skills: [String],
 
