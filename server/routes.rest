@@ -27,9 +27,19 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-    "email": "something@something.caa",
+    "email": "something@something.ca",
     "password": "123",
     "userhandle": "newUser2"
+}
+
+###
+
+#This is both for filling out the profile and for editing it later
+PATCH http://localhost:3001/users/62a5f95625c58e7f389244f6
+Content-Type: application/json
+
+{
+    "bio": "Ths is an updated bio to test"
 }
 
 ###

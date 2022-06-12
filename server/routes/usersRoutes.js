@@ -24,25 +24,21 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-        const userId = req.params.userId;
-
-        const exclusionParams = {chats: 0, inactiveProposals: 0}
-
+        const userId = req.params.userId
+        const exclusionParams = {chats: 0, inactiveProposals: 0, "__v": 0}
+        //TODO: 
         //Replace this with: if the request is coming from a logged in user about themselves
         //Then let them see the archived proposals too
         if(false) delete exclusionParams.inactiveProposals;
 
-        const userData = await User.findOne({_id: userId}, exclusionParams).sort("-createdAt")
+        const userData = await User.findById(userId, exclusionParams).sort("-createdAt")
         res.json(userData)
     })
 
     //For when the user enters the chat and sees a list of all their previous chats
     router.get('/:userId/chat-previews', async (req, res) => {
-
         const userId = req.params.userId;
-     
         const chatPreviews = []
-
         const targetUser = await User.findOne({_id: userId}, {chats: 1})
 
         //Process each chat into a chat preview and add it the list
@@ -64,13 +60,11 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
             }
             chatPreviews.push(chatPreview)
         }
-
         
         res.json(chatPreviews)
 
     });
 
-    
     //Registration / creating a new user
     //--Creates a new user in the database [x]
     //--Logs the user into a session []
@@ -83,26 +77,37 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
         })
         User.create(newUser)
         .then(() => {
+             //TODO: 
             //Create sessions here
-            res.status(200).json({message: "success", error: null})
+            res.status(201).json({message: "success"})
         })
         .catch(dbError => {
             if (dbError.code === 11000){
                 let problemInput = "email"
                 if (dbError.keyValue.userhandle) problemInput = "userhandle"
-                res.status(400).json({error: false, message: `An account with this ${problemInput} already exists`})
+                res.status(400).json({message: `An account with this ${problemInput} already exists`})
             } else {
-                res.status(500).json({error: true, message: dbError.message})
+                res.status(500).json({message: dbError.message})
             }
         })
     })
 
     //Edit user information (also works for filling out the profile after registration)
     router.patch("/:userId", async (req, res) => {
+
+        //All the things that have to be changed are in the request body
+        const inputFields = req.body;
+
+        console.log(req.body)
+
+        //TODO: Figure out how to send image from file --> S3 storage --> URL to database
+
+        //Find user by ID and update the fields provided
+        User.updateOne({"_id": req.params.userId}, inputFields)
+        .then(() => res.status(200).json({message: "success"}))
+        .catch((error) => res.status(400).json({message: error.message}))
+
     })
-
-
-
 
     return router;
 }

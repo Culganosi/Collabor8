@@ -9,13 +9,12 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     router.get("/:chatId", async (req, res) => {
        const chatId = req.params.chatId;
        const chatHistory = await Chat.findById(chatId, {"__v": 0});
-
-       res.json(chatHistory)
-
+       res.json(chatHistory);
     })
 
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
+         //TODO: 
 
     })
 
