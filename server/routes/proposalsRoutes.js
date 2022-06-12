@@ -13,6 +13,9 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
                filterInput.title = { "$regex": filterInput.title, "$options": "i" }
           }
           
+          //TODO: This is not right, it should return proposals that seek ANY of the skills listed, not ALL of them
+          //Figure out how to do this but keep this for now
+          //https://stackoverflow.com/questions/19648841/how-can-i-handle-array-intersection-in-find
           if  (filterInput.seeking) {
                filterInput.seeking = {$all : filterInput.seeking}
           }
@@ -21,7 +24,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
           filterInput.status = "Active";
           
           const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1}
-          
+
           Proposal
           .find(filterInput, fieldsToReturn) 
           .sort(sortInput)
@@ -33,10 +36,8 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //View a specific proposal on its own page
     router.get("/:proposalId", async (req, res) => {
-        const {proposalId} = req.params;
-         //TODO: 
-
-
+          const targetProposal = await Proposal.findById(req.params.proposalId, {"__v": 0})
+          res.json(targetProposal)
     })
 
     //Create a new proposal

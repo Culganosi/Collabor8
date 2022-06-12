@@ -4,6 +4,7 @@
 # e.g. "developer" will find all types of developers and "ska" will find all userhandles that contain "ska"
 GET http://localhost:3001/users
 Content-Type: application/json
+
 {
     "filterInput": {
         "userhandle": "ska", 
@@ -89,6 +90,12 @@ GET http://localhost:3001/proposals
 Content-Type: application/json
 
 {
-    "filterInput": {"seeking": ["UX/UI designer"]},
+    "filterInput": {"seeking": ["Back-end developer"]},
     "sortInput": "-createdAt" 
 }
+
+
+###
+
+# Returns details of a proposal to be shown on the individual proposal page
+GET http://localhost:3001/proposals/62a6641d0869e44489be9fdd

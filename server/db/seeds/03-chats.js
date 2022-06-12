@@ -27,7 +27,7 @@ const chat2 = {
         },
         {
             author: "kmyrtle0",
-            text: "Omg thanks a lot! Love your Behance portfolio btw! Btw your proposal for a hobby-matching app sounds neat, I'd love to help with the front-end of it!"
+            text: "Omg thanks a lot! Btw your Behance portfolio is amazing!"
         }
     ]
 };

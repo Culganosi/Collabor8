@@ -24,7 +24,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
         if (filterInput.skills) {
             filterInput.skills = {$all : filterInput.skills}
         }
-        
+
         const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
 
         User
@@ -36,14 +36,13 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-        const userId = req.params.userId
         const exclusionParams = {chats: 0, inactiveProposals: 0, "__v": 0}
         //TODO: 
         //Replace this with: if the request is coming from a logged in user about themselves
         //Then let them see the archived proposals too
         if(false) delete exclusionParams.inactiveProposals;
 
-        const userData = await User.findById(userId, exclusionParams).sort("-createdAt")
+        const userData = await User.findById(req.params.userId, exclusionParams).sort("-createdAt")
         res.json(userData)
     })
 

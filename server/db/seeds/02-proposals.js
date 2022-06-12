@@ -18,7 +18,7 @@ const seedProposals = [
         status: "Active",
         title: "Hobby-matching",
         description: "I want to build an app that is similar to meetup.com but users can find and chat with users with similar hobbies directly and create and schedule events in their area. I have already done a lot of work on planning the functionality and design of the app according to the best user experience practices and accessibility standards. I'm looking for a full-stack developer to work on bringing this vision to life. If you're interested, please get in touch!",
-        seeking: ["Front-end developer", "back-end developer", "full-stack developer"],
+        seeking: ["Front-end developer", "Back-end developer", "Full-stack developer"],
     },
     {
         author: "kmyrtle0",
