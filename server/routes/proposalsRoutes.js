@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, Proposal, bcrypt) => {
+module.exports = (User, Proposal) => {
 
     //Get minimal info about proposals for the "browse proposals" page
     //See GET /users for comments because it's the same concepts

@@ -3,10 +3,12 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, Proposal, bcrypt) => {
+module.exports = (User, bcrypt, jwt) => {
 
     //Login
     router.post("/in", async (req, res) => {
+
+          //---Authenticate
 
           const {userhandle, password} = req.body;
           if (!userhandle || !password ) return res.status(400).json({message: "Incomplete input"})
@@ -20,8 +22,13 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
                return res.status(403).json({message: "Wrong password"});
           }
 
+          //----Authorize
 
-          res.status(200).json(targetUser)
+          const client = {userId: targetUser._id};
+
+          const accessToken = jwt.sign(client, process.env.ACCESS_TOKEN_SECRET);
+
+          res.status(200).json({accessToken})
 
     })
 

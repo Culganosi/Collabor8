@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 require('dotenv').config()
 
 //import schemas for each collection of documents
@@ -39,12 +40,11 @@ app.use(function(req, res, next) {
 
 
 //-----Redirect to routes and pass them things imported above
-app.use("/chats", chatsRoutes(User, Chat, Proposal, bcrypt))
-app.use("/auth", authRoutes(User, Chat, Proposal, bcrypt))
+app.use("/chats", chatsRoutes(User, Chat))
+app.use("/auth", authRoutes(User, bcrypt, jwt))
 app.use("/options", optionsRoutes(Option))
-app.use("/proposals", proposalsRoutes(User, Chat, Proposal, bcrypt))
-app.use("/users", usersRoutes(User, Chat, bcrypt))
-
+app.use("/proposals", proposalsRoutes(User, Proposal))
+app.use("/users", usersRoutes(User, Chat, bcrypt, jwt))
 
 
 //----The home route
