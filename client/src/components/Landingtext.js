@@ -1,11 +1,63 @@
 import styled from "styled-components";
+import Login from "../components/Login";
+// import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core';
+import ReactDOM from "react-dom";
+import { BrowserRouter, Route } from "react-router-dom";
+import Register from "./Register";
+// import {MDCRipple} from '@material/ripple';
+// const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
 
 export default function Landingtext() {
+  // const theme = createTheme({
+  //   palette: {
+  //     primary: blue,
+  //     secondary: yellow
+  //   }
+  // });
   return (
     <Wrapper>
       <Title>Welcome to Collabor||8</Title>
       <Description>
-      Find the designers abd developers you need to make it work bla bla bla
+        Find the designers abd developers you need to make it work bla bla bla
+        <br />
+        {/* <ThemeProvider theme={theme}> */}
+render () {
+   <BrowserRouter>
+   <div className="App">
+     <Route path="/" exact component={Login} />
+     <Route path="/profile" exact component={Register} />
+   </div>
+ </BrowserRouter>
+}
+        <Button
+          size="small"
+          style={{ fontSize: 24 }}
+          href="/Login"
+          variant="contained"
+          color="secondary"
+          >
+          Login
+        </Button>
+        {/* <Button component={Link} to="/Login" variant="contained" color="primary">About Page</Button> */}
+        <br />
+        <Button href="/Login" variant="contained">
+  Link
+</Button>
+        <Button
+          size="small"
+          style={{ fontSize: 24 }}
+          href="#"
+          variant="contained"
+          color="secondary">
+          Register          
+        </Button>
+        {/* </ThemeProvider> */}
+
+
+        {/* <Button component={Link} to="/Login">Click Me</Button>
+         <button>Register</button> */}
+
       </Description>
     </Wrapper>
   );
