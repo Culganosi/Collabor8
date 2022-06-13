@@ -21,9 +21,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
           }
 
 
-          //Note: password is encrypted!
-
-          res.json(targetUser)
+          res.status(200).json(targetUser)
 
     })
 

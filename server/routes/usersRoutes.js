@@ -25,7 +25,7 @@ module.exports = (User, Chat, bcrypt) => {
             filterInput.skills = {$all : filterInput.skills}
         }
 
-        const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
+        const fieldsToReturn = {userhandle: 1, avatar: 1, shortBio: 1, skills: 1, createdAt: 1}
 
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
