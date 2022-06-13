@@ -14,12 +14,12 @@
 # Role and Userhandle can be found by substring 
 # e.g. "developer" will find all types of developers and "ska" will find all userhandles that contain "ska"
 GET http://localhost:3001/users
-Content-Type: application/json
+Conc:\Users\Owner\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\code\electron-browser\workbench\workbench.htmltent-Type: application/json
 
 {
     "filterInput": {
         "userhandle": "myr", 
-        "role": "developer", 
+        "role": "dev", 
         "skills": ["Git"]},
     "sortInput": "-createdAt" 
 }
@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 
 #Returns data for the user profile page
-GET http://localhost:3001/users/62a67114709b384e3dfc1e9a
+GET http://localhost:3001/users/62a753af52e50b7b67588379
 
 ###
 
