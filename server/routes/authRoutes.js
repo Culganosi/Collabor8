@@ -33,7 +33,7 @@ module.exports = (User, bcrypt, jwt) => {
     })
 
     //Logout
-    router.post("/in", async (req, res) => {
+    router.post("/out", async (req, res) => {
          //TODO: 
         
     })
@@ -43,6 +43,23 @@ module.exports = (User, bcrypt, jwt) => {
 
     // GET auth/username
     // GET auth/out
+
+     function authenticateToken(req, res, next) {
+          const authHeader = req.headers['authorization']
+          const token = authHeader && authHeader.split(' ')[1]
+          if(!token) return res.status(401).json({message: "No token"})
+
+          jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, client) => {
+               if (err) return res.status(403).json({message: "Invalid token"})
+               req.client = client;
+               next();
+          })
+
+
+     }
+
+
+
 
 
     return router;
