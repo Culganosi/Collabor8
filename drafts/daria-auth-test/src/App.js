@@ -16,16 +16,13 @@ function App() {
   //--------- Local 
 
     //Run on every re-render
-    useEffect(() => {
-      //Make 3 API calls and update the state at the same time
-      axios.get("/users")
-      .then(userInfo => {
-        console.log(userInfo)
-      })
+    // useEffect(() => {
+    //   axios.get("/users")
+    //   .then(userInfo => {
+    //     console.log(userInfo)
+    //   })
 
-    }, []);
-  
-
+    // }, []);
 
   
   const [state, setState] = useState({

@@ -1,15 +1,22 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment, useState} from 'react';
+import axios from 'axios';
 
 
 function Login() {
 
   
-  const [inputId, setInputId] = useState(null);
+  const [inputId, setInputId] = useState(undefined);
 
   const submitId = () => {
 
-    //submit the inputId
+    const requestString = `http://localhost:3001/users/${inputId}`
+    console.log(requestString)
 
+    axios.get(requestString)
+    .then(userInfo => {
+      console.log(userInfo.data.userhandle)
+    })
+    .catch(err => console.log(err.message))
   }
 
 
@@ -24,7 +31,7 @@ function Login() {
         <p> <b>rgostridge1: </b>62a753af52e50b7b67588380</p>
         <p> <b>lreardon2: </b>62a753af52e50b7b67588386</p>
 
-      <form>
+      <form onSubmit={event => event.preventDefault()}>
 
       <label for="lname"><h2>Enter the user ID:</h2></label>
       <input 

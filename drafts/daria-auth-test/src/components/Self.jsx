@@ -6,6 +6,8 @@ function Self() {
     <Fragment>
 
         <h1>Self</h1>
+
+        <h2>Your username is: </h2>
         
     </Fragment>
 
