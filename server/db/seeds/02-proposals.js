@@ -11,14 +11,14 @@ const seedProposals = [
         status: "Active",
         title: "Personal portfolio",
         description: "I have built a draft of my personal portfolio, but I want someone with a good eye for design to have a look and give me some suggestions about how to make it appealing and easy to navigate. In return I'm open to lending my skills to any project of yours! Please get in touch!",
-        seeking: ["UX/UI Designer"]
+        seeking: ["UX/UI designer"]
     },
     {
         author: "lreardon2", 
         status: "Active",
         title: "Hobby-matching",
         description: "I want to build an app that is similar to meetup.com but users can find and chat with users with similar hobbies directly and create and schedule events in their area. I have already done a lot of work on planning the functionality and design of the app according to the best user experience practices and accessibility standards. I'm looking for a full-stack developer to work on bringing this vision to life. If you're interested, please get in touch!",
-        seeking: ["Front-end developer", "back-end developer", "full-stack developer"],
+        seeking: ["Front-end developer", "Back-end developer", "Full-stack developer"],
     },
     {
         author: "kmyrtle0",

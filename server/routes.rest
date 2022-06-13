@@ -1,0 +1,146 @@
+# ----NOTE: For routes that include the ID
+# ----------make sure that documents with those IDs are actually in the database
+
+
+#Kmyrtle - 62a67114709b384e3dfc1e9a
+#newUser23 - 62a67d79766034d514f1afcf
+
+#chatID - 62a67df74d146f3cdc4456d9
+
+
+
+#Returns data for the "Browse users" page
+# Requires a body with filtering and sorting options
+# Role and Userhandle can be found by substring 
+# e.g. "developer" will find all types of developers and "ska" will find all userhandles that contain "ska"
+GET http://localhost:3001/users
+Content-Type: application/json
+
+{
+    "filterInput": {
+        "userhandle": "myr", 
+        "role": "developer", 
+        "skills": ["Git"]},
+    "sortInput": "-createdAt" 
+}
+
+
+###
+
+#Returns data for the user profile page
+GET http://localhost:3001/users/62a67114709b384e3dfc1e9a
+
+###
+
+#Returns data for the chat list of a certain user, those with the most recent messages first
+GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
+
+###
+
+#Create a new user after submitting the registration form
+#Note: email and username must both be unique in the database, so same info will not work twice
+POST http://localhost:3001/users
+Content-Type: application/json
+
+{
+    "email": "something@something.ca1",
+    "password": "123",
+    "userhandle": "newUser23"
+}
+
+###
+
+#This is both for filling out the profile and for editing it later
+PATCH http://localhost:3001/users/62a67114709b384e3dfc1e9a
+Content-Type: application/json
+
+{
+    "bio": "Ths is an updated bio to test"
+}
+
+
+###
+
+#Get the full chat history
+GET http://localhost:3001/chats/62a67f8a13ec7c7a33e2e7ef
+
+###
+
+# Create a new chat
+# This is called ONLY if the sender has not chatted with the recipient yet, otherwise use the PATCH route
+# Note: A chat is only created when the first message is sent, a chat view before the first message is not permanent
+POST http://localhost:3001/chats/
+Content-Type: application/json
+
+{
+    "authorId": "62a67114709b384e3dfc1e9a", 
+    "recipientId": "62a67d79766034d514f1afcf",
+    "firstMessageText": "Welcome to the site!"
+}
+
+###
+
+#Add a new message to the chat
+PATCH http://localhost:3001/chats/62a6641d0869e44489be9fe6
+Content-Type: application/json
+
+{
+    "author": "62a6641b0869e44489be9fb4",
+    "text": "<3 <3 <3"
+}
+
+###
+
+#Returns active proposals only for the "Browse users" page
+#Requires a body with filtering and sorting options
+# Title can be found by substring 
+# Note: only returns Active proposals
+GET http://localhost:3001/proposals
+Content-Type: application/json
+
+{
+    "filterInput": {"seeking": ["Front-end developer"]},
+    "sortInput": "-createdAt" 
+}
+
+
+###
+
+# Returns details of a proposal to be shown on the individual proposal page
+GET http://localhost:3001/proposals/62a678cc0334290da163b6a0
+
+###
+
+#When the user creates a new proposal
+POST http://localhost:3001/proposals
+Content-Type: application/json
+
+{
+    "author": "62a67114709b384e3dfc1e9a",
+    "status": "Active",
+    "title": "Recipe app",
+    "description": "Generate recipes based on your fridge contents",
+    "seeking": ["Front-end developer"]
+}
+
+###
+
+#When the user creates a new proposal
+PATCH http://localhost:3001/proposals/62a678cc0334290da163b6a0
+Content-Type: application/json
+
+{
+    "status": "Inactive",
+    "seeking": ["Front-end developer", "back-end developer"]
+}
+
+###
+
+#When the author deletes their proposal
+DELETE http://localhost:3001/proposals/62a66ea2945d0a144325d5af
+
+
+###
+
+# All the options for: social media, roles, skills, proposal categories
+GET http://localhost:3001/options

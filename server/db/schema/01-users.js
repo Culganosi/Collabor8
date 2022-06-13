@@ -2,10 +2,11 @@ const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema ({
     email:  {type: String, require: true, unique: true, lowercase: true},
+    userhandle: {type: String, require: true, unique: true},
     password:  {type: String, require: true},
-    userhandle: String,
     avatar:  String,
     bio:  String,
+    role: String,
     createdAt: {type: Date, immutable: true, default: () => Date.now()},
     skills: [String],
 

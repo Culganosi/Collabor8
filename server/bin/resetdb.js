@@ -54,18 +54,22 @@ const insertChatUpdateUsers = async(seedChatData) => {
     const newChat = new Chat({...seedChatData, participants: participantIds, messages: null})
     const insertedChat = await Chat.create(newChat)
 
-
-    let timeIncrementer = insertedChat.createdAt;
+    //Change each message to refer to the author by ID, not userhandle
+    //Also create "sent at" times one starting now and one minute apart
+    let timeIncrementer = Date.now();
     const messagesWithIdsAndTimes = seedChatData.messages.map(message => {
         const newMessage = {... message, author: participantsByHandle[message.author]._id, sentAt: timeIncrementer}
         //Adding minutes to time
         //https://stackoverflow.com/questions/1197928/how-to-add-30-minutes-to-a-javascript-date-object
-        timeIncrementer = new Date(timeIncrementer.getTime() + 1*60000); 
+        timeIncrementer = new Date(timeIncrementer + 1*60000); 
         return newMessage;
     })
 
     //Update the chat documents to include reformatted messages
     insertedChat.messages = messagesWithIdsAndTimes;
+    //Record the time of the last message
+    insertedChat.lastMessageAt = messagesWithIdsAndTimes[messagesWithIdsAndTimes.length-1].sentAt;
+
     await insertedChat.save()
 
     //Add the id of this chat into the list of chats of all participating users
@@ -93,7 +97,8 @@ const resetDB = async () => {
 
     //Add user entries
     for (let seedUserData of seedUsers) {
-        await User.create(seedUserData)
+        //When adding a user, sort skills in alphabetical order
+        await User.create({...seedUserData, skills: seedUserData.skills.sort()})
         console.log(`Added user @${seedUserData.userhandle}`)
     }
 

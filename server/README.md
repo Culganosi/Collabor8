@@ -6,7 +6,6 @@
 ### Backend Requirements
 
 - Mongoose
-- Nodemon
 - Express
 - bcryptjs
 
@@ -14,6 +13,13 @@ _--Save-dev_
 
 - Nodemon
 - Dotenv
+
+### Todo
+
+- Receiving images and S3 storage
+- Changing filter of sought roles in get /proposals
+- More thorough authorization of only the logged in owner being able to see full data of some things
+- Handling different error cases and sending back correct error codes and messages
 
 ### Notes for later
 

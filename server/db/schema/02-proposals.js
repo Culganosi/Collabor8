@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const proposalSchema = new mongoose.Schema ({
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true, immutable: true },
     status: {type: String, require: true},
     title: {type: String, require: true},
     description: {type: String, require: true},

@@ -1,19 +1,9 @@
-// const chatSchema = new mongoose.Schema ({
-//     participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User', require: true }],
-//     messages: [{
-//         author: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-//         sentAt: {type: Date, immutable: true},
-//         text: String
-//     }]
-
-// })
-
-
 const chat1 = {
     participants: ["kmyrtle0", "rgostridge1"], //This will change to userIDs in the database
+    //lastMessageAt: To be generated in the seed script
     messages: [
         {
-            author: "kmyrtle0",
+            author: "kmyrtle0", //This will change to userIDs in the database
             text: "Hello there rgostridge1!"
             //sentAt: To be generated in the seed script
         },
@@ -37,11 +27,10 @@ const chat2 = {
         },
         {
             author: "kmyrtle0",
-            text: "Omg thanks a lot! Love your Behance portfolio btw! Btw your proposal for a hobby-matching app sounds neat, I'd love to help with the front-end of it!"
+            text: "Omg thanks a lot! Btw your Behance portfolio is amazing!"
         }
     ]
 };
-
 
 
 const seedChats = [chat1, chat2]
