@@ -36,11 +36,10 @@ module.exports = (User, Chat, bcrypt) => {
 
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-        const exclusionParams = {chats: 0, "__v": 0}
-        //TODO: For now showing both active and inactive proposals
-        //But eventually only include inactive for self-profiles
 
-        const userData = await User.findById(req.params.userId, exclusionParams).sort("-createdAt")
+        //TODO:  eventually only include inactive proposals and chats for self-profiles
+
+        const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
     })
 
@@ -48,18 +47,19 @@ module.exports = (User, Chat, bcrypt) => {
     router.get('/:userId/chat-previews', async (req, res) => {
         const userId = req.params.userId;
         const chatPreviews = []
-        const targetUser = await User.findOne({_id: userId}, {chats: 1})
+
+        const targetUserChats = await Chat.find({participants : userId}).sort("-lastMessageAt")
 
         //Process each chat into a chat preview and add it the list
-        for (let chatId of targetUser.chats){
-            const chatData = await Chat.findById(chatId).sort("lastMessageAt")
-
+        for (let chatId of targetUserChats){
+            const chatData = await Chat.findById(chatId)
+            
             //Don't send the entire chat, only get the info needed for preview
             const lastMessage = chatData.messages[chatData.messages.length - 1];
             const partners = chatData.participants.filter(participant => {
                 //Exclude the user who views their chat previews from this list
                 //!== does not work since IDs are not primitives
-                return (!participant.equals(targetUser._id))
+                return (!participant.equals(userId))
             })
 
             const chatPreview = {
@@ -85,10 +85,11 @@ module.exports = (User, Chat, bcrypt) => {
             userhandle: req.body.userhandle
         })
         User.create(newUser)
-        .then(() => {
-             //TODO: 
-            //Create sessions here
-            res.status(201).json({message: "success"})
+        .then((insertedUser) => {
+
+             //TODO: authorization
+
+            res.status(201).json({message: "success", userId: insertedUser._id})
         })
         .catch(dbError => {
             if (dbError.code === 11000){

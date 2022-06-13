@@ -2,6 +2,13 @@
 # ----------make sure that documents with those IDs are actually in the database
 
 
+#Kmyrtle - 62a67114709b384e3dfc1e9a
+#newUser23 - 62a67d79766034d514f1afcf
+
+#chatID - 62a67df74d146f3cdc4456d9
+
+
+
 #Returns data for the "Browse users" page
 # Requires a body with filtering and sorting options
 # Role and Userhandle can be found by substring 
@@ -36,9 +43,9 @@ POST http://localhost:3001/users
 Content-Type: application/json
 
 {
-    "email": "something@something.ca",
+    "email": "something@something.ca1",
     "password": "123",
-    "userhandle": "newUser2"
+    "userhandle": "newUser23"
 }
 
 ###
@@ -55,20 +62,21 @@ Content-Type: application/json
 ###
 
 #Get the full chat history
-GET http://localhost:3001/chats/62a67117709b384e3dfc1edd
+GET http://localhost:3001/chats/62a67f8a13ec7c7a33e2e7ef
 
 ###
 
-#Create a new chat
-#This is called ONLY if the sender has not chatted with the recipient yet, otherwise
-# POST http://localhost:3001/chats/
-# Content-Type: application/json
-# {
-#     "firstMessage": {
-#         "author": "62a5f95625c58e7f389244f6",
-#         "text": "This is a new message"
-#     }
-# }
+# Create a new chat
+# This is called ONLY if the sender has not chatted with the recipient yet, otherwise use the PATCH route
+# Note: A chat is only created when the first message is sent, a chat view before the first message is not permanent
+POST http://localhost:3001/chats/
+Content-Type: application/json
+
+{
+    "authorId": "62a67114709b384e3dfc1e9a", 
+    "recipientId": "62a67d79766034d514f1afcf",
+    "firstMessageText": "Welcome to the site!"
+}
 
 ###
 

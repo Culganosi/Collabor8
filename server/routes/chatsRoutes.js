@@ -13,7 +13,32 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     })
 
     router.post("/", async (req, res) => {
-        //TODO: think through pending chat scenario
+
+        //Create a new chat and put it in the database
+        const {authorId, recipientId, firstMessageText} = req.body;
+        const newChat = new Chat({
+            participants: [authorId, recipientId],
+            messages: [{
+                author: authorId,
+                text: firstMessageText,
+                sentAt: Date.now()
+            }],
+            lastMessageAt: Date.now()
+        })
+
+        const insertedChat = await newChat.save();
+        
+        //Put the ID of this chat in the data of the participants
+        const author = await User.findById(authorId)
+        const recipient = await User.findById(recipientId)
+
+        author.chats.push(insertedChat._id)
+        recipient.chats.push(insertedChat._id)
+
+        await author.save()
+        await recipient.save()
+
+        res.status(201).json({message: "success", chatId: insertedChat._id})
     })
 
     //Add new messages to the chat
@@ -30,6 +55,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
         }
 
         targetChat.messages.push({author, text, sentAt: Date.now()})
+        targetChat.lastMessageAt = Date.now();
 
         await targetChat.save();
 
