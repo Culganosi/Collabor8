@@ -1,8 +1,14 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 
 function Self() {
   return (
-    <h1>Self</h1>
+
+    <Fragment>
+
+        <h1>Self</h1>
+        
+    </Fragment>
+
   )
 }
 
