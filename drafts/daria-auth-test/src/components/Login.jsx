@@ -1,6 +1,19 @@
-import React, {Fragment} from 'react'
+import React, {Fragment, useState} from 'react'
+
 
 function Login() {
+
+  
+  const [inputId, setInputId] = useState(null);
+
+  const submitId = () => {
+
+    //submit the inputId
+
+  }
+
+
+
   return (
 
     <Fragment>
@@ -14,9 +27,19 @@ function Login() {
       <form>
 
       <label for="lname"><h2>Enter the user ID:</h2></label>
-      <input type="text" id="userId" name="userId" value="" /> <br /> <br />
+      <input 
+        type="text"
+        id="userId" 
+        name="userId" 
+        value={inputId} 
+        onChange={(event) => setInputId(event.target.value)} 
+      /> 
+      
+      <br /> <br />
 
-      <button type="submit"> SUBMIT </button>
+      <button onClick={() => submitId()}> SUBMIT </button>
+
+      <p>The ID to be submitted: {inputId}</p>
 
       </form>
 

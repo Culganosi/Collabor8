@@ -1,14 +1,42 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import React, {useState, useEffect} from "react";
 
 import Login from "./components/Login"
 import Self from "./components/Self"
 
 
+
+
 function App() {
+
+  //--------- Local 
+
+    //Run on every re-render
+    useEffect(() => {
+      //Make 3 API calls and update the state at the same time
+      axios.get("/users")
+      .then(userInfo => {
+        console.log(userInfo)
+      })
+
+    }, []);
+  
+
+
+  
+  const [state, setState] = useState({
+    clientUserId: undefined
+  })
+
+  //--------
+
+
   return (
+
     <div className="App">
 
       <Router>
@@ -23,6 +51,8 @@ function App() {
 
 
     </div>
+
+
   );
 }
 
