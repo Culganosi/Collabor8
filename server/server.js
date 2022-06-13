@@ -29,12 +29,22 @@ const PORT = 3001;
 const app = express()
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
+
+//TODO:...==> DO THIS PROPERLY
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); 
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+
+
 //-----Redirect to routes and pass them things imported above
 app.use("/chats", chatsRoutes(User, Chat, Proposal, bcrypt))
-app.use("/log", authRoutes(User, Chat, Proposal, bcrypt))
+app.use("/auth", authRoutes(User, Chat, Proposal, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Chat, Proposal, bcrypt))
 app.use("/users", usersRoutes(User, Chat, bcrypt))
+
 
 
 //----The home route

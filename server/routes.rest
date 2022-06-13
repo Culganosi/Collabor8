@@ -144,3 +144,14 @@ DELETE http://localhost:3001/proposals/62a66ea2945d0a144325d5af
 
 # All the options for: social media, roles, skills, proposal categories
 GET http://localhost:3001/options
+
+###
+
+//The login route
+POST http://localhost:3001/auth/in
+Content-Type: application/json
+
+{
+    "userhandle": "kmyrtle0",
+    "password": "123"
+}

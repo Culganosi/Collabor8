@@ -1,7 +1,8 @@
 //---Import libraries
 const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
 require('dotenv').config({}); 
-// require('dotenv').config({ path: './../.env' }); 
+
 
 //---import schemas for each collection of documents
 const User = require("./../db/schema/01-users");
@@ -97,8 +98,12 @@ const resetDB = async () => {
 
     //Add user entries
     for (let seedUserData of seedUsers) {
-        //When adding a user, sort skills in alphabetical order
-        await User.create({...seedUserData, skills: seedUserData.skills.sort()})
+        //When adding a user, sort skills in alphabetical order, encrypt password
+        await User.create({
+            ...seedUserData, 
+            skills: seedUserData.skills.sort(),
+            password: bcrypt.hashSync(seedUserData.password, 10)
+        })
         console.log(`Added user @${seedUserData.userhandle}`)
     }
 

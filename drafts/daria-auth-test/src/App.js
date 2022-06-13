@@ -14,7 +14,6 @@ import Self from "./components/Self"
 function App() {
 
   //--------- Local 
-
     //Run on every re-render
     // useEffect(() => {
     //   axios.get("/users")
@@ -23,7 +22,6 @@ function App() {
     //   })
 
     // }, []);
-
   
   const [state, setState] = useState({
     clientUserId: undefined
