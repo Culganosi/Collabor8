@@ -1,14 +1,31 @@
+import { Canvas } from "@react-three/fiber";
+import styled from "styled-components";
+import "./styles.css";
 
-function App() {
+import Background from "./components/Background";
+import MovingSphere from "./components/MovingSphere";
+// import { OrbitControls } from "@react-three/drei";
+import Landingtext from "./components/Landingtext";
+
+
+export default function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+ <Wrapper className='App'>
+  <Background />
+  <Landingtext />
+  <Canvas>
+<MovingSphere />
+  </Canvas>
+ </Wrapper>
   );
 }
+const Wrapper = styled.div`
+position: relative;
+background: #1f1144;
 
-export default App;
+canvas {
+  height: 500px;
+}
+`;
+
