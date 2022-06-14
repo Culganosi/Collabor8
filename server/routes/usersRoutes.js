@@ -30,7 +30,17 @@ module.exports = (User, Chat, bcrypt) => {
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
         .sort(sortInput)
-        .then((userData) => res.json(userData))
+        .then((userData) => {
+            
+            //Make the data an object indexable by ID
+            const rearrangedData = {};
+            userData.forEach(user => {
+                rearrangedData[user._id] = user;
+            })
+
+            res.json(rearrangedData)}
+            
+        )
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
 

@@ -14,13 +14,31 @@ import {DataContext} from "./DataContext"
 function App() {
 
     //This info is obtained upon successful login or registration
-    const [self, setSelf] = useState({empty: "no self / not logged in"});
-    const [chatPreviews, setChatPreviews] = useState([])
+    const [self, setSelf] = useState({empty: "no self / not logged in"}); //Info about the logged in user
+    const [chatPreviews, setChatPreviews] = useState([]) //Chat previews of the logged-in user
+    const [profiles, setProfiles] = useState([]) //Abridged info about the users
 
   // --------- Local 
 
+  ///------Notes: 
+  /*
+    What needs to be imported when?
+    - Should everything just re-import on every page??? Put it into a different document to run it???
+  */
+
+  //----
+
   //Every time the app loads
   useEffect(() => {
+
+    //TODO: Make these Promise.all somehow?
+
+    //Import info about users  
+
+    axios.get("/users")
+    .then(res => {
+      setProfiles(res.data)
+    })
 
     //Find out who the client is based on their cookie
     axios.get("/users/self")
