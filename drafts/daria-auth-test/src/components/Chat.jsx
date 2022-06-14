@@ -32,6 +32,11 @@ function Chat() {
         <p>Your userhandle is: <big>{self.userhandle}</big>, your ID is <big>{self._id}</big> </p>
 
         <button onClick={() => logout()}> LOGOUT </button>
+
+
+        <div className=""></div>
+
+
         
     </Fragment>
 

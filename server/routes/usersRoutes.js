@@ -93,7 +93,7 @@ module.exports = (User, Chat, bcrypt) => {
     });
 
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/self", async (req, res) => {
+    router.patch("/:userId", async (req, res) => {
 
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
@@ -101,7 +101,7 @@ module.exports = (User, Chat, bcrypt) => {
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
         //Find user by ID (via cookie) and update the fields provided
-        User.updateOne({"_id": req.session.userId}, inputFields)
+        User.updateOne({"_id": req.params.userId}, inputFields)
         .then(() => res.status(200).json({message: "success"}))
         .catch((error) => res.status(400).json({message: error.message}))
 

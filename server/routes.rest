@@ -42,7 +42,7 @@ GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 ###
 
 #This is both for filling out the profile and for editing it later
-PATCH http://localhost:3001/users/self
+PATCH http://localhost:3001/users/62a79f5697c61afc88917c55
 Content-Type: application/json
 
 {
