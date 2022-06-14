@@ -39,13 +39,13 @@ GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 
 #Create a new user after submitting the registration form
 #Note: email and username must both be unique in the database, so same info will not work twice
-POST http://localhost:3001/users
+POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "email": "something@something.ca",
+    "email": "something@something.da4",
     "password": "123",
-    "userhandle": "newestUser"
+    "userhandle": "newestUserr5"
 }
 
 ###

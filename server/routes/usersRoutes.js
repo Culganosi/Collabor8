@@ -43,24 +43,6 @@ module.exports = (User, Chat, bcrypt) => {
         res.json(userData)
     })
 
-    //Get info about the user who is logged in
-    //Even though login and registration also return full self-info
-    //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
-    router.get('/self', async (req, res) => {
-        //Use the ID stored in the cookie to find user
-
-        if (!req.session.userId) return res.status(403).json({yes: "yes"})
-
-        const selfUser = await User.findById(req.session.userId)
-
-        response.setContentType("application/json");
-
-        if (selfUser) {
-            return res.status(200).json(selfUser)
-        } else {
-            return res.status(404).json({yes: "yes"})
-        }
-    })
 
     //For when the user enters the chat and sees a list of all their previous chats
     router.get('/:userId/chat-previews', async (req, res) => {
@@ -92,34 +74,6 @@ module.exports = (User, Chat, bcrypt) => {
         res.json(chatPreviews)
 
     });
-
-    //Registration / creating a new user
-    //--Creates a new user in the database [x]
-    //--Logs the user into a session []
-    router.post("/", async (req, res) => {
-
-        const newUser = new User({
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            userhandle: req.body.userhandle
-        })
-        User.create(newUser)
-        .then((insertedUser) => {
-
-             //TODO: authorization
-
-            res.status(201).json({message: "success", userId: insertedUser._id})
-        })
-        .catch(dbError => {
-            if (dbError.code === 11000){
-                let problemInput = "email"
-                if (dbError.keyValue.userhandle) problemInput = "userhandle"
-                res.status(400).json({message: `An account with this ${problemInput} already exists`})
-            } else {
-                res.status(500).json({message: dbError.message})
-            }
-        })
-    })
 
     //Edit user information (also works for filling out the profile after registration)
     router.patch("/:userId", async (req, res) => {

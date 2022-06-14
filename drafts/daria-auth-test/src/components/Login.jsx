@@ -20,12 +20,10 @@ function Login() {
 
     const requestString = `/auth/in`
 
-    axios.post(requestString, {userhandle, password}, {withCredentials: true, "Content-Type": "Application/JSON"})
+    axios.post(requestString, {userhandle, password})
     .then(response => {
-
       setSelf(response.data)
       navigate("/self")
-
     })
     .catch(err => console.log(err.message))
   }
