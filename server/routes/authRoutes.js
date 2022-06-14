@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, bcrypt, jwt) => {
+module.exports = (User, bcrypt) => {
 
     //Login
     router.post("/in", async (req, res) => {
@@ -14,7 +14,7 @@ module.exports = (User, bcrypt, jwt) => {
           if (!userhandle || !password ) return res.status(400).json({message: "Incomplete input"})
 
           //Find the user by name, return error if DNE
-          const targetUser = await User.findOne({userhandle}, {password: 1})
+          const targetUser = await User.findOne({userhandle}, {"__v": 0})
           if (!targetUser) return res.status(400).json({message: "A user with this handle does not exist"})
           
           //Evaluate password, return error if incorrect
@@ -22,13 +22,11 @@ module.exports = (User, bcrypt, jwt) => {
                return res.status(403).json({message: "Wrong password"});
           }
 
-          //----Authorize
+          //Give the user a cookie
+          //req.session.userId = targetUser._id;
 
-          const client = {userId: targetUser._id};
-
-          const accessToken = jwt.sign(client, process.env.ACCESS_TOKEN_SECRET);
-
-          res.status(200).json({accessToken})
+          //On successful login, give the user all info about their own profile
+          res.status(200).json(targetUser)
 
     })
 

@@ -1,27 +1,34 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useContext, useEffect} from 'react';
+import { Link, useNavigate } from "react-router-dom";
+import {DataContext} from "./../DataContext"
 import axios from 'axios';
 import "./style.css"
 
+
+
 function Login() {
 
-  
+  const navigate = useNavigate();  
+  const {self, setSelf} = useContext(DataContext);
+
   const [userhandle, setUserhandle] = useState(undefined);
   const [password, setPassword] = useState(undefined);
 
-  const login = () => {
+  
 
-    const requestString = `http://localhost:3001/auth/in`
-    // console.log(requestString)
+  const login = () => {   
 
-    axios.post(requestString, {userhandle, password})
+    const requestString = `/auth/in`
+
+    axios.post(requestString, {userhandle, password}, {withCredentials: true, "Content-Type": "Application/JSON"})
     .then(response => {
-      console.log(response.data)
+
+      setSelf(response.data)
+      navigate("/self")
+
     })
     .catch(err => console.log(err.message))
-
-
   }
-
 
 
   return (
@@ -32,26 +39,28 @@ function Login() {
       <h2>Here are some user IDs</h2>
 
       <table>
+        <thead>
         <tr>
           <th>Userhandle</th>
           <th>Password</th>
           <th>ID</th>
-        </tr>
+        </tr></thead>
+        <tbody>
         <tr>
           <td>kmyrtle0</td>
           <td>123</td>
-          <td>62a753af52e50b7b67588379</td>
+          <td>62a79f5697c61afc88917c55</td>
         </tr>
         <tr>
           <td>rgostridge1</td>
           <td>123</td>
-          <td>62a753af52e50b7b67588380</td>
+          <td>62a79f5697c61afc88917c5c</td>
         </tr>
         <tr>
           <td>lreardon2</td>
           <td>123</td>
-          <td>62a753af52e50b7b67588386</td>
-        </tr>
+          <td>62a79f5697c61afc88917c62</td>
+        </tr></tbody>
       </table>
 
 

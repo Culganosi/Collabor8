@@ -4,13 +4,13 @@ table {
     font-size: 12px;
     margin: 0 auto;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
   
   td, th {
     border: 1px solid #7a7373;
-    text-align: left;
     padding: 6px;
+    text-align: center;
   }
   
   th {

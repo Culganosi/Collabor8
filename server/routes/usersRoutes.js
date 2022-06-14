@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, bcrypt, jwt) => {
+module.exports = (User, Chat, bcrypt) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
@@ -41,6 +41,25 @@ module.exports = (User, Chat, bcrypt, jwt) => {
 
         const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
+    })
+
+    //Get info about the user who is logged in
+    //Even though login and registration also return full self-info
+    //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
+    router.get('/self', async (req, res) => {
+        //Use the ID stored in the cookie to find user
+
+        if (!req.session.userId) return res.status(403).json({yes: "yes"})
+
+        const selfUser = await User.findById(req.session.userId)
+
+        response.setContentType("application/json");
+
+        if (selfUser) {
+            return res.status(200).json(selfUser)
+        } else {
+            return res.status(404).json({yes: "yes"})
+        }
     })
 
     //For when the user enters the chat and sees a list of all their previous chats

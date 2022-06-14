@@ -6,46 +6,56 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import React, {useState, useEffect} from "react";
 
 import Login from "./components/Login"
-import Self from "./components/Self"
+import Chat from "./components/Chat"
 
-
+import {DataContext} from "./DataContext"
 
 
 function App() {
 
-  //--------- Local 
-    //Run on every re-render
+    //This info is obtained upon successful login or registration
+    const [self, setSelf] = useState({empty: "yes"});
+
+  // --------- Local 
+   // Run on every re-render
+
     // useEffect(() => {
-    //   axios.get("/users")
-    //   .then(userInfo => {
-    //     console.log(userInfo)
+
+    //   axios.get('/users/self', {'Content-Type': 'application/json'})
+    //   .then((all) => {
+    //     console.log(all.data)
+    //     setSelf(all.data)
     //   })
+    //   .catch(error => console.log(error.message))
+
+    //   // Promise.all([
+    //   //   axios.get('/users/self', {}, {withCredentials: true, "Content-Type": "Application/JSON"})
+    //   // ])
+    //   // .then((all) => {
+    //   //   console.log(all.data)
+    //   //   setSelf(all[0].data)
+    //   // })
 
     // }, []);
-  
-  const [state, setState] = useState({
-    clientUserId: undefined
-  })
 
-  //--------
 
 
   return (
 
-    <div className="App">
+    <DataContext.Provider value={{self, setSelf}}>
 
       <Router>
+
         <Routes>
 
           <Route path="/" element={<Login />}/>
-
-          <Route path="/self" element={<Self />}/>
+          <Route path="/self" element={<Chat />}/>
 
         </Routes>
       </Router>
 
 
-    </div>
+    </DataContext.Provider>
 
 
   );
