@@ -23,9 +23,9 @@ function Login() {
     axios.post(requestString, {userhandle, password})
     .then(response => {
       setSelf(response.data)
-      navigate("/self")
     })
-    .catch(err => console.log(err.message))
+    .then(() => navigate("/chat"))
+    .catch(err => console.log(err))
   }
 
 

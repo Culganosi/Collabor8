@@ -16,7 +16,11 @@ function App() {
     //This info is obtained upon successful login or registration
     const [self, setSelf] = useState({empty: "no self / not logged in"}); //Info about the logged in user
     const [chatPreviews, setChatPreviews] = useState([]) //Chat previews of the logged-in user
-    const [profiles, setProfiles] = useState([]) //Abridged info about the users
+    const [profiles, setProfiles] = useState({}) //Abridged info about the users
+
+    //Which chat will display in the Conversation component
+    const [activeChat, setActiveChat] = useState(undefined);
+
 
   // --------- Local 
 
@@ -51,18 +55,18 @@ function App() {
 
       console.log(clientId)
 
+      axios.get(`/users/${clientId}/chat-previews`)
+      .then(res => {
+        console.log(res.data)
+        setChatPreviews(res.data)
+      })
+
       //TODO: Have rooms for all conversations of the client
       //Also what if messages from someone not messaged before come in? Should also be a room
 
 
     })
-    .catch(error => console.log(error.message))
-
-
-
-    
-
-
+    // .catch(error => console.log(error.message))
 
 
   }, [])
@@ -72,7 +76,9 @@ function App() {
 
     <DataContext.Provider value={{
        self, setSelf,
-       chatPreviews, setChatPreviews
+       chatPreviews, setChatPreviews,
+       profiles, setProfiles,
+       activeChat, setActiveChat
     }}>
 
       <Router>
@@ -80,7 +86,7 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Login />}/>
-          <Route path="/self" element={<Chat />}/>
+          <Route path="/chat" element={<Chat />}/>
 
         </Routes>
       </Router>

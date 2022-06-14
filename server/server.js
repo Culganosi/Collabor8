@@ -40,10 +40,10 @@ app.use(cookieSession({
 }));
 
 
+
 //TODO:...==> DO THIS PROPERLY
 
 //app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -51,6 +51,8 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
+
+  
 
 
 //-----Redirect to routes and pass them things imported above
