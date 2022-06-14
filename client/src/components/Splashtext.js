@@ -8,7 +8,7 @@ import Register from "./Register";
 // import {MDCRipple} from '@material/ripple';
 // const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
 
-export default function Landingtext() {
+export default function Splashtext() {
  
   return (
     <Wrapper>
@@ -77,7 +77,7 @@ const Title = styled.h1`
 `;
 
 const Description = styled.p`
-  max-width: 300px;
+  max-width: 400px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: normal;
   font-size: 17px;
