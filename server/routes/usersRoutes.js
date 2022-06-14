@@ -25,7 +25,7 @@ module.exports = (User, Chat, bcrypt) => {
             filterInput.skills = {$all : filterInput.skills}
         }
 
-        const fieldsToReturn = {userhandle: 1, avatar: 1, bio: 1, skills: 1, createdAt: 1}
+        const fieldsToReturn = {userhandle: 1, avatar: 1, shortBio: 1, skills: 1, createdAt: 1}
 
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
@@ -34,14 +34,32 @@ module.exports = (User, Chat, bcrypt) => {
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
 
+
+    //Get info about the user who is logged in
+    //Even though login and registration also return full self-info
+    //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
+    //NOTE: This route must stay above the next one so that "self" is not interpreted as an ID
+    router.get('/self', async (req, res) => {
+
+        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
+
+         //Use the ID stored in the cookie to find user
+        const selfUser = await User.findById(req.session.userId)
+
+        if (selfUser) {
+             return res.status(200).json(selfUser)
+        } else {
+             return res.status(404).json({message: "Not found"})
+        }
+   })
+
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-
-        //TODO:  eventually only include inactive proposals and chats for self-profiles
 
         const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
     })
+
 
     //For when the user enters the chat and sees a list of all their previous chats
     router.get('/:userId/chat-previews', async (req, res) => {
@@ -74,44 +92,16 @@ module.exports = (User, Chat, bcrypt) => {
 
     });
 
-    //Registration / creating a new user
-    //--Creates a new user in the database [x]
-    //--Logs the user into a session []
-    router.post("/", async (req, res) => {
-
-        const newUser = new User({
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            userhandle: req.body.userhandle
-        })
-        User.create(newUser)
-        .then((insertedUser) => {
-
-             //TODO: authorization
-
-            res.status(201).json({message: "success", userId: insertedUser._id})
-        })
-        .catch(dbError => {
-            if (dbError.code === 11000){
-                let problemInput = "email"
-                if (dbError.keyValue.userhandle) problemInput = "userhandle"
-                res.status(400).json({message: `An account with this ${problemInput} already exists`})
-            } else {
-                res.status(500).json({message: dbError.message})
-            }
-        })
-    })
-
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/:userId", async (req, res) => {
+    router.patch("/self", async (req, res) => {
 
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
 
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
-        //Find user by ID and update the fields provided
-        User.updateOne({"_id": req.params.userId}, inputFields)
+        //Find user by ID (via cookie) and update the fields provided
+        User.updateOne({"_id": req.session.userId}, inputFields)
         .then(() => res.status(200).json({message: "success"}))
         .catch((error) => res.status(400).json({message: error.message}))
 

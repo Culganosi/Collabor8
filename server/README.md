@@ -16,6 +16,7 @@ _--Save-dev_
 
 ### Todo
 
+- Fix the origin errors
 - Receiving images and S3 storage
 - Changing filter of sought roles in get /proposals
 - More thorough authorization of only the logged in owner being able to see full data of some things

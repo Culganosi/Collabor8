@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, Proposal, bcrypt) => {
+module.exports = (User, Proposal) => {
 
     //Get minimal info about proposals for the "browse proposals" page
     //See GET /users for comments because it's the same concepts
@@ -23,7 +23,7 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
           //Filter only for active proposals
           filterInput.status = "Active";
           
-          const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1}
+          const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1, shortDescription: 1, image: 1}
 
           Proposal
           .find(filterInput, fieldsToReturn) 
@@ -43,6 +43,12 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     //Create a new proposal and add it to the list of the authors either active or inactive proposals
     router.post("/", async (req, res) => {
           const inputInfo = req.body
+
+          //If no image added, add a default gradient
+          //TODO: Storing images on our own server?
+          if (!inputInfo?.image){
+               inputInfo.image = "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/02/Usign-Gradients-Featured-Image.jpg"
+          }
 
           const author = await User.findById(inputInfo.author)
           if (!author) {
