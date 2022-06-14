@@ -3,12 +3,12 @@ import {DataContext} from "../../DataContext";
 
 function Preview({previewData}) {
 
-    const {profiles} = useContext(DataContext);
+    const {profiles, setActiveChatId} = useContext(DataContext);
 
     const partnerId = previewData.partners[0];
 
     return (
-        <div className="chat__preview">
+        <div className="chat__preview" onClick={() => setActiveChatId(previewData._id)}>
 
             <p><b>Partner: </b>{profiles[partnerId].userhandle}</p>  
             <p><b>Last message at: </b>{previewData.lastMessage.sentAt}</p>

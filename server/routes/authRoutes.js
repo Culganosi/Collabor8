@@ -67,23 +67,6 @@ module.exports = (User, bcrypt) => {
      })
      })
 
-
-    //---Add dummy routes after
-
-     //FAKE login
-     router.get("/:userNUMBER", async (req, res) => {
-          
-          const userIndex = parseInt(req.params.userNUMBER)
-                    
-          const allUsers = await User.find({})
-          
-          const targetUser = allUsers[userIndex]
-
-          res.status(200).json(targetUser)
-
-     })
-
-
     return router;
 
 };

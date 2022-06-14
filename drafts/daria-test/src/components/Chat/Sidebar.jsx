@@ -6,7 +6,7 @@ import Preview from "./Preview";
 
 function Sidebar() {
 
-  const {chatPreviews, setChatPreviews, self, setSelf, profiles} = useContext(DataContext);
+  const {chatPreviews, setChatPreviews, self, setSelf, profiles, setActiveChat} = useContext(DataContext);
 
   return (
 

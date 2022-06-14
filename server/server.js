@@ -84,9 +84,6 @@ app.get("/", (req, res) => {
             "POST /auth/register",
             "POST /auth/in",
             "POST /auth/out",
-        ],
-        "temp routes": [
-            "GET /auth/:userNUMBER"
         ]
     })
 })

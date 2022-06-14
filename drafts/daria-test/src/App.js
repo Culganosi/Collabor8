@@ -19,18 +19,9 @@ function App() {
     const [profiles, setProfiles] = useState({}) //Abridged info about the users
 
     //Which chat will display in the Conversation component
-    const [activeChat, setActiveChat] = useState(undefined);
+    const [activeChatId, setActiveChatId] = useState(undefined); //---This is the ID
+    const [activeChatFull, setActiveChatFull] = useState(undefined);
 
-
-  // --------- Local 
-
-  ///------Notes: 
-  /*
-    What needs to be imported when?
-    - Should everything just re-import on every page??? Put it into a different document to run it???
-  */
-
-  //----
 
   //Every time the app loads
   useEffect(() => {
@@ -51,6 +42,8 @@ function App() {
       setSelf(res.data)
       return clientInfo._id;
     })
+
+    //We can only get chat previews when we know the Self user
     .then(clientId => {
 
       console.log(clientId)
@@ -59,6 +52,9 @@ function App() {
       .then(res => {
         console.log(res.data)
         setChatPreviews(res.data)
+
+        //Choose active chat as the first one by default
+        setActiveChatId(res.data[0]._id)
       })
 
       //TODO: Have rooms for all conversations of the client
@@ -78,7 +74,8 @@ function App() {
        self, setSelf,
        chatPreviews, setChatPreviews,
        profiles, setProfiles,
-       activeChat, setActiveChat
+       activeChatId, setActiveChatId,
+       activeChatFull, setActiveChatFull
     }}>
 
       <Router>
