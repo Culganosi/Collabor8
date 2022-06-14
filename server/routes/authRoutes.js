@@ -78,7 +78,7 @@ module.exports = (User, bcrypt) => {
 
           console.log("The ID is: " + req.session.userId);
 
-          if (!req.session.userId) return res.status(403).json({yes: "yes"})
+          if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
 
           console.log("WE ARE PRINTING THIS")
 
@@ -87,18 +87,24 @@ module.exports = (User, bcrypt) => {
           if (selfUser) {
                return res.status(200).json(selfUser)
           } else {
-               return res.status(404).json({yes: "yes"})
+               return res.status(404).json({message: "Not found"})
           }
      })
 
     //---Add dummy routes after
 
-    // GET auth/username
-    // GET auth/out
+     //FAKE login
+     router.get("/:userNUMBER", async (req, res) => {
+          
+          const userIndex = parseInt(req.params.userNUMBER)
+                    
+          const allUsers = await User.find({})
+          
+          const targetUser = allUsers[userIndex]
 
+          res.status(200).json(targetUser)
 
-
-
+     })
 
 
     return router;

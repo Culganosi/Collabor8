@@ -37,19 +37,6 @@ GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 
 ###
 
-#Create a new user after submitting the registration form
-#Note: email and username must both be unique in the database, so same info will not work twice
-POST http://localhost:3001/auth/register
-Content-Type: application/json
-
-{
-    "email": "something@something.da4",
-    "password": "123",
-    "userhandle": "newestUserr5"
-}
-
-###
-
 #This is both for filling out the profile and for editing it later
 PATCH http://localhost:3001/users/62a67114709b384e3dfc1e9a
 Content-Type: application/json
@@ -155,3 +142,32 @@ Content-Type: application/json
     "userhandle": "kmyrtle0",
     "password": "123"
 }
+
+###
+
+//The logout route
+POST http://localhost:3001/auth/out
+
+###
+
+//Get info about the specific user logged in (will not work if you are logged out) 
+GET http://localhost:3001/auth/self
+
+###
+
+#Registration
+#Create a new user after submitting the registration form
+#Note: email and username must both be unique in the database, so same info will not work twice
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+    "email": "something@something.da4",
+    "password": "123",
+    "userhandle": "newestUserr5"
+}
+
+###
+
+#FAKE LOGIN
+GET http://localhost:3001/auth/0
