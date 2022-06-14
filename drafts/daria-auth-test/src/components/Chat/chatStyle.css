@@ -1,0 +1,34 @@
+.chat {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat__sidebar{
+    background-color: aqua;
+    width: 30%;
+}
+
+.chat__right{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.chat__conversation{
+    background: lightpink;
+    min-height: 300px;
+}
+
+.chat__right > input {
+    height: 50px;
+}
+
+.chat__preview {
+    margin: 5px;
+    height: 50px;
+    background-color: rgb(76, 119, 227);
+}
