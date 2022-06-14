@@ -93,10 +93,7 @@ export default function BrowseProp() {
                   </CardActionArea>
                   <CardActions>
                     <Button size="small" color="secondary">
-                      Detailed View
-                    </Button>
-                    <Button size="small" color="secondary">
-                      Message
+                      See More Details
                     </Button>
                   </CardActions>
                 </Card>

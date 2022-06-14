@@ -8,6 +8,8 @@ import SignIn from "./components/SignIn";
 import Splash from "./components/Splash";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import { BrowserUpdatedSharp } from "@mui/icons-material";
+import BrowserUsers from './components/BrowseUsers'
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -16,7 +18,7 @@ function App() {
     <>
       <CssBaseline />
       <Nav />
-      <Splash />
+      <BrowserUsers />
       {/* <BrowseProp />
       <SignIn /> */}
       {/* <OthersProp /> */}
