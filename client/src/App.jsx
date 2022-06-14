@@ -5,6 +5,7 @@ import Footer from "./components/Footer";
 import OthersProp from "./components/OthersProp";
 import { CssBaseline } from "@material-ui/core";
 import SignIn from "./components/SignIn";
+import Splash from "./components/Splash";
 
 
 function App() {
@@ -12,8 +13,9 @@ function App() {
     <>
       <CssBaseline />
       <Nav />
-      <BrowseProp />
-      <SignIn />
+      <Splash />
+      {/* <BrowseProp />
+      <SignIn /> */}
       {/* <OthersProp /> */}
       <Footer />
     </>
