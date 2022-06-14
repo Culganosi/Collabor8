@@ -16,7 +16,7 @@ function App() {
     <>
       <CssBaseline />
       <Nav />
-      <Dashboard />
+      <Splash />
       {/* <BrowseProp />
       <SignIn /> */}
       {/* <OthersProp /> */}
