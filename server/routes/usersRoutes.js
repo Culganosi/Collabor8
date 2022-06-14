@@ -34,10 +34,27 @@ module.exports = (User, Chat, bcrypt) => {
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
 
+
+    //Get info about the user who is logged in
+    //Even though login and registration also return full self-info
+    //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
+    //NOTE: This route must stay above the next one so that "self" is not interpreted as an ID
+    router.get('/self', async (req, res) => {
+
+        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
+
+         //Use the ID stored in the cookie to find user
+        const selfUser = await User.findById(req.session.userId)
+
+        if (selfUser) {
+             return res.status(200).json(selfUser)
+        } else {
+             return res.status(404).json({message: "Not found"})
+        }
+   })
+
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-
-        //TODO:  eventually only include inactive proposals and chats for self-profiles
 
         const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
@@ -76,15 +93,15 @@ module.exports = (User, Chat, bcrypt) => {
     });
 
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/:userId", async (req, res) => {
+    router.patch("/self", async (req, res) => {
 
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
 
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
-        //Find user by ID and update the fields provided
-        User.updateOne({"_id": req.params.userId}, inputFields)
+        //Find user by ID (via cookie) and update the fields provided
+        User.updateOne({"_id": req.session.userId}, inputFields)
         .then(() => res.status(200).json({message: "success"}))
         .catch((error) => res.status(400).json({message: error.message}))
 

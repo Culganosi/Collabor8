@@ -68,29 +68,6 @@ module.exports = (User, bcrypt) => {
      })
 
 
-     //Get info about the user who is logged in
-    //Even though login and registration also return full self-info
-    //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
-    router.get('/self', async (req, res) => {
-
-          console.log("WE ARE IN THE ROUTE")
-          //Use the ID stored in the cookie to find user
-
-          console.log("The ID is: " + req.session.userId);
-
-          if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
-
-          console.log("WE ARE PRINTING THIS")
-
-          const selfUser = await User.findById(req.session.userId)
-
-          if (selfUser) {
-               return res.status(200).json(selfUser)
-          } else {
-               return res.status(404).json({message: "Not found"})
-          }
-     })
-
     //---Add dummy routes after
 
      //FAKE login

@@ -19,37 +19,19 @@ function App() {
   // --------- Local 
 
   useEffect(() => {
-    axios.get("/auth/self")
+    axios.get("/users/self")
     .then(res => {
-      console.log(res.data)
+
+
+      const clientInfo = res.data;
       setSelf(res.data)
+
+
+
+
     })
     .catch(error => console.log(error.message))
   }, [])
-
-
-   // Run on every re-render
-   //, {"Content-Type": "Application/JSON"}
-
-    // useEffect(() => {
-
-    //   axios.get('/users/self')
-    //   .then((all) => {
-    //     console.log(all.data)
-    //     setSelf(all.data)
-    //   })
-    //   .catch(error => console.log(error.message))
-
-    // // //   // Promise.all([
-    // // //   //   axios.get('/users/self', {}, {withCredentials: true, "Content-Type": "Application/JSON"})
-    // // //   // ])
-    // // //   // .then((all) => {
-    // // //   //   console.log(all.data)
-    // // //   //   setSelf(all[0].data)
-    // // //   // })
-
-    // }, []);
-
 
 
   return (

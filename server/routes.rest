@@ -24,6 +24,10 @@ Conc:\Users\Owner\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\
     "sortInput": "-createdAt" 
 }
 
+###
+
+//Get info about the specific user logged in (will not work if you are logged out) 
+GET http://localhost:3001/auth/self
 
 ###
 
@@ -38,7 +42,7 @@ GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 ###
 
 #This is both for filling out the profile and for editing it later
-PATCH http://localhost:3001/users/62a67114709b384e3dfc1e9a
+PATCH http://localhost:3001/users/self
 Content-Type: application/json
 
 {
@@ -147,11 +151,6 @@ Content-Type: application/json
 
 //The logout route
 POST http://localhost:3001/auth/out
-
-###
-
-//Get info about the specific user logged in (will not work if you are logged out) 
-GET http://localhost:3001/auth/self
 
 ###
 
