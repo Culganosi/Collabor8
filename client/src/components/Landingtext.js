@@ -3,30 +3,26 @@ import Login from "../components/Login";
 // import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Register from "./Register";
 // import {MDCRipple} from '@material/ripple';
 // const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
 
 export default function Landingtext() {
-  // const theme = createTheme({
-  //   palette: {
-  //     primary: blue,
-  //     secondary: yellow
-  //   }
-  // });
+ 
   return (
     <Wrapper>
-      <Title>Welcome to Collabor||8</Title>
+      <Title>Welcome to COLLAB||8</Title>
       <Description>
         Find the designers abd developers you need to make it work bla bla bla
         <br />
-        {/* <ThemeProvider theme={theme}> */}
 render () {
    <BrowserRouter>
    <div className="App">
+    <Routes>
      <Route path="/" exact component={Login} />
      <Route path="/profile" exact component={Register} />
+     </Routes>
    </div>
  </BrowserRouter>
 }
