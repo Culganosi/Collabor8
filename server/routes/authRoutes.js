@@ -32,7 +32,6 @@ module.exports = (User, bcrypt) => {
 
     //Logout
     router.post("/out", (req, res) => {
-          console.log("received logour request")
           req.session = null;
           res.status(200).json({message: "success"})
     })
