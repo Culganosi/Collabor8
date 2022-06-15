@@ -35,67 +35,47 @@ function App() {
 
       //--------------------------
 
+      
+
+
+      //-------------REFRESH
 
       useEffect(() => {
         const connection = socketIoClient('http://localhost:3001');
         setConn(connection);
       },[])
-      
-      useEffect(() => {
-        if (conn) {
 
-          //Receive from server
-          conn.on('INITIAL_CONNECTION', data => {
-            console.log("DATA HAS COME IN FROM THE SERVER!");
-            console.log(data);
-          })
-
-
-          conn.on('receiveMessage', data => {
-            //console.log("DATA HAS COME IN FROM THE SERVER!");
-            console.log(data);
-          })
-
-
-        }
-      }, [conn])
-      
-
-
-
+              
 
       //----------------------------
 
 
+    return (
+
+      <DataContext.Provider value={{
+        self, setSelf,
+        chatPreviews, setChatPreviews,
+        profiles, setProfiles,
+        activeChatId, setActiveChatId,
+        activeChatFull, setActiveChatFull,
+        conn
+      }}>
+
+        <Router>
+
+          <Routes>
+
+            <Route path="/" element={<Login />}/>
+            <Route path="/chat" element={<Chat />}/>
+
+          </Routes>
+        </Router>
 
 
-
-  return (
-
-    <DataContext.Provider value={{
-       self, setSelf,
-       chatPreviews, setChatPreviews,
-       profiles, setProfiles,
-       activeChatId, setActiveChatId,
-       activeChatFull, setActiveChatFull,
-       conn
-    }}>
-
-      <Router>
-
-        <Routes>
-
-          <Route path="/" element={<Login />}/>
-          <Route path="/chat" element={<Chat />}/>
-
-        </Routes>
-      </Router>
+      </DataContext.Provider>
 
 
-    </DataContext.Provider>
-
-
-  );
+    );
 }
 
 export default App;

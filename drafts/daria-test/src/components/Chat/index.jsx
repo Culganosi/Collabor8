@@ -29,18 +29,21 @@ function Chat() {
     const requestString = `/auth/out`
     axios.post(requestString)
     .then((res) => {
+      setSelf({})
       navigate("/")
     })
     .catch(err => console.log(err.message))
   }
 
 
+  //TODO: This is a conversation with an existing chat!
   const submitNewMessage = () => {
 
     //Send new message to the socket
     const messageToSocket = {
       text: newMessage, 
       chatId: activeChatId,
+      author: self._id,
       recipientId: activeChatFull.participants.filter(id => id != self._id)[0],
       sentAt: Date.now()
     }
@@ -48,7 +51,12 @@ function Chat() {
 
     //Save message in local storage -> it will display in author's chat
     const messageToLocal = {author: self._id, text: newMessage, sentAt: new Date(Date.now()).toString()}
-    activeChatFull.messages.push(messageToLocal);
+
+    setActiveChatFull(prev => {
+      const newMessages = [...prev.messages, messageToLocal]
+      const newChat = {...prev, messages: newMessages}
+      return newChat;
+    })
 
     //Send message to database -> it will persist on refresh
     axios.patch(`/chats/${activeChatId}`, {text: newMessage})
@@ -59,7 +67,7 @@ function Chat() {
   }
 
 
-
+  
   //------------------------------REFRESH-----------------------------
 
   useEffect(() => {
@@ -109,6 +117,62 @@ function Chat() {
     refreshConvo()
 
   }, [activeChatId])
+
+    
+
+  //------------------------------INCOMING--------------------------
+
+  const processIncomingMessage = (data) => {
+    const {text, chatId, recipientId, author, sentAt} = data;
+
+    //If you're running the app but not signed in yet, don't process the message by socket
+    if (Object.keys(self).length === 0) return;
+
+    //Ignore the message if it's not for you
+    if (recipientId !== self._id) return;
+
+    //---If currently in active chat, post to it
+    if (chatId == activeChatId) {
+      console.log("Trying to push to local")
+      const messageToLocal = {author, text, sentAt}
+      // console.log(messageToLocal)
+      // console.log(activeChatFull)
+      setActiveChatFull(prev => {
+        const newMessages = [...prev.messages, messageToLocal]
+        const newChat = {...prev, messages: newMessages}
+        return newChat;
+      })
+      //return;
+      // console.log(activeChatFull)
+    }
+
+   return;
+    //--
+
+    //console.log(text);
+  
+  }
+
+
+  useEffect(() => {
+    
+    if (conn) {
+
+      //Receive from server
+      conn.on('INITIAL_CONNECTION', data => {
+        console.log("DATA HAS COME IN FROM THE SERVER!");
+        console.log(data);
+      })
+
+      conn.on('receiveMessage', data => {
+        processIncomingMessage(data);
+      })
+
+
+    }
+  }, [conn]) //This was [conn]
+
+
 
 
   //------------------------------RENDER-----------------------------
