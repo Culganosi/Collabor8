@@ -38,13 +38,20 @@ function Chat() {
   const submitNewMessage = () => {
 
     //Send new message to the socket
-    const newMessageData = {
+    const messageToSocket = {
       text: newMessage, 
       chatId: activeChatId,
       recipientId: activeChatFull.participants.filter(id => id != self._id)[0],
-      sendAt: Date.now()
+      sentAt: Date.now()
     }
-    conn.emit("newMessage", newMessageData);
+    conn.emit("newMessage", messageToSocket);
+
+    //Save message in local storage -> it will display in author's chat
+    const messageToLocal = {author: self._id, text: newMessage, sentAt: new Date(Date.now()).toString()}
+    activeChatFull.messages.push(messageToLocal);
+
+    //Send message to database -> it will persist on refresh
+    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
 
     //Refresh input field
     setNewMessage("")
