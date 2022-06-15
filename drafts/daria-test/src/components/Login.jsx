@@ -34,31 +34,37 @@ function Login() {
     <Fragment>
       <h1>Login</h1>
 
-      <h2>Here are some user IDs</h2>
+      <h2>Some test users</h2>
 
       <table>
         <thead>
         <tr>
           <th>Userhandle</th>
           <th>Password</th>
-          <th>ID</th>
+          <th>On db:reset</th>
         </tr></thead>
         <tbody>
         <tr>
           <td>kmyrtle0</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c55</td>
+          <td>2 chat convos</td>
         </tr>
         <tr>
           <td>rgostridge1</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c5c</td>
+          <td>1 chat convo</td>
         </tr>
         <tr>
           <td>lreardon2</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c62</td>
-        </tr></tbody>
+          <td>1 chat convo</td>
+        </tr>
+        <tr>
+          <td>fpeers3</td>
+          <td>123</td>
+          <td>0 chat convos</td>
+        </tr>        
+        </tbody>
       </table>
 
 

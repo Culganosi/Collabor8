@@ -7,7 +7,7 @@ function Preview({previewData}) {
 
     const {profiles, setActiveChatId} = useContext(DataContext);
 
-    const partnerId = previewData.partners[0];
+    const partnerId = previewData.partner;
 
 
     return (

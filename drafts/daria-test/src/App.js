@@ -11,6 +11,14 @@ import Chat from "./components/Chat/"
 import {DataContext} from "./DataContext"
 
 
+
+import socketIoClient from 'socket.io-client'
+const connection = socketIoClient('http://localhost:8080') 
+//Address of the server //--> This will create a connection which the server detects as 'connection'
+
+
+
+
 function App() {
 
       //---NOTE: Don't set these to null or undefined

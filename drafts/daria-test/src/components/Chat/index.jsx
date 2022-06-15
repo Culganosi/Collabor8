@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {DataContext} from "./../../DataContext"
 
-//Custom hooks
 
 //--Import subcomponents
 
@@ -59,7 +58,7 @@ function Chat() {
       setProfiles(usersRes.data);
 
       //Make sure the Self is correct on refresh
-      if (self=={}) {
+      if (Object.keys(self).length === 0) {
         const selfUserRes = await axios.get('/users/self')
         setSelf(selfUserRes.data);
       }

@@ -141,7 +141,7 @@ POST http://localhost:3001/auth/in
 Content-Type: application/json
 
 {
-    "userhandle": "kmyrtle0",
+    "userhandle": "rgostridge1",
     "password": "123"
 }
 

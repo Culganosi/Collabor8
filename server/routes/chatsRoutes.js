@@ -75,23 +75,27 @@ module.exports = (User, Chat) => {
 
         const chatPreviews = []
 
-        const targetUserChats = await Chat.find({participants : userId}).sort("-lastMessageAt")
+        const userData = await User.findById(userId)
+        const userChatIds = userData.chats
+
+
+        const targetUserChats = await Chat.find({'_id': { $in: userChatIds}}).sort("-lastMessageAt")
 
         //Process each chat into a chat preview and add it the list
-        for (let chatId of targetUserChats){
-            const chatData = await Chat.findById(chatId)
+        for (let chatData of targetUserChats){
+            //const chatData = await Chat.findById(chatId)
             
             //Don't send the entire chat, only get the info needed for preview
             const lastMessage = chatData.messages[chatData.messages.length - 1];
-            const partners = chatData.participants.filter(participant => {
+            const partner = chatData.participants.filter(participant => {
                 //Exclude the user who views their chat previews from this list
                 //!== does not work since IDs are not primitives
                 return (!participant.equals(userId))
-            })
+            })[0]
 
             const chatPreview = {
-                lastMessage,
-                partners,
+                lastMessage, 
+                partner, 
                 _id: chatData._id,
             }
             chatPreviews.push(chatPreview)
