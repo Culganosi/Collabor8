@@ -1,4 +1,4 @@
-import React, {Fragment, useContext, useEffect} from 'react'
+import React, {Fragment, useContext, useEffect, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {DataContext} from "./../../DataContext"
@@ -17,9 +17,12 @@ import "./chatStyle.css"
 
 function Chat() {
 
-  //Import stuff within the component
+  //Variables
   const navigate = useNavigate(); 
   const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull} = useContext(DataContext);
+
+  const [newMessage, setNewMessage] = useState()
+
 
 
     //------------------------------HELPER FUNCTIONS-----------------------------
@@ -36,21 +39,30 @@ function Chat() {
   }
 
 
+  const submitNewMessage = () => {
+    console.log(`Submitting message: ${newMessage}`)
+  }
+
+
+
   //------------------------------REFRESH-----------------------------
 
   useEffect(() => {
 
     async function refreshData () {
 
+      //Get most up to date info about users (e.g. if someone changed something)
+      //TODO: We dno't need this on this page if people can not change userhandles...
       const usersRes = await axios.get("/users");
       setProfiles(usersRes.data);
 
-      //Make sure the Self is correct again
-      const selfUserRes = await axios.get('/users/self')
-      setSelf(selfUserRes.data);
+      //Make sure the Self is correct on refresh
+      if (self=={}) {
+        const selfUserRes = await axios.get('/users/self')
+        setSelf(selfUserRes.data);
+      }
 
       const chatPrevRes = await axios.get(`/chats/self/chat-previews`)
-
       setChatPreviews(chatPrevRes.data);
 
       let defaultActiveChatId=""
@@ -106,9 +118,13 @@ function Chat() {
 
             <Conversation />
 
-            <input type="text"/>
+            <input 
+              type="text"
+              value={newMessage}
+              onChange={(event) => setNewMessage(event.target.value)}
+            />
 
-            <button>Send Message</button>
+            <button onClick={() => submitNewMessage()}>Send Message</button>
 
           </div>
 
