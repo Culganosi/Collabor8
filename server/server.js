@@ -67,20 +67,26 @@ app.use("/users", usersRoutes(User, Chat, bcrypt))
 app.get("/", (req, res) => {
     res.json({
         message: "Welcome to the Collab||8 server! 🎉",
-        routes: [
+        "user routes": [
             "GET /users",
             "GET /users/:userId",
-            "GET /users/:userId/chat-previews",
-            "PATCH /users/userId",
+            "GET /users/self",
+            "PATCH /users/userId",         
+        ],
+        "chat routes": [
             "GET /chats/:chatId",
-            "PATCH /chats/:chatId",
+            "GET /users/:userId/chat-previews",
+            "PATCH /chats/:chatId", 
+        ],
+        "proposal routes": [
             "GET /proposals",
             "GET /proposals/:proposalId",
             "POST /proposals",
             "PATCH /proposals",
             "DELETE /proposals/:proposalId",
-            "GET /options",
-            "GET /auth/self",
+        ],
+        "options route": [ "GET /options"],
+        "authentication routes": [
             "POST /auth/register",
             "POST /auth/in",
             "POST /auth/out",

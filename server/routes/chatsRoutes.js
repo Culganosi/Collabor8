@@ -14,8 +14,10 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     router.post("/", async (req, res) => {
 
+        const authorId = req.session.userId;
+
         //Create a new chat and put it in the database
-        const {authorId, recipientId, firstMessageText} = req.body;
+        const {recipientId, firstMessageText} = req.body;
         const newChat = new Chat({
             participants: [authorId, recipientId],
             messages: [{
@@ -44,7 +46,9 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
 
-        const {author, text} = req.body;
+        const author = req.session.userId;
+
+        const {text} = req.body;
 
          //TODO: Verify author is authenticated (+ exists in DB?)
         const targetChat = await Chat.findById(req.params.chatId)

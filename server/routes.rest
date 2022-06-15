@@ -27,7 +27,7 @@ Conc:\Users\Owner\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\
 ###
 
 //Get info about the specific user logged in (will not work if you are logged out) 
-GET http://localhost:3001/auth/self
+GET http://localhost:3001/users/self
 
 ###
 
@@ -42,18 +42,18 @@ GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 ###
 
 #This is both for filling out the profile and for editing it later
-PATCH http://localhost:3001/users/62a79f5697c61afc88917c55
+PATCH http://localhost:3001/users/self
 Content-Type: application/json
 
 {
-    "bio": "Ths is an updated bio to test"
+    "bio": "Ths is an updated bio to test 2"
 }
 
 
 ###
 
 #Get the full chat history
-GET http://localhost:3001/chats/62a79f5997c61afc88917c98
+GET http://localhost:3001/chats/62a92ba847c9847fd07b4fd2
 
 ###
 
@@ -64,19 +64,17 @@ POST http://localhost:3001/chats/
 Content-Type: application/json
 
 {
-    "authorId": "62a67114709b384e3dfc1e9a", 
-    "recipientId": "62a67d79766034d514f1afcf",
+    "recipientId": "62a79f5697c61afc88917c55",
     "firstMessageText": "Welcome to the site!"
 }
 
 ###
 
 #Add a new message to the chat
-PATCH http://localhost:3001/chats/62a6641d0869e44489be9fe6
+PATCH http://localhost:3001/chats/62a92ba847c9847fd07b4fd2
 Content-Type: application/json
 
 {
-    "author": "62a6641b0869e44489be9fb4",
     "text": "<3 <3 <3"
 }
 
@@ -107,7 +105,6 @@ POST http://localhost:3001/proposals
 Content-Type: application/json
 
 {
-    "author": "62a79f5697c61afc88917c55",
     "status": "Active",
     "title": "Recipe app",
     "description": "Generate recipes based on your fridge contents",
@@ -161,9 +158,9 @@ POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "email": "something@something.da4",
+    "email": "something@something.daa4",
     "password": "123",
-    "userhandle": "newestUserr5"
+    "userhandle": "newestUserrr5"
 }
 
 ###

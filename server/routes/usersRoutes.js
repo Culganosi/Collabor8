@@ -44,7 +44,6 @@ module.exports = (User, Chat, bcrypt) => {
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
 
-
     //Get info about the user who is logged in
     //Even though login and registration also return full self-info
     //This route can be called on every refresh so that client doesn't lose info stored in local memory on client-side
@@ -103,7 +102,7 @@ module.exports = (User, Chat, bcrypt) => {
     });
 
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/:userId", async (req, res) => {
+    router.patch("/self", async (req, res) => {
 
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
@@ -111,7 +110,7 @@ module.exports = (User, Chat, bcrypt) => {
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
         //Find user by ID (via cookie) and update the fields provided
-        User.updateOne({"_id": req.params.userId}, inputFields)
+        User.updateOne({"_id": req.session.userId}, inputFields)
         .then(() => res.status(200).json({message: "success"}))
         .catch((error) => res.status(400).json({message: error.message}))
 
