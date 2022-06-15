@@ -18,7 +18,7 @@ function Chat() {
 
   //Variables
   const navigate = useNavigate(); 
-  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull} = useContext(DataContext);
+  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull, conn} = useContext(DataContext);
 
   const [newMessage, setNewMessage] = useState()
 
@@ -42,6 +42,9 @@ function Chat() {
     //To be sent to: activeChatId
     //TODO: Work here
     console.log(`Submitting message: ${newMessage}`)
+
+    // client-side
+    conn.emit("newMessage", newMessage);
   }
 
 

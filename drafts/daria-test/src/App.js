@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
@@ -9,6 +7,8 @@ import Login from "./components/Login"
 import Chat from "./components/Chat/"
 
 import {DataContext} from "./DataContext"
+
+import "./App.css"
 
 
 
@@ -69,7 +69,8 @@ function App() {
        chatPreviews, setChatPreviews,
        profiles, setProfiles,
        activeChatId, setActiveChatId,
-       activeChatFull, setActiveChatFull
+       activeChatFull, setActiveChatFull,
+       conn
     }}>
 
       <Router>

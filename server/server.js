@@ -74,6 +74,14 @@ app.use(function(req, res, next) {
 	console.log(socket) // prints details about the connection
 
     socket.emit('INITIAL_CONNECTION', "HELLO DARIA");
+
+    socket.on("newMessage", (arg) => {
+        console.log(arg); // world
+    });
+
+
+
+
 });
 
 
