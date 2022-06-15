@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+const socketio = require('socket.io')
+const http = require('http')
 
 require('dotenv').config()
 
@@ -30,6 +32,20 @@ mongoose
 //----------Start the app
 const PORT = 3001;
 const app = express()
+
+//----ADD SOCKETS
+
+const server = http.createServer(app);
+
+//For newer versions of the socketio package: whitelist origin and methods!
+const io = socketio (server, {
+	cors: {
+		origin: "http://localhost:3000", //The front-end client
+		methods: ["GET", "POST"]
+}});
+
+
+
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
 
@@ -52,6 +68,18 @@ app.use(function(req, res, next) {
     next();
   });
 
+
+  
+
+  io.on ('connection', (socket) => {
+	console.log("Someone has connected");
+	console.log(socket) // prints details about the connection
+});
+
+
+
+
+///----ROUTER TO OTHER ROUTES
 
 
 //-----Redirect to routes and pass them things imported above
@@ -96,6 +124,6 @@ app.get("/", (req, res) => {
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on localhost:${PORT}`)
 })
