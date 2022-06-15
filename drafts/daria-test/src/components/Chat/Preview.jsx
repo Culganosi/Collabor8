@@ -13,11 +13,17 @@ function Preview({previewData}) {
     return (
 
 
-        <div className="chat__preview" onClick={() => setActiveChatId(previewData._id)}>
+        <div className="chat-preview" onClick={() => setActiveChatId(previewData._id)}>
 
-            <p><b>Partner: </b>{profiles[partnerId].userhandle}</p>  
-            <p><b>Last message at: </b>{previewData.lastMessage.sentAt}</p>
-            <p><b>Text: </b>{previewData.lastMessage.text}</p>       
+            <img className="chat-preview__avatar" src={`${profiles[partnerId].avatar}`} />
+
+            <div>
+
+            <p><b>{profiles[partnerId].userhandle}</b></p>  
+            <p>{previewData.lastMessage.sentAt}</p>
+            <p>{profiles[previewData.lastMessage.author].userhandle}: {previewData.lastMessage.text}</p>    
+
+            </div>   
                 
         </div>
 

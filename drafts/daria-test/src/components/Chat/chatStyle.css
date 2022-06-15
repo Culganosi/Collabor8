@@ -27,10 +27,18 @@
     height: 50px;
 }
 
-.chat__preview {
+.chat-preview {
     margin: 5px;
-    height: 120px;
+    height: 150px;
     background-color: rgb(76, 119, 227);
+    display: flex;
+}
+
+.chat-preview__avatar {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .message {
