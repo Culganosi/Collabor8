@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
+const socketio = require('socket.io')
+const http = require('http')
 
 require('dotenv').config()
 
@@ -30,6 +32,20 @@ mongoose
 //----------Start the app
 const PORT = 3001;
 const app = express()
+
+//----ADD SOCKETS
+
+const server = http.createServer(app);
+
+//For newer versions of the socketio package: whitelist origin and methods!
+const io = socketio (server, {
+	cors: {
+		origin: "http://localhost:3000", //The front-end client
+		methods: ["GET", "POST"]
+}});
+
+
+
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
 
@@ -40,10 +56,10 @@ app.use(cookieSession({
 }));
 
 
+
 //TODO:...==> DO THIS PROPERLY
 
 //app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -53,38 +69,54 @@ app.use(function(req, res, next) {
   });
 
 
+  
+
+  io.on ('connection', (socket) => {
+	console.log("Someone has connected");
+	console.log(socket) // prints details about the connection
+});
+
+
+
+
+///----ROUTER TO OTHER ROUTES
+
+
 //-----Redirect to routes and pass them things imported above
 app.use("/chats", chatsRoutes(User, Chat))
 app.use("/auth", authRoutes(User, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Proposal))
-app.use("/users", usersRoutes(User, Chat, bcrypt))
+app.use("/users", usersRoutes(User))
 
 
 //----The home route
 app.get("/", (req, res) => {
     res.json({
         message: "Welcome to the Collab||8 server! 🎉",
-        routes: [
+        "user routes": [
             "GET /users",
             "GET /users/:userId",
-            "GET /users/:userId/chat-previews",
-            "PATCH /users/userId",
+            "GET /users/self",
+            "PATCH /users/userId",         
+        ],
+        "chat routes": [
             "GET /chats/:chatId",
-            "PATCH /chats/:chatId",
+            "GET /chats/self/chat-previews",
+            "PATCH /chats/:chatId", 
+        ],
+        "proposal routes": [
             "GET /proposals",
             "GET /proposals/:proposalId",
             "POST /proposals",
             "PATCH /proposals",
             "DELETE /proposals/:proposalId",
-            "GET /options",
-            "GET /auth/self",
+        ],
+        "options route": [ "GET /options"],
+        "authentication routes": [
             "POST /auth/register",
             "POST /auth/in",
             "POST /auth/out",
-        ],
-        "temp routes": [
-            "GET /auth/:userNUMBER"
         ]
     })
 })
@@ -92,6 +124,6 @@ app.get("/", (req, res) => {
 
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on localhost:${PORT}`)
 })
