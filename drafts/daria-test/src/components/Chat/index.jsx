@@ -40,6 +40,12 @@ function Chat() {
 
 
   const submitNewMessage = () => {
+
+    //To be sent to: activeChatId
+
+    
+
+    //TODO: Work here
     console.log(`Submitting message: ${newMessage}`)
   }
 
