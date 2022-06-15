@@ -52,7 +52,6 @@ app.use(function(req, res, next) {
     next();
   });
 
-  
 
 
 //-----Redirect to routes and pass them things imported above
@@ -60,7 +59,7 @@ app.use("/chats", chatsRoutes(User, Chat))
 app.use("/auth", authRoutes(User, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Proposal))
-app.use("/users", usersRoutes(User, Chat, bcrypt))
+app.use("/users", usersRoutes(User))
 
 
 //----The home route
@@ -75,7 +74,7 @@ app.get("/", (req, res) => {
         ],
         "chat routes": [
             "GET /chats/:chatId",
-            "GET /users/:userId/chat-previews",
+            "GET /chats/self/chat-previews",
             "PATCH /chats/:chatId", 
         ],
         "proposal routes": [

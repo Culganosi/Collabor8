@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, bcrypt) => {
+module.exports = (User) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
@@ -68,38 +68,6 @@ module.exports = (User, Chat, bcrypt) => {
         const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
     })
-
-
-    //For when the user enters the chat and sees a list of all their previous chats
-    router.get('/:userId/chat-previews', async (req, res) => {
-        const userId = req.params.userId;
-        const chatPreviews = []
-
-        const targetUserChats = await Chat.find({participants : userId}).sort("-lastMessageAt")
-
-        //Process each chat into a chat preview and add it the list
-        for (let chatId of targetUserChats){
-            const chatData = await Chat.findById(chatId)
-            
-            //Don't send the entire chat, only get the info needed for preview
-            const lastMessage = chatData.messages[chatData.messages.length - 1];
-            const partners = chatData.participants.filter(participant => {
-                //Exclude the user who views their chat previews from this list
-                //!== does not work since IDs are not primitives
-                return (!participant.equals(userId))
-            })
-
-            const chatPreview = {
-                lastMessage,
-                partners,
-                _id: chatData._id,
-            }
-            chatPreviews.push(chatPreview)
-        }
-        
-        res.json(chatPreviews)
-
-    });
 
     //Edit user information (also works for filling out the profile after registration)
     router.patch("/self", async (req, res) => {

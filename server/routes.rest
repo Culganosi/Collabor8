@@ -34,10 +34,6 @@ GET http://localhost:3001/users/self
 #Returns data for the user profile page
 GET http://localhost:3001/users/62a79f5697c61afc88917c55
 
-###
-
-#Returns data for the chat list of a certain user, those with the most recent messages first
-GET http://localhost:3001/users/62a67114709b384e3dfc1e9a/chat-previews
 
 ###
 
@@ -49,6 +45,11 @@ Content-Type: application/json
     "bio": "Ths is an updated bio to test 2"
 }
 
+
+###
+
+#Returns data for the chat list of the logged-in user, those with the most recent messages first
+GET http://localhost:3001/chats/self/chat-previews
 
 ###
 
