@@ -32,3 +32,27 @@
     height: 120px;
     background-color: rgb(76, 119, 227);
 }
+
+.message {
+    margin: 10px 10px;
+}
+
+.message__author, .message__sentAt, .message_text {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+.message__text {
+    background: palevioletred;
+    border-radius: 20px;
+}
+
+.message__author {
+    font-weight: bold;
+}
+
+.message__sentAt {
+    font-style: italic;
+    color: grey;
+}

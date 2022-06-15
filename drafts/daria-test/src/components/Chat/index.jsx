@@ -19,7 +19,10 @@ function Chat() {
 
   //Import stuff within the component
   const navigate = useNavigate(); 
-  const {self, setSelf, setChatPreviews, chatPreviews, setProfiles, setActiveChatId} = useContext(DataContext);
+  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull} = useContext(DataContext);
+
+
+    //------------------------------HELPER FUNCTIONS-----------------------------
 
 
   //function to log out
@@ -27,15 +30,13 @@ function Chat() {
     const requestString = `/auth/out`
     axios.post(requestString)
     .then((res) => {
-      console.log(res)
       navigate("/")
     })
     .catch(err => console.log(err.message))
   }
 
 
-
-  //---------
+  //------------------------------REFRESH-----------------------------
 
   useEffect(() => {
 
@@ -50,13 +51,17 @@ function Chat() {
 
       const chatPrevRes = await axios.get(`/chats/self/chat-previews`)
 
-      console.log(chatPrevRes)
       setChatPreviews(chatPrevRes.data);
 
+      let defaultActiveChatId=""
+
       if (chatPrevRes.data.length > 0) {
-        const defaultActiveChatId = chatPrevRes.data[0]._id
-        setActiveChatId(defaultActiveChatId)
+        defaultActiveChatId = chatPrevRes.data[0]._id
+      } else {
+        setActiveChatFull([])
       }
+
+      setActiveChatId(defaultActiveChatId)
 
     }
 
@@ -64,7 +69,22 @@ function Chat() {
 
   }, [])
 
-  //--------
+
+  useEffect(() => {
+
+    async function refreshConvo () {
+      if(activeChatId) {
+        const chatFullRes = await axios.get(`/chats/${activeChatId}`)
+        setActiveChatFull(chatFullRes.data)
+      }
+    }
+
+    refreshConvo()
+
+  }, [activeChatId])
+
+
+  //------------------------------RENDER-----------------------------
 
 
   return (

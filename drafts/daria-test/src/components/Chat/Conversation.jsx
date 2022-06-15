@@ -4,45 +4,26 @@ import {DataContext} from "../../DataContext";
 import { useEffect } from 'react';
 import axios from 'axios';
 
+import MessageLine from "./MessageLine"
+
 
 function Conversation() {
 
   const {activeChatId, activeChatFull, setActiveChatFull} = useContext(DataContext);
 
-  //--useEffect -- IF active chat exists?
+  let messageList = [];
 
-  // useEffect(() => {
-
-  //     axios.get(`/chats/${activeChatId}`)
-  //     .then(res => {
-
-  //       console.log("RESPONSE")
-  //       console.log(res)
-
-  //       setActiveChatFull(res.data)
-  //     })
-  //     .catch(err => console.log(err))
-
-  // }, [])
-
-  // console.log("Active chat full");
-  // console.log(activeChatFull);
-  // console.log("Active chat ID");
-  // console.log(activeChatId);
+  if (activeChatFull.messages){
+    messageList = activeChatFull.messages.map(message => {
+      return <MessageLine message={message} key={message._id}/>
+    })
+  }
 
 
   return (
     <div className="chat__conversation">
       
-      Conversation
-
-      {/* {activeChatFull && activeChatFull.messages.map(message => {
-
-        <p>message.text</p>
-
-
-      })} */}
-      
+      {messageList}
       
       </div>
   )

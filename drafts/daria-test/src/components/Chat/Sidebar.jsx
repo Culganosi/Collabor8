@@ -12,7 +12,7 @@ function Sidebar() {
 
    
     <div className="chat__sidebar">
-      {chatPreviews.map(preview => (<Preview previewData={preview} />))}
+      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
     </div>
 
   )
