@@ -12,10 +12,8 @@ import {DataContext} from "./DataContext"
 
 
 
-import socketIoClient from 'socket.io-client'
-const connection = socketIoClient('http://localhost:8080') 
+import socketIoClient from 'socket.io-client';
 //Address of the server //--> This will create a connection which the server detects as 'connection'
-
 
 
 
@@ -32,6 +30,33 @@ function App() {
       //Which chat will display in the Conversation component
       const [activeChatId, setActiveChatId] = useState(""); //---This is the ID
       const [activeChatFull, setActiveChatFull] = useState([]); //---This is the whole history of the active chat
+
+      const [conn, setConn] = useState(null);
+
+      //--------------------------
+
+
+      useEffect(() => {
+        const connection = socketIoClient('http://localhost:3001');
+        setConn(connection);
+      },[])
+      
+      useEffect(() => {
+        if (conn) {
+          conn.on('INITIAL_CONNECTION', data => {
+            console.log("DATA HAS COME IN FROM THE SERVER!");
+            console.log(data);
+            // setUser(prev => data.name);
+            // setUsers(prev => data.usersList);
+          })
+        }
+      }, [conn])
+      
+
+
+
+
+      //----------------------------
 
 
 
