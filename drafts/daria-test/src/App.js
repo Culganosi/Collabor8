@@ -43,12 +43,20 @@ function App() {
       
       useEffect(() => {
         if (conn) {
+
+          //Receive from server
           conn.on('INITIAL_CONNECTION', data => {
             console.log("DATA HAS COME IN FROM THE SERVER!");
             console.log(data);
-            // setUser(prev => data.name);
-            // setUsers(prev => data.usersList);
           })
+
+
+          conn.on('receiveMessage', data => {
+            //console.log("DATA HAS COME IN FROM THE SERVER!");
+            console.log(data);
+          })
+
+
         }
       }, [conn])
       

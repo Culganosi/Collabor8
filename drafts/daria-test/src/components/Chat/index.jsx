@@ -18,13 +18,11 @@ function Chat() {
 
   //Variables
   const navigate = useNavigate(); 
-  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull, conn} = useContext(DataContext);
+  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn} = useContext(DataContext);
 
   const [newMessage, setNewMessage] = useState()
 
-
-    //------------------------------HELPER FUNCTIONS-----------------------------
-
+  //------------------------------HELPER FUNCTIONS-----------------------------
 
   //function to log out
   const logout = () => {
@@ -39,12 +37,18 @@ function Chat() {
 
   const submitNewMessage = () => {
 
-    //To be sent to: activeChatId
-    //TODO: Work here
-    console.log(`Submitting message: ${newMessage}`)
+    //Send new message to the socket
+    const newMessageData = {
+      text: newMessage, 
+      chatId: activeChatId,
+      recipientId: activeChatFull.participants.filter(id => id != self._id)[0],
+      sendAt: Date.now()
+    }
+    conn.emit("newMessage", newMessageData);
 
-    // client-side
-    conn.emit("newMessage", newMessage);
+    //Refresh input field
+    setNewMessage("")
+
   }
 
 

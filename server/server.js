@@ -69,16 +69,18 @@ app.use(function(req, res, next) {
 
   io.on ('connection', (socket) => {
 
+	// console.log("Someone has connected");
+	// //console.log(socket) // prints details about the connection
+
+    // socket.emit('INITIAL_CONNECTION', "HELLO DARIA");
+
+    //Receive new message from client
+    socket.on("newMessage", (data) => {
+
+        //Just send it to all the other users
+        socket.broadcast.emit('receiveMessage', data)
     
-	console.log("Someone has connected");
-	console.log(socket) // prints details about the connection
-
-    socket.emit('INITIAL_CONNECTION', "HELLO DARIA");
-
-    socket.on("newMessage", (arg) => {
-        console.log(arg); // world
     });
-
 
 
 
