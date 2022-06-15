@@ -53,7 +53,7 @@ Content-Type: application/json
 ###
 
 #Get the full chat history
-GET http://localhost:3001/chats/62a67f8a13ec7c7a33e2e7ef
+GET http://localhost:3001/chats/62a79f5997c61afc88917c98
 
 ###
 

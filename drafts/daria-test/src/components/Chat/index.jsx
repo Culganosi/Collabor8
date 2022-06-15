@@ -1,7 +1,9 @@
-import React, {Fragment, useContext} from 'react'
+import React, {Fragment, useContext, useEffect} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import {DataContext} from "../../DataContext";
+import {DataContext} from "./../../DataContext"
+
+//Custom hooks
 
 //--Import subcomponents
 
@@ -15,14 +17,14 @@ import "./chatStyle.css"
 
 function Chat() {
 
+  //Import stuff within the component
   const navigate = useNavigate(); 
+  const {self, setSelf, setChatPreviews, chatPreviews, setProfiles, setActiveChatId} = useContext(DataContext);
 
-  const {self, setSelf} = useContext(DataContext);
 
+  //function to log out
   const logout = () => {
-
     const requestString = `/auth/out`
-
     axios.post(requestString)
     .then((res) => {
       console.log(res)
@@ -31,7 +33,40 @@ function Chat() {
     .catch(err => console.log(err.message))
   }
 
-  
+
+
+  //---------
+
+  useEffect(() => {
+
+    async function refreshData () {
+
+      //Make sure the Self is correct again
+      const selfUserRes = await axios.get('/users/self')
+      setSelf(selfUserRes.data);
+      const selfId = selfUserRes.data._id
+
+      //Refresh user data
+      const usersRes = await axios.get("/users");
+      setProfiles(usersRes.data)
+
+      //Refresh chat previews
+      const chatPrevRes = await axios.get(`/users/${selfId}/chat-previews`)
+      setChatPreviews(chatPrevRes.data);
+
+      if (chatPrevRes.data.length > 0) {
+        const defaultActiveChatId = chatPrevRes.data[0]._id
+        setActiveChatId(defaultActiveChatId)
+      }
+
+    }
+
+    refreshData();
+
+  }, [])
+
+
+  //--------
 
 
   return (

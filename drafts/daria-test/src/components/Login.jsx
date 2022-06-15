@@ -5,7 +5,6 @@ import axios from 'axios';
 import "./style.css"
 
 
-
 function Login() {
 
   const navigate = useNavigate();  
@@ -14,8 +13,9 @@ function Login() {
   const [userhandle, setUserhandle] = useState(undefined);
   const [password, setPassword] = useState(undefined);
 
-  
 
+
+  //FUNCTION TO LOG IN
   const login = () => {   
 
     const requestString = `/auth/in`

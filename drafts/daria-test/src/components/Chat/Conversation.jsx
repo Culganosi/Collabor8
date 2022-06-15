@@ -11,16 +11,24 @@ function Conversation() {
 
   //--useEffect -- IF active chat exists?
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if(activeChatId) {
-      axios.get(`/chats/${activeChatId}`)
-      .then(activeChatDetails => {
-        setActiveChatFull(activeChatDetails)
-      })
-    }
+  //     axios.get(`/chats/${activeChatId}`)
+  //     .then(res => {
 
-  }, [])
+  //       console.log("RESPONSE")
+  //       console.log(res)
+
+  //       setActiveChatFull(res.data)
+  //     })
+  //     .catch(err => console.log(err))
+
+  // }, [])
+
+  // console.log("Active chat full");
+  // console.log(activeChatFull);
+  // console.log("Active chat ID");
+  // console.log(activeChatId);
 
 
   return (
@@ -28,7 +36,12 @@ function Conversation() {
       
       Conversation
 
-      {activeChatId}
+      {/* {activeChatFull && activeChatFull.messages.map(message => {
+
+        <p>message.text</p>
+
+
+      })} */}
       
       
       </div>
