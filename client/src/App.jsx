@@ -1,4 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
+
+
+import {DataContext} from "./DataContext"
+
+
 import { CssBaseline } from "@material-ui/core";
 import BrowseProp from "./pages/BrowseProp";
 import OthersProp from "./pages/OthersProp";
@@ -17,19 +22,31 @@ import Login from "./pages/Login";
 import OtherProfile from "./pages/OtherProfile";
 import UserProfile from "./pages/UserProfile";
 
+
+
+
 function App() {
+
+
+  //Variables to be shared
+  const [profiles, setProfiles] = useState({})
+
+
+
+
   return (
+    <DataContext.Provider value={{profiles, setProfiles}}>
     <>
     <CssBaseline />
       <Nav />
-      <UserProfile />
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
-        <Route path="/Create-Proposal" element={<CreateProfile />} />
+        <Route path="/Create-Profile" element={<CreateProfile />} />
       </Routes>
     </>
+    </DataContext.Provider>
   );
 }
 

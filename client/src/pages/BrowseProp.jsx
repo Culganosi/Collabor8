@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
+import axios from "axios";
+import { DataContext } from "./../DataContext";
 import {
   Typography,
   Button,
@@ -12,11 +14,66 @@ import {
   Container,
 } from "@material-ui/core";
 import useStyles from "../styles";
+import ProposalCard from "../components/ProposalCard";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function BrowseProp() {
   const classes = useStyles();
+
+  const { proposals, setProposal } = useContext(DataContext);
+  
+//   GET http://localhost:3001/proposals
+// Content-Type: application/json
+
+// {
+//     "filterInput": {"seeking": ["Front-end developer"]},
+//     "sortInput": "-createdAt" 
+// }
+
+
+// axios({
+//   method: 'post',
+//   url: '/login',
+//   data: {
+//     firstName: 'Finn',
+//     lastName: 'Williams'
+//   }
+// });
+  
+// axios({
+//   method: "get",
+//   url: "/proposals",
+//   data: {filterInput: {}, sortInput: ""},
+//   headers: {
+//     "Content-Type": "application/json"
+//   }
+// })
+  useEffect(() => {
+    axios.get("/proposals", {"Content-Type": "application/json"})
+    .then((res) => {
+      console.log(res.data)
+      //setProposals(res.data);
+      //Now the "proposals" state variables should hold the data (which is an object)
+    })
+    .catch(Error => console.log(Error))
+  }, []);
+
+  // const listOfProposalCards = Object.values(proposals).map((proposal) => {
+  //   return (
+  //     <Grid item={proposals} xs={12} sm={6} md={4}>
+  //       <ProposalCard
+  //         key={proposals._id}
+  //         _id={proposals._id}
+  //         avatar={proposals.avatar} 
+  //         shortBio={proposals.shortBio}
+  //         skills={proposals.skills}
+  //         userhandle={proposals.userhandle}
+  //         role={proposals.role}
+  //       />
+  //     </Grid>
+  //   );
+  // });
 
   return (
     <main>
@@ -55,45 +112,6 @@ export default function BrowseProp() {
           </div>
         </Container>
       </div>
-      <Box border={2} padding={5} margin={2} borderRadius={16}>
-        <Container className={classes.cardGrid} maxWidth="xl">
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardActionArea>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image="https://source.unsplash.com/random"
-                      title="Title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5">
-                        Proposal Title
-                      </Typography>
-                      <Typography>
-                        Seeking: Product Developer, UX/UI Designer
-                      </Typography>
-                      <Typography>!Urgent</Typography>
-                      <Typography>
-                        I'm making this super cool thing, do you want to make a
-                        super cool thing? Make a super cool thing with me.
-                        Potato.
-                      </Typography>
-                      <Typography>Created: 06/06/2022</Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" color="secondary">
-                      See More Details
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </Box>
     </main>
   );
 }

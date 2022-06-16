@@ -16,7 +16,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 
-const pages = ["People", "Proposals", "Create-Proposal"];
+const pages = ["People", "Proposals", "Create-Profile"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = () => {

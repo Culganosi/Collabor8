@@ -7,8 +7,10 @@ module.exports = (User, Proposal) => {
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
 
-          const {filterInput, sortInput} = req.body;
-          
+          let {filterInput, sortInput} = req.body;
+          if (!filterInput) {
+               filterInput={}
+          }
           if (filterInput?.title) {
                filterInput.title = { "$regex": filterInput.title, "$options": "i" }
           }
@@ -16,13 +18,15 @@ module.exports = (User, Proposal) => {
           //TODO: This is not right, it should return proposals that seek ANY of the skills listed, not ALL of them
           //Figure out how to do this but keep this for now
           //https://stackoverflow.com/questions/19648841/how-can-i-handle-array-intersection-in-find
-          if  (filterInput?.seeking) {
+          if  (filterInput.seeking) {
                filterInput.seeking = {$all : filterInput.seeking}
           }
-          
+          console.log(filterInput)
           //Filter only for active proposals
-          filterInput.status = "Active";
-          
+          if(filterInput) {
+               filterInput.status = "Active";
+          }
+
           const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1, shortDescription: 1, image: 1}
 
           Proposal
