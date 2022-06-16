@@ -1,19 +1,21 @@
 import React, {useContext, useEffect} from 'react'
 import {DataContext} from "../../DataContext";
-import axios from 'axios';
+import classNames from "classnames";
 
 function Preview({previewData}) {
 
-
-    const {profiles, setActiveChatId} = useContext(DataContext);
-
+    //Full variables from context
+    const {profiles, setActiveChatId, activeChatId} = useContext(DataContext);
+    
+    //Helper variables
+    const previewClass = classNames('chat-preview', { "active": previewData._id==activeChatId});
     const partnerId = previewData.partner;
+    
 
-
+    //RENDER
     return (
 
-
-        <div className="chat-preview" onClick={() => setActiveChatId(previewData._id)}>
+        <div className={previewClass} onClick={() => setActiveChatId(previewData._id)}>
 
             <img className="chat-preview__avatar" src={`${profiles[partnerId].avatar}`} />
 
