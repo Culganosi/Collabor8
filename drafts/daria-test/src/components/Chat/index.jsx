@@ -8,6 +8,7 @@ import socketIoClient from 'socket.io-client';
 
 import Conversation from './Conversation';
 import Sidebar from './Sidebar';
+import CreateChatButtons from './CreateChatButtons'
 
 import "./chatStyle.css"
 
@@ -18,7 +19,7 @@ function Chat() {
 
   //Variables
   const navigate = useNavigate(); 
-  const {self, setSelf, chatPreviews, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn, setConn} = useContext(DataContext);
+  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn, setConn} = useContext(DataContext);
 
   const [newMessage, setNewMessage] = useState()
 
@@ -35,18 +36,20 @@ function Chat() {
     .catch(err => console.log(err.message))
   }
 
-
   //TODO: This is a conversation with an existing chat!
   const submitNewMessage = () => {
 
     if (!newMessage) return;
 
     //Send new message to the socket
+    
+    const recipientId = activeChatFull.participants.filter(id => id != self._id)[0]
+
     const messageToSocket = {
       text: newMessage, 
       chatId: activeChatId,
       author: self._id,
-      recipientId: activeChatFull.participants.filter(id => id != self._id)[0],
+      recipientId,
       sentAt: Date.now()
     }
     conn.emit("newMessage", messageToSocket);
@@ -60,6 +63,24 @@ function Chat() {
       return newChat;
     })
 
+    //Also update in the preview panels
+    setChatPreviews(prev => {
+
+      const indexOfNeededPreview = prev.findIndex(preview => preview.partner == recipientId)
+
+      const newPreview = {
+        partner: recipientId,
+        _id: prev[indexOfNeededPreview]._id,
+        lastMessage: {author: self._id, sentAt: Date.now(), text: newMessage}
+      }
+
+      const newPreviews = [...prev]
+      newPreviews.splice(indexOfNeededPreview, 1)
+      newPreviews.unshift(newPreview)
+      return newPreviews;
+    })
+
+
     //Send message to database -> it will persist on refresh
     //TODO: uncomment
     axios.patch(`/chats/${activeChatId}`, {text: newMessage})
@@ -69,10 +90,10 @@ function Chat() {
 
   }
 
-
-  
   //------------------------------REFRESH-----------------------------
 
+
+  //Refresh the needed data
   useEffect(() => {
 
     async function refreshData () {
@@ -101,14 +122,6 @@ function Chat() {
       setActiveChatId(defaultActiveChatId)
 
       //If we haven't kept the active chat in local yet, choose the first one
-      //TODO: -----
-      // console.log("CONDITIONS")
-      // console.log(chatPrevRes.data.length)
-      // console.log(activeChatId)
-      // if (chatPrevRes.data.length > 0 && !activeChatId){
-      //   console.log("Meets condition")
-      //   setActiveChatId(chatPrevRes.data[0]._id)
-      // }
 
     }
 
@@ -128,8 +141,6 @@ function Chat() {
     refreshConvo()
   }, [activeChatId])
 
-    
-
 
 
   //-----------------------WEBSOCKET STUFF------------------
@@ -140,17 +151,13 @@ function Chat() {
     setConn(connection);
   },[])
 
-
   //Send the ID to the socket server to make it relate sockedID <---> userId
   useEffect(() => {
-    console.log(`ID IS NOW: ${self?._id}`)
-
     if (conn && self?._id) {
       conn.emit('sendUserId', self._id)
     }
 
   }, [self])
-
 
   //All the other listeners
   useEffect(() => {
@@ -198,13 +205,7 @@ function Chat() {
   }, [conn])
 
 
-  //FOR TESTING
-  useEffect(() => {
-    console.log(`Active chat is now ==> ${activeChatId}`)
-  }, [activeChatId])
-
   //------------------------------RENDER CHAT PAGE COMPONENT -----------------------------
-
 
   return (
 
@@ -216,14 +217,16 @@ function Chat() {
 
         <button onClick={() => logout()}> LOGOUT </button>
 
-        {/* < createChatButtons /> */}
+        < CreateChatButtons />  {/* <---- IGNORE THIS IN THE FINAL VERSION */}
 
         <div className="chat">
 
           <Sidebar />
   
           <div className="chat__right">
+
             <Conversation />
+
             <input 
               type="text"
               value={newMessage}

@@ -13,7 +13,7 @@ function Conversation() {
 
   //Variables
 
-  const {activeChatId, activeChatFull, setActiveChatFull} = useContext(DataContext);
+  const {activeChatFull} = useContext(DataContext);
 
   //Create message list if exists
   let messageList = [];
