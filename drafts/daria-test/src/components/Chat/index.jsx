@@ -62,7 +62,7 @@ function Chat() {
 
     //Send message to database -> it will persist on refresh
     //TODO: uncomment
-    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
+    //axios.patch(`/chats/${activeChatId}`, {text: newMessage})
 
     //Refresh input field
     setNewMessage("")
@@ -101,9 +101,7 @@ function Chat() {
       setActiveChatId(defaultActiveChatId)
 
       //If we haven't kept the active chat in local yet, choose the first one
-
       //TODO: -----
-
       // console.log("CONDITIONS")
       // console.log(chatPrevRes.data.length)
       // console.log(activeChatId)
@@ -111,8 +109,6 @@ function Chat() {
       //   console.log("Meets condition")
       //   setActiveChatId(chatPrevRes.data[0]._id)
       // }
-
-
 
     }
 
@@ -171,16 +167,16 @@ function Chat() {
 
         //TODO: This has bugs, code runs whichever room you seem to be in-+
 
-        if (activeChatId === chatId) {
+       // if (activeChatId == chatId) {
           setActiveChatFull(prev => {
             console.log("I'm inside this")
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
             return newChat;
           })
-        }
+        //}
 
-        console.log(chatPreviews)
+        //console.log(chatPreviews)
 
         //TODO: Update preview when message arrives
         // setChatPreviews(prev => {

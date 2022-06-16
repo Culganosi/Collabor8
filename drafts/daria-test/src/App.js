@@ -13,7 +13,6 @@ import "./App.css"
 import socketIoClient from 'socket.io-client';
 
 
-
 function App() {
 
       //---NOTE: Don't set these to null or undefined
