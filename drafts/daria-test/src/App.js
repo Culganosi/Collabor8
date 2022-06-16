@@ -1,5 +1,3 @@
-import logo from './logo.svg';
-import './App.css';
 import axios from 'axios';
 
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
@@ -10,12 +8,9 @@ import Chat from "./components/Chat/"
 
 import {DataContext} from "./DataContext"
 
+import "./App.css"
 
-
-import socketIoClient from 'socket.io-client'
-const connection = socketIoClient('http://localhost:8080') 
-//Address of the server //--> This will create a connection which the server detects as 'connection'
-
+import socketIoClient from 'socket.io-client';
 
 
 
@@ -33,35 +28,46 @@ function App() {
       const [activeChatId, setActiveChatId] = useState(""); //---This is the ID
       const [activeChatFull, setActiveChatFull] = useState([]); //---This is the whole history of the active chat
 
+      const [conn, setConn] = useState(null);
+
+      //--------------------------
+
+      
 
 
+      //-------------REFRESH
+
+              
+
+      //----------------------------
 
 
-  return (
+    return (
 
-    <DataContext.Provider value={{
-       self, setSelf,
-       chatPreviews, setChatPreviews,
-       profiles, setProfiles,
-       activeChatId, setActiveChatId,
-       activeChatFull, setActiveChatFull
-    }}>
+      <DataContext.Provider value={{
+        self, setSelf,
+        chatPreviews, setChatPreviews,
+        profiles, setProfiles,
+        activeChatId, setActiveChatId,
+        activeChatFull, setActiveChatFull,
+        conn, setConn
+      }}>
 
-      <Router>
+        <Router>
 
-        <Routes>
+          <Routes>
 
-          <Route path="/" element={<Login />}/>
-          <Route path="/chat" element={<Chat />}/>
+            <Route path="/" element={<Login />}/>
+            <Route path="/chat" element={<Chat />}/>
 
-        </Routes>
-      </Router>
-
-
-    </DataContext.Provider>
+          </Routes>
+        </Router>
 
 
-  );
+      </DataContext.Provider>
+
+
+    );
 }
 
 export default App;

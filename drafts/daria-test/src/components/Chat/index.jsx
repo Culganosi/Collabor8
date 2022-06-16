@@ -2,7 +2,7 @@ import React, {Fragment, useContext, useEffect, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import {DataContext} from "./../../DataContext"
-
+import socketIoClient from 'socket.io-client';
 
 //--Import subcomponents
 
@@ -18,34 +18,59 @@ function Chat() {
 
   //Variables
   const navigate = useNavigate(); 
-  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, setActiveChatFull} = useContext(DataContext);
+  const {self, setSelf, chatPreviews, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn, setConn} = useContext(DataContext);
 
   const [newMessage, setNewMessage] = useState()
 
-
-    //------------------------------HELPER FUNCTIONS-----------------------------
-
+  //------------------------------HELPER FUNCTIONS-----------------------------
 
   //function to log out
   const logout = () => {
     const requestString = `/auth/out`
     axios.post(requestString)
     .then((res) => {
+      setSelf({})
       navigate("/")
     })
     .catch(err => console.log(err.message))
   }
 
 
+  //TODO: This is a conversation with an existing chat!
   const submitNewMessage = () => {
 
-    //To be sent to: activeChatId
-    //TODO: Work here
-    console.log(`Submitting message: ${newMessage}`)
+    if (!newMessage) return;
+
+    //Send new message to the socket
+    const messageToSocket = {
+      text: newMessage, 
+      chatId: activeChatId,
+      author: self._id,
+      recipientId: activeChatFull.participants.filter(id => id != self._id)[0],
+      sentAt: Date.now()
+    }
+    conn.emit("newMessage", messageToSocket);
+
+    //Save message in local storage -> it will display in author's chat
+    const messageToLocal = {author: self._id, text: newMessage, sentAt: new Date(Date.now()).toString()}
+
+    setActiveChatFull(prev => {
+      const newMessages = [...prev.messages, messageToLocal]
+      const newChat = {...prev, messages: newMessages}
+      return newChat;
+    })
+
+    //Send message to database -> it will persist on refresh
+    //TODO: uncomment
+    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
+
+    //Refresh input field
+    setNewMessage("")
+
   }
 
 
-
+  
   //------------------------------REFRESH-----------------------------
 
   useEffect(() => {
@@ -53,15 +78,14 @@ function Chat() {
     async function refreshData () {
 
       //Get most up to date info about users (e.g. if someone changed something)
-      //TODO: We dno't need this on this page if people can not change userhandles...
+      //TODO: We dno't need this on this page if people can not change userhandles... (meaning it would go in App.js?)
       const usersRes = await axios.get("/users");
       setProfiles(usersRes.data);
 
       //Make sure the Self is correct on refresh
-      if (Object.keys(self).length === 0) {
-        const selfUserRes = await axios.get('/users/self')
-        setSelf(selfUserRes.data);
-      }
+      const selfUserRes = await axios.get('/users/self')
+      setSelf(selfUserRes.data);
+
 
       const chatPrevRes = await axios.get(`/chats/self/chat-previews`)
       setChatPreviews(chatPrevRes.data);
@@ -76,6 +100,20 @@ function Chat() {
 
       setActiveChatId(defaultActiveChatId)
 
+      //If we haven't kept the active chat in local yet, choose the first one
+
+      //TODO: -----
+
+      // console.log("CONDITIONS")
+      // console.log(chatPrevRes.data.length)
+      // console.log(activeChatId)
+      // if (chatPrevRes.data.length > 0 && !activeChatId){
+      //   console.log("Meets condition")
+      //   setActiveChatId(chatPrevRes.data[0]._id)
+      // }
+
+
+
     }
 
     refreshData();
@@ -83,21 +121,84 @@ function Chat() {
   }, [])
 
 
+  //Once have the ID of the chat to display, get the entire chat history from database
   useEffect(() => {
-
     async function refreshConvo () {
       if(activeChatId) {
         const chatFullRes = await axios.get(`/chats/${activeChatId}`)
         setActiveChatFull(chatFullRes.data)
       }
     }
-
     refreshConvo()
-
   }, [activeChatId])
 
+    
 
-  //------------------------------RENDER-----------------------------
+
+
+  //-----------------------WEBSOCKET STUFF------------------
+
+  //Set up connection
+  useEffect(() => {
+    const connection = socketIoClient('http://localhost:3001');
+    setConn(connection);
+  },[])
+
+
+  //Send the ID to the socket server to make it relate sockedID <---> userId
+  useEffect(() => {
+    console.log(`ID IS NOW: ${self?._id}`)
+
+    if (conn && self?._id) {
+      conn.emit('sendUserId', self._id)
+    }
+
+  }, [self])
+
+
+  //All the other listeners
+  useEffect(() => {
+    if(conn) {
+      conn.on('receiveMessage', data => {
+        console.log(`Received message: ${data.text}`)
+        console.log(data);
+
+        const {sentAt, text, author, chatId} = data;
+        const messageToLocal = {sentAt, author, text}
+
+        console.log("Active chat: " + activeChatId)
+        console.log("Intended chat: " + chatId)
+
+        //TODO: This has bugs, code runs whichever room you seem to be in-+
+
+        if (activeChatId === chatId) {
+          setActiveChatFull(prev => {
+            console.log("I'm inside this")
+            const newMessages = [...prev.messages, messageToLocal]
+            const newChat = {...prev, messages: newMessages}
+            return newChat;
+          })
+        }
+
+        console.log(chatPreviews)
+
+        //TODO: Update preview when message arrives
+        // setChatPreviews(prev => {
+
+        // })
+
+      });
+    }
+
+  }, [conn])
+
+
+  //FOR TESTING
+  useEffect(() => {
+    console.log(`Active chat is now ==> ${activeChatId}`)
+  }, [activeChatId])
+
+  //------------------------------RENDER CHAT PAGE COMPONENT -----------------------------
 
 
   return (
@@ -116,9 +217,7 @@ function Chat() {
           <Sidebar />
   
           <div className="chat__right">
-
             <Conversation />
-
             <input 
               type="text"
               value={newMessage}
@@ -126,12 +225,8 @@ function Chat() {
             />
 
             <button onClick={() => submitNewMessage()}>Send Message</button>
-
           </div>
-
         </div>
-
-
         
     </Fragment>
 

@@ -41,28 +41,28 @@ function Login() {
         <tr>
           <th>Userhandle</th>
           <th>Password</th>
-          <th>On db:reset</th>
+          <th>User ID</th>
         </tr></thead>
         <tbody>
         <tr>
           <td>kmyrtle0</td>
           <td>123</td>
-          <td>2 chat convos</td>
+          <td>62aa59aa214e947ced12f194</td>
         </tr>
         <tr>
           <td>rgostridge1</td>
           <td>123</td>
-          <td>1 chat convo</td>
+          <td>62aa59aa214e947ced12f19b</td>
         </tr>
         <tr>
           <td>lreardon2</td>
           <td>123</td>
-          <td>1 chat convo</td>
+          <td>62aa59aa214e947ced12f1a1</td>
         </tr>
         <tr>
           <td>fpeers3</td>
           <td>123</td>
-          <td>0 chat convos</td>
+          <td>62aa59aa214e947ced12f1a7</td>
         </tr>        
         </tbody>
       </table>

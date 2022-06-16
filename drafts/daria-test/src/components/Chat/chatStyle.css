@@ -34,6 +34,10 @@
     display: flex;
 }
 
+.chat-preview.active {
+    background-color: purple;
+}
+
 .chat-preview__avatar {
     width: 100px;
     height: 100px;
@@ -54,6 +58,10 @@
 .message__text {
     background: palevioletred;
     border-radius: 20px;
+}
+
+.yours > .message__text {
+    background: orangered;
 }
 
 .message__author {

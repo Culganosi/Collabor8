@@ -7,17 +7,32 @@ import axios from 'axios';
 import MessageLine from "./MessageLine"
 
 
+
+
 function Conversation() {
+
+  //Variables
 
   const {activeChatId, activeChatFull, setActiveChatFull} = useContext(DataContext);
 
+  //Create message list if exists
   let messageList = [];
-
   if (activeChatFull.messages){
     messageList = activeChatFull.messages.map(message => {
       return <MessageLine message={message} key={message._id}/>
     })
   }
+
+
+  useEffect(() => {
+
+  })
+
+
+  ///-------------------
+
+  
+  //-------------------
 
 
   return (

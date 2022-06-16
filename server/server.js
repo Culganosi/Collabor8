@@ -4,8 +4,12 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
-const socketio = require('socket.io')
-const http = require('http')
+
+// STEP 1: require socket.io
+const socketio = require('socket.io');
+// STEP 2: require http
+const http = require('http');
+
 
 require('dotenv').config()
 
@@ -34,20 +38,14 @@ const PORT = 3001;
 const app = express()
 
 //----ADD SOCKETS
-
 const server = http.createServer(app);
+const io = socketio(server);
 
-//For newer versions of the socketio package: whitelist origin and methods!
-const io = socketio (server, {
-	cors: {
-		origin: "http://localhost:3000", //The front-end client
-		methods: ["GET", "POST"]
-}});
+
 
 
 
 app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
-
 
 //Tell server to use cookies
 app.use(cookieSession({
@@ -68,12 +66,42 @@ app.use(function(req, res, next) {
     next();
   });
 
-
   
+  const userIdSocketId = {}
 
   io.on ('connection', (socket) => {
-	console.log("Someone has connected");
-	console.log(socket) // prints details about the connection
+
+	// console.log("Someone has connected");
+	// //console.log(socket) // prints details about the connection
+
+    socket.emit('INITIAL_CONNECTION', "HELLO USER");
+
+    socket.on("sendUserId", userId => {
+       // console.log(`User joined: ${userId}`)
+        userIdSocketId[userId] = socket.id
+       // console.log(userIdSocketId)
+    })
+
+    //Receive new message from client
+    socket.on("newMessage", (data) => {
+
+        console.log("A message was sent to the server")
+
+        const {recipientId} = data;
+        const recipientSockedId = userIdSocketId[recipientId]
+
+        if (recipientSockedId) {
+           // console.log(`${recipientId} is connected, so sending message`)
+            //console.log(`Sending ${data.text} to ${recipientId}`)
+            socket.broadcast.to(recipientSockedId).emit('receiveMessage', data)
+        } else {
+           // console.log(`${recipientId} is not connected`)
+        }
+    
+    });
+
+
+
 });
 
 
@@ -120,8 +148,6 @@ app.get("/", (req, res) => {
         ]
     })
 })
-
-
 
 
 server.listen(PORT, () => {
