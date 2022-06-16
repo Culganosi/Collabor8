@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, Proposal, bcrypt) => {
+module.exports = (User, Chat) => {
 
     //Get chat history
     router.get("/:chatId", async (req, res) => {
@@ -14,8 +14,10 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
     router.post("/", async (req, res) => {
 
+        const authorId = req.session.userId;
+
         //Create a new chat and put it in the database
-        const {authorId, recipientId, firstMessageText} = req.body;
+        const {recipientId, firstMessageText} = req.body;
         const newChat = new Chat({
             participants: [authorId, recipientId],
             messages: [{
@@ -44,7 +46,9 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
 
-        const {author, text} = req.body;
+        const author = req.session.userId;
+
+        const {text} = req.body;
 
          //TODO: Verify author is authenticated (+ exists in DB?)
         const targetChat = await Chat.findById(req.params.chatId)
@@ -63,6 +67,44 @@ module.exports = (User, Chat, Proposal, bcrypt) => {
 
 
     })
+
+    //For when the user enters the chat and sees a list of all their previous chats
+    router.get('/self/chat-previews', async (req, res) => {
+
+        const userId = req.session.userId;
+
+        const chatPreviews = []
+
+        const userData = await User.findById(userId)
+        const userChatIds = userData.chats
+
+
+        const targetUserChats = await Chat.find({'_id': { $in: userChatIds}}).sort("-lastMessageAt")
+
+        //Process each chat into a chat preview and add it the list
+        for (let chatData of targetUserChats){
+            //const chatData = await Chat.findById(chatId)
+            
+            //Don't send the entire chat, only get the info needed for preview
+            const lastMessage = chatData.messages[chatData.messages.length - 1];
+            const partner = chatData.participants.filter(participant => {
+                //Exclude the user who views their chat previews from this list
+                //!== does not work since IDs are not primitives
+                return (!participant.equals(userId))
+            })[0]
+
+            const chatPreview = {
+                lastMessage, 
+                partner, 
+                _id: chatData._id,
+            }
+            chatPreviews.push(chatPreview)
+        }
+        
+        res.json(chatPreviews)
+
+    });
+
 
 
     return router;

@@ -44,13 +44,18 @@ module.exports = (User, Proposal) => {
     router.post("/", async (req, res) => {
           const inputInfo = req.body
 
+          if(!req.session.userId) res.status(403).json({message: "You must be logged in to post"})
+
+          //We get the author from cookie info
+          const authorId = req.session.userId;
+
           //If no image added, add a default gradient
           //TODO: Storing images on our own server?
           if (!inputInfo?.image){
                inputInfo.image = "https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/02/Usign-Gradients-Featured-Image.jpg"
           }
 
-          const author = await User.findById(inputInfo.author)
+          const author = await User.findById(authorId)
           if (!author) {
                return res.status(404).json({message: "Invalid author ID"})
           }
@@ -70,7 +75,7 @@ module.exports = (User, Proposal) => {
 
           await author.save();
 
-          return res.status(201).json({message: "successs", proposalId: insertedProposal._id})
+          return res.status(201).json({message: "successs", proposal: insertedProposal})
 
     })
 

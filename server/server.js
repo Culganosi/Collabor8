@@ -5,6 +5,12 @@ const bcrypt = require('bcryptjs');
 const cookieSession = require('cookie-session');
 const cors = require('cors');
 
+// STEP 1: require socket.io
+const socketio = require('socket.io');
+// STEP 2: require http
+const http = require('http');
+
+
 require('dotenv').config()
 
 //import schemas for each collection of documents
@@ -30,8 +36,16 @@ mongoose
 //----------Start the app
 const PORT = 3001;
 const app = express()
-app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
+//----ADD SOCKETS
+const server = http.createServer(app);
+const io = socketio(server);
+
+
+
+
+
+app.use(express.json()) //Same purpose as body parser, lets server accept JSON as a req body
 
 //Tell server to use cookies
 app.use(cookieSession({
@@ -40,10 +54,10 @@ app.use(cookieSession({
 }));
 
 
+
 //TODO:...==> DO THIS PROPERLY
 
 //app.use(cors({ origin: "http://localhost:3000", credentials: true }));
-
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
@@ -52,46 +66,90 @@ app.use(function(req, res, next) {
     next();
   });
 
+  
+  const userIdSocketId = {}
+
+  io.on ('connection', (socket) => {
+
+	// console.log("Someone has connected");
+	// //console.log(socket) // prints details about the connection
+
+    socket.emit('INITIAL_CONNECTION', "HELLO USER");
+
+    socket.on("sendUserId", userId => {
+       // console.log(`User joined: ${userId}`)
+        userIdSocketId[userId] = socket.id
+       // console.log(userIdSocketId)
+    })
+
+    //Receive new message from client
+    socket.on("newMessage", (data) => {
+
+        console.log("A message was sent to the server")
+
+        const {recipientId} = data;
+        const recipientSockedId = userIdSocketId[recipientId]
+
+        if (recipientSockedId) {
+           // console.log(`${recipientId} is connected, so sending message`)
+            //console.log(`Sending ${data.text} to ${recipientId}`)
+            socket.broadcast.to(recipientSockedId).emit('receiveMessage', data)
+        } else {
+           // console.log(`${recipientId} is not connected`)
+        }
+    
+    });
+
+
+
+});
+
+
+
+
+///----ROUTER TO OTHER ROUTES
+
 
 //-----Redirect to routes and pass them things imported above
 app.use("/chats", chatsRoutes(User, Chat))
 app.use("/auth", authRoutes(User, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Proposal))
-app.use("/users", usersRoutes(User, Chat, bcrypt))
+app.use("/users", usersRoutes(User))
 
 
 //----The home route
 app.get("/", (req, res) => {
     res.json({
         message: "Welcome to the Collab||8 server! 🎉",
-        routes: [
+        "user routes": [
             "GET /users",
             "GET /users/:userId",
-            "GET /users/:userId/chat-previews",
-            "PATCH /users/userId",
+            "GET /users/self",
+            "PATCH /users/userId",         
+        ],
+        "chat routes": [
             "GET /chats/:chatId",
-            "PATCH /chats/:chatId",
+            "GET /chats/self/chat-previews",
+            "PATCH /chats/:chatId", 
+        ],
+        "proposal routes": [
             "GET /proposals",
             "GET /proposals/:proposalId",
             "POST /proposals",
             "PATCH /proposals",
             "DELETE /proposals/:proposalId",
-            "GET /options",
-            "GET /auth/self",
+        ],
+        "options route": [ "GET /options"],
+        "authentication routes": [
             "POST /auth/register",
             "POST /auth/in",
             "POST /auth/out",
-        ],
-        "temp routes": [
-            "GET /auth/:userNUMBER"
         ]
     })
 })
 
 
-
-
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on localhost:${PORT}`)
 })

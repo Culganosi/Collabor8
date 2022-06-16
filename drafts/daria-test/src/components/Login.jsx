@@ -5,7 +5,6 @@ import axios from 'axios';
 import "./style.css"
 
 
-
 function Login() {
 
   const navigate = useNavigate();  
@@ -14,8 +13,9 @@ function Login() {
   const [userhandle, setUserhandle] = useState(undefined);
   const [password, setPassword] = useState(undefined);
 
-  
 
+
+  //FUNCTION TO LOG IN
   const login = () => {   
 
     const requestString = `/auth/in`
@@ -23,9 +23,9 @@ function Login() {
     axios.post(requestString, {userhandle, password})
     .then(response => {
       setSelf(response.data)
-      navigate("/self")
     })
-    .catch(err => console.log(err.message))
+    .then(() => navigate("/chat"))
+    .catch(err => console.log(err))
   }
 
 
@@ -34,31 +34,37 @@ function Login() {
     <Fragment>
       <h1>Login</h1>
 
-      <h2>Here are some user IDs</h2>
+      <h2>Some test users</h2>
 
       <table>
         <thead>
         <tr>
           <th>Userhandle</th>
           <th>Password</th>
-          <th>ID</th>
+          <th>User ID</th>
         </tr></thead>
         <tbody>
         <tr>
           <td>kmyrtle0</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c55</td>
+          <td>62aa59aa214e947ced12f194</td>
         </tr>
         <tr>
           <td>rgostridge1</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c5c</td>
+          <td>62aa59aa214e947ced12f19b</td>
         </tr>
         <tr>
           <td>lreardon2</td>
           <td>123</td>
-          <td>62a79f5697c61afc88917c62</td>
-        </tr></tbody>
+          <td>62aa59aa214e947ced12f1a1</td>
+        </tr>
+        <tr>
+          <td>fpeers3</td>
+          <td>123</td>
+          <td>62aa59aa214e947ced12f1a7</td>
+        </tr>        
+        </tbody>
       </table>
 
 

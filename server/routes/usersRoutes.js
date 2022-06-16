@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat, bcrypt) => {
+module.exports = (User) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
@@ -30,10 +30,19 @@ module.exports = (User, Chat, bcrypt) => {
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
         .sort(sortInput)
-        .then((userData) => res.json(userData))
+        .then((userData) => {
+            
+            //Make the data an object indexable by ID
+            const rearrangedData = {};
+            userData.forEach(user => {
+                rearrangedData[user._id] = user;
+            })
+
+            res.json(rearrangedData)}
+            
+        )
         .catch(dbError => res.status(500).json({error: dbError.message}))
     })
-
 
     //Get info about the user who is logged in
     //Even though login and registration also return full self-info
@@ -60,40 +69,8 @@ module.exports = (User, Chat, bcrypt) => {
         res.json(userData)
     })
 
-
-    //For when the user enters the chat and sees a list of all their previous chats
-    router.get('/:userId/chat-previews', async (req, res) => {
-        const userId = req.params.userId;
-        const chatPreviews = []
-
-        const targetUserChats = await Chat.find({participants : userId}).sort("-lastMessageAt")
-
-        //Process each chat into a chat preview and add it the list
-        for (let chatId of targetUserChats){
-            const chatData = await Chat.findById(chatId)
-            
-            //Don't send the entire chat, only get the info needed for preview
-            const lastMessage = chatData.messages[chatData.messages.length - 1];
-            const partners = chatData.participants.filter(participant => {
-                //Exclude the user who views their chat previews from this list
-                //!== does not work since IDs are not primitives
-                return (!participant.equals(userId))
-            })
-
-            const chatPreview = {
-                lastMessage,
-                partners,
-                _id: chatData._id,
-            }
-            chatPreviews.push(chatPreview)
-        }
-        
-        res.json(chatPreviews)
-
-    });
-
     //Edit user information (also works for filling out the profile after registration)
-    router.patch("/:userId", async (req, res) => {
+    router.patch("/self", async (req, res) => {
 
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
@@ -101,7 +78,7 @@ module.exports = (User, Chat, bcrypt) => {
         //TODO: Figure out how to send image from file --> S3 storage --> URL to database
 
         //Find user by ID (via cookie) and update the fields provided
-        User.updateOne({"_id": req.params.userId}, inputFields)
+        User.updateOne({"_id": req.session.userId}, inputFields)
         .then(() => res.status(200).json({message: "success"}))
         .catch((error) => res.status(400).json({message: error.message}))
 
