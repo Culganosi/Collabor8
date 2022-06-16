@@ -14,13 +14,15 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import OtherProfile from "./pages/OtherProfile";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
     <>
     <CssBaseline />
       <Nav />
-      <Login />
+      <UserProfile />
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
