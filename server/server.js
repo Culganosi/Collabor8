@@ -77,9 +77,9 @@ app.use(function(req, res, next) {
     socket.emit('INITIAL_CONNECTION', "HELLO USER");
 
     socket.on("sendUserId", userId => {
-        console.log(`User joined: ${userId}`)
+       // console.log(`User joined: ${userId}`)
         userIdSocketId[userId] = socket.id
-        console.log(userIdSocketId)
+       // console.log(userIdSocketId)
     })
 
     //Receive new message from client
@@ -91,11 +91,11 @@ app.use(function(req, res, next) {
         const recipientSockedId = userIdSocketId[recipientId]
 
         if (recipientSockedId) {
-            console.log(`${recipientId} is connected, so sending message`)
-            console.log(`Sending ${data.text} to ${recipientId}`)
+           // console.log(`${recipientId} is connected, so sending message`)
+            //console.log(`Sending ${data.text} to ${recipientId}`)
             socket.broadcast.to(recipientSockedId).emit('receiveMessage', data)
         } else {
-            console.log(`${recipientId} is not connected`)
+           // console.log(`${recipientId} is not connected`)
         }
     
     });

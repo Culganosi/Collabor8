@@ -90,25 +90,27 @@ function Chat() {
       const chatPrevRes = await axios.get(`/chats/self/chat-previews`)
       setChatPreviews(chatPrevRes.data);
 
-      // let defaultActiveChatId=""
+      let defaultActiveChatId=""
 
-      // if (chatPrevRes.data.length > 0) {
-      //   defaultActiveChatId = chatPrevRes.data[0]._id
-      // } else {
-      //   setActiveChatFull([])
-      // }
+      if (chatPrevRes.data.length > 0) {
+        defaultActiveChatId = chatPrevRes.data[0]._id
+      } else {
+        setActiveChatFull([])
+      }
 
-      // setActiveChatId(defaultActiveChatId)
+      setActiveChatId(defaultActiveChatId)
 
       //If we haven't kept the active chat in local yet, choose the first one
 
-      console.log("CONDITIONS")
-      console.log(chatPrevRes.data.length)
-      console.log(activeChatId)
-      if (chatPrevRes.data.length > 0 && !activeChatId){
-        console.log("Meets condition")
-        setActiveChatId(chatPrevRes.data[0]._id)
-      }
+      //TODO: -----
+
+      // console.log("CONDITIONS")
+      // console.log(chatPrevRes.data.length)
+      // console.log(activeChatId)
+      // if (chatPrevRes.data.length > 0 && !activeChatId){
+      //   console.log("Meets condition")
+      //   setActiveChatId(chatPrevRes.data[0]._id)
+      // }
 
 
 
@@ -167,6 +169,8 @@ function Chat() {
         console.log("Active chat: " + activeChatId)
         console.log("Intended chat: " + chatId)
 
+        //TODO: This has bugs, code runs whichever room you seem to be in-+
+
         if (activeChatId === chatId) {
           setActiveChatFull(prev => {
             console.log("I'm inside this")
@@ -175,6 +179,13 @@ function Chat() {
             return newChat;
           })
         }
+
+        console.log(chatPreviews)
+
+        //TODO: Update preview when message arrives
+        // setChatPreviews(prev => {
+
+        // })
 
       });
     }
