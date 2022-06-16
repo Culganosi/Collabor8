@@ -1,16 +1,3 @@
-// import React from 'react'
-// import { AppBar, Toolbar, Typography } from '@material-ui/core'
-
-// export default function Nav() {
-  //   return (
-    //   <AppBar position="relative" color="secondary">
-    //     <Toolbar>
-//       <CameraIcon />
-//       <Typography variant="h6">Collab || 8</Typography>
-//     </Toolbar>
-//   </AppBar>
-//   )
-// }
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';

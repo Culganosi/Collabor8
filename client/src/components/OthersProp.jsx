@@ -1,60 +1,81 @@
 import * as React from "react";
-import { makeStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import { CardContent } from "@material-ui/core";
-import { Typography } from "@mui/material";
-import { Card } from "@material-ui/core";
+import useStyles from "../styles";
+import {
+  Typography,
+  Button,
+  Box,
+  CardContent,
+  Grid,
+} from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing * 2,
-    textAlign: "center",
-    color: "green"
-  }
-}));
 
-export default function App() {
+export default function OthersProp() {
   const classes = useStyles();
 
-  return (
-    <div className={classes.root}>
-      <Grid container spacing={24}>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>Left Side @User, Description, Message, Avatar</Paper>
-          <Card className={classes.card}>
-          <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5">
-                      Proposal #1
-                    </Typography>
-                    <Typography>
-                      Check out the description of this proposal
-                    </Typography>
-                    <Typography>
-                      We got all kinds of shyt
-                      I want to
-                      Make this thing
-                      longer than it already
-                      is so let
-                      this got
-                      We got all kinds of shyt
-                      I want to
-                      Make this thing
-                      longer than it already
-                      is so let
-                      this got
 
-                    </Typography>
-                  </CardContent>
-                  </Card>
+  return (
+    <Box p={5}>
+    <div className={classes.card}>
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} sm={6} md={4} lg={4} style={{ display: 'flex', justifyContent:"center"}}>
+          <Paper className={classes.content} elevation={8} style={{ display: 'flex', justifyContent:"center"}}>
+          <CardContent>
+          <img src="https://i.pinimg.com/736x/6c/44/59/6c44599df53591ef7283e6212ea41e7c--desktop-backgrounds-desktop-wallpapers.jpg"
+              className={classes.userprofileavatar}
+              alt="Beaker"
+            /> 
+   
+                <Typography className={classes.title} component="h5" variant="h5" color="secondary" style={{ display: 'flex', justifyContent:"center"}}>
+                  UserNameGoesHere
+                </Typography>
+                <Typography
+                  className={classes.title}
+                  variant="h6"
+                  color="textSecondary"
+                  style={{ display: 'flex', justifyContent:"center"}}>
+                  Junior Web Developer
+                </Typography>
+                <Typography className={classes.bio}></Typography>
+                <Box textAlign="center">
+
+                <Button variant="contained" color="secondary">
+                  Message User
+                </Button>
+                </Box>
+              </CardContent>
+          </Paper>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Paper className={classes.paper}>Right Side Title, subtitle, looking for, short text bio?</Paper>
+
+        <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Paper className={classes.content} elevation={8}>
+          <CardContent className={classes.cardContent}>
+      <Typography component="h5" variant="h5" color="secondary">
+        Title of the Proposal
+      </Typography>
+      <Typography className={classes.title} variant="h6" color="textSecondary">
+        Just for Fun
+      </Typography>
+ 
+      <Typography className={classes.title} variant="h6" color="textSecondary">
+        Looking for: UX/UI Designer
+      </Typography>
+      <Typography className={classes.bio}>
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum."
+      </Typography>
+    </CardContent>
+          </Paper>
         </Grid>
       </Grid>
     </div>
+    </Box>
   );
 }
+
+

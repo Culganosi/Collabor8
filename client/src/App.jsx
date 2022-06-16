@@ -4,25 +4,30 @@ import BrowseProp from "./components/BrowseProp";
 import Footer from "./components/Footer";
 import OthersProp from "./components/OthersProp";
 import { CssBaseline } from "@material-ui/core";
-import SignIn from "./components/SignIn";
+// import SignIn from "./components/SignIn";
 import Splash from "./components/Splash";
-import Login from "./components/Login";
-import Dashboard from "./components/Dashboard";
-import { BrowserUpdatedSharp } from "@mui/icons-material";
-import BrowserUsers from './components/BrowseUsers'
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import Login from "./components/Login";
+// import Dashboard from "./components/Dashboard";
+// import { BrowserUpdatedSharp } from "@mui/icons-material";
+import BrowseUsers from './components/BrowseUsers'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import OwnProp from './components/OwnProp'
+import EditProp from './components/EditProp'
+import EditModal from './components/EditModal'
+import CreateProfile from './components/CreateProfile'
 
 
 function App() {
   return (
     <>
+    <Router>
       <CssBaseline />
       <Nav />
-      <BrowserUsers />
-      {/* <BrowseProp />
-      <SignIn /> */}
+      <BrowseProp />
+      {/*<SignIn /> */}
       {/* <OthersProp /> */}
       <Footer />
+      </Router>
     </>
   );
 }
