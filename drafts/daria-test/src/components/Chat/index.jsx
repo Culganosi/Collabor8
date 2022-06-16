@@ -62,7 +62,7 @@ function Chat() {
 
     //Send message to database -> it will persist on refresh
     //TODO: uncomment
-    //axios.patch(`/chats/${activeChatId}`, {text: newMessage})
+    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
 
     //Refresh input field
     setNewMessage("")
@@ -156,32 +156,41 @@ function Chat() {
   useEffect(() => {
     if(conn) {
       conn.on('receiveMessage', data => {
-        console.log(`Received message: ${data.text}`)
-        console.log(data);
+        // console.log(`Received message: ${data.text}`)
+        // console.log(data);
 
         const {sentAt, text, author, chatId} = data;
         const messageToLocal = {sentAt, author, text}
 
-        console.log("Active chat: " + activeChatId)
-        console.log("Intended chat: " + chatId)
+        // console.log("Active chat: " + activeChatId)
+        // console.log("Intended chat: " + chatId)
 
         //TODO: This has bugs, code runs whichever room you seem to be in-+
 
        // if (activeChatId == chatId) {
           setActiveChatFull(prev => {
-            console.log("I'm inside this")
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
             return newChat;
           })
         //}
 
-        //console.log(chatPreviews)
 
-        //TODO: Update preview when message arrives
-        // setChatPreviews(prev => {
+        setChatPreviews(prev => {
 
-        // })
+          const indexOfNeededPreview = prev.findIndex(preview => preview.partner == author)
+
+          const newPreview = {
+            partner: prev[indexOfNeededPreview].partner,
+            _id: prev[indexOfNeededPreview]._id,
+            lastMessage: {author, sentAt, text}
+          }
+
+          const newPreviews = [...prev]
+          newPreviews.splice(indexOfNeededPreview, 1)
+          newPreviews.unshift(newPreview)
+          return newPreviews;
+        })
 
       });
     }
@@ -207,6 +216,7 @@ function Chat() {
 
         <button onClick={() => logout()}> LOGOUT </button>
 
+        {/* < createChatButtons /> */}
 
         <div className="chat">
 
