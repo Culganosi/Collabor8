@@ -188,7 +188,7 @@ function Chat() {
           const indexOfNeededPreview = prev.findIndex(preview => preview.partner == author)
 
           const newPreview = {
-            partner: prev[indexOfNeededPreview].partner,
+            partner: author,
             _id: prev[indexOfNeededPreview]._id,
             lastMessage: {author, sentAt, text}
           }
@@ -217,7 +217,7 @@ function Chat() {
 
         <button onClick={() => logout()}> LOGOUT </button>
 
-        < CreateChatButtons />  {/* <---- IGNORE THIS IN THE FINAL VERSION */}
+        {/* < CreateChatButtons />  <---- IGNORE THIS IN THE FINAL VERSION */}
 
         <div className="chat">
 

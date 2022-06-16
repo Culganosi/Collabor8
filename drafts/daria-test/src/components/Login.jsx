@@ -41,28 +41,28 @@ function Login() {
         <tr>
           <th>Userhandle</th>
           <th>Password</th>
-          <th>User ID</th>
+          <th>Chats in seed of DB</th>
         </tr></thead>
         <tbody>
         <tr>
           <td>kmyrtle0</td>
           <td>123</td>
-          <td>62aa59aa214e947ced12f194</td>
+          <td>2</td>
         </tr>
         <tr>
           <td>rgostridge1</td>
           <td>123</td>
-          <td>62aa59aa214e947ced12f19b</td>
+          <td>1</td>
         </tr>
         <tr>
           <td>lreardon2</td>
           <td>123</td>
-          <td>62aa59aa214e947ced12f1a1</td>
+          <td>1</td>
         </tr>
         <tr>
           <td>fpeers3</td>
           <td>123</td>
-          <td>62aa59aa214e947ced12f1a7</td>
+          <td>0</td>
         </tr>        
         </tbody>
       </table>
