@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import useStyles from "../styles";
 import { red } from '@mui/material/colors';
-import UserCard from './UserCard'
+import UserCard from "../components/UserCard";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 

@@ -1,45 +1,33 @@
 import React from "react";
-import Nav from "./components/Nav";
-import BrowseProp from "./components/BrowseProp";
-import Footer from "./components/Footer";
-import OthersProp from "./components/OthersProp";
 import { CssBaseline } from "@material-ui/core";
-// import SignIn from "./components/SignIn";
+import BrowseProp from "./pages/BrowseProp";
+import OthersProp from "./pages/OthersProp";
+import OwnProp from './pages/OwnProp'
+import CreateProfile from './pages/CreateProfile'
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
 import Splash from "./components/Splash";
-// import Login from "./components/Login";
-// import Dashboard from "./components/Dashboard";
-// import { BrowserUpdatedSharp } from "@mui/icons-material";
-import BrowseUsers from './components/BrowseUsers'
+import BrowseUsers from './pages/BrowseUsers'
+import EditProp from './pages/EditProp'
+import EditModal from './pages/EditModal'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import OwnProp from './components/OwnProp'
-import EditProp from './components/EditProp'
-import EditModal from './components/EditModal'
-import CreateProfile from './components/CreateProfile'
-
+import { Link } from 'react-router-dom'
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <>
-    <Router>
-      <CssBaseline />
+    <CssBaseline />
       <Nav />
-      <BrowseProp />
-      {/*<SignIn /> */}
-      {/* <OthersProp /> */}
-      <Footer />
-      </Router>
+      <Dashboard />
+      <Routes>
+        <Route path="/" element={<Splash />} />
+        <Route path="/People" element={<BrowseUsers />} / >
+        <Route path="/Proposals" element={<BrowseProp />} />
+        <Route path="/Create-Proposal" element={<CreateProfile />} />
+      </Routes>
     </>
   );
 }
 
 export default App;
-
- {/* <Router>
-        <Navbar />
-        <Routes>
-          <Route exact path="/" element={Splash} />
-          <Route exact path="/Register" element={Register} />
-          <Route exact path="/Login" element={Login} />
-          <Route exact path="/Dashboard" element={Dashboard} />
-        </Routes>
-      </Router> */}
