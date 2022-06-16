@@ -13,16 +13,17 @@ import EditModal from './pages/EditModal'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
 
 function App() {
   return (
     <>
     <CssBaseline />
       <Nav />
-      <Dashboard />
+      <Login />
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/People" element={<BrowseUsers />} / >
+        <Route path="/People" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Proposal" element={<CreateProfile />} />
       </Routes>
