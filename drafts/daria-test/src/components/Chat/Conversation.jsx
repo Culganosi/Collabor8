@@ -2,18 +2,15 @@ import React, {useContext} from 'react'
 import "./chatStyle.css"
 import {DataContext} from "../../DataContext";
 import { useEffect } from 'react';
-import axios from 'axios';
+
 
 import MessageLine from "./MessageLine"
-
-
 
 
 function Conversation() {
 
   //Variables
-
-  const {activeChatId, activeChatFull, setActiveChatFull} = useContext(DataContext);
+  const {activeChatFull} = useContext(DataContext);
 
   //Create message list if exists
   let messageList = [];

@@ -21,10 +21,10 @@ function Preview({previewData}) {
 
             <div>
 
-            <b>{previewData._id}</b>
+            <b>Chat ID: </b>{previewData._id}
 
             <p><b>{profiles[partnerId].userhandle}</b></p>  
-            <p>{previewData.lastMessage.sentAt}</p>
+            {/* <p>Time: {previewData.lastMessage.sentAt}</p> */}
             <p>{profiles[previewData.lastMessage.author].userhandle}: {previewData.lastMessage.text}</p>    
 
             </div>   
