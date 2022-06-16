@@ -10,10 +10,7 @@ import {DataContext} from "./DataContext"
 
 import "./App.css"
 
-
-
 import socketIoClient from 'socket.io-client';
-//Address of the server //--> This will create a connection which the server detects as 'connection'
 
 
 
@@ -40,11 +37,6 @@ function App() {
 
       //-------------REFRESH
 
-      useEffect(() => {
-        const connection = socketIoClient('http://localhost:3001');
-        setConn(connection);
-      },[])
-
               
 
       //----------------------------
@@ -58,7 +50,7 @@ function App() {
         profiles, setProfiles,
         activeChatId, setActiveChatId,
         activeChatFull, setActiveChatFull,
-        conn
+        conn, setConn
       }}>
 
         <Router>

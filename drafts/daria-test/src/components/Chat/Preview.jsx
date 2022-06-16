@@ -19,6 +19,8 @@ function Preview({previewData}) {
 
             <div>
 
+            <b>{previewData._id}</b>
+
             <p><b>{profiles[partnerId].userhandle}</b></p>  
             <p>{previewData.lastMessage.sentAt}</p>
             <p>{profiles[previewData.lastMessage.author].userhandle}: {previewData.lastMessage.text}</p>    
