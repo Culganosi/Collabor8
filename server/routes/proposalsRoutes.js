@@ -3,6 +3,9 @@ const router = express.Router();
 
 module.exports = (User, Proposal) => {
 
+
+     
+
     //Get minimal info about proposals for the "browse proposals" page
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
@@ -32,11 +35,29 @@ module.exports = (User, Proposal) => {
           Proposal
           .find(filterInput, fieldsToReturn) 
           .sort(sortInput)
-          .then((proposalData) => res.json(proposalData))
+          .then((proposalData) => {
+
+               //Make the data an object indexable by ID
+               const rearrangedData = {};
+               proposalData.forEach(proposal => {
+                    rearrangedData[proposal._id] = proposal;
+               })
+
+               res.json(rearrangedData)
+          })
           .catch(dbError => res.status(500).json({error: dbError.message}))
 
 
     })
+
+
+        //Return all the proposals of the Self user, including inactive ones
+     router.get('/self', async (req, res) => {
+          const userId = req.session.userId;
+          const selfProposals = await Proposal.find({author: userId}, {description: 0})
+          res.status(200).json(selfProposals)
+     })
+
 
     //View a specific proposal on its own page
     router.get("/:proposalId", async (req, res) => {
@@ -98,6 +119,9 @@ module.exports = (User, Proposal) => {
          .then(() => res.status(200).json({message: "success"}))
          .catch((error) => res.status(400).json({message: error.message}))
     })
+
+
+
 
     return router;
 

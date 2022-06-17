@@ -88,11 +88,18 @@ Content-Type: application/json
 GET http://localhost:3001/proposals
 Content-Type: application/json
 
+###
+
+#Returns all the proposals of the logged in user, including ianctive ones
+GET http://localhost:3001/proposals/self/
+
+
+###--------------Example data for the above
+
 {
     "filterInput": {"seeking": ["Front-end developer"]},
     "sortInput": "-createdAt" 
 }
-
 
 ###
 
@@ -141,7 +148,7 @@ POST http://localhost:3001/auth/in
 Content-Type: application/json
 
 {
-    "userhandle": "rgostridge1",
+    "userhandle": "kmyrtle0",
     "password": "123"
 }
 
