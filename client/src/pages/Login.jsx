@@ -10,6 +10,7 @@ import axios from "axios";
 import { DataContext } from "./../DataContext"
 import useStyles from '../styles';
 import { Container, Typography } from '@material-ui/core'
+import purplewave from "../images/purplewave.webp";
 
 export default function Login() {
   const classes = useStyles();

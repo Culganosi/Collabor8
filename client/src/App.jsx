@@ -22,6 +22,7 @@ import Login from "./pages/Login";
 import OtherProfile from "./pages/OtherProfile";
 import UserProfile from "./pages/UserProfile";
 import SignIn from "./pages/SignIn"
+import CreateProposal from "./pages/CreateProposal";
 
 
 
@@ -44,6 +45,7 @@ function App() {
         <Route path="/My-Profile" element={<UserProfile />} />
         <Route path="/Other-User" element={<OtherProfile />} />
         <Route path="/Home" element={<Dashboard />} />
+        <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
       </Routes>
     </>
