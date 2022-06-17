@@ -58,9 +58,10 @@ export default function UserProfile() {
         </Typography>
       </Container>
       </div>      
+
       <div class="body">
         <Container className="root-container">
-          <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
+          <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}>
 
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
@@ -90,9 +91,6 @@ export default function UserProfile() {
                     <Button style={{ margin: 2 }} variant="contained">
                       Edit Profile
                     </Button>
-                  
-
-
                   </p>
                 </CardContent>
               </Card>
@@ -133,14 +131,7 @@ export default function UserProfile() {
                     </Grid>
                   </CardContent>
                 </Card>
-              </Stack>
-            </Grid>
-            <br />
-            <br />
-            <br />
-
-            <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0">
+             
                 <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>

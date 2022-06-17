@@ -2,12 +2,11 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme) => ({
   headercontainer :{
-    // backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6)
   },
   container: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6)
+    padding: theme.spacing(8, 0, 6),
   },
   icon: {
     marginRight: '20px',
