@@ -3,12 +3,17 @@ const router = express.Router();
 
 module.exports = (User, Proposal) => {
 
+
+     
+
     //Get minimal info about proposals for the "browse proposals" page
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
 
-          const {filterInput, sortInput} = req.body;
-          
+          let {filterInput, sortInput} = req.body;
+          if (!filterInput) {
+               filterInput={}
+          }
           if (filterInput?.title) {
                filterInput.title = { "$regex": filterInput.title, "$options": "i" }
           }
@@ -16,23 +21,43 @@ module.exports = (User, Proposal) => {
           //TODO: This is not right, it should return proposals that seek ANY of the skills listed, not ALL of them
           //Figure out how to do this but keep this for now
           //https://stackoverflow.com/questions/19648841/how-can-i-handle-array-intersection-in-find
-          if  (filterInput?.seeking) {
+          if  (filterInput.seeking) {
                filterInput.seeking = {$all : filterInput.seeking}
           }
-          
+          console.log(filterInput)
           //Filter only for active proposals
-          filterInput.status = "Active";
-          
+          if(filterInput) {
+               filterInput.status = "Active";
+          }
+
           const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1, shortDescription: 1, image: 1}
 
           Proposal
           .find(filterInput, fieldsToReturn) 
           .sort(sortInput)
-          .then((proposalData) => res.json(proposalData))
+          .then((proposalData) => {
+
+               //Make the data an object indexable by ID
+               const rearrangedData = {};
+               proposalData.forEach(proposal => {
+                    rearrangedData[proposal._id] = proposal;
+               })
+
+               res.json(rearrangedData)
+          })
           .catch(dbError => res.status(500).json({error: dbError.message}))
 
 
     })
+
+
+        //Return all the proposals of the Self user, including inactive ones
+     router.get('/self', async (req, res) => {
+          const userId = req.session.userId;
+          const selfProposals = await Proposal.find({author: userId}, {description: 0})
+          res.status(200).json(selfProposals)
+     })
+
 
     //View a specific proposal on its own page
     router.get("/:proposalId", async (req, res) => {
@@ -94,6 +119,9 @@ module.exports = (User, Proposal) => {
          .then(() => res.status(200).json({message: "success"}))
          .catch((error) => res.status(400).json({message: error.message}))
     })
+
+
+
 
     return router;
 

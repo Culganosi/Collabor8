@@ -11,6 +11,9 @@ module.exports = (User, bcrypt) => {
           //---Authenticate
 
           const {userhandle, password} = req.body;
+
+          console.log(`Received: ${userhandle}, ${password}`)
+
           if (!userhandle || !password ) return res.status(400).json({message: "Incomplete input"})
 
           //Find the user by name, return error if DNE

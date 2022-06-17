@@ -1,4 +1,8 @@
-import React from "react";
+import React, {useContext, useState, useEffect} from "react";
+import {DataContext} from "./../DataContext";
+import axios from 'axios';
+
+
 import {
   Typography,
   Button,
@@ -19,6 +23,38 @@ import UserCard from "../components/UserCard";
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function BrowseProp() {
+
+  const {profiles, setProfiles} = useContext(DataContext);
+
+
+  useEffect(() => {
+    axios.get("/users")
+    .then(res => {
+      setProfiles(res.data)
+      //Now the "profiles" state variables should hold the data (which is an object)
+    })
+
+  }, [])
+
+
+  const listOfUserCards = Object.values(profiles).map(profile => {
+    return (
+      <Grid item={profile} xs={12} sm={6} md={4}>
+        <UserCard 
+          key={profile._id}
+          _id={profile._id}
+          avatar={profile.avatar}
+          shortBio={profile.shortBio}
+          skills={profile.skills}
+          userhandle={profile.userhandle}
+          role={profile.role}     
+        />
+      </Grid>
+    )
+
+  })
+
+
   const classes = useStyles();
 
   return (
@@ -61,12 +97,16 @@ export default function BrowseProp() {
       <Box border={2} padding={5} margin={2} borderRadius={16}>
         <Container className={classes.cardGrid} maxWidth="xl">
           <Grid container spacing={4}>
-            {cards.map((card) => (
+
+            {listOfUserCards}
+
+
+            {/* {cards.map((card) => (
               <Grid item={card} xs={12} sm={6} md={4}>
                 <UserCard />
 
               </Grid>
-            ))}
+            ))} */}
           </Grid>
         </Container>
       </Box>

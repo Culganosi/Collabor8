@@ -3,20 +3,21 @@ import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, 
 import { styled, Paper } from '@mui/material'
 // import Background from "./Background";
 import "./Dashboard.css"
-// import useStyles from '../styles';
+import useStyles from '../styles';
 
 
 export default function Dashboard() {
-    const classes = {
-        root: {
-            flexGrow: 1
-        },
-        paper: {
-            padding: 20,
-            textAlign: "center",
-            color: "blue"
-        }
-    }
+    // const classes = {
+    //     root: {
+    //         flexGrow: 1
+    //     },
+    //     paper: {
+    //         padding: 20,
+    //         textAlign: "center",
+    //         color: "blue"
+    //     }
+    // }
+    const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const useRef = React.useRef();
@@ -41,6 +42,16 @@ export default function Dashboard() {
     }));
     return (
         <>
+        <div className={classes.container}>
+      <Container max-Width="sm">
+        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+          My Dashboard
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          View proposals and users for possible collaborations 
+        </Typography>
+      </Container>
+      </div>
             {/* <Background /> */}
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} columns={2}>

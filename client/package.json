@@ -1,6 +1,7 @@
 {
   "name": "muidemo",
   "version": "0.1.0",
+  "proxy": "http://localhost:3001/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
@@ -14,6 +15,7 @@
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.4.0",

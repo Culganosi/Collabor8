@@ -6,6 +6,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import useStyles from "../styles";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -45,9 +46,20 @@ const styles = makeStyles((theme) => ({
   <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
 </Container> */}
 export default function UserProfile() {
+  const classes = useStyles();
+
   return (
     <>
-      <br />
+<div className={classes.container}>
+      <Container max-Width="sm">
+        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+          My User Profile 
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          View your active and archived proposals. Edit profile that other users may see
+        </Typography>
+      </Container>
+      </div>      
       <div class="body">
         <Container className="root-container">
           <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
@@ -55,7 +67,7 @@ export default function UserProfile() {
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                  <h1>  Other User's Profile  </h1>
+                  <h1>  My User's Profile  </h1>
                   <Avatar
                     alt="Username"
                     src="https://avatars.dicebear.com/api/adventurer-neutral/your-custom-seed.svg"

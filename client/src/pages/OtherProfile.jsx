@@ -1,12 +1,16 @@
-import React, { useState } from "react"
-import { Container, Grid, makeStyles, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardHeader, CardActionArea, CardMedia, Popover } from '@material-ui/core';
+import React, { useState, useEffect } from "react"
+import { Container, Grid, makeStyles, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardHeader, CardActionArea, CardMedia, Popover, Link } from '@material-ui/core';
 import { styled, Paper, Avatar, Stack } from '@mui/material'
 import "./OtherProfile.css"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
+import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import EmailIcon from '@mui/icons-material/Email';
+import useStyles from "../styles";
+
+import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -15,6 +19,8 @@ const Item = styled(Paper)(({ theme }) => ({
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
+
+
 
 const styles = makeStyles((theme) => ({
   avatar: {
@@ -44,9 +50,38 @@ const styles = makeStyles((theme) => ({
 
 
 export default function OtherProfile() {
+
+
+
+  const [otherUser, setOtherUser] = useState({})
+
+  useEffect(() => {
+    // "62ab80d97c81411e543b76f5"
+    axios.get("/users/62ab80d97c81411e543b76fc")
+      .then((res) => {
+        //console.log(res.data)
+        console.log(res.data.skills)
+        setOtherUser(res.data)
+
+      })
+  }, [])
+
+
+  const classes = useStyles();
+
+
   return (
     <>
-      <br />
+<div className={classes.container}>
+      <Container max-Width="sm">
+        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+        Profile Page: {otherUser.userhandle}
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          View this user's active proposals for a possible collaboration 👀
+        </Typography>
+      </Container>
+      </div> 
       <div class="body">
         <Container className="root-container">
           <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
@@ -54,31 +89,43 @@ export default function OtherProfile() {
             <Grid container item xs={10} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                  <h1>  Other User's Profile  </h1>
+                  <h1>  {otherUser.userhandle} </h1>
                   <Avatar
                     alt="Username"
-                    src="https://avatars.dicebear.com/api/adventurer-neutral/your-custom-seed.svg"
+                    src={otherUser.avatar}
                     sx={{ width: 56, height: 56 }}
                   />
-                   <Button style={{ margin: 2 }} variant="contained">
-                                    <EmailIcon />
-                                </Button>
+                  <Button style={{ margin: 2 }} variant="contained">
+                    <EmailIcon />
+                  </Button>
                   <p>
                     <div>
+                      <Link href="#" target="blank">
+                      <ScreenshotMonitorIcon />
+                      </Link>
+                      <Link href="#" target="blank">
                       <GitHubIcon />
+                      </Link>
+                      <Link href="#" target="blank">
                       <LinkedInIcon />
+                      </Link>
+                      <Link href="#" target="blank">
                       <TwitterIcon />
+                      </Link>
+                      <Link href="#" target="blank">
                       <InstagramIcon />
+                      </Link>
                     </div>
                     <br />
 
-                    <h3>Role:</h3> 
-                    Full-Stack Developer
-                    Description: I am a full-stack developer with interests in this and that. Also you can checkout the following links to see my work
+                    <h3>Role:</h3>
+                    {otherUser.role}
+                    <h3>Bio:</h3>
+                    {otherUser.bio}
                     <br />
                     <h3>Skills: </h3>
-                    PostGreSQL | NodeJS | Express | React | CSS 
-                    
+                    {otherUser.skills && otherUser.skills.join(" | ")}
+
 
                   </p>
                 </CardContent>

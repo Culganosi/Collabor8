@@ -3,7 +3,7 @@
 const express = require("express");
 const router = express.Router();
 
-module.exports = (User, Chat) => {
+module.exports = (User, Chat, Proposal) => {
 
     //Get chat history
     router.get("/:chatId", async (req, res) => {
@@ -104,7 +104,6 @@ module.exports = (User, Chat) => {
         res.json(chatPreviews)
 
     });
-
 
 
     return router;
