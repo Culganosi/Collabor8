@@ -1,9 +1,5 @@
 import React, {useState} from "react";
-
-
 import {DataContext} from "./DataContext"
-
-
 import { CssBaseline } from "@material-ui/core";
 import BrowseProp from "./pages/BrowseProp";
 import OthersProp from "./pages/OthersProp";
@@ -38,15 +34,13 @@ function App() {
   return (
     <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
     <>
-    {/* <Wrapper className='App'> */}
+    <Wrapper className='App'>
     {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
 
       <Routes>
         <Route path="/" element={<Splash />} />
-        {/* <Nav /> */}
-
         <Route path="/People" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Profile" element={<CreateProfile />} />
@@ -60,7 +54,7 @@ function App() {
         <Route path="/Edit-Proposal" element={<EditModal />} />
         <Route path="/Proposal-Other" element={<OthersProp />} />
       </Routes>
-      {/* </Wrapper> */}
+      </Wrapper>
     </>
     <Footer />
 

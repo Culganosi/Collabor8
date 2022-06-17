@@ -1,4 +1,4 @@
-import "./Login.css";
+import "./Forms.css";
 import React, { useState, useContext } from 'react';
 import Button from "@material-ui/core/Button";
 import Box from '@mui/material/Box';
@@ -12,7 +12,7 @@ import useStyles from '../styles';
 import { Container, Typography } from '@material-ui/core'
 import purplewave from "../images/purplewave.webp";
 
-export default function Login() {
+export default function Register() {
   const classes = useStyles();
 
   const navigate = useNavigate();
@@ -30,19 +30,19 @@ export default function Login() {
       .then(response => {
         setSelf(response.data)
       })
-      .then(() => navigate("/Home"))
+      .then(() => navigate("/Create-Profile"))
       .catch(err => console.log(err))
   }
 
 
 
   //FUNCTION TO LOG IN
-  const login = () => {
+  const register = () => {
     axios.post("/auth/in", { userhandle, password })
       .then(response => {
         setSelf(response.data)
       })
-      .then(() => navigate("/Home"))
+      .then(() => navigate("/Create-Profile"))
       .catch(err => console.log(err))
   }
 
@@ -50,10 +50,10 @@ export default function Login() {
 
   return (
     <>
-      <div className={classes.container}>
+      <div className={classes.headercontainer}>
         <Container max-Width="sm">
           <Typography variant="h2" align="center" color="secondary" gutterBottom>
-            Login
+            Register
           </Typography>
 
         </Container>
@@ -65,7 +65,7 @@ export default function Login() {
               <TextField
                 id="outlined-multiline-flexible"
                 label="Username"
-                helperText="Please enter your username"
+                helperText="Please type in a username"
                 multiline
                 maxRows={1}
                 value={userhandle}
@@ -84,11 +84,23 @@ export default function Login() {
               />
             </div>
 
+            <div className="form-group">
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Password "
+                helperText="Please re-enter your password for confirmation"
+                multiline
+                maxRows={1}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+
             <Button
               variant="outlined"
               size="medium"
               color="secondary"
-              onClick={() => login()}
+              onClick={() => register()}
             >
               Submit</Button>
 
