@@ -23,12 +23,22 @@ export default function Login() {
   const [password, setPassword] = useState(undefined);
 
 
+  //TEMP SHORTCUT TO LOG IN
+  const shortcutLogin = (shortcutUserhandle) => {
+    console.log(shortcutUserhandle)
+    axios.post("/auth/in", { userhandle: shortcutUserhandle, password: "123" })
+      .then(response => {
+        setSelf(response.data)
+      })
+      .then(() => navigate("/Home"))
+      .catch(err => console.log(err))
+  }
+
+
 
   //FUNCTION TO LOG IN
   const login = () => {
-    const requestString = `/auth/in`
-    console.log(userhandle, password)
-    axios.post(requestString, { userhandle, password })
+    axios.post("/auth/in", { userhandle, password })
       .then(response => {
         setSelf(response.data)
       })
@@ -89,8 +99,16 @@ export default function Login() {
               </Link>
             </Grid>
 
+            <h4>Temporary shortcuts - login as: </h4>
+            <button type="button" onClick={() => shortcutLogin("kmyrtle0")}>kmyrtle0</button>
+            <button type="button" onClick={() => shortcutLogin("rgostridge1")}>rgostridge1</button>
+            <button type="button" onClick={() => shortcutLogin("lreardon2")}>lreardon2</button>
+
           </form>
         </div>
+
+       
+
       </Box>
 
     </>
