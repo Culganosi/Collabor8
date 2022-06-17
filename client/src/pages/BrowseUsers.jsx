@@ -1,29 +1,21 @@
 import React, {useContext, useState, useEffect} from "react";
 import {DataContext} from "./../DataContext";
 import axios from 'axios';
-
-
 import {
   Typography,
   Button,
   Box,
-  Card,
-  CardActions,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Grid,
   Container,
-  Avatar,
 } from "@material-ui/core";
 import useStyles from "../styles";
-import { red } from '@mui/material/colors';
 import UserCard from "../components/UserCard";
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function BrowseProp() {
-
+export default function BrowseUsers() {
+  const classes = useStyles();
+  
   const {profiles, setProfiles} = useContext(DataContext);
 
 
@@ -55,7 +47,6 @@ export default function BrowseProp() {
   })
 
 
-  const classes = useStyles();
 
   return (
     <main>

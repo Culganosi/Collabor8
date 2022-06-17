@@ -5,11 +5,6 @@ import {
   Typography,
   Button,
   Box,
-  Card,
-  CardActions,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   Grid,
   Container,
 } from "@material-ui/core";
@@ -47,10 +42,11 @@ export default function BrowseProp() {
   //     "Content-Type": "application/json"
   //   }
   // })
+  const { proposals, setProposals } = useContext(DataContext);
   useEffect(() => {
     axios
     .get("/proposals")
-    .then((res) => {
+    .then(res => {
       setProposals(res.data)
       //setProposals(res.data);
       //Now the "proposals" state variables should hold the data (which is an object)
@@ -58,7 +54,6 @@ export default function BrowseProp() {
     // .catch((Error) => console.log(Error));
   }, []);
   
-  const { proposals, setProposals } = useContext(DataContext);
   const listOfProposalCards = Object.values(proposals).map(proposal => {
     return (
       <Grid item={proposal} xs={12} sm={6} md={4}>
@@ -115,7 +110,9 @@ export default function BrowseProp() {
       <Box border={2} padding={5} margin={2} borderRadius={16}>
         <Container className={classes.cardGrid} maxWidth="xl">
           <Grid container spacing={4}>
+
             {listOfProposalCards}
+
           </Grid>
         </Container>
       </Box>

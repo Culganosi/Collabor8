@@ -30,10 +30,11 @@ function App() {
 
   //Variables to be shared
   const [profiles, setProfiles] = useState({})
+  const [proposals, setProposals] = useState({})
   const [self, setSelf] = useState({})
 
   return (
-    <DataContext.Provider value={{profiles, setProfiles, self, setSelf}}>
+    <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
     <>
     <CssBaseline />
       <Nav />
