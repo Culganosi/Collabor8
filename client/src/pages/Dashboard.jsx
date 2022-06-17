@@ -6,6 +6,8 @@ import "./Dashboard.css"
 import useStyles from '../styles';
 
 
+
+
 export default function Dashboard() {
     // const classes = {
     //     root: {
@@ -52,6 +54,15 @@ export default function Dashboard() {
         </Typography>
       </Container>
       </div>
+      <Grid container spacing={2}>
+        <Grid item xs={5}>
+          <Paper className={classes.paper}>Grid cell 1, 1</Paper>
+        </Grid>
+        <Grid item xs={5}>
+          <Paper className={classes.paper}>Grid cell 2, 1</Paper>
+        </Grid>
+      </Grid>
+
             {/* <Background /> */}
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} columns={2}>

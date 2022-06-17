@@ -21,8 +21,6 @@ export default function OthersProp() {
   };
   const classes = useStyles();
 
-
-
   return (
     <Box p={5}>
       <Grid container justify="center">

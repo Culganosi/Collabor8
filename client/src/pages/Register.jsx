@@ -23,22 +23,9 @@ export default function Register() {
   const [password, setPassword] = useState(undefined);
 
 
-  //TEMP SHORTCUT TO LOG IN
-  const shortcutLogin = (shortcutUserhandle) => {
-    console.log(shortcutUserhandle)
-    axios.post("/auth/in", { userhandle: shortcutUserhandle, password: "123" })
-      .then(response => {
-        setSelf(response.data)
-      })
-      .then(() => navigate("/Create-Profile"))
-      .catch(err => console.log(err))
-  }
-
-
-
-  //FUNCTION TO LOG IN
+  //FUNCTION TO REGISTER IN
   const register = () => {
-    axios.post("/auth/in", { userhandle, password })
+    axios.post("/auth/register", { userhandle, password })
       .then(response => {
         setSelf(response.data)
       })
@@ -84,18 +71,6 @@ export default function Register() {
               />
             </div>
 
-            <div className="form-group">
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Password "
-                helperText="Please re-enter your password for confirmation"
-                multiline
-                maxRows={1}
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-
             <Button
               variant="outlined"
               size="large"
@@ -103,6 +78,7 @@ export default function Register() {
               onClick={() => register()}
             >
               Submit</Button>
+
           </form>
         </div>
       </Box>
