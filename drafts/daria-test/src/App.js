@@ -11,8 +11,6 @@ import {DataContext} from "./DataContext"
 
 import "./App.css"
 
-import socketIoClient from 'socket.io-client';
-
 
 function App() {
 
@@ -34,26 +32,6 @@ function App() {
 
       
 
-
-  //--------------------WEBSOCKET REFRESH-------------------------
-  //---Has to happen here because sockets should work on all pages
-
-  //Set up connection
-  useEffect(() => {
-    const connection = socketIoClient('http://localhost:3001');
-    setConn(connection);
-  },[])
-
-  //Send the ID to the socket server to make it relate sockedID <---> userId
-  useEffect(() => {
-    //If connection exists and self is loaded
-    if (conn && self?._id) {
-      conn.emit('sendUserId', self._id)
-    }
-
-  }, [self])
-
-              
 
       //----------------------------
 

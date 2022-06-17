@@ -1,8 +1,9 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
+
+import socketIoClient from 'socket.io-client';
 import axios from 'axios';
 import {DataContext} from "./../../DataContext"
-import socketIoClient from 'socket.io-client';
 
 //--Import subcomponents
 
@@ -140,31 +141,37 @@ function Chat() {
       }
     }
     refreshConvo()
+
+    //----------For testing
+    console.log("Active chat is now: " + activeChatId)
+
+
   }, [activeChatId])
 
 
 
   //-----------------------WEBSOCKET STUFF------------------
 
-  // //Set up connection
-  // useEffect(() => {
-  //   const connection = socketIoClient('http://localhost:3001');
-  //   setConn(connection);
-  // },[])
+  //Set up connection
+  useEffect(() => {
+    const connection = socketIoClient('http://localhost:3001');
+    setConn(connection);
+  },[])
 
-  // //Send the ID to the socket server to make it relate sockedID <---> userId
-  // useEffect(() => {
-  //   if (conn && self?._id) {
-  //     conn.emit('sendUserId', self._id)
-  //   }
+  //Send the ID to the socket server to make it relate sockedID <---> userId
+  useEffect(() => {
+    if (conn && self?._id) {
+      conn.emit('sendUserId', self._id)
+    }
 
-  // }, [self])
+  }, [self])
 
   //All the other listeners
   useEffect(() => {
     if(conn) {
       conn.on('receiveMessage', data => {
-        // console.log(`Received message: ${data.text}`)
+        
+        console.log(`Received message: ${data.text}`)
         // console.log(data);
 
         const {sentAt, text, author, chatId} = data;
@@ -175,13 +182,20 @@ function Chat() {
 
         //TODO: This has bugs, code runs whichever room you seem to be in-+
 
-       // if (activeChatId == chatId) {
+        console.log(`Active: ${activeChatId}`)
+        console.log(`Intended: ${chatId}`)
+
+       if (activeChatId == chatId) {
           setActiveChatFull(prev => {
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
+
+            console.log(messageToLocal)
+            console.log(newChat)
+
             return newChat;
           })
-        //}
+        }
 
 
         setChatPreviews(prev => {
