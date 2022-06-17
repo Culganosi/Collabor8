@@ -116,4 +116,8 @@ const seedUsers = [
         skills: ["Git", "NodeJS", "Express", "HTML", "CSS", "MongoDB", "VueJS", "AngularJS"]
     }]
 
+<<<<<<< HEAD
     module.exports = seedUsers;
+=======
+    module.exports = seedUsers;
+>>>>>>> 6b4d740e3d8208da72a24634b0b55dea4657c2ef
