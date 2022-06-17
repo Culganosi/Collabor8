@@ -9,13 +9,12 @@ const seedUsers = [
         bio: "We will write some bios later",
         shortBio: "This is a short bio",
         skills: ["HTML", "CSS", "jQuery", "ReactJS", "Git", "test-driven development"],
-        socialMedia: [
-            {title: "Portfolio", url: "https://kmyrtle0.github.io"},
-            {title: "LinkedIn", url: "https://www.linkedin.com/in/kmyrtle0"},
-            {title: "GitHub", url: "https://github.com/kmyrtle0"},
-            {title: "Twitter", url: "https://twitter.com/kmyrtle0"},
-            {title: "Medium", url: "https://medium.com/kmyrtle0"}
-        ]
+        socialMedia: {
+            Portfolio: "https://kmyrtle0.github.io",
+            LinkedIn: "https://www.linkedin.com/in/kmyrtle0",
+            GitHub: "https://github.com/kmyrtle0",
+            Twitter: "https://twitter.com/kmyrtle0",
+        }
     }, 
     {
         "userhandle": "rgostridge1",
@@ -26,12 +25,11 @@ const seedUsers = [
         bio: "We will write some bios later",
         shortBio: "This is a short bio",
         skills: ["HTML", "CSS", "ReactJS", "VueJS", "NodeJS", "Git"],
-        socialMedia: [
-            {title: "Portfolio", url: "https://kmyrtle0.github.io"},
-            {title: "GitHub", url: "https://github.com/kmyrtle0"},
-            {title: "Instagram", url: "https://twitter.com/kmyrtle0"},
-            {title: "Medium", url: "https://www.instagram.com/kmyrtle0/"}
-        ]
+        socialMedia: {
+            Portfolio: "https://rgostridge1.github.io",
+            GitHub: "https://github.com/rgostridge1",
+            Instagram: "https://twitter.com/kmyrtle0"
+        }
     }, 
     {
         "userhandle": "lreardon2",
@@ -42,12 +40,10 @@ const seedUsers = [
         bio: "We will write some bios later",
         shortBio: "This is a short bio",
         skills: ["HTML", "CSS", "Figma", "UX research", "Git"],
-        socialMedia: [
-            {title: "Portfolio", url: "https://lreardon2.github.io"},
-            {title: "Behance", url: "https://www.behance.net/lreardon2"},
-            {title: "Instagram", url: "https://twitter.com/lreardon2"},
-            {title: "YoutTube", url: "https://www.youtube.com/channel/lreardon2/videos"}
-        ]
+        socialMedia: {
+            Portfolio: "https://lreardon2.github.io",
+            Instagram: "https://twitter.com/lreardon2"
+        }
     }, 
     {
         "userhandle": "fpeers3",
@@ -58,10 +54,10 @@ const seedUsers = [
         bio: "We will write some bios later",
         shortBio: "This is a short bio",
         skills: ["HTML", "CSS", "Figma", "UX research", "Photoshop", "Git"],
-        socialMedia: [
-            {title: "Portfolio", url: "https://fpeers3.github.io"},
-            {title: "Instagram", url: "https://twitter.com/fpeers3"}
-        ]
+        socialMedia: {
+            Portfolio: "https://fpeers3.github.io",
+            Instagram: "https://twitter.com/fpeers3"
+        } 
     }, 
     {
         "userhandle": "dsporrij4",
@@ -72,12 +68,10 @@ const seedUsers = [
         bio: "We will write some bios later",
         shortBio: "This is a short bio",
         skills: ["Git", "NodeJS", "Express", "HTML", "CSS", "SQL", "React"],
-        socialMedia: [            
-            {title: "Portfolio", url: "https://dsporrij4.github.io"},
-            {title: "LinkedIn", url: "https://www.linkedin.com/in/dsporrij4"},
-            {title: "GitHub", url: "https://github.com/dsporrij4"},
-            {title: "Facebook", url: "https://www.facebook.com/dsporrij4"}
-        ]
+        socialMedia: {
+            Portfolio: "https://dsporrij4.github.io",
+            LinkedIn: "https://www.linkedin.com/in/dsporrij4"
+        }            
     }, 
     {
         "userhandle": "rgaskal5",
