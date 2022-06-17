@@ -44,7 +44,6 @@ module.exports = (User, bcrypt) => {
      router.post("/register", async (req, res) => {
 
      const newUser = new User({
-         email: req.body.email,
          password: bcrypt.hashSync(req.body.password, 10),
          userhandle: req.body.userhandle
      })
@@ -60,9 +59,7 @@ module.exports = (User, bcrypt) => {
      })
      .catch(dbError => {
          if (dbError.code === 11000){
-             let problemInput = "email"
-             if (dbError.keyValue.userhandle) problemInput = "userhandle"
-             res.status(400).json({message: `An account with this ${problemInput} already exists`})
+             res.status(400).json({message: `An account with this userhandle already exists`})
          } else {
              res.status(500).json({message: dbError.message})
          }

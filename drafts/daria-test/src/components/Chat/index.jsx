@@ -9,7 +9,6 @@ import socketIoClient from 'socket.io-client';
 import Conversation from './Conversation';
 import Sidebar from './Sidebar';
 import CreateChatButtons from './CreateChatButtons'
-
 import "./chatStyle.css"
 
 

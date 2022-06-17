@@ -166,7 +166,6 @@ POST http://localhost:3001/auth/register
 Content-Type: application/json
 
 {
-    "email": "something@something.daa4",
     "password": "123",
     "userhandle": "newestUserrr5"
 }
