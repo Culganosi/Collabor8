@@ -8,7 +8,6 @@ import socketIoClient from 'socket.io-client';
 
 import Conversation from './Conversation';
 import Sidebar from './Sidebar';
-import CreateChatButtons from './CreateChatButtons'
 
 import "./chatStyle.css"
 
@@ -96,6 +95,8 @@ function Chat() {
   //Refresh the needed data
   useEffect(() => {
 
+
+
     async function refreshData () {
 
       //Get most up to date info about users (e.g. if someone changed something)
@@ -145,19 +146,19 @@ function Chat() {
 
   //-----------------------WEBSOCKET STUFF------------------
 
-  //Set up connection
-  useEffect(() => {
-    const connection = socketIoClient('http://localhost:3001');
-    setConn(connection);
-  },[])
+  // //Set up connection
+  // useEffect(() => {
+  //   const connection = socketIoClient('http://localhost:3001');
+  //   setConn(connection);
+  // },[])
 
-  //Send the ID to the socket server to make it relate sockedID <---> userId
-  useEffect(() => {
-    if (conn && self?._id) {
-      conn.emit('sendUserId', self._id)
-    }
+  // //Send the ID to the socket server to make it relate sockedID <---> userId
+  // useEffect(() => {
+  //   if (conn && self?._id) {
+  //     conn.emit('sendUserId', self._id)
+  //   }
 
-  }, [self])
+  // }, [self])
 
   //All the other listeners
   useEffect(() => {
@@ -217,7 +218,6 @@ function Chat() {
 
         <button onClick={() => logout()}> LOGOUT </button>
 
-        {/* < CreateChatButtons />  <---- IGNORE THIS IN THE FINAL VERSION */}
 
         <div className="chat">
 

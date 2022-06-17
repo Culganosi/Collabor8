@@ -25,7 +25,7 @@ function Login() {
     .then(response => {
       setSelf(response.data)
     })
-    .then(() => navigate("/chat"))
+    .then(() => navigate("/dashboard"))
     .catch(err => console.log(err))
   }
 

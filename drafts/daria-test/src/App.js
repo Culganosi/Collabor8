@@ -5,6 +5,7 @@ import React, {useState, useEffect} from "react";
 
 import Login from "./components/Login"
 import Chat from "./components/Chat/"
+import Dashboard from "./components/Dashboard"
 
 import {DataContext} from "./DataContext"
 
@@ -34,7 +35,23 @@ function App() {
       
 
 
-      //-------------REFRESH
+  //--------------------WEBSOCKET REFRESH-------------------------
+  //---Has to happen here because sockets should work on all pages
+
+  //Set up connection
+  useEffect(() => {
+    const connection = socketIoClient('http://localhost:3001');
+    setConn(connection);
+  },[])
+
+  //Send the ID to the socket server to make it relate sockedID <---> userId
+  useEffect(() => {
+    //If connection exists and self is loaded
+    if (conn && self?._id) {
+      conn.emit('sendUserId', self._id)
+    }
+
+  }, [self])
 
               
 
@@ -57,6 +74,7 @@ function App() {
           <Routes>
 
             <Route path="/" element={<Login />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/chat" element={<Chat />}/>
 
           </Routes>
