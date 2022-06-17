@@ -9,7 +9,14 @@ import {
 } from "@material-ui/core";
 import useStyles from "../styles";
 
-export default function UserCard({_id, avatar, shortBio, skills, userhandle, role}) {
+export default function UserCard({
+  _id,
+  avatar,
+  shortBio,
+  skills,
+  userhandle,
+  role,
+}) {
   const classes = useStyles();
 
   return (
@@ -39,9 +46,7 @@ export default function UserCard({_id, avatar, shortBio, skills, userhandle, rol
           >
             {skills.join(" | ")}
           </Typography>
-          <Typography className={classes.bio}>
-            {shortBio}
-          </Typography>
+          <Typography className={classes.bio}>{shortBio}</Typography>
           <Button variant="contained" color="secondary">
             See User Profile
           </Button>
