@@ -3,20 +3,21 @@ import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, 
 import { styled, Paper } from '@mui/material'
 // import Background from "./Background";
 import "./Dashboard.css"
-// import useStyles from '../styles';
+import useStyles from '../styles';
 
 
 export default function Dashboard() {
-    const classes = {
-        root: {
-            flexGrow: 1
-        },
-        paper: {
-            padding: 20,
-            textAlign: "center",
-            color: "blue"
-        }
-    }
+    // const classes = {
+    //     root: {
+    //         flexGrow: 1
+    //     },
+    //     paper: {
+    //         padding: 20,
+    //         textAlign: "center",
+    //         color: "blue"
+    //     }
+    // }
+    const classes = useStyles();
 
     const [anchorEl, setAnchorEl] = React.useState(null);
     const useRef = React.useRef();
