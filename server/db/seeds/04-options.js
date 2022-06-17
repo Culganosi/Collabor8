@@ -21,17 +21,7 @@ const roles = {
 
 const socialMedia = {
     title: "socialMedia", 
-    data: [
-        {title: "Portfolio", fontAwesomeIcon: "fa-solid fa-crown"},
-        {title: "GitHub", fontAwesomeIcon: "fa-brands fa-github-alt"},
-        {title: "LinkedIn", fontAwesomeIcon: "fa-brands fa-linkedin-in"},
-        {title: "Behance", fontAwesomeIcon: "fa-brands fa-behance"},
-        {title: "Medium", fontAwesomeIcon: "fa-brands fa-medium"},
-        {title: "Facebook", fontAwesomeIcon: "fa-brands fa-facebook-f"},
-        {title: "Twitter", fontAwesomeIcon: "fa-brands fa-twitter"},
-        {title: "Instagram", fontAwesomeIcon: "fa-brands fa-instagram"},
-        {title: "YoutTube", fontAwesomeIcon: "fa-brands fa-youtube"}
-    ]
+    data: ["Portfolio", "GitHub", "LinkedIn", "Twitter", "Instagram"]
 }
 
 const proposalCategories = {

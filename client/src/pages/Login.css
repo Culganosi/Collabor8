@@ -35,7 +35,7 @@
   margin-bottom:10px; 
 }
 
-/* .form-group input[type="text"],input[type="password"]{
+.form-group input[type="text"],input[type="password"]{
   border:none;
   padding:10px; 
   width:90%; 
@@ -44,14 +44,14 @@
   font-size:20px;
   color:white;
   background-color:rgba(0,0,0,0.6); 
-} */
+}
 
 
 /* login & register boxes */
-/* .form {
+.form {
   background-image:linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
   backdrop-filter: "blur(10px)"; 
   box-shadow: 10px 10px 10px rgba(30,30,30,0.5);
   border-left:solid 1px rgba(255,255,255,0.8);
   border-top:solid 1px rgba(255,255,255,0.8);
-  } */
+  }

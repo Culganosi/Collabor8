@@ -133,7 +133,7 @@ export default function CreateProposal() {
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item>
                     <Button variant="contained" color="secondary">
-                      Create Profile
+                      Create Proposal
                     </Button>
                   </Grid>
                   <Grid item>

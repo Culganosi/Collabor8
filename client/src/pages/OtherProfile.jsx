@@ -21,7 +21,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-
 const styles = makeStyles((theme) => ({
   avatar: {
     verticalAlign: "middle",
@@ -51,12 +50,10 @@ const styles = makeStyles((theme) => ({
 
 export default function OtherProfile() {
 
-
-
   const [otherUser, setOtherUser] = useState({})
 
   useEffect(() => {
-    // "62ab80d97c81411e543b76f5"
+    "62ac9574647371e54697937d"
     axios.get("/users/62ab80d97c81411e543b76fc")
       .then((res) => {
         //console.log(res.data)
@@ -66,22 +63,20 @@ export default function OtherProfile() {
       })
   }, [])
 
-
   const classes = useStyles();
-
 
   return (
     <>
-<div className={classes.container}>
-      <Container max-Width="sm">
-        <Typography variant="h2" align="center" color="secondary" gutterBottom>
-        Profile Page: {otherUser.userhandle}
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          View this user's active proposals for a possible collaboration 👀
-        </Typography>
-      </Container>
-      </div> 
+      <div className={classes.container}>
+        <Container max-Width="sm">
+          <Typography variant="h2" align="center" color="secondary" gutterBottom>
+            Profile Page: {otherUser.userhandle}
+          </Typography>
+          <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            View this user's active proposals for a possible collaboration 👀
+          </Typography>
+        </Container>
+      </div>
       <div class="body">
         <Container className="root-container">
           <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
@@ -101,19 +96,19 @@ export default function OtherProfile() {
                   <p>
                     <div>
                       <Link href="#" target="blank">
-                      <ScreenshotMonitorIcon />
+                        <ScreenshotMonitorIcon />
                       </Link>
                       <Link href="#" target="blank">
-                      <GitHubIcon />
+                        <GitHubIcon />
                       </Link>
                       <Link href="#" target="blank">
-                      <LinkedInIcon />
+                        <LinkedInIcon />
                       </Link>
                       <Link href="#" target="blank">
-                      <TwitterIcon />
+                        <TwitterIcon />
                       </Link>
                       <Link href="#" target="blank">
-                      <InstagramIcon />
+                        <InstagramIcon />
                       </Link>
                     </div>
                     <br />

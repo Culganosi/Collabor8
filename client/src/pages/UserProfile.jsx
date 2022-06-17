@@ -42,9 +42,7 @@ const styles = makeStyles((theme) => ({
   },
 }));
 
-{/* <Container fixed>
-  <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
-</Container> */}
+
 export default function UserProfile() {
   const classes = useStyles();
 

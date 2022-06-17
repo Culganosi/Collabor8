@@ -9,7 +9,6 @@ import {DataContext} from "./../../DataContext"
 
 import Conversation from './Conversation';
 import Sidebar from './Sidebar';
-
 import "./chatStyle.css"
 
 

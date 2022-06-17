@@ -67,7 +67,7 @@ export default function Login() {
                 label="Username"
                 helperText="Please enter your username"
                 multiline
-                maxRows={3}
+                maxRows={1}
                 value={userhandle}
                 onChange={(event) => setUserhandle(event.target.value)}
               />
@@ -78,7 +78,7 @@ export default function Login() {
                 label="Password"
                 helperText="Please enter your password"
                 multiline
-                maxRows={3}
+                maxRows={1}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />
@@ -94,7 +94,7 @@ export default function Login() {
 
 
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/Register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
