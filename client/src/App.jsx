@@ -30,15 +30,17 @@ function App() {
 
   //Variables to be shared
   const [profiles, setProfiles] = useState({})
+  const [proposals, setProposals] = useState({})
   const [self, setSelf] = useState({})
 
   return (
-    <DataContext.Provider value={{profiles, setProfiles, self, setSelf}}>
+    <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
     <>
     {/* <Wrapper className='App'> */}
 
     <CssBaseline />
       <Nav />
+      <Footer />
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
@@ -50,6 +52,9 @@ function App() {
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/My-Proposals" element={<OwnProp />} />
+        <Route path="/Edit-Proposal" element={<EditModal />} />
+        <Route path="/Proposal-Other" element={<OthersProp />} />
       </Routes>
       {/* </Wrapper> */}
     </>
