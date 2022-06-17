@@ -16,8 +16,8 @@ import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 
-const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Other-User", "Create-Proposal", "Register", "Login"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Other-User", "Create-Proposal", "Login", "My-Proposals", "Edit-Proposal", "Proposal-Other"];
+const settings = ["Profile", "Account", "Dashboard", "Logout", "Login"];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -165,7 +165,7 @@ const ResponsiveAppBar = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Link style={{textDecoration: "none", color: "white"}} to={`/${setting}`}>{setting}</Link>
                 </MenuItem>
               ))}
             </Menu>

@@ -52,9 +52,7 @@ function App() {
         <Route path="/Register" element={<Register />} />
       </Routes>
       {/* </Wrapper> */}
-
     </>
-
     </DataContext.Provider>
   );
 }
