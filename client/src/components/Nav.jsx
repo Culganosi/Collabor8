@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,11 +16,43 @@ import CameraIcon from "@mui/icons-material/Camera";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
+import {DataContext} from "./../DataContext";
 
 const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Other-User", "Create-Proposal", "Login", "My-Proposals", "Edit-Proposal", "Proposal-Other"];
 const settings = ["Profile", "Account", "Dashboard", "Logout", "Login"];
 
 const ResponsiveAppBar = () => {
+
+  const {self, setSelf} = useContext(DataContext);
+
+
+    // //function to log out
+    // const logout = () => {
+    //   axios.post(`/auth/out`)
+    //   .then((res) => {
+    //     setSelf({})
+    //     navigate("/")
+    //   })
+    //   .catch(err => console.log(err.message))
+    // }
+
+  
+
+  //Get info about self
+  useEffect(() => {
+    if(Object.keys(self).length>0) {
+      axios.get("/users/self")
+      .then(res => {
+        setSelf(res.data)
+      })
+    } else {
+      console.log("Not logged in")
+    }
+
+  }, [self])
+
+
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -143,7 +176,7 @@ const ResponsiveAppBar = () => {
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar
                   alt="Profile"
-                  src="https://source.unsplash.com/random"
+                  src={self.avatar}
                 />
               </IconButton>
             </Tooltip>
