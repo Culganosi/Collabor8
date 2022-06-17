@@ -55,7 +55,7 @@ export default function UserProfile() {
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                  <h1>  Other User's Profile  </h1>
+                  <h1>  My User's Profile  </h1>
                   <Avatar
                     alt="Username"
                     src="https://avatars.dicebear.com/api/adventurer-neutral/your-custom-seed.svg"

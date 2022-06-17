@@ -41,6 +41,16 @@ export default function Dashboard() {
     }));
     return (
         <>
+        <div className={classes.container}>
+      <Container max-Width="sm">
+        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+          My Dashboard
+        </Typography>
+        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+          View proposals and users for possible collaborations 
+        </Typography>
+      </Container>
+      </div>
             {/* <Background /> */}
             <Box sx={{ flexGrow: 1 }}>
                 <Grid container spacing={2} columns={2}>

@@ -1,12 +1,39 @@
 import "./Login.css";
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import Button from "@material-ui/core/Button";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 // import Background from "./Background";
 import {Grid, Link} from "@material-ui/core"
+import {useNavigate } from "react-router-dom";
+import axios from "axios";
+import {DataContext} from "./../DataContext"
 
 export default function Login() {
+
+  const navigate = useNavigate();  
+  const {self, setSelf} = useContext(DataContext);
+
+
+  const [userhandle, setUserhandle] = useState(undefined);
+  const [password, setPassword] = useState(undefined);
+
+  
+
+    //FUNCTION TO LOG IN
+    const login = () => {   
+      const requestString = `/auth/in`
+      console.log(userhandle, password)
+      axios.post(requestString, {userhandle, password})
+      .then(response => {
+        setSelf(response.data)
+      })
+      .then(() => navigate("/Home"))
+      .catch(err => console.log(err))
+    }
+  
+
+
   return (
    
       <Box>
@@ -19,8 +46,8 @@ export default function Login() {
                 helperText="Please enter your username"
                 multiline
                 maxRows={3}
-              // value={value}
-              // onChange={handleChange}
+                value={userhandle}
+                onChange={(event) => setUserhandle(event.target.value)}
               />
             </div>
             <div className="form-group">
@@ -30,8 +57,8 @@ export default function Login() {
                 helperText="Please enter your password"
                 multiline
                 maxRows={3}
-              // value={value}
-              // onChange={handleChange}
+                value={password} 
+                onChange={(event) => setPassword(event.target.value)} 
               />
             </div>
     
@@ -39,12 +66,17 @@ export default function Login() {
             variant="outlined"
             size="medium"
             color="secondary"
-            >Submit</Button>
+            onClick={() => login()}
+            >
+              Submit</Button>
+
+
               <Grid item>
                 <Link href="#" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
+              
           </form>
         </div>
       </Box>
