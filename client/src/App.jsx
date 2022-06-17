@@ -48,6 +48,9 @@ function App() {
         <Route path="/Home" element={<Dashboard />} />
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/My-Proposals" element={<OwnProp />} />
+        <Route path="/Edit-Proposal" element={<EditModal />} />
+        <Route path="/Proposal-Other" element={<OthersProp />} />
       </Routes>
     </>
     </DataContext.Provider>

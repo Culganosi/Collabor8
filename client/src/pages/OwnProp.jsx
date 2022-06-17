@@ -8,7 +8,6 @@ import {
   CardContent,
   Grid,
 } from "@material-ui/core";
-import { sizing } from '@material-ui/system'
 
 
 export default function OthersProp() {
