@@ -5,7 +5,7 @@ import React, {useState, useEffect} from "react";
 
 import Login from "./components/Login"
 import Chat from "./components/Chat/"
-import Dashboard from "./components/Dashboard"
+import Dashboard from "./components/Dashboard/"
 
 import {DataContext} from "./DataContext"
 
@@ -13,6 +13,7 @@ import "./App.css"
 
 
 function App() {
+
 
       //---NOTE: Don't set these to null or undefined
 

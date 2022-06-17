@@ -11,7 +11,6 @@ import Conversation from './Conversation';
 import Sidebar from './Sidebar';
 import "./chatStyle.css"
 
-
 //----
 
 function Chat() {
@@ -184,7 +183,7 @@ function Chat() {
         console.log(`Active: ${activeChatId}`)
         console.log(`Intended: ${chatId}`)
 
-       if (activeChatId == chatId) {
+       //if (activeChatId == chatId) {
           setActiveChatFull(prev => {
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
@@ -194,7 +193,7 @@ function Chat() {
 
             return newChat;
           })
-        }
+        //}
 
 
         setChatPreviews(prev => {

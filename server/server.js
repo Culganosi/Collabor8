@@ -62,6 +62,8 @@ app.use(cookieSession({
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Origin", "https://localhost:3000");  
+    // res.header("Access-Control-Allow-Origin", "http://2051-2607-fea8-3edf-f09f-e196-c21d-60f9-163b.ngrok.io");  
+    // res.header("Access-Control-Allow-Origin", "http://2051-2607-fea8-3edf-f09f-e196-c21d-60f9-163b.ngrok.io");  
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
