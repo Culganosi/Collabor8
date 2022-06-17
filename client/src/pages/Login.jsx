@@ -67,7 +67,7 @@ export default function Login() {
                 label="Username"
                 helperText="Please enter your username"
                 multiline
-                maxRows={3}
+                maxRows={1}
                 value={userhandle}
                 onChange={(event) => setUserhandle(event.target.value)}
               />
@@ -78,7 +78,7 @@ export default function Login() {
                 label="Password"
                 helperText="Please enter your password"
                 multiline
-                maxRows={3}
+                maxRows={1}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
               />

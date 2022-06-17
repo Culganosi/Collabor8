@@ -23,8 +23,8 @@ import OtherProfile from "./pages/OtherProfile";
 import UserProfile from "./pages/UserProfile";
 import SignIn from "./pages/SignIn"
 import CreateProposal from "./pages/CreateProposal";
-
-
+import Register from "./pages/Register";
+import styled from "styled-components";
 
 function App() {
 
@@ -35,6 +35,8 @@ function App() {
   return (
     <DataContext.Provider value={{profiles, setProfiles, self, setSelf}}>
     <>
+    {/* <Wrapper className='App'> */}
+
     <CssBaseline />
       <Nav />
       <Routes>
@@ -47,10 +49,21 @@ function App() {
         <Route path="/Home" element={<Dashboard />} />
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
+        <Route path="/Register" element={<Register />} />
       </Routes>
+      {/* </Wrapper> */}
+
     </>
+
     </DataContext.Provider>
   );
 }
+const Wrapper = styled.div`
+position: relative;
+background: #1f1144;
+canvas {
+  height: 500px;
+}
+`;
 
 export default App;

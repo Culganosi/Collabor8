@@ -15,30 +15,24 @@ export default function Splashtext() {
       <Description>
         Find the designers abd developers you need to make it work bla bla bla
         <br />
-        {/* render () {
-//   //  <BrowserRouter>
-//    <div className="App">
-//     <Routes>
-//      <Route path="/" exact component={Login} />
-//      <Route path="/profile" exact component={Register} />
-//      </Routes>
-//    </div>
-//  </BrowserRouter> 
-// } */}
+        <br />
+
         <Button
           size="small"
           style={{ fontSize: 24 }}
-          // href="/Login"
+          href="/Login"
           variant="contained"
           color="secondary"
         >
           Login
         </Button>
         <br />
+        <br />
+
         <Button
           size="small"
           style={{ fontSize: 24 }}
-          // href="#"
+          href="/Register"
           variant="contained"
           color="secondary"
         >
