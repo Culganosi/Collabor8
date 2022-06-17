@@ -85,7 +85,7 @@ app.use(function(req, res, next) {
     //Receive new message from client
     socket.on("newMessage", (data) => {
 
-        console.log("A message was sent to the server")
+        //console.log("A message was sent to the server")
 
         const {recipientId} = data;
         const recipientSockedId = userIdSocketId[recipientId]
