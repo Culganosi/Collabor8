@@ -40,7 +40,6 @@ function App() {
 
     <CssBaseline />
       <Nav />
-      <Footer />
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
@@ -58,6 +57,8 @@ function App() {
       </Routes>
       {/* </Wrapper> */}
     </>
+    <Footer />
+
     </DataContext.Provider>
   );
 }
