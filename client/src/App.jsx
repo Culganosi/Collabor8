@@ -15,7 +15,7 @@ import Splash from "./components/Splash";
 import BrowseUsers from './pages/BrowseUsers'
 import EditProp from './pages/EditProp'
 import EditModal from './pages/EditModal'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -28,6 +28,8 @@ import styled from "styled-components";
 
 function App() {
 
+  const location = useLocation();
+
   //Variables to be shared
   const [profiles, setProfiles] = useState({})
   const [proposals, setProposals] = useState({})
@@ -37,11 +39,14 @@ function App() {
     <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
     <>
     {/* <Wrapper className='App'> */}
+    {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
-      <Nav />
+
       <Routes>
         <Route path="/" element={<Splash />} />
+        {/* <Nav /> */}
+
         <Route path="/People" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Profile" element={<CreateProfile />} />
