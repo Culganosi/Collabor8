@@ -161,7 +161,7 @@ POST http://localhost:3001/auth/out
 
 #Registration
 #Create a new user after submitting the registration form
-#Note: email and username must both be unique in the database, so same info will not work twice
+#Note: username be unique in the database, so same info will not work twice
 POST http://localhost:3001/auth/register
 Content-Type: application/json
 
