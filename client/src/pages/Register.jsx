@@ -98,31 +98,14 @@ export default function Register() {
 
             <Button
               variant="outlined"
-              size="medium"
+              size="large"
               color="secondary"
               onClick={() => register()}
             >
               Submit</Button>
-
-
-            <Grid item>
-              <Link href="/Register" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-
-            <h4>Temporary shortcuts - login as: </h4>
-            <button type="button" onClick={() => shortcutLogin("kmyrtle0")}>kmyrtle0</button>
-            <button type="button" onClick={() => shortcutLogin("rgostridge1")}>rgostridge1</button>
-            <button type="button" onClick={() => shortcutLogin("lreardon2")}>lreardon2</button>
-
           </form>
         </div>
-
-       
-
       </Box>
-
     </>
   );
 }
