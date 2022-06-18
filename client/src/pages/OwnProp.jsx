@@ -14,7 +14,7 @@ import {
   Grid,
 } from "@material-ui/core";
 
-export default function OthersProp() {
+export default function OwnProp() {
   const classes = useStyles();
 
   const [proposal, setProposal] = useState({})
@@ -27,7 +27,7 @@ export default function OthersProp() {
       .then((res) => {
         setProposal(res.data)
       })
-  })
+  }, [])
 
 
   return (
@@ -41,7 +41,6 @@ export default function OthersProp() {
               <Typography component="h5" variant="h5" color="secondary">
                 {proposal.title}
               </Typography>
-
               <Typography className={classes.title} variant="h6" color="textSecondary">
                 Looking for: {proposal.seeking && proposal.seeking.join(", ")}
               </Typography>

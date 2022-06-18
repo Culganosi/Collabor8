@@ -1,15 +1,16 @@
 import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
-import { useState } from "react";
-import {useParams} from 'react-router-dom';
-
+import { useState, useEffect } from "react";
+import {useParams, useNavigate} from 'react-router-dom';
+import axios from "axios";
 import {
   Typography,
   Button,
   Box,
   Container,
   CardContent,
+  CardMedia,
   Grid,
   Switch,
   FormGroup,
@@ -48,12 +49,69 @@ const roles = [
   },
 ];
 
-export default function OthersProp() {
+export default function EditModal() {
+
+  const navigate = useNavigate()
+
+  //Useeffect - call to get existing info about proposal, set as placeholder values
+  //Save user's changes 
+  //On submit - call to patch /proposals/:id with the new info
+
+  useEffect(() => {
+    axios.get(`/proposals/${proposalId}`)
+    .then((res) => {
+      setOldProposal(res.data)
+
+      setSeekingRole(res.data.seeking[0])
+      
+      //----Default value for role is in this variable: ....
+      console.log(res.data.seeking[0])
+
+    })
+  }, [])
+
+
+
+  const submitEditProposal = () => {
+
+    console.log("Inside the submit function")
+
+    let status="Active"
+    if (checked) status="Inactive" //status is still not set as a default 
+
+    const newData = {
+      status,
+      title,
+      description,
+      shortDescription,
+      seeking: [seekingRole]
+    }
+    
+    axios.patch(`/proposals/${proposalId}`, newData)
+    .then(res => {
+      console.log(res.data)
+      navigate(`/My-Profile/${proposalId}`)
+    })
+
+  }
+
+
+  const submitDeleteProposal = () => {
+    axios.delete(`/proposals/${proposalId}`)
+    .then(() => {
+      navigate(`/My-Profile/`)
+    })
+  }
+
+
+
+
+  const [oldProposal, setOldProposal] = useState({})
+
 
   const params = useParams();
   const proposalId = params.id
 
-  console.log(proposalId)
 
 
   const [value, setValue] = React.useState('Controlled');
@@ -61,7 +119,15 @@ export default function OthersProp() {
     setValue(event.target.value);
   };
   const [category, setCategories] = React.useState("");
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(oldProposal.status=="Active");
+
+
+  const [title, setTitle] = React.useState(oldProposal.title)
+  const [description, setDescription] = React.useState(oldProposal.description)
+  const [shortDescription, setShortDescription] = React.useState(oldProposal.shortDescription)
+  const [seekingRole, setSeekingRole] = React.useState("")
+
+
   const toggleChecked = () => {
     setChecked((prev) => !prev);
   };
@@ -95,38 +161,41 @@ Make changes below to update the details of your proposal
         <Grid item xs={8}>
           <Paper className={classes.ownprofile} elevation={8}>
             <CardContent className={classes.cardContent}>
+       
+              <CardMedia className={classes.cardMedia} image={oldProposal.image} title="Title" />
+               <Button variant="outlined" color="secondary">
+                    Upload picture
+                  </Button>
+
               <Typography component="h5" variant="h5" color="secondary">
                 Title of the Proposal
               </Typography>
               <TextField
-                id="filled-basic"
-                label="Edit"
+                id="filled-multiline-static" //"filled-basic"
+                defaultValue={oldProposal.title}
+                multiline
                 variant="filled"
                 color="secondary"
+                onChange={(event) => setTitle(event.target.value)}
               />
-              <Typography
+               <Typography
                 className={classes.title}
                 variant="h6"
                 color="secondary"
               >
-                Type of Proposal
+                Short description
               </Typography>
-              <TextField
-                id="filled-select-category"
-                select
-                label="Category"
-                value={value}
-                onChange={handleChange}
-                helperText="Please select your category"
-                variant="filled"
-                color="secondary"
-              >
-                {categories.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+              <div>
+                <TextField
+                  id="filled-multiline-static"
+                  multiline
+                  rows={1}
+                  defaultValue={oldProposal.shortDescription}
+                  variant="filled"
+                  style={{ width: "75%" }}
+                  onChange={(event) => setShortDescription(event.target.value)}
+                />
+              </div>
               <Typography
                 className={classes.title}
                 variant="h6"
@@ -139,8 +208,8 @@ Make changes below to update the details of your proposal
                 select
                 label="Role"
                 value={value}
+                defaultValue={oldProposal.seeking}
                 onChange={handleChange}
-                helperText="Please select your category"
                 variant="filled"
                 color="secondary"
               >
@@ -160,18 +229,12 @@ Make changes below to update the details of your proposal
               <div>
                 <TextField
                   id="filled-multiline-static"
-                  label="Multiline"
                   multiline
                   rows={6}
-                  defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-          in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum."
+                  defaultValue={oldProposal.description}
                   variant="filled"
                   style={{ width: "75%" }}
+                  onChange={(event) => setDescription(event.target.value)}
                 />
               </div>
               <FormGroup>
@@ -185,8 +248,13 @@ Make changes below to update the details of your proposal
             </CardContent>
             <div>
               <Grid container spacing={2} justifyContent="center">
+              <Grid item>
+                  <Button variant="contained" color="secondary" onClick={() => submitDeleteProposal()}>
+                    Delete Proposal
+                  </Button>
+                </Grid>
                 <Grid item>
-                  <Button variant="contained" color="secondary">
+                  <Button variant="contained" color="secondary" onClick={() => submitEditProposal()}>
                     Save Changes
                   </Button>
                 </Grid>
