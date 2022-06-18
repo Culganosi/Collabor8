@@ -92,10 +92,7 @@ export default function BrowseUsers() {
       <Box border={2} padding={5} margin={2} borderRadius={16}>
         <Container className={classes.cardGrid} maxWidth="xl">
           <Grid container spacing={4}>
-
             {listOfUserCards}
-
-
             {/* {cards.map((card) => (
               <Grid item={card} xs={12} sm={6} md={4}>
                 <UserCard />
@@ -105,13 +102,6 @@ export default function BrowseUsers() {
           </Grid>
         </Container>
       </Box>
-
-
-
-    <Routes>
-      <Route path=":id" element={<OtherProfile />} />
-    </Routes>
     </main>
-
   );
 }

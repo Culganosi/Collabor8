@@ -1,4 +1,4 @@
-import {Link, Routes, Route} from 'react-router-dom';
+import { Link, Routes, Route } from 'react-router-dom';
 import OtherProfile from '../pages/OtherProfile';
 import React from "react";
 import {
@@ -22,11 +22,8 @@ export default function UserCard({
   role,
 }) {
   const classes = useStyles();
-  // const history = useHistory();
 
-  // function handleClick() {
-  //   history.push("/Other-User");
-  // }
+
   return (
     <Card className={classes.card}>
       <CardMedia
@@ -57,13 +54,12 @@ export default function UserCard({
           <Typography className={classes.bio}>{shortBio}</Typography>
 
           <Link to={_id} element={<OtherProfile />} >
-          <Button variant="contained" color="secondary">
-            See User Profile
-          </Button>
+            <Button variant="contained" color="secondary">
+              See User Profile
+            </Button>
           </Link>
         </CardContent>
       </div>
     </Card>
   );
 }
-// onClick={handleClick}
