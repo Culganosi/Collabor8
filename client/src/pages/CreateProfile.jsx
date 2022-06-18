@@ -125,287 +125,318 @@ export default function CreateProfile() {
         </Typography>
       </Container>
 
-      <Box p={5}>
-        <Grid container justify="center">
-          <Grid item xs={8}>
-            <Paper className={classes.createprofile} elevation={8}>
+      <Box border={2} padding={5} margin={6} borderRadius={16}>
+        <Grid container justify="center" alignItems="stretch">
+          <Grid item xs={5}>
+            <Paper className={classes.card} elevation={4} style={{width: '600px'}}>
               <CardContent className={classes.cardContent}>
                 <Box
                   component="img"
                   style={{
-                    height: 300,
-                    width: 350,
-                    maxHeight: { xs: 233, md: 167 },
-                    maxWidth: { xs: 350, md: 250 },
+                    height: "auto",
+                    width: "100%",
                   }}
                   src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
                 />
-                <Grid item style={{ marginBottom: 25 }}>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    component="label"
-                  >
-                    Upload Profile Picture
-                    <input type="file" hidden />
-                  </Button>
-                </Grid>
-                <Typography component="h5" variant="h5" color="secondary">
-                  Select preferred Role(s)
-                </Typography>
-
-                <FormControl
-                  required
-                  error={error}
-                  component="fieldset"
-                  sx={{ m: 3 }}
-                  variant="standard"
-                >
-                  <FormLabel component="legend">Select one or more </FormLabel>
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={uxui}
-                          onChange={handleRole}
-                          name="uxui"
-                        />
-                      }
-                      label="UX/UI Designer"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={full}
-                          onChange={handleRole}
-                          name="full"
-                        />
-                      }
-                      label="Full-Stack Developer"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={front}
-                          onChange={handleRole}
-                          name="front"
-                        />
-                      }
-                      label="Front-End Developer"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={back}
-                          onChange={handleRole}
-                          name="front"
-                        />
-                      }
-                      label="Back-End Developer"
-                    />
-                  </FormGroup>
-                </FormControl>
-
-                <Typography
-                  className={classes.title}
-                  variant="h6"
-                  color="secondary"
-                >
-                  Select Skills
-                </Typography>
-
-                <Grid container>
-                  <FormControl
-                    required
-                    error={error}
-                    component="fieldset"
-                    sx={{ m: 3 }}
-                    variant="standard"
-                  >
-                    <Grid container item xs={6}>
-                      <FormLabel component="legend">Front-End</FormLabel>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={html}
-                              onChange={handleSkill}
-                              name="html"
-                            />
-                          }
-                          label="HTML"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={css}
-                              onChange={handleSkill}
-                              name="css"
-                            />
-                          }
-                          label="CSS"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={sass}
-                              onChange={handleSkill}
-                              name="sass"
-                            />
-                          }
-                          label="Sass"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={jquery}
-                              onChange={handleSkill}
-                              name="jquery"
-                            />
-                          }
-                          label="jQuery"
-                        />
-
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={reactjs}
-                              onChange={handleSkill}
-                              name="reactjs"
-                            />
-                          }
-                          label="ReactJS"
-                        />
-
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={uxui}
-                              onChange={handleSkill}
-                              name="angularjs"
-                            />
-                          }
-                          label="AngularJS"
-                        />
-                      </FormGroup>
+                <Box>
+                  <Grid container justify="center" alignItems="stretch">
+                    <Grid item style={{ marginBottom: 25 }}>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        component="label"
+                      >
+                        Upload Profile Picture
+                        <input type="file" hidden />
+                      </Button>
                     </Grid>
-                    <Grid container item xs={6} direction="column">
-                      <FormLabel component="legend">Back-End</FormLabel>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={nodejs}
-                              onChange={handleSkill}
-                              name="nodejs"
-                            />
-                          }
-                          label="NodeJS"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={express}
-                              onChange={handleSkill}
-                              name="express"
-                            />
-                          }
-                          label="Express"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={sql}
-                              onChange={handleSkill}
-                              name="sql"
-                            />
-                          }
-                          label="SQL"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={mongodb}
-                              onChange={handleSkill}
-                              name="mongodb"
-                            />
-                          }
-                          label="MongoDB"
-                        />
-                      </FormGroup>
+
+                  <Grid container>
+                    <Grid item xs={6} style={{ marginBottom: 15 }}>
+                      <Typography
+                        className={classes.title}
+                        variant="h5"
+                        color="secondary"
+                      >
+                        Select Areas of Expertise
+                      </Typography>
+                      </Grid>
+                      <Grid item xs={8}>
+                      <FormControl
+                        required
+                        error={error}
+                        component="fieldset"
+                        sx={{ m: 3 }}
+                        variant="standard"
+                      >
+                        <FormLabel component="legend">
+                          Select one or more{" "}
+                        </FormLabel>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={uxui}
+                                onChange={handleRole}
+                                name="uxui"
+                              />
+                            }
+                            label="UX/UI Designer"
+                          />
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={full}
+                                onChange={handleRole}
+                                name="full"
+                              />
+                            }
+                            label="Full-Stack Developer"
+                          />
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={front}
+                                onChange={handleRole}
+                                name="front"
+                              />
+                            }
+                            label="Front-End Developer"
+                          />
+                          <FormControlLabel
+                            control={
+                              <Checkbox
+                                checked={back}
+                                onChange={handleRole}
+                                name="front"
+                              />
+                            }
+                            label="Back-End Developer"
+                          />
+                        </FormGroup>
+                      </FormControl>
                     </Grid>
-                    <Grid container item xs={6} direction="column">
-                      <FormLabel component="legend">UX/UI</FormLabel>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={photoshop}
-                              onChange={handleSkill}
-                              name="photoshop"
-                            />
-                          }
-                          label="Photoshop"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={figma}
-                              onChange={handleSkill}
-                              name="figma"
-                            />
-                          }
-                          label="Figma"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={uxresearch}
-                              onChange={handleSkill}
-                              name="exresearch"
-                            />
-                          }
-                          label="UX Research"
-                        />
-                      </FormGroup>
+                  </Grid>
+                  </Grid>
+
+                  <Grid container>
+                    <Grid item style={{ marginBottom: 15 }}>
+                      <Typography
+                        className={classes.title}
+                        variant="h5"
+                        color="secondary"
+                      >
+                        Select Skills
+                      </Typography>
                     </Grid>
-                    <Grid container item xs={6} direction="column">
-                      <FormLabel component="legend">Other</FormLabel>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={git}
-                              onChange={handleSkill}
-                              name="git"
+
+                    <Grid container wrap="nowrap">
+                      <FormControl
+                        required
+                        error={error}
+                        component="fieldset"
+                        sx={{ m: 3 }}
+                        variant="standard"
+                      >
+                        <Grid container spacing={2}>
+                          <Grid item>
+
+
+                          <FormLabel component="legend">Front-End</FormLabel>
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={html}
+                                  onChange={handleSkill}
+                                  name="html"
+                                />
+                              }
+                              label="HTML"
                             />
-                          }
-                          label="Git"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={tdd}
-                              onChange={handleSkill}
-                              name="tdd"
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={css}
+                                  onChange={handleSkill}
+                                  name="css"
+                                />
+                              }
+                              label="CSS"
                             />
-                          }
-                          label="TDD"
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={vscode}
-                              onChange={handleSkill}
-                              name="vscode"
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={sass}
+                                  onChange={handleSkill}
+                                  name="sass"
+                                />
+                              }
+                              label="Sass"
                             />
-                          }
-                          label="VS Code"
-                        />
-                      </FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={jquery}
+                                  onChange={handleSkill}
+                                  name="jquery"
+                                />
+                              }
+                              label="jQuery"
+                            />
+
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={reactjs}
+                                  onChange={handleSkill}
+                                  name="reactjs"
+                                />
+                              }
+                              label="ReactJS"
+                            />
+
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={uxui}
+                                  onChange={handleSkill}
+                                  name="angularjs"
+                                />
+                              }
+                              label="AngularJS"
+                            />
+                          </FormGroup>
+                        </Grid>
+                        
+                     
+                          <Grid item>
+                          <FormLabel component="legend">Back-End</FormLabel>
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={nodejs}
+                                  onChange={handleSkill}
+                                  name="nodejs"
+                                />
+                              }
+                              label="NodeJS"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={express}
+                                  onChange={handleSkill}
+                                  name="express"
+                                />
+                              }
+                              label="Express"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={sql}
+                                  onChange={handleSkill}
+                                  name="sql"
+                                />
+                              }
+                              label="SQL"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={mongodb}
+                                  onChange={handleSkill}
+                                  name="mongodb"
+                                />
+                              }
+                              label="MongoDB"
+                            />
+                          </FormGroup>
+                        </Grid>
+                        
+                     
+                          <Grid item>
+
+                          
+                          <FormLabel component="legend">UX/UI</FormLabel>
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={photoshop}
+                                  onChange={handleSkill}
+                                  name="photoshop"
+                                />
+                              }
+                              label="Photoshop"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={figma}
+                                  onChange={handleSkill}
+                                  name="figma"
+                                />
+                              }
+                              label="Figma"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={uxresearch}
+                                  onChange={handleSkill}
+                                  name="exresearch"
+                                />
+                              }
+                              label="UX Research"
+                            />
+                          </FormGroup>
+                        </Grid>
+                       
+                        
+                          <Grid item>
+                          <FormLabel component="legend">Other</FormLabel>
+                          <FormGroup>
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={git}
+                                  onChange={handleSkill}
+                                  name="git"
+                                />
+                              }
+                              label="Git"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={tdd}
+                                  onChange={handleSkill}
+                                  name="tdd"
+                                />
+                              }
+                              label="TDD"
+                            />
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={vscode}
+                                  onChange={handleSkill}
+                                  name="vscode"
+                                />
+                              }
+                              label="VS Code"
+                            />
+                          </FormGroup>
+                        </Grid>
+                        </Grid>
+                      </FormControl>
                     </Grid>
-                  </FormControl>
-                </Grid>
+                  </Grid>
+                  
+                </Box>
 
                 <Typography
                   className={classes.title}
