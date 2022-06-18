@@ -4,6 +4,7 @@ import {DataContext} from "./../../DataContext"
 import axios from "axios"
 
 import MessageButton from "./MessageButton"
+import ImageUpload from "./../ImageUpload"
 
 function Dashboard() {
 
@@ -58,6 +59,10 @@ function Dashboard() {
         <h1>Or</h1>
 
         <button type="button" onClick={() => {navigate("/chat")}}>Proceed to chat</button>
+
+        <hr></hr>
+
+        <ImageUpload />
 
 
         </>
