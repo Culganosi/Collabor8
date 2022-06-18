@@ -45,14 +45,12 @@ function App() {
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Profile" element={<CreateProfile />} />
         <Route path="/My-Profile" element={<UserProfile />} />
-        {/* <Route path="/People/*" element={<OtherProfile />} /> */}
         <Route path="/Home" element={<Dashboard />} />
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/My-Proposals" element={<OwnProp />} />
         <Route path="/Edit-Proposal" element={<EditModal />} />
-        <Route path="/Proposal-Other" element={<OthersProp />} />
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
       </Routes>

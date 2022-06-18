@@ -33,6 +33,13 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '25%',
     marginBottom: 10
   },
+  proposalImg:{
+    borderRadius: '100%',
+    width: '50%',
+    height: 320,
+    marginLeft: '25%',
+    marginBottom: 10
+  },
   cardContent: {
     flexGrow: 1,
   },
