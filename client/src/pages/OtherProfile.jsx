@@ -10,6 +10,10 @@ import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import EmailIcon from '@mui/icons-material/Email';
 import useStyles from "../styles";
 
+import {useParams, useNavigate} from 'react-router-dom';
+
+
+
 import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -50,14 +54,17 @@ const styles = makeStyles((theme) => ({
 
 export default function OtherProfile() {
 
+
+  const params = useParams();
+  const userId = params.id
+
   const [otherUser, setOtherUser] = useState({})
 
   useEffect(() => {
-    "62ac9574647371e54697937d"
-    axios.get("/users/62ab80d97c81411e543b76fc")
+    axios.get(`/users/${userId}`)
       .then((res) => {
-        //console.log(res.data)
-        console.log(res.data.skills)
+        console.log(res.data)
+        // console.log(res.data.skills)
         setOtherUser(res.data)
 
       })
@@ -77,7 +84,7 @@ export default function OtherProfile() {
           </Typography>
         </Container>
       </div>
-      <div class="body">
+      <div className="body">
         <Container className="root-container">
           <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
 

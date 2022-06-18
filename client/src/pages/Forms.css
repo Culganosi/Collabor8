@@ -1,20 +1,21 @@
+/* CSS for Login & Register Pages */
+
 .form-group{
   margin-bottom:25px;
   display: flex;
   flex-direction: column;
 }
 .form{
-  width:400px;
-  height:400px;
-  background-color:rgba(0,0,0,0.6);
+  width:600px;
+  height:600px;
   display:flex;
   flex-direction:column;
   justify-content: center;
   padding:20px; 
-  border:black 2px;
+  border:rgb(44, 6, 6) 2px;
   background-image:linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  backdrop-filter: "blur(10px)"; 
-  box-shadow: 10px 10px 10px rgba(30,30,30,0.5);
+  backdrop-filter: "blur(8px)"; 
+  box-shadow: 10px 10px 30px rgba(30,30,30,0.5);
   border-left:solid 1px rgba(255,255,255,0.8);
   border-top:solid 1px rgba(255,255,255,0.8);
   }
@@ -29,9 +30,15 @@
   
 }
 
+#outlined-multiline-flexible-helper-text {
+  font-size: 0.8rem;
+  color:rgb(142, 138, 138);
+
+}
 .form-group label{
   font-size:20px;
   color:white;
+  font-weight: 400;
   margin-bottom:10px; 
 }
 
@@ -43,15 +50,5 @@
   border-radius:10px;
   font-size:20px;
   color:white;
-  background-color:rgba(0,0,0,0.6); 
+  /* background-color:rgba(0,0,0,0.6);  */
 }
-
-
-/* login & register boxes */
-.form {
-  background-image:linear-gradient(to bottom right, rgba(255,255,255,0.2), rgba(255,255,255,0));
-  backdrop-filter: "blur(10px)"; 
-  box-shadow: 10px 10px 10px rgba(30,30,30,0.5);
-  border-left:solid 1px rgba(255,255,255,0.8);
-  border-top:solid 1px rgba(255,255,255,0.8);
-  }

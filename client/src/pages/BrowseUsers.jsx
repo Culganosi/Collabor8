@@ -1,6 +1,7 @@
 import React, {useContext, useState, useEffect} from "react";
 import {DataContext} from "./../DataContext";
 import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {
   Typography,
   Button,
@@ -10,6 +11,9 @@ import {
 } from "@material-ui/core";
 import useStyles from "../styles";
 import UserCard from "../components/UserCard";
+
+
+import OtherProfile from "./OtherProfile"
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -88,10 +92,7 @@ export default function BrowseUsers() {
       <Box border={2} padding={5} margin={2} borderRadius={16}>
         <Container className={classes.cardGrid} maxWidth="xl">
           <Grid container spacing={4}>
-
             {listOfUserCards}
-
-
             {/* {cards.map((card) => (
               <Grid item={card} xs={12} sm={6} md={4}>
                 <UserCard />

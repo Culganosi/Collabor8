@@ -152,7 +152,7 @@ Enter Y/y if you're sure.\n`, (confirm) => {
         .catch((err) => console.log(err.message))
 
         resetDB().then(() => {
-            console.log("\n--Closing connection--")
+            console.log("--Done, closing connection--")
             mongoose.connection.close();
         })
     } 

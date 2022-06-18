@@ -1,5 +1,6 @@
-import React, { useState } from "react"
-import { Container, Grid, makeStyles, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardHeader, CardActionArea, CardMedia, Popover } from '@material-ui/core';
+import React, { useState, useEffect, useContext } from "react"
+import axios from "axios";
+import { Container, Link, Grid, makeStyles, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardHeader, CardActionArea, CardMedia, Popover } from '@material-ui/core';
 import { styled, Paper, Avatar, Stack } from '@mui/material'
 import "./UserProfile.css"
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -7,6 +8,9 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import useStyles from "../styles";
+import { DataContext } from "./../DataContext";
+import ProposalCard from "../components/ProposalCard";
+import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -44,132 +48,149 @@ const styles = makeStyles((theme) => ({
 
 
 export default function UserProfile() {
+
+  const { proposals, setProposals, self, setSelf } = useContext(DataContext);
+
+  const [selfProposals, setSelfProposals] = useState([])
+
   const classes = useStyles();
 
+  useEffect(() => {
+    //If the self variable is {}, load the info again
+
+    axios.get("/users/self")
+      .then((res) => {
+        // console.log(res.data.skills)
+        setSelf(res.data)
+      })
+
+    axios.get("/proposals/self")
+    .then(res => {
+      console.log(res.data)
+      setSelfProposals(res.data)
+    })
+  }, [])
+
+
+
+  const selfActiveProposals = []
+  const selfInactiveProposals = []
+
+  for (let proposal of selfProposals) {
+    if (proposal.status=="Active") {
+      selfActiveProposals.push(proposal)
+    } else {
+      selfInactiveProposals.push(proposal)
+    }
+  }
+
+  const selfActiveProposalCards = selfActiveProposals.map((proposal) => {
+    return (
+      <Grid item={proposal} >
+        <ProposalCard
+          key={proposal._id}
+          _id={proposal._id}
+          author={proposal.author}
+          title={proposal.title}
+          shortDescription={proposal.shortDescription}
+          image={proposal.image}
+          seeking={proposal.seeking}
+        />
+      </Grid>
+    );
+  });
+
+  const selfInactiveProposalCards = selfInactiveProposals.map((proposal) => {
+    return (
+      <Grid item={proposal} >
+        <ProposalCard
+          key={proposal._id}
+          _id={proposal._id}
+          author={proposal.author}
+          title={proposal.title}
+          shortDescription={proposal.shortDescription}
+          image={proposal.image}
+          seeking={proposal.seeking}
+        />
+      </Grid>
+    );
+  });
+  
+
+  
+  
+  
   return (
     <>
-<div className={classes.container}>
-      <Container max-Width="sm">
-        <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          My User Profile 
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          View your active and archived proposals. Edit profile that other users may see
-        </Typography>
-      </Container>
-      </div>      
+      <div className={classes.container}>
+        <Container max-Width="sm">
+          <Typography variant="h2" align="center" color="secondary" gutterBottom>
+            My User Profile
+          </Typography>
+          <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            View your active and archived proposals. Edit profile that other users may see
+          </Typography>
+        </Container>
+      </div>
+
       <div class="body">
         <Container className="root-container">
-          <Grid container spacing={0} sx={{ width: '120vw', height: '120vh' }}>
+          <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}>
 
+            {/* USER PROFILE GRID */}
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                  <h1>  My User's Profile  </h1>
+                  <h1>  {self.userhandle} </h1>
                   <Avatar
-                    alt="Username"
-                    src="https://avatars.dicebear.com/api/adventurer-neutral/your-custom-seed.svg"
+                    alt="avatar"
+                    src={self.avatar}
                     sx={{ width: 56, height: 56 }}
                   />
                   <p>
                     <div>
-                      <GitHubIcon />
-                      <LinkedInIcon />
-                      <TwitterIcon />
-                      <InstagramIcon />
+                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon /></Link>}
                     </div>
-
                     <br />
-
                     <h3>Role:</h3>
-                    Full-Stack Developer
-                    Description: I am a back-end developer with interests in this and that. Also you can checkout the following links to see my work
-                    <br />
+                    {self.role}                    
+                    <h3>Description:</h3>
+                     {self.bio} 
+                   <br />
                     <h3>Skills: </h3>
-                    PostGreSQL | NodeJS | Express | React | CSS
-                    <Button style={{ margin: 2 }} variant="contained">
+                    {self.skills && self.skills.join(" | ")}
+                    <br />
+                    <Button style={{ margin: 10 }} variant="contained">
                       Edit Profile
                     </Button>
-                  
-
-
                   </p>
                 </CardContent>
               </Card>
             </Grid>
 
-            <Grid container xs={12} sm={7} lg={9}> 
-              <Stack spacing={1} flex="1 1 0">
+
+            {/* ACTIVE PROPOSALS */}
+            <Grid container xs={9}>
+              <Stack spacing={1} falslex="1 1 0">
                 <Card>
                   <CardContent>
                     <h1 text-align="center">Your Active Proposals
                     </h1>
                     <Grid container alignItems="stretch">
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 1</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This adds the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 2</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 3</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
+                      {selfActiveProposalCards}
                     </Grid>
                   </CardContent>
                 </Card>
-              </Stack>
-            </Grid>
-            <br />
-            <br />
-            <br />
 
-            <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0">
                 <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
-
                     <Grid container alignItems="stretch">
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal </h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal </h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal </h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
+                      {selfInactiveProposalCards}
                     </Grid>
 
                   </CardContent>

@@ -1,9 +1,5 @@
 import React, {useState} from "react";
-
-
 import {DataContext} from "./DataContext"
-
-
 import { CssBaseline } from "@material-ui/core";
 import BrowseProp from "./pages/BrowseProp";
 import OthersProp from "./pages/OthersProp";
@@ -15,7 +11,7 @@ import Splash from "./components/Splash";
 import BrowseUsers from './pages/BrowseUsers'
 import EditProp from './pages/EditProp'
 import EditModal from './pages/EditModal'
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -28,6 +24,8 @@ import styled from "styled-components";
 
 function App() {
 
+  const location = useLocation();
+
   //Variables to be shared
   const [profiles, setProfiles] = useState({})
   const [proposals, setProposals] = useState({})
@@ -36,18 +34,18 @@ function App() {
   return (
     <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
     <>
-    {/* <Wrapper className='App'> */}
+    <Wrapper className='App'>
+    {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
-      <Nav />
-      <Footer />
+
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/People" element={<BrowseUsers />} />
+        <Route path="/People/*" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Profile" element={<CreateProfile />} />
         <Route path="/My-Profile" element={<UserProfile />} />
-        <Route path="/Other-User" element={<OtherProfile />} />
+        {/* <Route path="/People/*" element={<OtherProfile />} /> */}
         <Route path="/Home" element={<Dashboard />} />
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
@@ -55,9 +53,13 @@ function App() {
         <Route path="/My-Proposals" element={<OwnProp />} />
         <Route path="/Edit-Proposal" element={<EditModal />} />
         <Route path="/Proposal-Other" element={<OthersProp />} />
+        <Route path="/People/:id" element={<OtherProfile />} />
+        <Route path="/Proposals/:id" element={<OthersProp />} />
       </Routes>
-      {/* </Wrapper> */}
+      </Wrapper>
     </>
+    <Footer />
+
     </DataContext.Provider>
   );
 }

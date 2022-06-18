@@ -13,6 +13,8 @@ import {
   Divider,
 } from "@material-ui/core";
 import useStyles from "../styles";
+import {Link} from "react-router-dom"
+import OthersProp from "../pages/OthersProp";
 
 export default function ProposalCard({
   _id,
@@ -40,9 +42,11 @@ export default function ProposalCard({
         </CardContent>
       </CardActionArea>
       <CardActions>
+      <Link to={_id} element={<OthersProp />} >
         <Button size="small" color="secondary">
           See More Details
         </Button>
+        </Link>
       </CardActions>
     </Card>
   );

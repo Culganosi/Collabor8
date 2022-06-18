@@ -1,3 +1,5 @@
+import { Link, Routes, Route } from 'react-router-dom';
+import OtherProfile from '../pages/OtherProfile';
 import React from "react";
 import {
   Typography,
@@ -9,6 +11,8 @@ import {
 } from "@material-ui/core";
 import useStyles from "../styles";
 
+
+
 export default function UserCard({
   _id,
   avatar,
@@ -18,6 +22,7 @@ export default function UserCard({
   role,
 }) {
   const classes = useStyles();
+
 
   return (
     <Card className={classes.card}>
@@ -47,9 +52,12 @@ export default function UserCard({
             {skills.join(" | ")}
           </Typography>
           <Typography className={classes.bio}>{shortBio}</Typography>
-          <Button variant="contained" color="secondary">
-            See User Profile
-          </Button>
+
+          <Link to={_id} element={<OtherProfile />} >
+            <Button variant="contained" color="secondary">
+              See User Profile
+            </Button>
+          </Link>
         </CardContent>
       </div>
     </Card>

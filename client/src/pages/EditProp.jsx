@@ -14,14 +14,12 @@ import {
 } from "@material-ui/core";
 import { sizing } from "@material-ui/system";
 
-export default function OthersProp() {
+export default function OthersProp() { // ??
   const [checked, setChecked] = React.useState(false);
   const toggleChecked = () => {
     setChecked((prev) => !prev);
   };
   const classes = useStyles();
-
-
 
   return (
     <Box p={5}>

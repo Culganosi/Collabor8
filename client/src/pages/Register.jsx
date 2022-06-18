@@ -1,162 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useStyles from "../styles";
-import Paper from "@material-ui/core/Paper";
-import {
-  Typography,
-  Button,
-  Box,
-  Container,
-  CardContent,
-  Grid,
-  TextField,
-} from "@material-ui/core";
-import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+import "./Forms.css";
+import React, { useState, useContext } from 'react';
+import Button from "@material-ui/core/Button";
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+// import Background from "./Background";
+import { Grid, Link } from "@material-ui/core"
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { DataContext } from "./../DataContext"
+import useStyles from '../styles';
+import { Container, Typography } from '@material-ui/core'
+import purplewave from "../images/purplewave.webp";
 
 export default function Register() {
   const classes = useStyles();
 
-  const [role, setRole] = React.useState("Front-End Dev");
-  const [category, setCategory] = React.useState("Front-End Dev");
+  const navigate = useNavigate();
+  const { self, setSelf } = useContext(DataContext);
 
-  const handleChangeRole = (event, newRole) => {
-    setRole(newRole);
-  };
-  const handleChangeCategory = (event, newCategory) => {
-    setCategory(newCategory);
-  };
 
-    return (
-      <>
-      <div className={classes.container}>
-      <Container max-Width="sm">
-        <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          Register
-        </Typography>
+  const [userhandle, setUserhandle] = useState(undefined);
+  const [password, setPassword] = useState(undefined);
 
-      </Container>
-    </div>
-    <Box p={5}>
-        <Grid container justify="center">
-          <Grid item xs={8}>
-            <Paper className={classes.createprofile} elevation={8}>
-              <CardContent className={classes.cardContent}>
 
-                <Typography component="h5" variant="h5" color="secondary">
-                  Choose your role
-                </Typography>
-                <ToggleButtonGroup
-                  color="secondary"
-                  value={role}
-                  exclusive
-                  onChange={handleChangeRole}
-                >
-                  <ToggleButton value="front">Front-End</ToggleButton>
-                  <ToggleButton value="back">Back-End</ToggleButton>
-                  <ToggleButton value="any">Full-stack</ToggleButton>
-                  <ToggleButton value="design">UI/UX designer</ToggleButton>
-                </ToggleButtonGroup>
-                <br />
-                <br />
+  //FUNCTION TO REGISTER IN
+  const register = () => {
+    axios.post("/auth/register", { userhandle, password })
+      .then(response => {
+        setSelf(response.data)
+      })
+      .then(() => navigate("/Create-Profile"))
+      .catch(err => console.log(err))
+  }
 
-                <Typography
-                 component="h5" 
-                 variant="h5" 
-                 color="secondary"
-                >
-                  Choose your skills
-                </Typography>
-                <ToggleButtonGroup
-                  color="secondary"
-                  value={category}
-                  exclusive
-                  onChange={handleChangeCategory}
-                >
-                  <ToggleButton value="prof">Portfolio</ToggleButton>
-                  <ToggleButton value="prac">Practice</ToggleButton>
-                  <ToggleButton value="edu">Educational</ToggleButton>
-                  <ToggleButton value="fun">Leisure</ToggleButton>
-                </ToggleButtonGroup>
-                <br />
-                <br />
 
-                <Typography
-                 component="h5" 
-                 variant="h5" 
-                 color="secondary"
-                >
-                  Link your Github
-                </Typography>
-                <div>
-                  <TextField
-                    id="filled-multiline-static"
-                    label="Github URL"
-                    multiline
-                    rows={1}
-                    variant="filled"
-                    style={{ width: "75%" }}
-                  />
-                </div>
-                <br />
-                <br />
-                <Typography
-                 component="h5" 
-                 variant="h5" 
-                 color="secondary"
-                >
-                  Link your LinkedIn
-                </Typography>
-                <div>
-                  <TextField
-                    id="filled-multiline-static"
-                    label="LinkedIn URL"
-                    multiline
-                    rows={1}
-                    variant="filled"
-                    style={{ width: "75%" }}
-                  />
-                </div>
-                <br />
-                <br />
 
-                <Typography
-                  component="h5" 
-                  variant="h5" 
-                  color="secondary"
-                >
-                  Short Bio
-                </Typography>
-                <div>
-                  <TextField
-                    id="filled-multiline-static"
-                    label="Please include a short bio about yourself"
-                    multiline
-                    rows={4}
-                    variant="filled"
-                    style={{ width: "75%" }}
-                  />
-                </div>
+  return (
+    <>
+      <div className={classes.headercontainer}>
+        <Container max-Width="sm">
+          <Typography variant="h2" align="center" color="secondary" gutterBottom>
+            Register
+          </Typography>
 
-              </CardContent>
-              <div>
-                <Grid container spacing={2} justifyContent="center">
-                  <Grid item>
-                    <Button variant="contained" color="secondary">
-                      Create Profile
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" color="secondary">
-                      Cancel
-                    </Button>
-                  </Grid>
-                </Grid>
-              </div>
-            </Paper>
-          </Grid>
-        </Grid>
+        </Container>
+      </div>
+      <Box>
+        <div className="form-container">
+          <form className="form">
+            <div className="form-group">
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Username"
+                helperText="Please type in a username"
+                multiline
+                maxRows={1}
+                value={userhandle}
+                onChange={(event) => setUserhandle(event.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <TextField
+                id="outlined-multiline-flexible"
+                label="Password"
+                helperText="Please enter your password"
+                multiline
+                maxRows={1}
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </div>
+
+            <Button
+              variant="outlined"
+              size="large"
+              color="secondary"
+              onClick={() => register()}
+            >
+              Submit</Button>
+
+          </form>
+        </div>
       </Box>
-
-      </>
-    );
+    </>
+  );
 }

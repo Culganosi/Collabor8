@@ -53,6 +53,9 @@ module.exports = (User, Proposal) => {
 
         //Return all the proposals of the Self user, including inactive ones
      router.get('/self', async (req, res) => {
+
+          if(!req.session.userId) res.status(403).json({message: "You're not logged in"})
+          
           const userId = req.session.userId;
           const selfProposals = await Proposal.find({author: userId}, {description: 0})
           res.status(200).json(selfProposals)
