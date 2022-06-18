@@ -8,36 +8,30 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { Typography } from "@mui/material";
+import CameraIcon from "@mui/icons-material/Camera";
 
 function Footer() {
   return (
     <div className="footer-container">
       <div className="footer-links">
-        <div className="footer-link-wrapper">
-          <div className="footer-link-items">
-            <h2>About Us</h2>
-            <a href="/sign-up">How it works</a>
-            <a href="/">Testimonials</a>
-          </div>
-          <div className="footer-link-items">
-            <h2>Contact Us</h2>
-            <a href="/">Contact</a>
-            <a href="/">Support</a>
-          </div>
-        </div>
-        <div className="footer-link-wrapper">
-          <div className="footer-link-items">
-            <h2>Social Media</h2>
-            <a href="/">Instagram</a>
-            <a href="/">Facebook</a>
-            <a href="/">Youtube</a>
-            <a href="/">Twitter</a>
-          </div>
-        </div>
+        <div className="footer-link-wrapper"></div>
       </div>
       <section className="social-media">
         <div className="social-media-wrap">
-          <Typography variant="h5" align="inherit" gutterBottom color="#e91e63">
+          <Typography
+            variant="h5"
+            align="inherit"
+            gutterBottom
+            color="#e91e63"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              textDecoration: "none",
+            }}
+          >
             Collab||8 © 2022
           </Typography>
 
