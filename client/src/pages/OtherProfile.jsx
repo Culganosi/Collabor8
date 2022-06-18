@@ -10,6 +10,10 @@ import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import EmailIcon from '@mui/icons-material/Email';
 import useStyles from "../styles";
 
+import {useParams, useNavigate} from 'react-router-dom';
+
+
+
 import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -50,10 +54,14 @@ const styles = makeStyles((theme) => ({
 
 export default function OtherProfile() {
 
+
+  const params = useParams();
+  const userId = params.id
+
   const [otherUser, setOtherUser] = useState({})
 
   useEffect(() => {
-    axios.get("/users/62accf47c18256dfaab45130")
+    axios.get(`/users/${userId}`)
       .then((res) => {
         console.log(res.data)
         // console.log(res.data.skills)
