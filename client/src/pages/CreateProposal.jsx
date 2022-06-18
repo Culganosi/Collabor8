@@ -11,20 +11,34 @@ import {
   Grid,
   TextField,
 } from "@material-ui/core";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
+
 export default function CreateProposal() {
+
+  const navigate = useNavigate();
+
+
+  const createProposal = () => {
+    const proposalData = {title, status: "Active", description, shortDescription, seeking}
+    axios.post("/proposals", proposalData)
+      .then((res) => {
+        console.log(res.data)
+        navigate("/My-Profile")
+    })
+    
+  }
+
   const classes = useStyles();
 
-  const [role, setRole] = React.useState("Front-End Dev");
-  const [category, setCategory] = React.useState("Front-End Dev");
+  const [title, setTitle] = React.useState("")
+  const [seeking, setSeeking] = React.useState([]);
+  const [description, setDescription] = React.useState("")
+  const [shortDescription, setShortDescription] = React.useState("")
 
-  const handleChangeRole = (event, newRole) => {
-    setRole(newRole);
-  };
-  const handleChangeCategory = (event, newCategory) => {
-    setCategory(newCategory);
-  };
+
 
   return (
     <div className={classes.container}>
@@ -57,6 +71,8 @@ export default function CreateProposal() {
                     rows={1}
                     variant="filled"
                     style={{ width: "75%" }}
+                    value={title}
+                    onChange={(event) => setTitle(event.target.value)}
                   />
                 </div>
 
@@ -75,42 +91,26 @@ export default function CreateProposal() {
                     rows={1}
                     variant="filled"
                     style={{ width: "75%" }}
+                    value={shortDescription}
+                    onChange={(event) => setShortDescription(event.target.value)}
                   />
                 </div>
 
                 <Typography component="h5" variant="h5" color="secondary">
-                  Who are you looking for ?
+                  Who are you looking for (Role) ?
                 </Typography>
                 <ToggleButtonGroup
                   color="secondary"
-                  value={role}
+                  value={seeking}
                   exclusive
-                  onChange={handleChangeRole}
+                  onChange={(event) => setSeeking([event.target.value])}
                 >
-                  <ToggleButton value="front">Front-End</ToggleButton>
-                  <ToggleButton value="back">Back-End</ToggleButton>
-                  <ToggleButton value="any">Any</ToggleButton>
+                  <ToggleButton value="front">UX/UI designer</ToggleButton>
+                  <ToggleButton value="front2">Front-end developer</ToggleButton>
+                  <ToggleButton value="front3">Back-end developer</ToggleButton>
+                  <ToggleButton value="front4">Full-stack developer</ToggleButton>
                 </ToggleButtonGroup>
-                <Typography
-                  className={classes.title}
-                  variant="h6"
-                  color="secondary"
-                >
-                  Select a category
-                </Typography>
-                <ToggleButtonGroup
-                  color="secondary"
-                  value={category}
-                  exclusive
-                  onChange={handleChangeCategory}
-                >
-                  <ToggleButton value="front">Portfolio</ToggleButton>
-                  <ToggleButton value="back">Practice</ToggleButton>
-                  <ToggleButton value="any">Educational</ToggleButton>
-                  <ToggleButton value="any1">Leisure</ToggleButton>
-                </ToggleButtonGroup>
-
-
+              
                 <Typography
                   className={classes.title}
                   variant="h6"
@@ -125,6 +125,8 @@ export default function CreateProposal() {
                     multiline
                     rows={6}
                     variant="filled"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)} 
                     style={{ width: "75%" }}
                   />
                 </div>
@@ -132,7 +134,7 @@ export default function CreateProposal() {
               <div>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item>
-                    <Button variant="contained" color="secondary">
+                    <Button variant="contained" color="secondary" onClick={() => createProposal()}>
                       Create Proposal
                     </Button>
                   </Grid>
