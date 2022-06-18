@@ -2,6 +2,8 @@ import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import { useState } from "react";
+import {useParams} from 'react-router-dom';
+
 import {
   Typography,
   Button,
@@ -47,6 +49,13 @@ const roles = [
 ];
 
 export default function OthersProp() {
+
+  const params = useParams();
+  const proposalId = params.id
+
+  console.log(proposalId)
+
+
   const [value, setValue] = React.useState('Controlled');
   const handleChange = (event) => {
     setValue(event.target.value);

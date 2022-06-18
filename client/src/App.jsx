@@ -9,7 +9,6 @@ import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import Splash from "./components/Splash";
 import BrowseUsers from './pages/BrowseUsers'
-import EditProp from './pages/EditProp'
 import EditModal from './pages/EditModal'
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom'
@@ -49,7 +48,6 @@ function App() {
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/Edit-Proposal" element={<EditModal />} />
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
         <Route path="/My-Profile/:id" element={<OwnProp />} />

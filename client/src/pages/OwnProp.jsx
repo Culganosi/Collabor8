@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom';
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import axios from "axios";
-import EditModal from "./EditProp"
+import EditModal from "./EditModal"
 import {
   Typography,
   Button,
