@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import {DataContext} from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Other-User", "Create-Proposal", "Login", "My-Proposals", "Edit-Proposal", "Proposal-Other", "Register"];
+const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Login", "Register"];
 const settings = ["Logout"];
 
 const ResponsiveAppBar = () => {

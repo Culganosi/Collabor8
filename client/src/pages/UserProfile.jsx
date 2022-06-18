@@ -172,10 +172,10 @@ export default function UserProfile() {
               </Card>
             </Grid>
 
-
-            {/* ACTIVE PROPOSALS */}
             <Grid container xs={9}>
               <Stack spacing={1} falslex="1 1 0">
+
+                 {/* ACTIVE PROPOSALS */}
                 <Card>
                   <CardContent>
                     <h1 text-align="center">Your Active Proposals
@@ -186,13 +186,13 @@ export default function UserProfile() {
                   </CardContent>
                 </Card>
 
+                {/* ARCHIVED PROPOSALS */}
                 <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
                     <Grid container alignItems="stretch">
                       {selfInactiveProposalCards}
                     </Grid>
-
                   </CardContent>
                 </Card>
               </Stack>
