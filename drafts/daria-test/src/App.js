@@ -14,7 +14,6 @@ import "./App.css"
 
 function App() {
 
-
       //---NOTE: Don't set these to null or undefined
 
       //This info is obtained upon successful login or registration
