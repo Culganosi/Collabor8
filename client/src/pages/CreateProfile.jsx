@@ -14,7 +14,7 @@ import {
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
-export default function OthersProp() {
+export default function CreateProfile() {
 
 
 

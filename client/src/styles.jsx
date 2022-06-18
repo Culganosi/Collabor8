@@ -26,7 +26,18 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '56.25%'
     
   },
+  ownPropImg: {
+    paddingTop: '30%'
+
+  },
   cardMediaUser:{
+    borderRadius: '100%',
+    width: '50%',
+    height: 320,
+    marginLeft: '25%',
+    marginBottom: 10
+  },
+  proposalImg:{
     borderRadius: '100%',
     width: '50%',
     height: 320,
