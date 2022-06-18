@@ -1,9 +1,10 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import axios from "axios";
+import EditModal from "./EditProp"
 import {
   Typography,
   Button,
@@ -47,9 +48,13 @@ export default function OthersProp() {
               <Typography className={classes.bio}>
                 {proposal.description}
               </Typography>
+
+              <Link to="edit" element={<EditModal />} >
               <Button variant="contained" color="secondary">
                 Edit Proposal
               </Button>
+              </Link>
+
           </CardContent>
         </Paper>
       </Grid>

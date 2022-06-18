@@ -49,11 +49,11 @@ function App() {
         <Route path="/Create-Proposal" element={<CreateProposal />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/My-Proposals" element={<OwnProp />} />
         <Route path="/Edit-Proposal" element={<EditModal />} />
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
         <Route path="/My-Profile/:id" element={<OwnProp />} />
+        <Route path="/My-Profile/:id/edit" element={<EditModal />} />
 
       </Routes>
       </Wrapper>

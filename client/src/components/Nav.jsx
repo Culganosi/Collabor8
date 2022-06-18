@@ -18,7 +18,7 @@ import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 import {DataContext} from "./../DataContext";
 
-const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Create-Proposal", "Login", "My-Proposals", "Edit-Proposal", "Register"];
+const pages = ["People", "Proposals", "Create-Profile", "My-Profile", "Home", "Create-Proposal", "Login", "Edit-Proposal", "Register"];
 const settings = ["Profile", "Account", "Dashboard", "Logout", "Login"];
 
 const ResponsiveAppBar = () => {
