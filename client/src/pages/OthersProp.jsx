@@ -4,7 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
-
+import OtherProfile from "./OtherProfile";
+import { Link } from "react-router-dom";
 import {useParams, useNavigate} from 'react-router-dom';
 
 
@@ -60,8 +61,11 @@ return (
               />
 
               <Typography className={classes.title} component="h5" variant="h5" color="secondary" style={{ display: 'flex', justifyContent: "center" }}>
+              <Link to={`/People/${author._id}`}>
                 {author.userhandle}
+              </Link>
               </Typography>
+
               <Typography
                 className={classes.title}
                 variant="h6"

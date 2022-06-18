@@ -49,6 +49,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/People/:id" element={<OtherProfile />} />
+        <Route path="/People/:userId/:id" element={<OthersProp />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
         <Route path="/My-Profile/:id" element={<OwnProp />} />
         <Route path="/My-Profile/:id/edit" element={<EditModal />} />

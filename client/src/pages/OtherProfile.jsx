@@ -11,9 +11,6 @@ import EmailIcon from '@mui/icons-material/Email';
 import useStyles from "../styles";
 import ProposalCard from "../components/ProposalCard";
 import {useParams, useNavigate} from 'react-router-dom';
-
-
-
 import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
