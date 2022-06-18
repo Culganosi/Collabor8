@@ -53,6 +53,8 @@ function App() {
         <Route path="/Edit-Proposal" element={<EditModal />} />
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
+        <Route path="/My-Profile/:id" element={<OwnProp />} />
+
       </Routes>
       </Wrapper>
     </>

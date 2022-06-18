@@ -47,7 +47,6 @@ export default function OthersProp() {
   }, []);
 
 
-
 return (
   <Box p={5}>
     <div className={classes.card}>
