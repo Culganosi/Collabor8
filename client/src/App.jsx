@@ -55,6 +55,7 @@ function App() {
         <Route path="/Proposal-Other" element={<OthersProp />} />
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
+        <Route path="/Logout" element={<Dashboard />} />
       </Routes>
       </Wrapper>
     </>
