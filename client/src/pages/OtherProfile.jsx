@@ -9,7 +9,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import EmailIcon from '@mui/icons-material/Email';
 import useStyles from "../styles";
-
+import ProposalCard from "../components/ProposalCard";
 import {useParams, useNavigate} from 'react-router-dom';
 
 
@@ -59,16 +59,51 @@ export default function OtherProfile() {
   const userId = params.id
 
   const [otherUser, setOtherUser] = useState({})
+  const [userProposals, setUserProposals] = useState([])
 
   useEffect(() => {
-    axios.get(`/users/${userId}`)
-      .then((res) => {
-        console.log(res.data)
-        // console.log(res.data.skills)
-        setOtherUser(res.data)
 
-      })
+    async function getData() {
+
+      const userResponse = await axios.get(`/users/${userId}`)
+      setOtherUser(userResponse.data)
+
+      const proposals = await (await axios.get("/proposals")).data
+
+      console.log(proposals)
+
+      const tempUserProposals = []
+
+      for (let proposalId of userResponse.data.activeProposals) {
+        tempUserProposals.push(proposals[proposalId])
+      }
+
+      setUserProposals(tempUserProposals)
+
+    }
+
+    getData()
+
   }, [])
+
+
+  const userProposalsCard = userProposals.map((proposal) => {
+    return (
+      <Grid item={proposal} >
+        <ProposalCard
+          key={proposal._id}
+          _id={proposal._id}
+          author={proposal.author}
+          title={proposal.title}
+          shortDescription={proposal.shortDescription}
+          image={proposal.image}
+          seeking={proposal.seeking}
+        />
+      </Grid>
+    );
+  });
+
+
 
   const classes = useStyles();
 
@@ -101,22 +136,12 @@ export default function OtherProfile() {
                     <EmailIcon />
                   </Button>
                   <p>
-                    <div>
-                      <Link href="#" target="blank">
-                        <ScreenshotMonitorIcon />
-                      </Link>
-                      <Link href="#" target="blank">
-                        <GitHubIcon />
-                      </Link>
-                      <Link href="#" target="blank">
-                        <LinkedInIcon />
-                      </Link>
-                      <Link href="#" target="blank">
-                        <TwitterIcon />
-                      </Link>
-                      <Link href="#" target="blank">
-                        <InstagramIcon />
-                      </Link>
+                  <div>
+                      {otherUser.socialMedia && otherUser.socialMedia.Portfolio && <Link href={otherUser.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
+                      {otherUser.socialMedia && otherUser.socialMedia.GitHub && <Link href={otherUser.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
+                      {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && <Link href={otherUser.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
+                      {otherUser.socialMedia && otherUser.socialMedia.Twitter && <Link href={otherUser.socialMedia.Twitter} target="blank"><TwitterIcon /></Link>}
+                      {otherUser.socialMedia && otherUser.socialMedia.Instagram && <Link href={otherUser.socialMedia.Instagram} target="blank"><InstagramIcon /></Link>}
                     </div>
                     <br />
 
@@ -139,68 +164,23 @@ export default function OtherProfile() {
 
                 <Card>
                   <CardContent>
-                    <h1 text-align="center">Anon's Active Proposals
+                    <h1 text-align="center">{otherUser.userhandle}'s Active Proposals
                     </h1>
                     <Grid container alignItems="stretch">
 
                       <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 1</h4>
-                        </CardContent>
+                        {/* <CardContent>
+                          <h4>{userProposalsCard}</h4>
+                        </CardContent> */}
                         <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
+                        {userProposalsCard} 
+                          </CardActions>
                       </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent href="#">
-                          <h4>Proposal 2</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 3</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
                     </Grid>
-                    <Grid container alignItems="stretch">
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 4</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 5</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                      <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>Proposal 6</h4>
-                        </CardContent>
-                        <CardActions>
-                          <p>This is the description of this proposal and it is just</p>  </CardActions>
-                      </Grid>
-
-                    </Grid>
-
                   </CardContent>
                 </Card>
               </Stack>
             </Grid>
-
           </Grid>
         </Container>
       </div>
