@@ -1,16 +1,19 @@
-import React, { useState } from "react"
+import React, { useContext, useState, useEffect } from "react";
 import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardActionArea, CardMedia, Popover } from '@material-ui/core';
 import { styled, Paper } from '@mui/material'
 // import Background from "./Background";
 import "./Dashboard.css"
 // import useStyles from '../styles';
 import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import ProposalCard from "../components/ProposalCard";
+import axios from "axios";
+import { DataContext } from "./../DataContext";
+
 
 const useStyles = makeStyles({
     container: {
         height: "100%", // So that grids 1 & 4 go all the way down
-        minHeight: 150, // Give minimum height to a div
+        minHeight: 500, // Give minimum height to a div
         border: "1px solid black",
         fontSize: 30,
         textAlign: "center",
@@ -20,6 +23,7 @@ const useStyles = makeStyles({
     containerTall: {
         minHeight: 250 // This div has higher minimum height
     }
+    // sx={{ width: '25%' }}> sizing to maybe use for the columns
 });
 
 
@@ -43,8 +47,6 @@ export default function Dashboard() {
     //     setAnchorEl(useRef.current);
     // }
 
-
-
     // function handleClose() {
     //     setAnchorEl(null);
     // }
@@ -52,6 +54,28 @@ export default function Dashboard() {
     // const open = Boolean(anchorEl);
     // const id = open ? "simple-popover" : undefined;
 
+    const { proposals, setProposals } = useContext(DataContext);
+    useEffect(() => {
+      axios.get("/proposals").then((res) => {
+        setProposals(res.data);
+      });
+    }, []);
+  
+    const listOfProposalCards = Object.values(proposals).map((proposal) => {
+      return (
+        <Grid item={proposal} xs={12} sm={6} md={4}>
+          <ProposalCard
+            key={proposal._id}
+            _id={proposal._id}
+            author={proposal.author}
+            title={proposal.title}
+            shortDescription={proposal.shortDescription}
+            image={proposal.image}
+            seeking={proposal.seeking}
+          />
+        </Grid>
+      );
+    });
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -70,11 +94,11 @@ export default function Dashboard() {
                 </Container>
             </div>
 
-            
-             <Container maxWidth={1000}>
+            <Container maxWidth={200}>
                 <Grid container spacing={3}>
+                    {/* PROPOSALS COLUMN */}
+
                     <Grid container item xs={4}  >
-                        <div className="left">
                         <Card>
                             <CardContent>
                                 <p>
@@ -83,18 +107,21 @@ export default function Dashboard() {
                                     <br />
                                     <h1>Latest proposals that are seeking your skills:</h1>
                                     <br />
-                                    <h3>Skills: </h3>
-                                    <br />
-                                    <Button style={{ margin: 10 }} variant="contained">
-                                        Edit Profile
+        <Container className={classes.cardMedia} maxWidth="xl">
+          <Grid container spacing={1}>
+            {listOfProposalCards}
+          </Grid>
+        </Container>
+                                          <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                        Look at more proposals
                                     </Button>
                                 </p>
                             </CardContent>
                         </Card>
-                        </div>
                     </Grid>
+                    {/* USERS COLUMN */}
+
                     <Grid container item xs={4} >
-                        <div className="middle">
                         <Card>
                             <CardContent>
 
@@ -103,20 +130,19 @@ export default function Dashboard() {
                                     <div>
                                     </div>
                                     <br />
-                                    <h1>The latest proposals that are seeking your skills that may interest you:</h1>
+                                    <h1>Users to consider for your active proposals:</h1>
                                     <br />
-                                    <h3>Skills: </h3>
                                     <br />
-                                    <Button style={{ margin: 10 }} variant="contained">
-                                        Edit Profile
+                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                        Look at more users
                                     </Button>
                                 </p>
                             </CardContent>
                         </Card>
-                        </div>
                     </Grid>
+                    {/* MEMES COLUMN */}
+
                     <Grid container item xs={4}  >
-                        <div className="right">
                         <Card>
                             <CardContent>
 
@@ -125,42 +151,21 @@ export default function Dashboard() {
                                     <div>
                                     </div>
                                     <br />
-                                    <h1>The latest proposals that are seeking your skills that may interest you:</h1>
+                                    <h1>Just cat memes and other memes:</h1>
                                     <br />
-                                    <h3>Skills: </h3>
+                                    <h3>Look at the kitties: </h3>
                                     <br />
+                                    <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
                                     <Button style={{ margin: 10 }} variant="contained">
                                         Edit Profile
                                     </Button>
                                 </p>
                             </CardContent>
                         </Card>
-                        </div>
 
                     </Grid>
                 </Grid>
             </Container>
-            {/* <Grid container direction="row" spacing={2}>
-      <Grid item xs>
-        <div className="dash-container">1</div>
-      </Grid>
-      <Grid item container direction="column" xs spacing={2}>
-        <Grid item xs>
-          <div className="dash-container">2</div>
-        </Grid>
-        <Grid item xs>
-          <div className={clsx(classes.dash-container, classes.containerTall)}>
-            3
-          </div>
-        </Grid>
-      </Grid>
-      <Grid item xs>
-        <div className={classes.container}>4</div>
-      </Grid>
-    </Grid> */}
-            
-
-
         </>
     )
 }
