@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 export default function Dashboard() {
     const classes = useStyles();
 
-//FETCH PROPOSALS---------------------------------------
+    //FETCH PROPOSALS---------------------------------------
     const { proposals, setProposals } = useContext(DataContext);
     useEffect(() => {
         axios.get("/proposals").then((res) => {
@@ -84,6 +84,8 @@ export default function Dashboard() {
             </Grid>
         )
     })
+    //FETCH CAT API ------------------------------------------------
+   
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -92,82 +94,83 @@ export default function Dashboard() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+        return (
+            <>
+                <div className={classes.headercontainer}>
+                    <Container max-Width="sm">
+                        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+                            Dashboard
+                        </Typography>
+                    </Container>
+                </div>
+                <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    Browse through the follwing proposals and users that you might be interested to work with.
+                </Typography>
 
-    return (
-        <>
-            <div className={classes.headercontainer}>
-                <Container max-Width="sm">
-                    <Typography variant="h2" align="center" color="secondary" gutterBottom>
-                        Dashboard
-                    </Typography>
-                </Container>
-            </div>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            Browse through the follwing proposals and users that you might be interested to work with.
-          </Typography>
-
-            <Container maxWidth={200}>
-                <Grid container spacing={3}>
-                    {/* PROPOSALS COLUMN --------------------------*/}
-                    <Grid container item xs={4}  >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    <h1>Latest proposals that are seeking your skills:</h1>
-                                    <br />
-                                    <Container className={classes.cardMedia} maxWidth="xl">
-                                        <Grid container spacing={1}>
-                                            {listOfProposalCards}
-                                        </Grid>
-                                    </Container>
-                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
-                                        Look at more proposals
-                                    </Button>
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    {/* USERS COLUMN-------------------------------- */}
-                    <Grid container item xs={4} >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    <h1>Users to consider for your active proposals:</h1>
-                                    <br />
-                                    <Container className={classes.cardGrid} maxWidth="xl">
-                                        <Grid container spacing={2}>
-                                            {listOfUserCards}
-                                        </Grid>
-                                    </Container>                                    
-                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
-                                        Look at more users
-                                    </Button>
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    {/* MEMES COLUMN---------------------------------- */}
-                    <Grid container item xs={4}  >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    <h1>Just cat memes and other memes:</h1>
-                                    <br />
-                                    <h3>Look at the kitties: </h3>
-                                    <br />
-                                    <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
-                                    <Button style={{ margin: 10 }} variant="contained">
-                                        Edit Profile
-                                    </Button>
+                <Container maxWidth={200}>
+                    <Grid container spacing={3}>
+                        {/* PROPOSALS COLUMN --------------------------*/}
+                        <Grid container item xs={4}  >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Latest proposals that are seeking your skills:</h1>
+                                        <br />
+                                        <Container className={classes.cardMedia} maxWidth="xl">
+                                            <Grid container spacing={1}>
+                                                {listOfProposalCards}
+                                            </Grid>
+                                        </Container>
+                                        <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                            Look at more proposals
+                                        </Button>
                                     </p>
-                            </CardContent>
-                        </Card>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        {/* USERS COLUMN-------------------------------- */}
+                        <Grid container item xs={4} >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Users to consider for your active proposals:</h1>
+                                        <br />
+                                        <Container className={classes.cardGrid} maxWidth="xl">
+                                            <Grid container spacing={2}>
+                                                {listOfUserCards}
+                                            </Grid>
+                                        </Container>
+                                        <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                            Look at more users
+                                        </Button>
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        {/* MEMES COLUMN---------------------------------- */}
+                        <Grid container item xs={4}  >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Just cat memes and other memes:</h1>
+                                        <br />
+                                        <div>
+          <button >Get random cat!</button>
+        </div>
+        
+                                        <h3>Look at the kitties: </h3>
+                                        <br />
+                                        <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
+                                        
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Container>
-        </>
-    )
-}
+                </Container>
+            </>
+        )
+    }
