@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-
+import { createMuiTheme } from '@material-ui/core/styles';
 import { useNavigate } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -40,6 +40,15 @@ export default function MessageLine({ message }) {
     }
   });
 
+  const theme = createMuiTheme({
+    typography: {
+      useNextVariants: true,
+    },
+    palette: {
+     background: {paper: '#5fba7d'}
+    },
+  });
+
   const classes = useStyles();
 
   //Pull variable from context
@@ -58,7 +67,7 @@ export default function MessageLine({ message }) {
         <Grid item xs={12}>
           <ListItemText align={linePosition}
             primary={
-              <Typography variant="h6" style={{ color: "black" }}>
+              <Typography variant="h6" theme={theme} style={{ color: "black" }}>
                 {text}
               </Typography>
             }>

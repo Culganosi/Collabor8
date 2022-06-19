@@ -110,9 +110,6 @@ const Chat = () => {
     }
     refreshConvo()
 
-    // //----------For testing
-    // console.log("Active chat is now: " + activeChatId)
-
   }, [activeChatId])
 
   
@@ -166,7 +163,6 @@ const Chat = () => {
 
 
     //Send message to database -> it will persist on refresh
-    //TODO: uncomment
     axios.patch(`/chats/${activeChatId}`, {text: newMessage})
 
     //Refresh input field
@@ -195,27 +191,24 @@ const Chat = () => {
     if(conn) {
       conn.on('receiveMessage', data => {
         
-        console.log(`Received message: ${data.text}`)
-        // console.log(data);
+        //console.log(`Received message: ${data.text}`)
 
         const {sentAt, text, author, chatId} = data;
         const messageToLocal = {sentAt, author, text}
 
-        // console.log("Active chat: " + activeChatId)
-        // console.log("Intended chat: " + chatId)
 
         //TODO: This has bugs, code runs whichever room you seem to be in-+
 
-        console.log(`Active: ${activeChatId}`)
-        console.log(`Intended: ${chatId}`)
+        // console.log(`Active: ${activeChatId}`)
+        // console.log(`Intended: ${chatId}`)
 
        //if (activeChatId == chatId) {
           setActiveChatFull(prev => {
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
 
-            console.log(messageToLocal)
-            console.log(newChat)
+            // console.log(messageToLocal)
+            // console.log(newChat)
 
             return newChat;
           })
