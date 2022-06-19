@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {DataContext} from "./DataContext"
 import { CssBaseline } from "@material-ui/core";
 import BrowseProp from "./pages/BrowseProp";
@@ -10,7 +11,6 @@ import Footer from "./components/Footer";
 import Splash from "./components/Splash";
 import BrowseUsers from './pages/BrowseUsers'
 import EditModal from './pages/EditModal'
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
@@ -21,7 +21,7 @@ import Messages from "./pages/Messages"
 import CreateProposal from "./pages/CreateProposal";
 import Register from "./pages/Register";
 import styled from "styled-components";
-import Chat from "./pages/Chat";
+import Chat from "./pages/Chat/index";
 
 function App() {
 
@@ -31,9 +31,20 @@ function App() {
   const [profiles, setProfiles] = useState({})
   const [proposals, setProposals] = useState({})
   const [self, setSelf] = useState({})
+  const [chatPreviews, setChatPreviews] = useState([]) //Chat previews of the logged-in user
+  //Which chat will display in the Conversation component
+  const [activeChatId, setActiveChatId] = useState(""); //---This is the ID
+  const [activeChatFull, setActiveChatFull] = useState([]); //---This is the whole history of the active chat
+
+
 
   return (
-    <DataContext.Provider value={{profiles, setProfiles, self, setSelf, proposals, setProposals}}>
+    <DataContext.Provider value={{
+      profiles, setProfiles, self, setSelf, proposals, setProposals,
+        chatPreviews, setChatPreviews,
+        activeChatId, setActiveChatId,
+        activeChatFull, setActiveChatFull,
+      }}>
     <>
     <Wrapper className='App'>
     {location.pathname === '/' ? null : <Nav />}
