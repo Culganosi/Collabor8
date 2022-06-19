@@ -17,8 +17,8 @@ function Chat() {
 
   //Variables
   const navigate = useNavigate(); 
-  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn, setConn} = useContext(DataContext);
 
+  const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull, conn, setConn} = useContext(DataContext);
   const [newMessage, setNewMessage] = useState()
 
   //------------------------------HELPER FUNCTIONS-----------------------------
@@ -33,6 +33,8 @@ function Chat() {
     })
     .catch(err => console.log(err.message))
   }
+
+  //-----------
 
   //TODO: This is a conversation with an existing chat!
   const submitNewMessage = () => {
