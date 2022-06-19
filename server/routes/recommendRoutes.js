@@ -57,14 +57,24 @@ module.exports = (User, Proposal) => {
 
         //Query the list of users for people in those roles, prioritizing the most frequently saught
         let recommendedUsers = []
+        //How many people to return for each saught role
+        let limit = 1;
+        if (uniqueRoles.length===1) {
+            limit = 3
+        } else if (uniqueRoles.length===2) {
+            limit = 2;
+        }
+
         for (let role of uniqueRoles) {
-            const usersInRole = await User.find({role, _id: {"$ne": userId}}, {userhandle: 1, avatar: 1, role: 1, skills: 1, shortBio: 1, createdAt: 1})
+            const usersInRole = await User.find(
+                {role, _id: {"$ne": userId}}, 
+                {userhandle: 1, avatar: 1, role: 1, skills: 1, shortBio: 1, createdAt: 1}).limit(limit)
             console.log(role)
             console.log(usersInRole)
             recommendedUsers = recommendedUsers.concat(usersInRole)
         }
 
-        res.status(200).json(recommendedUsers.slice(0, 3))
+        res.status(200).json(recommendedUsers)
 
     })
 
