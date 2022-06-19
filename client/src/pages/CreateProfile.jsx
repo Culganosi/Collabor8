@@ -145,7 +145,7 @@ export default function CreateProfile() {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="secondary">
+                    <Button variant="outlined" color="secondary" style={{marginBottom: '15px'}}>
                       Cancel
                     </Button>
                   </Grid>
