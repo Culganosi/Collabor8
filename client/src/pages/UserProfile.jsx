@@ -11,6 +11,7 @@ import useStyles from "../styles";
 import { DataContext } from "./../DataContext";
 import ProposalCard from "../components/ProposalCard";
 import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
+import { TextureLoader } from "three";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -64,10 +65,10 @@ export default function UserProfile() {
       })
 
     axios.get("/proposals/self")
-    .then(res => {
-      console.log(res.data)
-      setSelfProposals(res.data)
-    })
+      .then(res => {
+        // console.log(res.data)
+        setSelfProposals(res.data)
+      })
   }, [])
 
 
@@ -76,7 +77,7 @@ export default function UserProfile() {
   const selfInactiveProposals = []
 
   for (let proposal of selfProposals) {
-    if (proposal.status=="Active") {
+    if (proposal.status == "Active") {
       selfActiveProposals.push(proposal)
     } else {
       selfInactiveProposals.push(proposal)
@@ -98,6 +99,7 @@ export default function UserProfile() {
       </Grid>
     );
   });
+  console.log(selfActiveProposalCards)
 
   const selfInactiveProposalCards = selfInactiveProposals.map((proposal) => {
     return (
@@ -114,11 +116,11 @@ export default function UserProfile() {
       </Grid>
     );
   });
-  
 
-  
-  
-  
+
+
+
+
   return (
     <>
       <div className={classes.container}>
@@ -141,7 +143,7 @@ export default function UserProfile() {
               <Card>
                 <CardContent>
                   <h1 className="userHandle">  {self.userhandle} </h1>
-                  
+
                   <Avatar
                     alt="avatar"
                     src={self.avatar}
@@ -157,10 +159,10 @@ export default function UserProfile() {
                     </div>
                     <br />
                     <h3>Role:</h3>
-                    {self.role}                    
+                    {self.role}
                     <h3>Description:</h3>
-                     {self.bio} 
-                   <br />
+                    {self.bio}
+                    <br />
                     <h3>Skills: </h3>
                     {self.skills && self.skills.join(" | ")}
                     <br />
@@ -173,15 +175,17 @@ export default function UserProfile() {
             </Grid>
 
             <Grid container xs={12} sm={7} lg={9}>
-            <Stack spacing={1} flex="1 1 0">
+              <Stack spacing={1} flex="1 1 0">
 
-                 {/* ACTIVE PROPOSALS */}
+                {/* ACTIVE PROPOSALS */}
                 <Card>
                   <CardContent>
-                    <h1 text-align="center" padding="20px">Your Active Proposals 
+                    <h1 text-align="center" padding="20px">Your Active Proposals
                     </h1>
                     <Grid container alignItems="stretch" className="card">
-                      {selfActiveProposalCards.length == 0 ? <p>Post your first proposal so others can see your work</p> : {selfActiveProposalCards}}
+                      {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
+                      {selfActiveProposalCards.map(activepropcard => activepropcard)}
+                      {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
                     </Grid>
                   </CardContent>
                 </Card>
