@@ -28,7 +28,7 @@ const useStyles = makeStyles({
   },
   chatSection: {
     width: '100%',
-    height: '80vh'
+    height: '90vh'
   },
   headBG: {
       backgroundColor: '#e0e0e0'
@@ -94,6 +94,24 @@ const Chat = () => {
       refreshData();
   
     }, [])
+
+
+
+      //Once have the ID of the chat to display, get the entire chat history from database
+    useEffect(() => {
+    async function refreshConvo () {
+      if(activeChatId) {
+        const chatFullRes = await axios.get(`/chats/${activeChatId}`)
+        setActiveChatFull(chatFullRes.data)
+      }
+    }
+    refreshConvo()
+
+    // //----------For testing
+    // console.log("Active chat is now: " + activeChatId)
+
+  }, [activeChatId])
+
   
 
 

@@ -1,4 +1,6 @@
-import React, {useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+
+import { useNavigate } from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -13,13 +15,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
-
+import axios from "axios";
 
 import {DataContext} from "./../../DataContext"
 
-import Preview from "./Preview"
-
-export default function Sidebar() {
+export default function MessageLine({message}) {
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -42,39 +42,29 @@ export default function Sidebar() {
   
   const classes = useStyles();
 
+    //Pull variable from context
+    const {profiles, self} = useContext(DataContext);
 
-  const {chatPreviews} = useContext(DataContext);
+    const {author, sentAt, text} = message
+
+    let linePosition = "left"
+    if(author==self._id) {
+        linePosition = "right"
+    }
+
   
-
   return (
+    <ListItem key="1">
+      <Grid container>
+        <Grid item xs={12}>
+          <ListItemText align={linePosition} primary={text}></ListItemText>
+        </Grid>
+        <Grid item xs={12}>
+          <ListItemText align={linePosition} secondary="09:30"></ListItemText>
+        </Grid>
+      </Grid>
 
-//     <div className="chat__sidebar">
-//     {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-//   </div>
-
-
-
-
-
-
-    <Grid item xs={3} className={classes.borderRight500}>
-      <List style={{maxHeight: 500, overflow: 'auto'}}>
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-        
-        {/* <Preview />
-        <Preview />
-        <Preview />
-        <Preview /> */}
-
-      </List>
-    </Grid>
+    </ListItem>
   )
 }
 

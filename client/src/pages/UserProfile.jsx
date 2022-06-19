@@ -50,7 +50,6 @@ const styles = makeStyles((theme) => ({
 export default function UserProfile() {
 
   const { proposals, setProposals, self, setSelf } = useContext(DataContext);
-
   const [selfProposals, setSelfProposals] = useState([])
 
   const classes = useStyles();

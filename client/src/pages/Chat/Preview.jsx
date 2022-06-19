@@ -54,7 +54,7 @@ export default function Preview({previewData}) {
 
   
   return (
-    <ListItem button key="test3">
+    <ListItem button key="test3" onClick={() => setActiveChatId(previewData._id)}>
     <ListItemIcon>
     <Avatar alt="test3"  src={`${profiles[partnerId].avatar}`} />
     </ListItemIcon>
