@@ -9,9 +9,13 @@ import ProposalCard from "../components/ProposalCard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
 import UserCard from "../components/UserCard";
-
+// import useStyles from "../styles";
 
 const useStyles = makeStyles({
+
+    headercontainer: {
+        padding: 30
+    },
     container: {
         height: "100%", // So that grids 1 & 4 go all the way down
         minHeight: 500, // Give minimum height to a div
@@ -26,35 +30,13 @@ const useStyles = makeStyles({
     }
     // sx={{ width: '25%' }}> sizing to maybe use for the columns
 });
-
+//https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&format=txt
 
 
 export default function Dashboard() {
-    // const classes = {
-    //     root: {
-    //         flexGrow: 1
-    //     },
-    //     paper: {
-    //         padding: 20,
-    //         textAlign: "center",
-    //         color: "blue"
-    //     }
-    // }
     const classes = useStyles();
 
-    // const [anchorEl, setAnchorEl] = React.useState(null);
-    // const useRef = React.useRef();
-    // function handleClick() {
-    //     setAnchorEl(useRef.current);
-    // }
-
-    // function handleClose() {
-    //     setAnchorEl(null);
-    // }
-
-    // const open = Boolean(anchorEl);
-    // const id = open ? "simple-popover" : undefined;
-
+//FETCH PROPOSALS---------------------------------------
     const { proposals, setProposals } = useContext(DataContext);
     useEffect(() => {
         axios.get("/proposals").then((res) => {
@@ -77,6 +59,7 @@ export default function Dashboard() {
             </Grid>
         );
     });
+    //FETCH USERS ---------------------------------------
     const { profiles, setProfiles } = useContext(DataContext);
 
     useEffect(() => {
@@ -87,6 +70,7 @@ export default function Dashboard() {
             })
 
     }, [])
+
     const listOfUserCards = Object.values(profiles).map(profile => {
         return (
             <Grid item={profile} xs={12}>
@@ -101,9 +85,7 @@ export default function Dashboard() {
                 />
             </Grid>
         )
-
     })
-
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -112,6 +94,7 @@ export default function Dashboard() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+
     return (
         <>
             <div className={classes.headercontainer}>
@@ -121,17 +104,17 @@ export default function Dashboard() {
                     </Typography>
                 </Container>
             </div>
+            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            Browse through the follwing proposals and users that you might be interested to work with.
+          </Typography>
 
             <Container maxWidth={200}>
                 <Grid container spacing={3}>
-                    {/* PROPOSALS COLUMN */}
-
+                    {/* PROPOSALS COLUMN --------------------------*/}
                     <Grid container item xs={4}  >
                         <Card>
                             <CardContent>
                                 <p>
-                                    <div>
-                                    </div>
                                     <br />
                                     <h1>Latest proposals that are seeking your skills:</h1>
                                     <br />
@@ -147,45 +130,31 @@ export default function Dashboard() {
                             </CardContent>
                         </Card>
                     </Grid>
-                    {/* USERS COLUMN */}
-
+                    {/* USERS COLUMN-------------------------------- */}
                     <Grid container item xs={4} >
                         <Card>
                             <CardContent>
-
-
                                 <p>
-                                    <div>
-                                    </div>
                                     <br />
                                     <h1>Users to consider for your active proposals:</h1>
                                     <br />
                                     <Container className={classes.cardGrid} maxWidth="xl">
-
                                         <Grid container spacing={2}>
-
                                             {listOfUserCards}
-
-
                                         </Grid>
-
-                                    </Container>                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                    </Container>                                    
+                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
                                         Look at more users
                                     </Button>
                                 </p>
                             </CardContent>
                         </Card>
                     </Grid>
-                    {/* MEMES COLUMN */}
-
+                    {/* MEMES COLUMN---------------------------------- */}
                     <Grid container item xs={4}  >
                         <Card>
                             <CardContent>
-
-
                                 <p>
-                                    <div>
-                                    </div>
                                     <br />
                                     <h1>Just cat memes and other memes:</h1>
                                     <br />
@@ -195,10 +164,9 @@ export default function Dashboard() {
                                     <Button style={{ margin: 10 }} variant="contained">
                                         Edit Profile
                                     </Button>
-                                </p>
+                                    </p>
                             </CardContent>
                         </Card>
-
                     </Grid>
                 </Grid>
             </Container>
