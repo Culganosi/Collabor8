@@ -5,7 +5,7 @@ module.exports = (User) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
-        const {filterInput, sortInput} = req.body;
+        let {filterInput, sortInput} = req.body;
 
         if (!filterInput) {
             filterInput={}
