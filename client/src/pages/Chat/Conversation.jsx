@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
+// import Button from "@material-ui/core"
 
 import {DataContext} from "./../../DataContext"
 
@@ -50,16 +51,15 @@ export default function Conversation() {
     let messageList = [];
     if (activeChatFull.messages){
         messageList = activeChatFull.messages.map(message => {
-        return <MessageLine message={message} key={message._id}/>
+        return <MessageLine message={message} key={message._id} />
         })
     }
 
 
   return (
-    <List className={classes.messageArea}>
-     
-     {messageList}
+    <List className={classes.messageArea} >
 
+     {messageList}
 
     </List>
   )

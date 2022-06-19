@@ -15,10 +15,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import axios from "axios";
+import socketIoClient from 'socket.io-client';
+
+//Import compoentns
 import Sidebar from "./Sidebar";
 import Conversation from "./Conversation";
 
-
+//Import context
 import {DataContext} from "./../../DataContext"
 
 
@@ -114,10 +117,142 @@ const Chat = () => {
 
   
 
+  ///////---------------------HELPER FUNCTIONS
+
+
+  const submitNewMessage = () => {
+
+    if (!newMessage) return;
+
+    //Send new message to the socket
+    
+    const recipientId = activeChatFull.participants.filter(id => id != self._id)[0]
+
+    const messageToSocket = {
+      text: newMessage, 
+      chatId: activeChatId,
+      author: self._id,
+      recipientId,
+      sentAt: Date.now()
+    }
+    
+    conn.emit("newMessage", messageToSocket);
+
+    //Save message in local storage -> it will display in author's chat
+    const messageToLocal = {author: self._id, text: newMessage, sentAt: new Date(Date.now()).toString()}
+
+    setActiveChatFull(prev => {
+      const newMessages = [...prev.messages, messageToLocal]
+      const newChat = {...prev, messages: newMessages}
+      return newChat;
+    })
+
+    //Also update in the preview panels
+    setChatPreviews(prev => {
+
+      const indexOfNeededPreview = prev.findIndex(preview => preview.partner == recipientId)
+
+      const newPreview = {
+        partner: recipientId,
+        _id: prev[indexOfNeededPreview]._id,
+        lastMessage: {author: self._id, sentAt: Date.now(), text: newMessage}
+      }
+
+      const newPreviews = [...prev]
+      newPreviews.splice(indexOfNeededPreview, 1)
+      newPreviews.unshift(newPreview)
+      return newPreviews;
+    })
+
+
+    //Send message to database -> it will persist on refresh
+    //TODO: uncomment
+    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
+
+    //Refresh input field
+    setNewMessage("")
+
+  }
+
+  //-----------------------WEBSOCKET STUFF------------------
+
+  //Set up connection
+  useEffect(() => {
+    const connection = socketIoClient('http://localhost:3001');
+    setConn(connection);
+  },[])
+
+  //Send the ID to the socket server to make it relate sockedID <---> userId
+  useEffect(() => {
+    if (conn && self?._id) {
+      conn.emit('sendUserId', self._id)
+    }
+
+  }, [self])
+
+  //All the other listeners
+  useEffect(() => {
+    if(conn) {
+      conn.on('receiveMessage', data => {
+        
+        console.log(`Received message: ${data.text}`)
+        // console.log(data);
+
+        const {sentAt, text, author, chatId} = data;
+        const messageToLocal = {sentAt, author, text}
+
+        // console.log("Active chat: " + activeChatId)
+        // console.log("Intended chat: " + chatId)
+
+        //TODO: This has bugs, code runs whichever room you seem to be in-+
+
+        console.log(`Active: ${activeChatId}`)
+        console.log(`Intended: ${chatId}`)
+
+       //if (activeChatId == chatId) {
+          setActiveChatFull(prev => {
+            const newMessages = [...prev.messages, messageToLocal]
+            const newChat = {...prev, messages: newMessages}
+
+            console.log(messageToLocal)
+            console.log(newChat)
+
+            return newChat;
+          })
+        //}
+
+
+        setChatPreviews(prev => {
+
+          const indexOfNeededPreview = prev.findIndex(preview => preview.partner == author)
+
+          const newPreview = {
+            partner: author,
+            _id: prev[indexOfNeededPreview]._id,
+            lastMessage: {author, sentAt, text}
+          }
+
+          const newPreviews = [...prev]
+          newPreviews.splice(indexOfNeededPreview, 1)
+          newPreviews.unshift(newPreview)
+          return newPreviews;
+        })
+
+      });
+    }
+
+  }, [conn])
 
 
 
-  ///////------------------------------------
+
+
+
+
+
+
+
+  ////--------------------
   const classes = useStyles();
 
   return (
@@ -139,10 +274,10 @@ const Chat = () => {
                 <Divider />
                 <Grid container style={{padding: '20px'}}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Type Something" fullWidth />
+                        <TextField id="outlined-basic-email" label="Type Something" fullWidth  onChange={(event) => setNewMessage(event.target.value)} />
                     </Grid>
                     <Grid xs={1} align="right">
-                        <Fab color="primary" aria-label="add"><SendIcon /></Fab>
+                        <Fab color="primary" aria-label="add"><SendIcon onClick={() => submitNewMessage()} /></Fab>
                     </Grid>
                 </Grid>
             </Grid>
