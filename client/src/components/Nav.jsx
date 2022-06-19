@@ -37,21 +37,15 @@ const ResponsiveAppBar = () => {
       .catch((err) => console.log(err.message));
   };
 
-
-
-  
-
   //Get info about self
   useEffect(() => {
-    if(Object.keys(self).length>0) {
-      axios.get("/users/self")
+    if(Object.keys(self).length==0) {
+      axios.get("/users/self", { withCredentials: true })
       .then(res => {
         setSelf(res.data)
       })
-    } else {
-      console.log("Not logged in")
+      .catch(() => console.log("Not logged in"))
     }
-
   }, [self])
 
 
