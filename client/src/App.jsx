@@ -55,8 +55,7 @@ function App() {
         <Route path="/My-Profile/:id/edit" element={<EditModal />} />
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
-
-
+        <Route path="/Logout" element={<Dashboard />} />
       </Routes>
       </Wrapper>
     </>

@@ -17,24 +17,27 @@ import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
 import {DataContext} from "./../DataContext";
+import { useNavigate } from "react-router-dom";
 
 const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Login", "Register"];
-const settings = ["Profile", "Account", "Dashboard", "Logout", "Login"];
+const settings = ["Logout"];
 
 const ResponsiveAppBar = () => {
-
+  const navigate=useNavigate();
   const {self, setSelf} = useContext(DataContext);
 
 
-    // //function to log out
-    // const logout = () => {
-    //   axios.post(`/auth/out`)
-    //   .then((res) => {
-    //     setSelf({})
-    //     navigate("/")
-    //   })
-    //   .catch(err => console.log(err.message))
-    // }
+  const logout = () => {
+    axios
+      .post(`/auth/out`)
+      .then((res) => {
+        setSelf({});
+        navigate("/Home");
+      })
+      .catch((err) => console.log(err.message));
+  };
+
+
 
   
 
@@ -196,11 +199,11 @@ const ResponsiveAppBar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Link style={{textDecoration: "none", color: "white"}} to={`/${setting}`}>{setting}</Link>
+                <MenuItem key={settings} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    <Link style={{textDecoration: "none", color: "white"}} onClick ={() => this.logout()} to={`/Logout`}>Logout</Link>
+                  </Typography>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
         </Toolbar>
