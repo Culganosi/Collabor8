@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardActionArea, CardMedia, Popover } from '@material-ui/core';
 import { styled, Paper } from '@mui/material'
-// import Background from "./Background";
 import "./Dashboard.css"
 // import useStyles from '../styles';
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,7 +8,6 @@ import ProposalCard from "../components/ProposalCard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
 import UserCard from "../components/UserCard";
-// import useStyles from "../styles";
 
 const useStyles = makeStyles({
 
