@@ -21,6 +21,7 @@ import Messages from "./pages/Messages"
 import CreateProposal from "./pages/CreateProposal";
 import Register from "./pages/Register";
 import styled from "styled-components";
+import Chat from "./pages/Chat";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
         <Route path="/My-Profile/:id/edit" element={<EditModal />} />
         <Route path="/Logout" element={<Dashboard />} />
         <Route path="/Messages" element={<Messages />} />
+        <Route path="/Chat" element={<Chat />} />
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
       </Routes>
