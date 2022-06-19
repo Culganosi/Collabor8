@@ -7,7 +7,7 @@ import { DataContext } from "./../DataContext";
 import OtherProfile from "./OtherProfile";
 import { Link } from "react-router-dom";
 import {useParams, useNavigate} from 'react-router-dom';
-
+import EmailIcon from "@mui/icons-material/Email";
 
 import {
   Typography,
@@ -79,9 +79,35 @@ return (
               <Typography className={classes.bio}></Typography>
               <Box textAlign="center">
 
-                <Button variant="contained" color="secondary">
-                  Message User
-                </Button>
+                <Button
+                    style={{ margin: 2,
+                      borderRadius: 10,
+                      backgroundColor: "#21b6ae",
+                      padding: "5px 10px",
+                      fontSize: "10px",
+                    }}
+                    variant="contained"
+                  >
+                    Send a Message
+                    <EmailIcon />
+                  </Button>
+                  <br />
+                  <Button
+                    style={{ margin: 2,
+                      borderRadius: 10,
+                      backgroundColor: "#21b6ae",
+                      padding: "5px 10px",
+                      fontSize: "10px",
+                    }}
+                    variant="contained"
+                  >
+                    Make a connection
+                    <EmailIcon />
+                  </Button>
+
+
+
+
               </Box>
             </CardContent>
           </Paper>
