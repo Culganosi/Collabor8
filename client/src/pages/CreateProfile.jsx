@@ -103,8 +103,8 @@ export default function CreateProfile() {
                     label="Enter a short description"
                     multiline
                     rows={1}
-                    defaultValue="Lorem ipsum dolor proident"
-                    value={shortBio}
+                    defaultValue=""
+                    value=""
                     onChange={setShortBio}
                     variant="outlined"
                     color="secondary"
@@ -123,16 +123,10 @@ export default function CreateProfile() {
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Enter a short description"
+                    label="Enter your Bio"
                     multiline
                     rows={6}
-                    defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-          enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-          in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-          nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-          sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    defaultValue=""
           variant="outlined"
           color="secondary"
                     style={{ width: "75%" }}
