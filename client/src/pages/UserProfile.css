@@ -2,7 +2,7 @@
   display: block;
   background: #FFFFFF;
   width: 500px;
-  height: 400px;
+  /* height: 400px; */
   border-radius: 2px;
   background-size:contain;
   margin: 10px;
@@ -11,9 +11,9 @@
   transition: all .25s linear;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.4);
 }
-.card:hover{
+/* .card:hover{
   box-shadow: -1px 10px 29px 0px rgba(0,0,0,0.8);
-} 
+}  */
 .rootContainer {
   opacity:"blur(20px)";
 

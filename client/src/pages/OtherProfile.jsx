@@ -65,15 +65,17 @@ export default function OtherProfile() {
       const userResponse = await axios.get(`/users/${userId}`)
       setOtherUser(userResponse.data)
 
-      const proposals = await (await axios.get("/proposals")).data
+      const proposals = await axios.get("/proposals").data
 
-      console.log(proposals)
+      console.log(userResponse.data.activeProposals)
 
       const tempUserProposals = []
 
-      for (let proposalId of userResponse.data.activeProposals) {
-        tempUserProposals.push(proposals[proposalId])
-      }
+      // if (userResponse.data.activeProposals.length > 0) {
+        for (let proposalId of userResponse.data.activeProposals) {
+          tempUserProposals.push(proposals[proposalId])
+        }
+      //}
 
       setUserProposals(tempUserProposals)
 
@@ -84,21 +86,28 @@ export default function OtherProfile() {
   }, [])
 
 
-  const userProposalsCard = userProposals.map((proposal) => {
-    return (
-      <Grid item={proposal} >
-        <ProposalCard
-          key={proposal._id}
-          _id={proposal._id}
-          author={proposal.author}
-          title={proposal.title}
-          shortDescription={proposal.shortDescription}
-          image={proposal.image}
-          seeking={proposal.seeking}
-        />
-      </Grid>
-    );
-  });
+  let userProposalsCard = []
+
+  // if(userProposals.length>0) {
+
+    userProposalsCard = userProposals.map((proposal) => {
+      console.log(proposal)
+      return (
+        <Grid item={proposal} >
+          <ProposalCard
+            key={proposal._id}
+            _id={proposal._id}
+            author={proposal.author}
+            title={proposal.title}
+            shortDescription={proposal.shortDescription}
+            image={proposal.image}
+            seeking={proposal.seeking}
+          />
+        </Grid>
+      );
+    });
+
+  //}
 
 
 
@@ -167,13 +176,15 @@ export default function OtherProfile() {
                     <Grid container alignItems="stretch">
 
                       <Grid item component={Card} xs>
-                        {/* <CardContent>
+                        <CardContent>
                           <h4>{userProposalsCard}</h4>
-                        </CardContent> */}
+                        </CardContent>
                         <CardActions>
                           {userProposalsCard}
-                          {/* {userProposalsCard ? userProposalsCard : <a href="/People">Go Back to view more users</a>}  */}
+                          {userProposals.length==0 ? <p>No proposals here yet</p> : <></>} 
                         </CardActions>
+
+
                       </Grid>
                     </Grid>
                   </CardContent>

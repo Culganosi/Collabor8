@@ -8,7 +8,7 @@ module.exports = (User, Proposal) => {
     //Get proposals that require a role that the user calling this has 
     router.get("/proposals", async (req, res) => {
 
-        if (!req.session.userId) res.status(403).json({message: "You are not logged in"})
+        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
         const userId = req.session.userId;
 
         //Find the role of the user making the call
@@ -18,21 +18,21 @@ module.exports = (User, Proposal) => {
         //Find proposals that seek that role, are active, and the author is not the user making the call
         const recommendedProposals = await Proposal.find({seeking: userRole, author: { "$ne": userId }, status: "Active" }).limit(3)
 
-        res.status(200).json(recommendedProposals)
+        return res.status(200).json(recommendedProposals)
 
     })
 
 
     router.get("/users", async (req, res) => {
 
-        if (!req.session.userId) res.status(403).json({message: "You are not logged in"})
+        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
         const userId = req.session.userId;
 
         //Find all proposals where the user calling is the author
         const callersProposals = await Proposal.find({author: userId})
 
         //If the caller has no proposals, return an empty array immediately
-        if (callersProposals.length==0) res.status(200).json([])
+        if (callersProposals.length==0) return res.status(200).json([])
 
         //Make a list of all the roles the caller seeks
         const saughtRoles = []
@@ -74,7 +74,7 @@ module.exports = (User, Proposal) => {
             recommendedUsers = recommendedUsers.concat(usersInRole)
         }
 
-        res.status(200).json(recommendedUsers)
+        return res.status(200).json(recommendedUsers)
 
     })
 
