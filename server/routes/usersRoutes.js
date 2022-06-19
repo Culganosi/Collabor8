@@ -6,6 +6,10 @@ module.exports = (User) => {
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
         const {filterInput, sortInput} = req.body;
+
+        if (!filterInput) {
+            filterInput={}
+        }
         
         //If the client included a userhandle or a role in the filtering parameter
         //Modify such that it will find anything where it is a substring, not only an exact match        
