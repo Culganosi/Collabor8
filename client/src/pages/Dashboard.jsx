@@ -3,8 +3,24 @@ import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, 
 import { styled, Paper } from '@mui/material'
 // import Background from "./Background";
 import "./Dashboard.css"
-import useStyles from '../styles';
+// import useStyles from '../styles';
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
+const useStyles = makeStyles({
+    container: {
+        height: "100%", // So that grids 1 & 4 go all the way down
+        minHeight: 150, // Give minimum height to a div
+        border: "1px solid black",
+        fontSize: 30,
+        textAlign: "center",
+        invisible: "true"
+
+    },
+    containerTall: {
+        minHeight: 250 // This div has higher minimum height
+    }
+});
 
 
 
@@ -21,18 +37,20 @@ export default function Dashboard() {
     // }
     const classes = useStyles();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const useRef = React.useRef();
-    function handleClick() {
-        setAnchorEl(useRef.current);
-    }
+    // const [anchorEl, setAnchorEl] = React.useState(null);
+    // const useRef = React.useRef();
+    // function handleClick() {
+    //     setAnchorEl(useRef.current);
+    // }
 
-    function handleClose() {
-        setAnchorEl(null);
-    }
 
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
+
+    // function handleClose() {
+    //     setAnchorEl(null);
+    // }
+
+    // const open = Boolean(anchorEl);
+    // const id = open ? "simple-popover" : undefined;
 
 
     const Item = styled(Paper)(({ theme }) => ({
@@ -44,107 +62,100 @@ export default function Dashboard() {
     }));
     return (
         <>
-        <div className={classes.container}>
-      <Container max-Width="sm">
-        <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          My Dashboard
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          View proposals and users for possible collaborations 
-        </Typography>
-      </Container>
-      </div>
-      <Grid container spacing={2}>
-        <Grid item xs={5}>
-          <Paper className={classes.paper}>Grid cell 1, 1</Paper>
-        </Grid>
-        <Grid item xs={5}>
-          <Paper className={classes.paper}>Grid cell 2, 1</Paper>
-        </Grid>
-      </Grid>
+            <div className={classes.headercontainer}>
+                <Container max-Width="sm">
+                    <Typography variant="h2" align="center" color="secondary" gutterBottom>
+                        Dashboard
+                    </Typography>=
+                </Container>
+            </div>
 
-            {/* <Background /> */}
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2} columns={2}>
-                    <Grid item xs={6}>
-                        <Item>
-                            <h1>Latest Proposals that are seeking your skills</h1>
-                            <Divider />
-                            <h3>
-                                <Card sx={{ maxWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                                ZapMedical
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                A mobile application where users may
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </h3>
-                        </Item>
-                        <div className="dash-container">
+            <Container className="root-container">
+                <Grid container spacing={3} sx={{ width: '200vw', height: '120vh' }}>
+                    <Grid container item xs={3} sm={3} lg={3} >
+                        <Card>
+                            <CardContent>
 
-                        </div>
+
+                                <p>
+                                    <div>
+                                    </div>
+                                    <br />
+                                    <h1>The latest proposals that are seeking your skills:</h1>
+                                    <br />
+                                    <h3>Skills: </h3>
+                                    <br />
+                                    <Button style={{ margin: 10 }} variant="contained">
+                                        Edit Profile
+                                    </Button>
+                                </p>
+                            </CardContent>
+                        </Card>
                     </Grid>
-                    <Grid item xs={6}>
-                        <Item>
-                            <h1>These users may be a great fit for your active proposals</h1>
-                            <Divider />
-
-                            <div ref={useRef}>
-                                <Button style={{ margin: 100 }} variant="contained" onClick={handleClick}>
-                                    Steven, front-end developer
-                                </Button>
-                                <Popover class="popover"
-                                    id={id}
-                                    open={open}
-                                    anchorEl={anchorEl}
-                                    onClose={handleClose}
-                                    anchorOrigin={{
-                                        vertical: "bottom",
-                                        horizontal: "center"
-                                    }}
-                                    transformOrigin={{
-                                        vertical: "top",
-                                        horizontal: "center"
-                                    }}>
-                                    <Typography variant="h6">Steven is an ok guy. He probably can help you with the front-end skills you need. You wil have to talk to him</Typography>
-                                </Popover>
-                            </div>
-                            <div ref={useRef}>
-                                <Button style={{ margin: 100 }} variant="contained" onClick={handleClick}>
-                                    Jamie, front-end developer
-                                </Button>
-                                <Popover class="popover"
-                                    id={id}
-                                    open={open}
-                                    anchorEl={anchorEl}
-                                    onClose={handleClose}
-                                    anchorOrigin={{
-                                        vertical: "bottom",
-                                        horizontal: "center"
-                                    }}
-                                    transformOrigin={{
-                                        vertical: "top",
-                                        horizontal: "center"
-                                    }}>
-                                    <Typography variant="h6">Jamie seems like a great fit. She is known for her front-end skills so you need her.</Typography>
-                                </Popover>
-                            </div>
-        
+                    <Grid container item xs={3} sm={3} lg={3} >
+                        <Card>
+                            <CardContent>
 
 
-                        </Item>
+                                <p>
+                                    <div>
+                                    </div>
+                                    <br />
+                                    <h1>The latest proposals that are seeking your skills that may interest you:</h1>
+                                    <br />
+                                    <h3>Skills: </h3>
+                                    <br />
+                                    <Button style={{ margin: 10 }} variant="contained">
+                                        Edit Profile
+                                    </Button>
+                                </p>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    <Grid container item xs={3} sm={3} lg={3} >
+                        <Card>
+                            <CardContent>
+
+
+                                <p>
+                                    <div>
+                                    </div>
+                                    <br />
+                                    <h1>The latest proposals that are seeking your skills that may interest you:</h1>
+                                    <br />
+                                    <h3>Skills: </h3>
+                                    <br />
+                                    <Button style={{ margin: 10 }} variant="contained">
+                                        Edit Profile
+                                    </Button>
+                                </p>
+                            </CardContent>
+                        </Card>
                     </Grid>
                 </Grid>
-            </Box>
+            </Container>
+            {/* <Grid container direction="row" spacing={2}>
+      <Grid item xs>
+        <div className="dash-container">1</div>
+      </Grid>
+      <Grid item container direction="column" xs spacing={2}>
+        <Grid item xs>
+          <div className="dash-container">2</div>
+        </Grid>
+        <Grid item xs>
+          <div className={clsx(classes.dash-container, classes.containerTall)}>
+            3
+          </div>
+        </Grid>
+      </Grid>
+      <Grid item xs>
+        <div className={classes.container}>4</div>
+      </Grid>
+    </Grid> */}
+            );
+}
+
+
         </>
     )
 }

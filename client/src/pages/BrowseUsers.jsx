@@ -9,6 +9,8 @@ import {
   Grid,
   Container,
 } from "@material-ui/core";
+import styled from "styled-components";
+
 import useStyles from "../styles";
 import UserCard from "../components/UserCard";
 
@@ -91,17 +93,22 @@ export default function BrowseUsers() {
       </div>
       <Box border={2} padding={5} margin={2} borderRadius={16}>
         <Container className={classes.cardGrid} maxWidth="xl">
-          <Grid container spacing={4}>
-            {listOfUserCards}
-            {/* {cards.map((card) => (
-              <Grid item={card} xs={12} sm={6} md={4}>
-                <UserCard />
 
-              </Grid>
-            ))} */}
+          <Grid container spacing={4}>
+
+            {listOfUserCards}
+
+          
           </Grid>
+
         </Container>
       </Box>
     </main>
   );
 }
+ {/* {cards.map((card) => (
+              <Grid item={card} xs={12} sm={6} md={4}>
+                <UserCard />
+
+              </Grid>
+            ))} */}

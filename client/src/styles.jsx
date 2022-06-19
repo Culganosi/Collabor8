@@ -7,6 +7,9 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
+    // backgroundColor: "transparent",
+    // opacity: 50,
+    // backdropFilter:"blur(20px)",
   },
   icon: {
     marginRight: '20px',
@@ -15,7 +18,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '40px'
   },
   cardGrid: {
-    padding: '20px'
+    padding: '20px',	
+
   },
   card: {
     height: '100%',
@@ -24,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia:{
     paddingTop: '56.25%'
-    
   },
   ownPropImg: {
     paddingTop: '30%'
@@ -64,8 +67,6 @@ const useStyles = makeStyles((theme) => ({
     width: 300,
     height: 320,
     borderRadius: '75%',
-
-    
   },
   controls: {
     display: "flex",

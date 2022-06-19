@@ -22,4 +22,6 @@ h6,input, img {
   justify-content: center;
   align-items: center;
   background-size:cover;
+  border-radius:5px;
+
 }

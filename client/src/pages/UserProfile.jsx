@@ -141,7 +141,8 @@ export default function UserProfile() {
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                  <h1>  {self.userhandle} </h1>
+                  <h1 className="userHandle">  {self.userhandle} </h1>
+                  
                   <Avatar
                     alt="avatar"
                     src={self.avatar}
@@ -178,9 +179,9 @@ export default function UserProfile() {
                  {/* ACTIVE PROPOSALS */}
                 <Card>
                   <CardContent>
-                    <h1 text-align="center">Your Active Proposals
+                    <h1 text-align="center" padding="20px">Your Active Proposals 
                     </h1>
-                    <Grid container alignItems="stretch">
+                    <Grid container alignItems="stretch" className="card">
                       {selfActiveProposalCards}
                     </Grid>
                   </CardContent>
@@ -190,7 +191,7 @@ export default function UserProfile() {
                 <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
-                    <Grid container alignItems="stretch">
+                    <Grid container alignItems="contain">
                       {selfInactiveProposalCards}
                     </Grid>
                   </CardContent>
