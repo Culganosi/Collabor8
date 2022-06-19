@@ -1,4 +1,7 @@
-.file-preview {
-    width: 250px;
-    margin: 0 auto;
+.avatar-button {
+    width: 150px;
+    height: 150px;
+    border: none;
+    background: rgb(187, 198, 213);
+    border-radius: 50%;
 }
