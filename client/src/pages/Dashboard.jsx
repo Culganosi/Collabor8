@@ -37,12 +37,12 @@ export default function Dashboard() {
     //FETCH PROPOSALS---------------------------------------
     const { proposals, setProposals } = useContext(DataContext);
     useEffect(() => {
-        axios.get("/proposals").then((res) => {
+        axios.get("/recommend/proposals").then((res) => {
             setProposals(res.data);
         });
     }, []);
 
-    const listOfProposalCards = Object.values(proposals).map((proposal) => {
+    const listOfProposalCards = proposals.map((proposal) => {
         return (
             <Grid item={proposal} xs={12}>
                 <ProposalCard
@@ -61,7 +61,7 @@ export default function Dashboard() {
     const { profiles, setProfiles } = useContext(DataContext);
 
     useEffect(() => {
-        axios.get("/users")
+        axios.get("/recommend/users")
             .then(res => {
                 setProfiles(res.data)
                 //Now the "profiles" state variables should hold the data (which is an object)
@@ -69,7 +69,7 @@ export default function Dashboard() {
 
     }, [])
 
-    const listOfUserCards = Object.values(profiles).map(profile => {
+    const listOfUserCards = profiles.map(profile => {
         return (
             <Grid item={profile} xs={12}>
                 <UserCard
