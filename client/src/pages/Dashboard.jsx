@@ -66,17 +66,17 @@ export default function Dashboard() {
                 <Container max-Width="sm">
                     <Typography variant="h2" align="center" color="secondary" gutterBottom>
                         Dashboard
-                    </Typography>=
+                    </Typography>
                 </Container>
             </div>
 
-            <Container className="root-container">
-                <Grid container spacing={3} sx={{ width: '200vw', height: '120vh' }}>
-                    <Grid container item xs={3} sm={3} lg={3} >
+            
+             <Container>
+                <Grid container spacing={3}>
+                    <Grid container item xs={4}  >
+                        <div className="left">
                         <Card>
                             <CardContent>
-
-
                                 <p>
                                     <div>
                                     </div>
@@ -91,8 +91,10 @@ export default function Dashboard() {
                                 </p>
                             </CardContent>
                         </Card>
+                        </div>
                     </Grid>
-                    <Grid container item xs={3} sm={3} lg={3} >
+                    <Grid container item xs={4} >
+                        <div className="middle">
                         <Card>
                             <CardContent>
 
@@ -111,8 +113,10 @@ export default function Dashboard() {
                                 </p>
                             </CardContent>
                         </Card>
+                        </div>
                     </Grid>
-                    <Grid container item xs={3} sm={3} lg={3} >
+                    <Grid container item xs={4}  >
+                        <div className="right">
                         <Card>
                             <CardContent>
 
@@ -131,6 +135,8 @@ export default function Dashboard() {
                                 </p>
                             </CardContent>
                         </Card>
+                        </div>
+
                     </Grid>
                 </Grid>
             </Container>
@@ -152,8 +158,7 @@ export default function Dashboard() {
         <div className={classes.container}>4</div>
       </Grid>
     </Grid> */}
-            );
-}
+            
 
 
         </>
