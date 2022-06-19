@@ -1,16 +1,15 @@
 import React, {Fragment, useContext, useEffect, useState} from 'react'
 import { Link, useNavigate } from "react-router-dom";
+
+import socketIoClient from 'socket.io-client';
 import axios from 'axios';
 import {DataContext} from "./../../DataContext"
-import socketIoClient from 'socket.io-client';
 
 //--Import subcomponents
 
 import Conversation from './Conversation';
 import Sidebar from './Sidebar';
-import CreateChatButtons from './CreateChatButtons'
 import "./chatStyle.css"
-
 
 //----
 
@@ -95,6 +94,8 @@ function Chat() {
   //Refresh the needed data
   useEffect(() => {
 
+
+
     async function refreshData () {
 
       //Get most up to date info about users (e.g. if someone changed something)
@@ -138,6 +139,11 @@ function Chat() {
       }
     }
     refreshConvo()
+
+    //----------For testing
+    console.log("Active chat is now: " + activeChatId)
+
+
   }, [activeChatId])
 
 
@@ -162,7 +168,8 @@ function Chat() {
   useEffect(() => {
     if(conn) {
       conn.on('receiveMessage', data => {
-        // console.log(`Received message: ${data.text}`)
+        
+        console.log(`Received message: ${data.text}`)
         // console.log(data);
 
         const {sentAt, text, author, chatId} = data;
@@ -173,10 +180,17 @@ function Chat() {
 
         //TODO: This has bugs, code runs whichever room you seem to be in-+
 
-       // if (activeChatId == chatId) {
+        console.log(`Active: ${activeChatId}`)
+        console.log(`Intended: ${chatId}`)
+
+       //if (activeChatId == chatId) {
           setActiveChatFull(prev => {
             const newMessages = [...prev.messages, messageToLocal]
             const newChat = {...prev, messages: newMessages}
+
+            console.log(messageToLocal)
+            console.log(newChat)
+
             return newChat;
           })
         //}
@@ -216,7 +230,6 @@ function Chat() {
 
         <button onClick={() => logout()}> LOGOUT </button>
 
-        {/* < CreateChatButtons />  <---- IGNORE THIS IN THE FINAL VERSION */}
 
         <div className="chat">
 

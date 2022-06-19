@@ -5,12 +5,11 @@ import React, {useState, useEffect} from "react";
 
 import Login from "./components/Login"
 import Chat from "./components/Chat/"
+import Dashboard from "./components/Dashboard/"
 
 import {DataContext} from "./DataContext"
 
 import "./App.css"
-
-import socketIoClient from 'socket.io-client';
 
 
 function App() {
@@ -34,10 +33,6 @@ function App() {
       
 
 
-      //-------------REFRESH
-
-              
-
       //----------------------------
 
 
@@ -57,6 +52,7 @@ function App() {
           <Routes>
 
             <Route path="/" element={<Login />}/>
+            <Route path="/dashboard" element={<Dashboard />}/>
             <Route path="/chat" element={<Chat />}/>
 
           </Routes>

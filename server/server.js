@@ -26,6 +26,8 @@ const optionsRoutes = require("./routes/optionsRoutes")
 const proposalsRoutes = require("./routes/proposalsRoutes")
 const usersRoutes = require("./routes/usersRoutes")
 
+const testRoutes = require("./routes/testRoutes")
+
 //Connect to database - the access string is imported from .env
 mongoose
 .connect(process.env.DB_CONNECTION_STRING)
@@ -62,6 +64,8 @@ app.use(cookieSession({
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Origin", "https://localhost:3000");  
+    // res.header("Access-Control-Allow-Origin", "http://2051-2607-fea8-3edf-f09f-e196-c21d-60f9-163b.ngrok.io");  
+    // res.header("Access-Control-Allow-Origin", "http://2051-2607-fea8-3edf-f09f-e196-c21d-60f9-163b.ngrok.io");  
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
@@ -85,7 +89,7 @@ app.use(function(req, res, next) {
     //Receive new message from client
     socket.on("newMessage", (data) => {
 
-        console.log("A message was sent to the server")
+        //console.log("A message was sent to the server")
 
         const {recipientId} = data;
         const recipientSockedId = userIdSocketId[recipientId]
@@ -116,6 +120,8 @@ app.use("/auth", authRoutes(User, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Proposal))
 app.use("/users", usersRoutes(User))
+
+app.use("/test", testRoutes())
 
 
 //----The home route
