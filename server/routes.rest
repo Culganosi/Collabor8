@@ -133,7 +133,7 @@ Content-Type: application/json
 ###
 
 #When the author deletes their proposal
-DELETE http://localhost:3001/proposals/62a66ea2945d0a144325d5af
+DELETE http://localhost:3001/proposals/62af2a9d4324ae9fc41ddebb
 
 
 ###
@@ -174,3 +174,8 @@ Content-Type: application/json
 
 #FAKE LOGIN
 GET http://localhost:3001/auth/0
+
+
+### 
+
+GET http://localhost:3001/recommend/proposals

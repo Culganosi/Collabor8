@@ -88,7 +88,7 @@ module.exports = (User, Proposal) => {
                return res.status(404).json({message: "Invalid author ID"})
           }
 
-          const newProposal = new Proposal({...inputInfo, createdAt: Date.now()})
+          const newProposal = new Proposal({...inputInfo, createdAt: Date.now(), author: authorId})
           insertedProposal = await newProposal.save()
 
           if (!insertedProposal) {
