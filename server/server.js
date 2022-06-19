@@ -26,6 +26,8 @@ const optionsRoutes = require("./routes/optionsRoutes")
 const proposalsRoutes = require("./routes/proposalsRoutes")
 const usersRoutes = require("./routes/usersRoutes")
 
+const testRoutes = require("./routes/testRoutes")
+
 //Connect to database - the access string is imported from .env
 mongoose
 .connect(process.env.DB_CONNECTION_STRING)
@@ -118,6 +120,8 @@ app.use("/auth", authRoutes(User, bcrypt))
 app.use("/options", optionsRoutes(Option))
 app.use("/proposals", proposalsRoutes(User, Proposal))
 app.use("/users", usersRoutes(User))
+
+app.use("/test", testRoutes())
 
 
 //----The home route
