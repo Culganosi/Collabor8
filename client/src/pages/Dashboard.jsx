@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardActionArea, CardMedia, Popover } from '@material-ui/core';
 import { styled, Paper } from '@mui/material'
+import { Link } from 'react-router-dom'
 import "./Dashboard.css"
 // import useStyles from '../styles';
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,31 +36,35 @@ export default function Dashboard() {
     const classes = useStyles();
 
     //FETCH PROPOSALS---------------------------------------
-    const { proposals, setProposals } = useContext(DataContext);
+    const [proposals, setProposals] = useState([])
+    const [profiles, setProfiles] = useState([])
+
+
     useEffect(() => {
         axios.get("/recommend/proposals").then((res) => {
             setProposals(res.data);
         });
     }, []);
 
-    const listOfProposalCards = proposals.map((proposal) => {
-        return (
-            <Grid item={proposal} xs={12}>
-                <ProposalCard
-                    key={proposal._id}
-                    _id={proposal._id}
-                    author={proposal.author}
-                    title={proposal.title}
-                    shortDescription={proposal.shortDescription}
-                    image={proposal.image}
-                    seeking={proposal.seeking}
-                />
-            </Grid>
-        );
-    });
+    let listOfProposalCards = []
+    if (proposals.length > 0) {
+        listOfProposalCards = proposals.map((proposal) => {
+            return (
+                <Grid item={proposal} xs={12}>
+                    <ProposalCard
+                        key={proposal._id}
+                        _id={proposal._id}
+                        author={proposal.author}
+                        title={proposal.title}
+                        shortDescription={proposal.shortDescription}
+                        image={proposal.image}
+                        seeking={proposal.seeking}
+                    />
+                </Grid>
+            );
+        });
+    }
     //FETCH USERS ---------------------------------------
-    const { profiles, setProfiles } = useContext(DataContext);
-
     useEffect(() => {
         axios.get("/recommend/users")
             .then(res => {
@@ -122,9 +127,12 @@ export default function Dashboard() {
                                                 {listOfProposalCards}
                                             </Grid>
                                         </Container>
+                                        <Link to="/Proposals" style={{ textDecoration: 'none' }}>
                                         <Button style={{ margin: 10 }} variant="contained" color="secondary">
                                             Look at more proposals
                                         </Button>
+                                        </Link>
+
                                     </p>
                                 </CardContent>
                             </Card>
@@ -142,9 +150,11 @@ export default function Dashboard() {
                                                 {listOfUserCards}
                                             </Grid>
                                         </Container>
-                                        <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                        <Link to="/People" style={{ textDecoration: 'none' }}>
+                                        <Button style={{ margin: 10}} variant="contained" color="secondary">
                                             Look at more users
                                         </Button>
+                                        </Link>
                                     </p>
                                 </CardContent>
                             </Card>

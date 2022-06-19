@@ -42,7 +42,7 @@ export default function ProposalCard({
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link to={_id}>
+      <Link to={`/proposals/${_id}`}>
         <Button size="small" color="secondary">
           See More Details
         </Button>

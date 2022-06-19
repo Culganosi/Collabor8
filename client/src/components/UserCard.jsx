@@ -53,7 +53,7 @@ export default function UserCard({
           </Typography>
           <Typography className={classes.bio}>{shortBio}</Typography>
 
-          <Link to={_id} element={<OtherProfile />} >
+          <Link to={`/People/${_id}`} element={<OtherProfile />} >
             <Button variant="contained" color="secondary">
               See User Profile
             </Button>

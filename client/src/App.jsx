@@ -42,7 +42,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/People/*" element={<BrowseUsers />} />
+        <Route path="/People" element={<BrowseUsers />} />
         <Route path="/Proposals" element={<BrowseProp />} />
         <Route path="/Create-Profile" element={<CreateProfile />} />
         <Route path="/My-Profile" element={<UserProfile />} />
