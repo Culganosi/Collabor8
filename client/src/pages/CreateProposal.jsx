@@ -8,6 +8,7 @@ import {
   Box,
   Container,
   CardContent,
+  CardMedia,
   Grid,
   TextField,
 } from "@material-ui/core";
@@ -51,11 +52,29 @@ export default function CreateProposal() {
         </Typography>
       </Container>
 
-      <Box p={5}>
+          <Box border={2} padding={5} margin={6} borderRadius={16}>
         <Grid container justify="center">
           <Grid item xs={8}>
             <Paper className={classes.createprofile} elevation={8}>
               <CardContent className={classes.cardContent}>
+          <Container>
+      <CardContent className={classes.cardContent}>
+      <CardMedia className={classes.createPropMedia} image="https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2017Q2/project-planning-header@2x.png" title="Title" />
+      </CardContent>
+
+      <Grid container justify="center" alignItems="stretch">
+      <Grid item style={{ marginBottom: 25 }}>
+      <Button
+        variant="outlined"
+        color="secondary"
+        component="label"
+        >
+        Upload Profile Picture
+        <input type="file" hidden />
+      </Button>
+    </Grid>
+    </Grid>
+          </Container>
                 <Typography
                   className={classes.title}
                   variant="h5"
@@ -69,7 +88,8 @@ export default function CreateProposal() {
                     label="Provide a title for your proposal"
                     multiline
                     rows={1}
-                    variant="filled"
+                    variant="outlined"
+                    color="secondary"
                     style={{ width: "75%" }}
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
@@ -89,7 +109,8 @@ export default function CreateProposal() {
                     label="Provide a one-line description of your proposal"
                     multiline
                     rows={1}
-                    variant="filled"
+                    variant="outlined"
+                    color="secondary"
                     style={{ width: "75%" }}
                     value={shortDescription}
                     onChange={(event) => setShortDescription(event.target.value)}
@@ -97,20 +118,29 @@ export default function CreateProposal() {
                 </div>
 
                 <Typography component="h5" variant="h5" color="secondary">
-                  Who are you looking for (Role) ?
+                  Looking for:
                 </Typography>
+                <Grid container>
+                <Grid item xs={10}>
+
                 <ToggleButtonGroup
-                  color="secondary"
+                  fullWidth='true'
+                  color="warning"
                   value={seeking}
+                  orientation={'horizontal'}
+                  size={'medium'}
                   exclusive
                   onChange={(event) => setSeeking([event.target.value])}
-                >
+                  
+                  >
                   <ToggleButton value="front">UX/UI designer</ToggleButton>
                   <ToggleButton value="front2">Front-end developer</ToggleButton>
                   <ToggleButton value="front3">Back-end developer</ToggleButton>
                   <ToggleButton value="front4">Full-stack developer</ToggleButton>
                 </ToggleButtonGroup>
               
+                    </Grid>
+                  </Grid>
                 <Typography
                   className={classes.title}
                   variant="h6"
@@ -124,7 +154,8 @@ export default function CreateProposal() {
                     label="Provide a brief description of your proposal"
                     multiline
                     rows={6}
-                    variant="filled"
+                    variant="outlined"
+                    color="secondary"
                     value={description}
                     onChange={(event) => setDescription(event.target.value)} 
                     style={{ width: "75%" }}
@@ -148,7 +179,7 @@ export default function CreateProposal() {
             </Paper>
           </Grid>
         </Grid>
-      </Box>
+        </Box>
     </div>
   );
 }

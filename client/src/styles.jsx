@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   container: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(8, 0, 6),
+
   },
   icon: {
     marginRight: '20px',
@@ -24,7 +25,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia:{
     paddingTop: '56.25%'
-    
+  },
+  createPropMedia: {
+    paddingTop: '36.25%'
+  },
+  createProfMedia: {
+    paddingTop: '36.25%'
   },
   ownPropImg: {
     paddingTop: '30%'
@@ -113,6 +119,7 @@ const useStyles = makeStyles((theme) => ({
     padding:'8%',
     height: 'auto',
   },
+  
 }));
 
 export default useStyles;

@@ -31,18 +31,6 @@ export default function RolesListItem() {
   const error = [uxui, full, front, back].filter((v) => v).length !== 1;
 
   return (
-    <Grid container justify="center" alignItems="stretch">
-    <Grid item style={{ marginBottom: 25 }}>
-      <Button
-        variant="outlined"
-        color="secondary"
-        component="label"
-      >
-        Upload Profile Picture
-        <input type="file" hidden />
-      </Button>
-    </Grid>
-
   <Grid container>
     <Grid item xs={6} style={{ marginBottom: 15 }}>
       <Typography
@@ -108,6 +96,5 @@ export default function RolesListItem() {
         </FormGroup>
       </FormControl>
     </Grid>
-  </Grid>
   </Grid>
           )}

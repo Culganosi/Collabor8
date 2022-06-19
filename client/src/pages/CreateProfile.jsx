@@ -11,6 +11,7 @@ import {
   CardContent,
   Grid,
   TextField,
+  CardMedia
 } from "@material-ui/core";
 
 import RolesListItem from "../components/RolesListItem";
@@ -68,16 +69,22 @@ export default function CreateProfile() {
       <Box border={2} padding={5} margin={6} borderRadius={16}>
         <Grid container justify="center" alignItems="stretch">
           <Grid item>
-            <Paper className={classes.card} elevation={4} style={{width: '600px'}}>
+            <Paper className={classes.card} elevation={4}>
               <CardContent>
-                <Box
-                  component="img"
-                  style={{
-                    height: "auto",
-                    width: "100%",
-                  }}
-                  src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png"
-                />
+              <CardMedia className={classes.createProfMedia} image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg" />
+              <Grid container justify="center">
+      <Grid item>
+      <Button
+        variant="outlined"
+        color="secondary"
+        component="label"
+        style={{marginTop: '30px'}}
+        >
+        Upload Profile Picture
+        <input type="file" hidden />
+      </Button>
+    </Grid>
+    </Grid>
                 <Box>
                   <RolesListItem />
                   <SkillListItem />
