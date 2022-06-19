@@ -1,7 +1,6 @@
 import React, {useContext, useState, useEffect} from "react";
 import {DataContext} from "./../DataContext";
 import axios from 'axios';
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {
   Typography,
   Button,
@@ -13,11 +12,6 @@ import styled from "styled-components";
 
 import useStyles from "../styles";
 import UserCard from "../components/UserCard";
-
-
-import OtherProfile from "./OtherProfile"
-
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function BrowseUsers() {
   const classes = useStyles();

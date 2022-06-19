@@ -47,6 +47,9 @@ export default function OthersProp() {
 
   }, []);
 
+  // const proposal = {
+
+  // }
 
 return (
   <Box p={5}>

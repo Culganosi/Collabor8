@@ -10,7 +10,7 @@ import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import EmailIcon from '@mui/icons-material/Email';
 import useStyles from "../styles";
 import ProposalCard from "../components/ProposalCard";
-import {useParams, useNavigate} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -109,6 +109,7 @@ export default function OtherProfile() {
       <div className={classes.container}>
         <Container max-Width="sm">
           <Typography variant="h2" align="center" color="secondary" gutterBottom>
+            {/* {!userProposalsCard ? `${otherUser.handle} has no active proposals at the moment` : `Profile Page: ${otherUser.userhandle}`} */}
             Profile Page: {otherUser.userhandle}
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
@@ -133,7 +134,7 @@ export default function OtherProfile() {
                     <EmailIcon />
                   </Button>
                   <p>
-                  <div>
+                    <div>
                       {otherUser.socialMedia && otherUser.socialMedia.Portfolio && <Link href={otherUser.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
                       {otherUser.socialMedia && otherUser.socialMedia.GitHub && <Link href={otherUser.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
                       {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && <Link href={otherUser.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
@@ -170,8 +171,9 @@ export default function OtherProfile() {
                           <h4>{userProposalsCard}</h4>
                         </CardContent> */}
                         <CardActions>
-                        {userProposalsCard} 
-                          </CardActions>
+                          {userProposalsCard}
+                          {/* {userProposalsCard ? userProposalsCard : <a href="/People">Go Back to view more users</a>}  */}
+                        </CardActions>
                       </Grid>
                     </Grid>
                   </CardContent>
