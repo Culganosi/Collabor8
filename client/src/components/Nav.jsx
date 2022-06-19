@@ -19,13 +19,12 @@ import { Link } from "react-router-dom";
 import {DataContext} from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Login", "Register", "Messages", "Chat"];
+const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat"];
 const settings = ["Logout"];
 
 const ResponsiveAppBar = () => {
   const navigate=useNavigate();
   const {self, setSelf} = useContext(DataContext);
-
 
   const logout = () => {
     axios

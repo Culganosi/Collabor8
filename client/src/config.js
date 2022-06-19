@@ -1,0 +1,3 @@
+const CAT_API_KEY = "179e280e-10c6-4b84-a042-02659ac318d6"
+
+export {CAT_API_KEY};

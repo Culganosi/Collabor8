@@ -9,6 +9,8 @@ import ProposalCard from "../components/ProposalCard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
 import UserCard from "../components/UserCard";
+import Cats from "../components/Cats";
+import Jokes from "../components/Jokes";
 
 const useStyles = makeStyles({
 
@@ -184,17 +186,12 @@ export default function Dashboard() {
                         <Card>
                             <CardContent>
                                 <p>
+                                    <br /> 
+                                    <h1>Relaxing corner</h1>
                                     <br />
-                                    <h1>Just cat memes and other memes:</h1>
+                                    <Cats />
                                     <br />
-                                    <div>
-                                        <button >Get random cat!</button>
-                                    </div>
-
-                                    <h3>Look at the kitties: </h3>
-                                    <br />
-                                    <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
-
+                                    <Jokes />
                                 </p>
                             </CardContent>
                         </Card>

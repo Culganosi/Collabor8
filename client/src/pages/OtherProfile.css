@@ -4,12 +4,10 @@ h1 {
   text-align: center;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
 .body {
   margin: 0;
   padding: 0;
   box-sizing:border-box;
-  font-family: "Alegreya";
 }
 
 .MuiPaper-root.MuiCard-root.MuiPaper-elevation1.MuiPaper-rounded {

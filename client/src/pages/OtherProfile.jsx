@@ -129,9 +129,11 @@ export default function OtherProfile() {
                     src={otherUser.avatar}
                     sx={{ width: 56, height: 56 }}
                   />
+
                   <Button style={{ margin: 2 }} variant="contained">
                     <EmailIcon />
                   </Button>
+                  
                   <p>
                     <div>
                       {otherUser.socialMedia && otherUser.socialMedia.Portfolio && <Link href={otherUser.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
