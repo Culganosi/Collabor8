@@ -179,3 +179,7 @@ GET http://localhost:3001/auth/0
 ### 
 
 GET http://localhost:3001/recommend/proposals
+
+### 
+
+GET http://localhost:3001/recommend/users
