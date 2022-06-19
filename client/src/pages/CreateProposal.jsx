@@ -151,7 +151,7 @@ export default function CreateProposal() {
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Provide a brief description of your proposal"
+                    label="Enter a more detailed Description of your proposal"
                     multiline
                     rows={6}
                     variant="outlined"
