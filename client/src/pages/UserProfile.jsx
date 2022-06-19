@@ -173,8 +173,8 @@ export default function UserProfile() {
               </Card>
             </Grid>
 
-            <Grid container xs={9}>
-              <Stack spacing={1} falslex="1 1 0">
+            <Grid container xs={12} sm={7} lg={9}>
+            <Stack spacing={1} flex="1 1 0">
 
                  {/* ACTIVE PROPOSALS */}
                 <Card>
@@ -182,7 +182,7 @@ export default function UserProfile() {
                     <h1 text-align="center" padding="20px">Your Active Proposals 
                     </h1>
                     <Grid container alignItems="stretch" className="card">
-                      {selfActiveProposalCards}
+                      {selfActiveProposalCards.length == 0 ? <p>Post your first proposal so others can see your work</p> : {selfActiveProposalCards}}
                     </Grid>
                   </CardContent>
                 </Card>
