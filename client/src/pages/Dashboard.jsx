@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import ProposalCard from "../components/ProposalCard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
+import UserCard from "../components/UserCard";
 
 
 const useStyles = makeStyles({
@@ -56,26 +57,53 @@ export default function Dashboard() {
 
     const { proposals, setProposals } = useContext(DataContext);
     useEffect(() => {
-      axios.get("/proposals").then((res) => {
-        setProposals(res.data);
-      });
+        axios.get("/proposals").then((res) => {
+            setProposals(res.data);
+        });
     }, []);
-  
+
     const listOfProposalCards = Object.values(proposals).map((proposal) => {
-      return (
-        <Grid item={proposal} xs={12} sm={6} md={4}>
-          <ProposalCard
-            key={proposal._id}
-            _id={proposal._id}
-            author={proposal.author}
-            title={proposal.title}
-            shortDescription={proposal.shortDescription}
-            image={proposal.image}
-            seeking={proposal.seeking}
-          />
-        </Grid>
-      );
+        return (
+            <Grid item={proposal} xs={12}>
+                <ProposalCard
+                    key={proposal._id}
+                    _id={proposal._id}
+                    author={proposal.author}
+                    title={proposal.title}
+                    shortDescription={proposal.shortDescription}
+                    image={proposal.image}
+                    seeking={proposal.seeking}
+                />
+            </Grid>
+        );
     });
+    const { profiles, setProfiles } = useContext(DataContext);
+
+    useEffect(() => {
+        axios.get("/users")
+            .then(res => {
+                setProfiles(res.data)
+                //Now the "profiles" state variables should hold the data (which is an object)
+            })
+
+    }, [])
+    const listOfUserCards = Object.values(profiles).map(profile => {
+        return (
+            <Grid item={profile} xs={12}>
+                <UserCard
+                    key={profile._id}
+                    _id={profile._id}
+                    avatar={profile.avatar}
+                    shortBio={profile.shortBio}
+                    skills={profile.skills}
+                    userhandle={profile.userhandle}
+                    role={profile.role}
+                />
+            </Grid>
+        )
+
+    })
+
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -107,12 +135,12 @@ export default function Dashboard() {
                                     <br />
                                     <h1>Latest proposals that are seeking your skills:</h1>
                                     <br />
-        <Container className={classes.cardMedia} maxWidth="xl">
-          <Grid container spacing={1}>
-            {listOfProposalCards}
-          </Grid>
-        </Container>
-                                          <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                    <Container className={classes.cardMedia} maxWidth="xl">
+                                        <Grid container spacing={1}>
+                                            {listOfProposalCards}
+                                        </Grid>
+                                    </Container>
+                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
                                         Look at more proposals
                                     </Button>
                                 </p>
@@ -132,8 +160,16 @@ export default function Dashboard() {
                                     <br />
                                     <h1>Users to consider for your active proposals:</h1>
                                     <br />
-                                    <br />
-                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                    <Container className={classes.cardGrid} maxWidth="xl">
+
+                                        <Grid container spacing={2}>
+
+                                            {listOfUserCards}
+
+
+                                        </Grid>
+
+                                    </Container>                                    <Button style={{ margin: 10 }} variant="contained" color="secondary">
                                         Look at more users
                                     </Button>
                                 </p>
