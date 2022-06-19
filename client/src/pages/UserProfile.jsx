@@ -182,7 +182,7 @@ export default function UserProfile() {
                   <CardContent>
                     <h1 text-align="center" padding="20px">Your Active Proposals
                     </h1>
-                    <Grid container alignItems="stretch" className="card">
+                    <Grid container alignItems="stretch">
                       {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
                       {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}

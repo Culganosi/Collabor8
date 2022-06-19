@@ -51,7 +51,6 @@ const styles = makeStyles((theme) => ({
 
 export default function OtherProfile() {
 
-
   const params = useParams();
   const userId = params.id
 
@@ -65,20 +64,17 @@ export default function OtherProfile() {
       const userResponse = await axios.get(`/users/${userId}`)
       setOtherUser(userResponse.data)
 
-      const proposals = await axios.get("/proposals").data
+      const proposalsRes = await axios.get("/proposals")
+      const proposals = proposalsRes.data
 
-      console.log(userResponse.data.activeProposals)
 
       const tempUserProposals = []
 
-      // if (userResponse.data.activeProposals.length > 0) {
         for (let proposalId of userResponse.data.activeProposals) {
           tempUserProposals.push(proposals[proposalId])
         }
-      //}
 
       setUserProposals(tempUserProposals)
-
     }
 
     getData()
@@ -86,11 +82,7 @@ export default function OtherProfile() {
   }, [])
 
 
-  let userProposalsCard = []
-
-  // if(userProposals.length>0) {
-
-    userProposalsCard = userProposals.map((proposal) => {
+  const  userProposalsCards = userProposals.map((proposal) => {
       console.log(proposal)
       return (
         <Grid item={proposal} >
@@ -106,8 +98,6 @@ export default function OtherProfile() {
         </Grid>
       );
     });
-
-  //}
 
 
 
@@ -175,17 +165,20 @@ export default function OtherProfile() {
                     </h1>
                     <Grid container alignItems="stretch">
 
-                      <Grid item component={Card} xs>
+                    {userProposalsCards}
+                    {userProposals.length==0 ? <p>{otherUser.userhandle} hasn't published any proposals yet </p> : <></>}
+
+                      {/* <Grid item component={Card} xs>
                         <CardContent>
-                          <h4>{userProposalsCard}</h4>
+                          <h4>{userProposalsCards}</h4>
                         </CardContent>
                         <CardActions>
-                          {userProposalsCard}
+                          {userProposalsCards}
                           {userProposals.length==0 ? <p>No proposals here yet</p> : <></>} 
                         </CardActions>
 
 
-                      </Grid>
+                      </Grid> */}
                     </Grid>
                   </CardContent>
                 </Card>
