@@ -17,6 +17,7 @@ import Login from "./pages/Login";
 import OtherProfile from "./pages/OtherProfile";
 import UserProfile from "./pages/UserProfile";
 import SignIn from "./pages/SignIn"
+import Messages from "./pages/Messages"
 import CreateProposal from "./pages/CreateProposal";
 import Register from "./pages/Register";
 import styled from "styled-components";
@@ -51,7 +52,12 @@ function App() {
         <Route path="/People/:id" element={<OtherProfile />} />
         <Route path="/People/:userId/:id" element={<OthersProp />} />
         <Route path="/Proposals/:id" element={<OthersProp />} />
+        <Route path="/My-Profile/:id" element={<OwnProp />} />
+        <Route path="/My-Profile/:id/edit" element={<EditModal />} />
         <Route path="/Logout" element={<Dashboard />} />
+        <Route path="/Messages" element={<Messages />} />
+        <Route path="/Home/People/:id" element={<OtherProfile />} />
+        <Route path="/Home/Proposals/:id" element={<OthersProp />} />
       </Routes>
       </Wrapper>
     </>

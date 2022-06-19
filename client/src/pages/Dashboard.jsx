@@ -1,39 +1,91 @@
-import React, { useState } from "react"
+import React, { useContext, useState, useEffect } from "react";
 import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardActionArea, CardMedia, Popover } from '@material-ui/core';
 import { styled, Paper } from '@mui/material'
-// import Background from "./Background";
 import "./Dashboard.css"
-import useStyles from '../styles';
+// import useStyles from '../styles';
+import { makeStyles } from "@material-ui/core/styles";
+import ProposalCard from "../components/ProposalCard";
+import axios from "axios";
+import { DataContext } from "./../DataContext";
+import UserCard from "../components/UserCard";
 
+const useStyles = makeStyles({
 
+    headercontainer: {
+        padding: 30
+    },
+    container: {
+        height: "100%", // So that grids 1 & 4 go all the way down
+        minHeight: 500, // Give minimum height to a div
+        border: "1px solid black",
+        fontSize: 30,
+        textAlign: "center",
+        invisible: "true"
+
+    },
+    containerTall: {
+        minHeight: 250 // This div has higher minimum height
+    }
+    // sx={{ width: '25%' }}> sizing to maybe use for the columns
+});
+//https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&format=txt
 
 
 export default function Dashboard() {
-    // const classes = {
-    //     root: {
-    //         flexGrow: 1
-    //     },
-    //     paper: {
-    //         padding: 20,
-    //         textAlign: "center",
-    //         color: "blue"
-    //     }
-    // }
     const classes = useStyles();
 
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const useRef = React.useRef();
-    function handleClick() {
-        setAnchorEl(useRef.current);
-    }
+    //FETCH PROPOSALS---------------------------------------
+    const { proposals, setProposals } = useContext(DataContext);
+    useEffect(() => {
+        axios.get("/proposals").then((res) => {
+            setProposals(res.data);
+        });
+    }, []);
 
-    function handleClose() {
-        setAnchorEl(null);
-    }
+    const listOfProposalCards = Object.values(proposals).map((proposal) => {
+        return (
+            <Grid item={proposal} xs={12}>
+                <ProposalCard
+                    key={proposal._id}
+                    _id={proposal._id}
+                    author={proposal.author}
+                    title={proposal.title}
+                    shortDescription={proposal.shortDescription}
+                    image={proposal.image}
+                    seeking={proposal.seeking}
+                />
+            </Grid>
+        );
+    });
+    //FETCH USERS ---------------------------------------
+    const { profiles, setProfiles } = useContext(DataContext);
 
-    const open = Boolean(anchorEl);
-    const id = open ? "simple-popover" : undefined;
+    useEffect(() => {
+        axios.get("/users")
+            .then(res => {
+                setProfiles(res.data)
+                //Now the "profiles" state variables should hold the data (which is an object)
+            })
 
+    }, [])
+
+    const listOfUserCards = Object.values(profiles).map(profile => {
+        return (
+            <Grid item={profile} xs={12}>
+                <UserCard
+                    key={profile._id}
+                    _id={profile._id}
+                    avatar={profile.avatar}
+                    shortBio={profile.shortBio}
+                    skills={profile.skills}
+                    userhandle={profile.userhandle}
+                    role={profile.role}
+                />
+            </Grid>
+        )
+    })
+    //FETCH CAT API ------------------------------------------------
+   
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -42,109 +94,83 @@ export default function Dashboard() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
-    return (
-        <>
-        <div className={classes.container}>
-      <Container max-Width="sm">
-        <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          My Dashboard
-        </Typography>
-        <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          View proposals and users for possible collaborations 
-        </Typography>
-      </Container>
-      </div>
-      <Grid container spacing={2}>
-        <Grid item xs={5}>
-          <Paper className={classes.paper}>Grid cell 1, 1</Paper>
-        </Grid>
-        <Grid item xs={5}>
-          <Paper className={classes.paper}>Grid cell 2, 1</Paper>
-        </Grid>
-      </Grid>
+        return (
+            <>
+                <div className={classes.headercontainer}>
+                    <Container max-Width="sm">
+                        <Typography variant="h2" align="center" color="secondary" gutterBottom>
+                            Dashboard
+                        </Typography>
+                    </Container>
+                </div>
+                <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                    Browse through the follwing proposals and users that you might be interested to work with.
+                </Typography>
 
-            {/* <Background /> */}
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={2} columns={2}>
-                    <Grid item xs={6}>
-                        <Item>
-                            <h1>Latest Proposals that are seeking your skills</h1>
-                            <Divider />
-                            <h3>
-                                <Card sx={{ maxWidth: 345 }}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                                ZapMedical
-                                            </Typography>
-                                            <Typography variant="body2" color="text.secondary">
-                                                A mobile application where users may
-                                            </Typography>
-                                        </CardContent>
-                                    </CardActionArea>
-                                </Card>
-                            </h3>
-                        </Item>
-                        <div className="dash-container">
-
-                        </div>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Item>
-                            <h1>These users may be a great fit for your active proposals</h1>
-                            <Divider />
-
-                            <div ref={useRef}>
-                                <Button style={{ margin: 100 }} variant="contained" onClick={handleClick}>
-                                    Steven, front-end developer
-                                </Button>
-                                <Popover class="popover"
-                                    id={id}
-                                    open={open}
-                                    anchorEl={anchorEl}
-                                    onClose={handleClose}
-                                    anchorOrigin={{
-                                        vertical: "bottom",
-                                        horizontal: "center"
-                                    }}
-                                    transformOrigin={{
-                                        vertical: "top",
-                                        horizontal: "center"
-                                    }}>
-                                    <Typography variant="h6">Steven is an ok guy. He probably can help you with the front-end skills you need. You wil have to talk to him</Typography>
-                                </Popover>
-                            </div>
-                            <div ref={useRef}>
-                                <Button style={{ margin: 100 }} variant="contained" onClick={handleClick}>
-                                    Jamie, front-end developer
-                                </Button>
-                                <Popover class="popover"
-                                    id={id}
-                                    open={open}
-                                    anchorEl={anchorEl}
-                                    onClose={handleClose}
-                                    anchorOrigin={{
-                                        vertical: "bottom",
-                                        horizontal: "center"
-                                    }}
-                                    transformOrigin={{
-                                        vertical: "top",
-                                        horizontal: "center"
-                                    }}>
-                                    <Typography variant="h6">Jamie seems like a great fit. She is known for her front-end skills so you need her.</Typography>
-                                </Popover>
-                            </div>
+                <Container maxWidth={200}>
+                    <Grid container spacing={3}>
+                        {/* PROPOSALS COLUMN --------------------------*/}
+                        <Grid container item xs={4}  >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Latest proposals that are seeking your skills:</h1>
+                                        <br />
+                                        <Container className={classes.cardMedia} maxWidth="xl">
+                                            <Grid container spacing={1}>
+                                                {listOfProposalCards}
+                                            </Grid>
+                                        </Container>
+                                        <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                            Look at more proposals
+                                        </Button>
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        {/* USERS COLUMN-------------------------------- */}
+                        <Grid container item xs={4} >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Users to consider for your active proposals:</h1>
+                                        <br />
+                                        <Container className={classes.cardGrid} maxWidth="xl">
+                                            <Grid container spacing={2}>
+                                                {listOfUserCards}
+                                            </Grid>
+                                        </Container>
+                                        <Button style={{ margin: 10 }} variant="contained" color="secondary">
+                                            Look at more users
+                                        </Button>
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        {/* MEMES COLUMN---------------------------------- */}
+                        <Grid container item xs={4}  >
+                            <Card>
+                                <CardContent>
+                                    <p>
+                                        <br />
+                                        <h1>Just cat memes and other memes:</h1>
+                                        <br />
+                                        <div>
+          <button >Get random cat!</button>
+        </div>
         
-
-
-                        </Item>
+                                        <h3>Look at the kitties: </h3>
+                                        <br />
+                                        <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
+                                        
+                                    </p>
+                                </CardContent>
+                            </Card>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </Box>
-        </>
-    )
-}
+                </Container>
+            </>
+        )
+    }

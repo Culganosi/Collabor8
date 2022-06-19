@@ -52,7 +52,7 @@ export default function Login() {
     <>
       <div className={classes.headercontainer}>
         <Container max-Width="sm">
-          <Typography variant="h2" align="center" color="secondary" gutterBottom>
+          <Typography variant="h2" align="center" color="secondary" className="title" gutterBottom>
             Login
           </Typography>
 
