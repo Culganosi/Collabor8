@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +14,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
-export default function Preview() {
+
+// import classNames from "classnames";
+
+
+import {DataContext} from "./../../DataContext"
+
+export default function Preview({previewData}) {
   const useStyles = makeStyles({
     table: {
       minWidth: 650,
@@ -36,13 +42,23 @@ export default function Preview() {
   });
   
   const classes = useStyles();
+
+
+    //Full variables from context
+    const {profiles, setActiveChatId, activeChatId} = useContext(DataContext);
+
+    //Helper variables
+    //const previewClass = classNames('chat-preview', { "active": previewData._id==activeChatId});
+    const partnerId = previewData.partner;
+    
+
   
   return (
     <ListItem button key="test3">
     <ListItemIcon>
-    <Avatar alt="test3" src="https://lumiere-a.akamaihd.net/v1/images/character_themuppets_gonzo_1e23c382.jpeg" />
+    <Avatar alt="test3"  src={`${profiles[partnerId].avatar}`} />
     </ListItemIcon>
-    <ListItemText primary="Daria">Daria</ListItemText>
+    <ListItemText primary={profiles[partnerId].userhandle}>{profiles[partnerId].userhandle}</ListItemText>
     </ListItem>  
 )
 }
