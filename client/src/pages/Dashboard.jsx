@@ -71,7 +71,7 @@ export default function Dashboard() {
             </div>
 
             
-             <Container>
+             <Container maxWidth={1000}>
                 <Grid container spacing={3}>
                     <Grid container item xs={4}  >
                         <div className="left">
@@ -81,7 +81,7 @@ export default function Dashboard() {
                                     <div>
                                     </div>
                                     <br />
-                                    <h1>The latest proposals that are seeking your skills:</h1>
+                                    <h1>Latest proposals that are seeking your skills:</h1>
                                     <br />
                                     <h3>Skills: </h3>
                                     <br />
