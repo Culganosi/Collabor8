@@ -144,15 +144,13 @@ export default function UserProfile() {
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                <div className="handleimage">
                   <h1 className="userHandle">  {self.userhandle} </h1>
                   <Avatar 
                     alt="avatar"
                     src={self.avatar}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 150, height: 150 }}
                   />
                   <br/>
-                  </div>
                   <p>
                     <div className="socialIcons">
                       {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}

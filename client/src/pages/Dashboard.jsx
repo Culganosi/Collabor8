@@ -124,6 +124,7 @@ export default function Dashboard() {
                                         <p>
                                             <br />
                                             <h1>Latest proposals that are seeking your skills:</h1>
+                                            <Divider />
                                             <br />
                                             <Container className={classes.cardMedia} maxWidth="xl">
                                                 <Grid container spacing={1}>
@@ -149,7 +150,7 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            {profiles.length > 0 ? <h1>Users to consider for your active proposals:</h1> :
+                                            {profiles.length > 0 ? <> <h1>Users to consider for your active proposals:</h1> <Divider />  </>:
                                                 <>
                                                     <h1>Publish your first proposal to get recommendations for collaborators</h1>
                                                     <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
@@ -189,6 +190,7 @@ export default function Dashboard() {
                                         <p>
                                             <br />
                                             <h1>Relaxing corner</h1>
+                                            <Divider />
                                             <br />
                                             <Cats />
                                             <br />
