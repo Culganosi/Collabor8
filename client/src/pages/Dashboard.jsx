@@ -114,10 +114,10 @@ export default function Dashboard() {
                 Browse through the follwing proposals and users that you might be interested to work with.
             </Typography>
 
-            <Container maxWidth={200}>
-                <Grid container spacing={3}>
+            {/* <Container maxWidth={200}>
+                <Grid container spacing={3}> */}
                     {/* PROPOSALS COLUMN --------------------------*/}
-                    <Grid container item xs={4}  >
+                    {/* <Grid container item xs={4}  >
                         <Card>
                             <CardContent>
                                 <p>
@@ -141,9 +141,9 @@ export default function Dashboard() {
                                 </p>
                             </CardContent>
                         </Card>
-                    </Grid>
+                    </Grid> */}
                     {/* USERS COLUMN-------------------------------- */}
-                    <Grid container item xs={4} >
+                    {/* <Grid container item xs={4} >
                         <Card>
                             <CardContent>
                                 <p>
@@ -180,9 +180,9 @@ export default function Dashboard() {
                                 </p>
                             </CardContent>
                         </Card>
-                    </Grid>
+                    </Grid> */}
                     {/* MEMES COLUMN---------------------------------- */}
-                    <Grid container item xs={4}  >
+                    {/* <Grid container item xs={4}  >
                         <Card>
                             <CardContent>
                                 <p>
@@ -197,7 +197,46 @@ export default function Dashboard() {
                         </Card>
                     </Grid>
                 </Grid>
-            </Container>
+            </Container> */}
+             <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={1} columns={16}>
+        <Grid item xs={4}>
+          <Item>
+{/* PROPOSALS COLUMN --------------------------*/}
+                        <Card>
+                            <CardContent>
+                                <p>
+                                    <br />
+                                    <h1>Latest proposals that are seeking your skills:</h1>
+                                    <br />
+                                    <Container className={classes.cardMedia} maxWidth="xl">
+                                        <Grid container spacing={1}>
+                                            {listOfProposalCards}
+                                        </Grid>
+                                    </Container>
+
+                                    <Link to="/Proposals" style={{ textDecoration: 'none' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                            <Button style={{ margin: 17 }} variant="outlined" color="secondary" >
+                                                Look at more proposals
+                                            </Button>
+                                        </div>
+                                    </Link>
+
+                                </p>
+                            </CardContent>
+                        </Card>
+
+          </Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item>xs=8</Item>
+        </Grid>
+        <Grid item xs={4}>
+          <Item>xs=8</Item>
+        </Grid>
+      </Grid>
+    </Box>
         </>
     )
 }
