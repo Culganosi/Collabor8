@@ -18,6 +18,7 @@ import SkillListItem from "../components/SkillListItem";
 import SocialListItem from "../components/SocialListItem";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function EditProfile() {
   const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function EditProfile() {
     // axios.get(`/users/${usersId}`).then((res) => {
       axios.get('/users/self').then((res) => {
         setOldProfile(res.data);
-        setRole(res.data.role[0]);
+        setRole(res.data.role);
       });
     }, []);
     
@@ -66,6 +67,11 @@ export default function EditProfile() {
     );
     const [skillsObject, setSkillsObject] = React.useState(oldProfile.skillsObject
       );
+
+      const [value, setValue] = React.useState("Controlled");
+      const handleChange = (event) => {
+        setValue(event.target.value);
+      };
 
     
 
@@ -116,7 +122,7 @@ export default function EditProfile() {
                       <ToggleButtonGroup
                         fullWidth="true"
                         color="warning"
-                        value={oldProfile.role}
+                        value={role}
                         orientation={"horizontal"}
                         size={"medium"}
                         exclusive
@@ -139,10 +145,10 @@ export default function EditProfile() {
                   </Grid>
 
               
-                  <SkillListItem
+                  {/* <SkillListItem
                     skillsObject={oldProfile.skillsObject}
                     setSkillsObject={setSkillsObject}
-                  />
+                  /> */}
                 </Box>
 
                 <Typography
@@ -197,10 +203,11 @@ export default function EditProfile() {
                       color="secondary"
                       onClick={() => submitEditProfile()}
                     >
-                      Create Profile
+                      Save Changes
                     </Button>
                   </Grid>
                   <Grid item>
+                  <Link to="/Home">
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -208,6 +215,7 @@ export default function EditProfile() {
                     >
                       Cancel
                     </Button>
+                    </Link>
                   </Grid>
                 </Grid>
               </div>

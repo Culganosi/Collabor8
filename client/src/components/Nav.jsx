@@ -12,11 +12,12 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+
 import CameraIcon from "@mui/icons-material/Camera";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
-import {DataContext} from "./../DataContext";
+import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
 const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat", "Edit-Profile"];
