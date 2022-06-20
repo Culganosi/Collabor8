@@ -128,16 +128,12 @@ export default function OtherProfile() {
   useEffect(() => {
     axios.get("/chats/self/chat-previews")
     .then(res => {
-      console.log("The response")
-      console.log(res.data)
       const chatPreviews = res.data
-
       for (let chat of chatPreviews) {
         if (chat.partner == otherUser._id) {
           setChatId(chat._id)
         }
       }
-
     })
   }, [otherUser])
 
