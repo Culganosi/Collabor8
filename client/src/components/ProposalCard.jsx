@@ -42,12 +42,18 @@ export default function ProposalCard({
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Link to={`/proposals/${_id}`} style={{ textDecoration: 'none' }}>
+
+      <Link to={`${_id}`} style={{ textDecoration: 'none' }}>
         <Button size="small" variant="contained" color="secondary">
           See More Details
         </Button>
         </Link>
+
+        
       </CardActions>
     </Card>
   );
 }
+
+
+///proposals

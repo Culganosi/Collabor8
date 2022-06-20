@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import { useState } from "react";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import {
   Typography,
   Button,

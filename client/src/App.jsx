@@ -45,7 +45,7 @@ function App() {
         activeChatFull, setActiveChatFull,
       }}>
     <>
-    <Wrapper className='App'>
+    {/* <Wrapper className='App'> */}
     {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
@@ -69,19 +69,19 @@ function App() {
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
       </Routes>
-      </Wrapper>
+      {/* </Wrapper> */}
     </>
     <Footer />
 
     </DataContext.Provider>
   );
 }
-const Wrapper = styled.div`
-position: relative;
-background: #1f1144;
-canvas {
-  height: 500px;
-}
-`;
+// const Wrapper = styled.div`
+// position: relative;
+// background: #1f1144;
+// canvas {
+//   height: 500px;
+// }
+// `;
 
 export default App;

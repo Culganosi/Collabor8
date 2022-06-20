@@ -161,9 +161,12 @@ export default function UserProfile() {
                     <br />
                     <h3>Role:</h3>
                     {self.role}
+                    <br />
                     <Divider />
+                    <br />
                     <h3>Description:</h3>
                     {self.bio}
+                    <br />
                     <Divider />
                     <h3>Skills: </h3>
                     {self.skills && self.skills.join(" | ")}
