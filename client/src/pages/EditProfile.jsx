@@ -14,7 +14,7 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import SkillListItem from "../components/SkillListItem";
+import SkillListEdit from "../components/SkillListEdit";
 import SocialListItem from "../components/SocialListItem";
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -65,8 +65,8 @@ export default function EditProfile() {
     const [socialMedia, setSocialMedia] = React.useState(
       oldProfile.setSocialMedia
     );
-    const [skillsObject, setSkillsObject] = React.useState(oldProfile.skillsObject
-      );
+
+    const [skillsObject, setSkillsObject] = React.useState({});
 
       const [value, setValue] = React.useState("Controlled");
       const handleChange = (event) => {
@@ -143,12 +143,13 @@ export default function EditProfile() {
                       </ToggleButtonGroup>
                     </Grid>
                   </Grid>
-
               
-                  {/* <SkillListItem
-                    skillsObject={oldProfile.skillsObject}
+                  <SkillListEdit
+                    skillsObject={skillsObject}
                     setSkillsObject={setSkillsObject}
-                  /> */}
+                    oldProfile={oldProfile}
+                  />
+
                 </Box>
 
                 <Typography
