@@ -58,6 +58,7 @@ export default function Preview({previewData}) {
       previewStyle = {background: "#f5e0df"}
     }
     
+    //const latestMessage = previewData.lastMessage.text.substring(0, 15) + "..."
 
   return (
     <ListItem button style={previewStyle} key="test3" onClick={() => setActiveChatId(previewData._id)}>
@@ -65,6 +66,8 @@ export default function Preview({previewData}) {
       <Avatar alt="test3"  src={`${profiles[partnerId].avatar}`} />
       </ListItemIcon>
       <ListItemText primary={profiles[partnerId].userhandle}>{profiles[partnerId].userhandle}</ListItemText>
+      
+      <ListItemText style={{textAlign: "right", color: "lightgrey", whiteSpace: "nowrap"}} primary={previewData.lastMessage.sentAt}></ListItemText>
     </ListItem>  
 )
 }
