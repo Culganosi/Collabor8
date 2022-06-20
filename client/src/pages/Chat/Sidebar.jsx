@@ -62,17 +62,6 @@ export default function Sidebar() {
 
       {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
 
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-
-      {chatPreviews.map(preview => (<Preview previewData={preview} key={preview._id}/>))}
-        
-        {/* <Preview />
-        <Preview />
-        <Preview />
-        <Preview /> */}
-
       </List>
     </Grid>
   )

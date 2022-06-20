@@ -16,6 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import axios from "axios";
+import Moment from 'react-moment';
 
 import { DataContext } from "./../../DataContext"
 
@@ -54,14 +55,32 @@ export default function MessageLine({ message }) {
   //Pull variable from context
   const { profiles, self } = useContext(DataContext);
 
-  const { author, sentAt, text } = message
+  const { author, sentAt, text, type } = message
 
   let linePosition = "left"
   if (author == self._id) {
     linePosition = "right"
   }
 
-  return (
+
+    const formattedDate = (<Moment format="MMM d, hh:mm">{sentAt}</Moment>)
+    //If this is the initial message, style it differently
+
+    if (type=="init") {
+      return (
+        <Grid item xs={12}>
+          <ListItemText align={linePosition} style={{textAlign: 'center'}} secondary="~ Connection created ~"></ListItemText>
+        </Grid>
+      )
+    } 
+    
+    //Otherwise display a normal message
+
+    else {
+
+
+
+    return (
     <ListItem key="1">
       <Grid container>
         <Grid item xs={12}>
@@ -74,12 +93,16 @@ export default function MessageLine({ message }) {
               </ListItemText>
         </Grid>
         <Grid item xs={12}>
-          <ListItemText align={linePosition} secondary={sentAt}></ListItemText>
+          <ListItemText align={linePosition} secondary={formattedDate}></ListItemText>
         </Grid>
       </Grid>
-
     </ListItem>
-  )
+
+    )
+
+    }
+
+
 }
 
 
