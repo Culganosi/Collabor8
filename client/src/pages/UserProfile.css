@@ -21,6 +21,10 @@
 .userHandle {
   font-weight: 400;
 }
+.handleimage {
+  display:flex;
+
+}
 
 /* .archived {
   display: flex;

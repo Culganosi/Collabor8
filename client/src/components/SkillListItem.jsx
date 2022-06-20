@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect} from "react";
 import useStyles from "../styles";
 import { useState } from "react";
 import {
@@ -10,25 +10,23 @@ import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-
 import Checkbox from "@mui/material/Checkbox";
-
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
-export default function SkillListItem() {
-  const [state, setState] = React.useState({
-    default: false,
-  });
+export default function SkillListItem({skillsObject, setSkillsObject}) {
+
   
   const classes = useStyles();
-  const { uxui, full, front, back } = state;
-  const error = [uxui, full, front, back].filter((v) => v).length !== 1;
+  // const { uxui, full, front, back } = state;
+ // const error = [uxui, full, front, back].filter((v) => v).length !== 1;
 
   const handleSkill = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
+    setSkillsObject(prev => {
+      return {
+        ...prev,
+        [event.target.name]: event.target.checked,
+      }
+    })
   };
 
   const {
@@ -49,27 +47,9 @@ export default function SkillListItem() {
     git,
     tdd,
     vscode,
-  } = state;
-  const errorSkill =
-    [
-      html,
-      css,
-      sass,
-      jquery,
-      reactjs,
-      vuejs,
-      angularjs,
-      nodejs,
-      express,
-      sql,
-      mongodb,
-      photoshop,
-      figma,
-      uxresearch,
-      git,
-      tdd,
-      vscode,
-    ].filter((v) => v).length !== 1;
+  } = skillsObject;
+  
+  
 
   return (
     <Grid container>
@@ -86,7 +66,6 @@ export default function SkillListItem() {
                     <Grid container wrap="nowrap">
                       <FormControl
                         required
-                        error={error}
                         component="fieldset"
                         sx={{ m: 3 }}
                         variant="standard"
@@ -152,7 +131,7 @@ export default function SkillListItem() {
                             <FormControlLabel
                               control={
                                 <Checkbox
-                                  checked={uxui}
+                                  checked={angularjs}
                                   onChange={handleSkill}
                                   name="angularjs"
                                 />

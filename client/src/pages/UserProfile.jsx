@@ -58,11 +58,13 @@ export default function UserProfile() {
   useEffect(() => {
     //If the self variable is {}, load the info again
 
-    axios.get("/users/self")
-      .then((res) => {
-        // console.log(res.data.skills)
-        setSelf(res.data)
-      })
+    if(Object.keys(self).length==0) {
+      axios.get("/users/self")
+        .then((res) => {
+          // console.log(res.data.skills)
+          setSelf(res.data)
+        })
+    }
 
     axios.get("/proposals/self")
       .then(res => {
@@ -119,8 +121,6 @@ export default function UserProfile() {
 
 
 
-
-
   return (
     <>
       <div className={classes.container}>
@@ -142,13 +142,14 @@ export default function UserProfile() {
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
+                <div className="handleimage">
                   <h1 className="userHandle">  {self.userhandle} </h1>
-
-                  <Avatar
+                  <Avatar 
                     alt="avatar"
                     src={self.avatar}
-                    sx={{ width: 56, height: 56 }}
+                    sx={{ width: 100, height: 100 }}
                   />
+                  </div>
                   <p>
                     <div>
                       {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
@@ -160,15 +161,21 @@ export default function UserProfile() {
                     <br />
                     <h3>Role:</h3>
                     {self.role}
+                    <Divider />
                     <h3>Description:</h3>
                     {self.bio}
-                    <br />
+                    <Divider />
                     <h3>Skills: </h3>
                     {self.skills && self.skills.join(" | ")}
+                    <Divider />
                     <br />
+                    {/* <Link to="/My-Profile/:id/edit" >
+                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button style={{ margin: 10 }} variant="contained">
                       Edit Profile
                     </Button>
+                    </div>
+                    </Link> */}
                   </p>
                 </CardContent>
               </Card>

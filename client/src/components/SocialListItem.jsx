@@ -2,12 +2,14 @@ import * as React from "react";
 import useStyles from "../styles";
 import { Typography, Box, TextField, Grid, Container } from "@material-ui/core";
 
-function SocialListItem() {
+function SocialListItem({setSocialMedia}) {
+
   const classes = useStyles();
-  const [socialMedia, setSocialMedia] = React.useState({
-    Portfolio: "htto://google.com",
-    GitHub: "http://GitHub.com",
-  });
+
+  // const [socialMedia, setSocialMedia] = React.useState({
+  //   Portfolio: "htto://google.com",
+  //   GitHub: "http://GitHub.com",
+  // });
 
   return (
     <Container style={{padding: 0}}>
@@ -22,7 +24,9 @@ function SocialListItem() {
               label="Enter URL"
               variant="outlined"
               color="secondary"
-              onChange={setSocialMedia}
+              onChange={(event) => {
+                setSocialMedia(prev => {return {...prev, GitHub: event.target.value}})
+              }}
             />
           </Box>
         </Grid>
@@ -37,7 +41,9 @@ function SocialListItem() {
               label="Enter URL"
               variant="outlined"
               color="secondary"
-              onChange={setSocialMedia}
+              onChange={(event) => {
+                setSocialMedia(prev => {return {...prev, LinkedIn: event.target.value}})
+              }}
             />
           </Box>
         </Grid>
@@ -57,7 +63,9 @@ function SocialListItem() {
                 label="Enter URL"
                 variant="outlined"
                 color="secondary"
-                onChange={setSocialMedia}
+                onChange={(event) => {
+                  setSocialMedia(prev => {return {...prev, Portfolio: event.target.value}})
+                }}
               />
             </Box>
           </Grid>
@@ -76,7 +84,9 @@ function SocialListItem() {
                 label="Enter URL"
                 variant="outlined"
                 color="secondary"
-                onChange={setSocialMedia}
+                onChange={(event) => {
+                  setSocialMedia(prev => {return {...prev, Twitter: event.target.value}})
+                }}
               />
             </Box>
           </Grid>

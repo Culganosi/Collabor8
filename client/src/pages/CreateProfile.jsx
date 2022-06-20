@@ -18,20 +18,29 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import RolesListItem from "../components/RolesListItem";
 import SkillListItem from "../components/SkillListItem";
 import SocialListItem from "../components/SocialListItem";
+import { useEffect } from "react";
 
 export default function CreateProfile() {
-  const [state, setState] = React.useState({
+
+  const classes = useStyles();
+  // const { self, setSelf } = useContext(DataContext);
+  const [role, setRole] = React.useState("");
+  const [bio, setBio] = React.useState("");
+  const [shortBio, setShortBio] = React.useState("");
+  const [socialMedia, setSocialMedia] = React.useState({});
+  const [skillsObject, setSkillsObject] = React.useState({
     default: false,
   });
 
-  //   #This is both for filling out the profile and for editing it later
-  // PATCH http://localhost:3001/users/self
-  // Content-Type: application/json
-  // {
-  //     "bio": "Ths is an updated bio to test 2"
-  // }
 
   const createProfile = () => {
+
+
+    const skills = []
+    for (let skill of Object.keys(skillsObject)) {
+      if (skillsObject[skill]==true) skills.push(skill)
+    }
+    
     const userData = {
       role,
       skills,
@@ -44,17 +53,6 @@ export default function CreateProfile() {
       console.log(res.data);
     });
   };
-
-  const classes = useStyles();
-  // const { self, setSelf } = useContext(DataContext);
-  const [role, setRole] = React.useState(["Front-End"]);
-  const [skills, setSkills] = React.useState(["Git", "JavaScript"]);
-  const [bio, setBio] = React.useState("This is a test long bio");
-  const [shortBio, setShortBio] = React.useState("This is a test short bio");
-  const [socialMedia, setSocialMedia] = React.useState({
-    Portfolio: "htto://google.com",
-    GitHub: "http://GitHub.com",
-  });
 
   return (
     <div className={classes.container}>
@@ -107,18 +105,18 @@ export default function CreateProfile() {
                         orientation={"horizontal"}
                         size={"medium"}
                         exclusive
-                        onChange={(event) => setRole([event.target.value])}
+                        onChange={(event) => setRole(event.target.value)}
                       >
-                        <ToggleButton value="front">
+                        <ToggleButton value="UX/UI designer">
                           UX/UI designer
                         </ToggleButton>
-                        <ToggleButton value="front2">
+                        <ToggleButton value="Front-end developer">
                           Front-end developer
                         </ToggleButton>
-                        <ToggleButton value="front3">
+                        <ToggleButton value="Back-end developer">
                           Back-end developer
                         </ToggleButton>
-                        <ToggleButton value="front4">
+                        <ToggleButton value="Full-stack developer">
                           Full-stack developer
                         </ToggleButton>
                       </ToggleButtonGroup>
@@ -126,7 +124,7 @@ export default function CreateProfile() {
                   </Grid>
 
                   {/* <RolesListItem /> */}
-                  <SkillListItem />
+                  <SkillListItem skillsObject={skillsObject} setSkillsObject={setSkillsObject}/>
                 </Box>
 
                 <Typography
@@ -143,20 +141,20 @@ export default function CreateProfile() {
                     multiline
                     rows={1}
                     defaultValue=""
-                    value=""
-                    onChange={setShortBio}
                     variant="outlined"
                     color="secondary"
                     style={{ width: "75%" }}
+                    value={shortBio}
+                    onChange={(event) => setShortBio(event.target.value)}
                   />
                 </div>
-                <SocialListItem />
+                <SocialListItem setSocialMedia={setSocialMedia} />
 
                 <Typography
                   className={classes.title}
                   variant="h6"
                   color="secondary"
-                >
+                  >
                   Bio
                 </Typography>
                 <div>
@@ -165,10 +163,11 @@ export default function CreateProfile() {
                     label="Enter your Bio"
                     multiline
                     rows={6}
-                    defaultValue=""
+                    defaultValue={bio}
                     variant="outlined"
                     color="secondary"
                     style={{ width: "75%" }}
+                    onChange={(event) => setBio(event.target.value)}
                   />
                 </div>
               </CardContent>
