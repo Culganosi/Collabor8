@@ -19,20 +19,6 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
-const categories = [
-  {
-    value: "Passion Project",
-    label: "Passion Project"
-  },
-  {
-    value: "Small Scale",
-    label: "Small Scale",
-  },
-  {
-    value: "Large Scale",
-    label: "Large Scale",
-  },
-];
 
 const roles = [
   {

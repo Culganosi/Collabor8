@@ -11,8 +11,9 @@ import {
   CardContent,
   Grid,
   TextField,
-  CardMedia
+  CardMedia,
 } from "@material-ui/core";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import RolesListItem from "../components/RolesListItem";
 import SkillListItem from "../components/SkillListItem";
@@ -46,7 +47,7 @@ export default function CreateProfile() {
 
   const classes = useStyles();
   // const { self, setSelf } = useContext(DataContext);
-  const [role, setRole] = React.useState("Front-End Developer");
+  const [role, setRole] = React.useState(["Front-End"]);
   const [skills, setSkills] = React.useState(["Git", "JavaScript"]);
   const [bio, setBio] = React.useState("This is a test long bio");
   const [shortBio, setShortBio] = React.useState("This is a test short bio");
@@ -71,22 +72,60 @@ export default function CreateProfile() {
           <Grid item>
             <Paper className={classes.card} elevation={4}>
               <CardContent>
-              <CardMedia className={classes.createProfMedia} image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg" />
-              <Grid container justify="center">
-      <Grid item>
-      <Button
-        variant="outlined"
-        color="secondary"
-        component="label"
-        style={{marginTop: '30px'}}
-        >
-        Upload Profile Picture
-        <input type="file" hidden />
-      </Button>
-    </Grid>
-    </Grid>
+                <CardMedia
+                  className={classes.createProfMedia}
+                  image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg"
+                />
+                <Grid container justify="center">
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      component="label"
+                      style={{ marginTop: "30px" }}
+                    >
+                      Upload Profile Picture
+                      <input type="file" hidden />
+                    </Button>
+                  </Grid>
+                </Grid>
                 <Box>
-                  <RolesListItem />
+                  <Typography
+                    className={classes.title}
+                    variant="h5"
+                    color="secondary"
+                  >
+                    Select preferred Role
+                  </Typography>
+
+                  <Grid container>
+                    <Grid item xs={10}>
+                      <ToggleButtonGroup
+                        fullWidth="true"
+                        color="warning"
+                        value={role}
+                        orientation={"horizontal"}
+                        size={"medium"}
+                        exclusive
+                        onChange={(event) => setRole([event.target.value])}
+                      >
+                        <ToggleButton value="front">
+                          UX/UI designer
+                        </ToggleButton>
+                        <ToggleButton value="front2">
+                          Front-end developer
+                        </ToggleButton>
+                        <ToggleButton value="front3">
+                          Back-end developer
+                        </ToggleButton>
+                        <ToggleButton value="front4">
+                          Full-stack developer
+                        </ToggleButton>
+                      </ToggleButtonGroup>
+                    </Grid>
+                  </Grid>
+
+                  {/* <RolesListItem /> */}
                   <SkillListItem />
                 </Box>
 
@@ -127,8 +166,8 @@ export default function CreateProfile() {
                     multiline
                     rows={6}
                     defaultValue=""
-          variant="outlined"
-          color="secondary"
+                    variant="outlined"
+                    color="secondary"
                     style={{ width: "75%" }}
                   />
                 </div>
@@ -145,7 +184,11 @@ export default function CreateProfile() {
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="secondary" style={{marginBottom: '15px'}}>
+                    <Button
+                      variant="outlined"
+                      color="secondary"
+                      style={{ marginBottom: "15px" }}
+                    >
                       Cancel
                     </Button>
                   </Grid>
