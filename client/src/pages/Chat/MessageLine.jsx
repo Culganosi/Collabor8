@@ -63,13 +63,13 @@ export default function MessageLine({ message }) {
   }
 
 
+    const formattedDate = (<Moment format="MMM d, hh:mm">{sentAt}</Moment>)
     //If this is the initial message, style it differently
 
     if (type=="init") {
-      const creationMessage = `~Connection created on ${sentAt}~`
       return (
         <Grid item xs={12}>
-          <ListItemText align={linePosition} style={{textAlign: 'center'}} secondary={creationMessage}></ListItemText>
+          <ListItemText align={linePosition} style={{textAlign: 'center'}} secondary="~ Connection created ~"></ListItemText>
         </Grid>
       )
     } 
@@ -78,7 +78,7 @@ export default function MessageLine({ message }) {
 
     else {
 
-      const formattedDate = (<Moment format="MMM d, hh:mm">{sentAt}</Moment>)
+
 
     return (
     <ListItem key="1">
