@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import {DataContext} from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat"];
+const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat", "Edit-Profile"];
 const settings = ["Logout"];
 
 const ResponsiveAppBar = () => {
@@ -194,7 +194,7 @@ const ResponsiveAppBar = () => {
             >
                 <MenuItem key={settings} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link style={{textDecoration: "none", color: "white"}} onClick ={() => this.logout()} to={`/Logout`}>Logout</Link>
+                    <Link style={{textDecoration: "none", color: "white"}} onClick ={() => logout()} to={`/Logout`}>Logout</Link>
                   </Typography>
                 </MenuItem>
             </Menu>

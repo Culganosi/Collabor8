@@ -69,7 +69,6 @@ export default function EditModal() {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
- 
 
   const [checked, setChecked] = React.useState(oldProposal.status == "Active");
 
@@ -81,7 +80,7 @@ export default function EditModal() {
   const [seekingRole, setSeekingRole] = React.useState("");
 
   const toggleChecked = () => {
-    console.log(checked)
+    console.log(checked);
     setChecked((prev) => !prev);
   };
   const classes = useStyles();

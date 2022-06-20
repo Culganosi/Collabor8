@@ -21,6 +21,7 @@ import CreateProposal from "./pages/CreateProposal";
 import Register from "./pages/Register";
 import styled from "styled-components";
 import Chat from "./pages/Chat/index";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
 
@@ -68,6 +69,7 @@ function App() {
         <Route path="/Chat" element={<Chat />} />
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
+        <Route path="/Edit-Profile" element={<EditProfile />} />
       </Routes>
       {/* </Wrapper> */}
     </>

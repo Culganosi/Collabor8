@@ -17,48 +17,66 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import SkillListItem from "../components/SkillListItem";
 import SocialListItem from "../components/SocialListItem";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-export default function CreateProfile() {
+export default function EditProfile() {
   const navigate = useNavigate();
   const classes = useStyles();
-  // const { self, setSelf } = useContext(DataContext);
-  const [role, setRole] = React.useState("");
-  const [bio, setBio] = React.useState("");
-  const [shortBio, setShortBio] = React.useState("");
-  const [socialMedia, setSocialMedia] = React.useState({});
-  const [skillsObject, setSkillsObject] = React.useState({
-    default: false,
-  });
 
-  const createProfile = () => {
-    const skills = [];
-    for (let skill of Object.keys(skillsObject)) {
-      if (skillsObject[skill] == true) skills.push(skill);
-    }
-
-    const userData = {
-      role,
-      skills,
-      shortBio,
-      bio,
-      socialMedia,
+  
+  useEffect(() => {
+    // axios.get(`/users/${usersId}`).then((res) => {
+      axios.get('/users/self').then((res) => {
+        setOldProfile(res.data);
+        setRole(res.data.role[0]);
+      });
+    }, []);
+    
+    const submitEditProfile = () => {
+      const skills = [];
+      for (let skill of Object.keys(skillsObject)) {
+        if (skillsObject[skill] == true) skills.push(skill);
+      }
+      
+      const newData = {
+        role,
+        skills,
+        shortBio,
+        bio,
+        socialMedia,
+      };
+      
+      axios.patch("users/self", newData).then((res) => {
+        console.log(res.data);
+        navigate("/My-Profile");
+      });
+      
     };
+    
+    const [oldProfile, setOldProfile] = useState({});
 
-    axios.patch("users/self", userData).then((res) => {
-      console.log(res.data);
-      navigate("/My-Profile");
-    });
-  };
+    const params = useParams();
+    const userId = params.id;
+
+    const [role, setRole] = React.useState(oldProfile.role);
+    const [bio, setBio] = React.useState(oldProfile.bio);
+    const [shortBio, setShortBio] = React.useState(oldProfile.shortBio);
+    const [socialMedia, setSocialMedia] = React.useState(
+      oldProfile.setSocialMedia
+    );
+    const [skillsObject, setSkillsObject] = React.useState(oldProfile.skillsObject
+      );
+
+    
 
   return (
     <div className={classes.container}>
       <Container max-Width="sm">
         <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          Create your profile
+          Edit your profile
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          Set up your profile in order to best match you with other Collab||8rs!
+          Edit your profile in order to best match you with other Collab||8rs!
         </Typography>
       </Container>
 
@@ -79,7 +97,7 @@ export default function CreateProfile() {
                       component="label"
                       style={{ marginTop: "30px" }}
                     >
-                      Upload Profile Picture
+                      Change Profile Picture
                       <input type="file" hidden />
                     </Button>
                   </Grid>
@@ -90,7 +108,7 @@ export default function CreateProfile() {
                     variant="h5"
                     color="secondary"
                   >
-                    Select preferred Role
+                    Preferred Role
                   </Typography>
 
                   <Grid container>
@@ -98,7 +116,7 @@ export default function CreateProfile() {
                       <ToggleButtonGroup
                         fullWidth="true"
                         color="warning"
-                        value={role}
+                        value={oldProfile.role}
                         orientation={"horizontal"}
                         size={"medium"}
                         exclusive
@@ -120,8 +138,9 @@ export default function CreateProfile() {
                     </Grid>
                   </Grid>
 
+              
                   <SkillListItem
-                    skillsObject={skillsObject}
+                    skillsObject={oldProfile.skillsObject}
                     setSkillsObject={setSkillsObject}
                   />
                 </Box>
@@ -143,7 +162,7 @@ export default function CreateProfile() {
                     variant="outlined"
                     color="secondary"
                     style={{ width: "75%" }}
-                    value={shortBio}
+                    value={oldProfile.shortBio}
                     onChange={(event) => setShortBio(event.target.value)}
                   />
                 </div>
@@ -162,7 +181,7 @@ export default function CreateProfile() {
                     label="Enter your Bio"
                     multiline
                     rows={6}
-                    defaultValue={bio}
+                    defaultValue={oldProfile.bio}
                     variant="outlined"
                     color="secondary"
                     style={{ width: "75%" }}
@@ -176,7 +195,7 @@ export default function CreateProfile() {
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => createProfile()}
+                      onClick={() => submitEditProfile()}
                     >
                       Create Profile
                     </Button>
