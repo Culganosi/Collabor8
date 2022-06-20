@@ -11,6 +11,7 @@ import { DataContext } from "./../DataContext"
 import useStyles from '../styles';
 import { Container, Typography } from '@material-ui/core'
 import purplewave from "../images/purplewave.webp";
+import styled from "styled-components"
 
 export default function Register() {
   const classes = useStyles();
@@ -33,55 +34,63 @@ export default function Register() {
       .catch(err => console.log(err))
   }
 
-
+  const Wrapper = styled.div`
+  position: relative;
+  background: #1f1144;
+  canvas {
+    height: 500px;
+  }
+  `;
 
   return (
     <>
-      <div className={classes.headercontainer}>
-        <Container max-Width="sm">
-          <Typography variant="h2" align="center" color="secondary" gutterBottom>
-            Register
-          </Typography>
+      <Wrapper>
+        <div className={classes.headercontainer}>
+          <Container max-Width="sm">
+            <Typography variant="h2" align="center" color="secondary" gutterBottom>
+              Register
+            </Typography>
 
-        </Container>
-      </div>
-      <Box>
-        <div className="form-container">
-          <form className="form">
-            <div className="form-group">
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Username"
-                helperText="Please type in a username"
-                multiline
-                maxRows={1}
-                value={userhandle}
-                onChange={(event) => setUserhandle(event.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <TextField
-                id="outlined-multiline-flexible"
-                label="Password"
-                helperText="Please enter your password"
-                multiline
-                maxRows={1}
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-            </div>
-
-            <Button
-              variant="outlined"
-              size="large"
-              color="secondary"
-              onClick={() => register()}
-            >
-              Submit</Button>
-
-          </form>
+          </Container>
         </div>
-      </Box>
+        <Box>
+          <div className="form-container">
+            <form className="form">
+              <div className="form-group">
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Username"
+                  helperText="Please type in a username"
+                  multiline
+                  maxRows={1}
+                  value={userhandle}
+                  onChange={(event) => setUserhandle(event.target.value)}
+                />
+              </div>
+              <div className="form-group">
+                <TextField
+                  id="outlined-multiline-flexible"
+                  label="Password"
+                  helperText="Please enter your password"
+                  multiline
+                  maxRows={1}
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                />
+              </div>
+
+              <Button
+                variant="outlined"
+                size="large"
+                color="secondary"
+                onClick={() => register()}
+              >
+                Submit</Button>
+
+            </form>
+          </div>
+        </Box>
+      </Wrapper>
     </>
   );
 }

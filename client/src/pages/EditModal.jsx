@@ -195,7 +195,7 @@ export default function EditModal() {
                   />
                 </div>
                 <FormGroup>
-                  <FormControlLabel
+                  <FormControlLabel  
                     control={
                       <Switch checked={checked} onChange={toggleChecked} />
                     }

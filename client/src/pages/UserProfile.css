@@ -25,6 +25,10 @@
   display:flex;
 
 }
+.socialIcons {
+  display: flex;
+  justify-content: space-around;
+}
 
 /* .archived {
   display: flex;

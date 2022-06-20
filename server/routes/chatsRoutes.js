@@ -23,7 +23,8 @@ module.exports = (User, Chat, Proposal) => {
             messages: [{
                 author: authorId,
                 text: firstMessageText,
-                sentAt: Date.now()
+                sentAt: Date.now(),
+                type: "init"
             }],
             lastMessageAt: Date.now()
         })

@@ -13,6 +13,7 @@ import ProposalCard from "../components/ProposalCard";
 import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import { TextureLoader } from "three";
 
+//STYLING FOR PAGE ------------------------------------------------------
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
@@ -48,13 +49,14 @@ const styles = makeStyles((theme) => ({
 }));
 
 
+
 export default function UserProfile() {
+  const classes = useStyles();
 
   const { proposals, setProposals, self, setSelf } = useContext(DataContext);
   const [selfProposals, setSelfProposals] = useState([])
 
-  const classes = useStyles();
-
+  
   useEffect(() => {
     //If the self variable is {}, load the info again
 
@@ -74,7 +76,7 @@ export default function UserProfile() {
   }, [])
 
 
-
+//FUNCTIONS TO FETCH ACTIVE & INACTIVE PROPOSALS ----------------------------------------
   const selfActiveProposals = []
   const selfInactiveProposals = []
 
@@ -101,7 +103,7 @@ export default function UserProfile() {
       </Grid>
     );
   });
-  console.log(selfActiveProposalCards)
+  // console.log(selfActiveProposalCards)
 
   const selfInactiveProposalCards = selfInactiveProposals.map((proposal) => {
     return (
@@ -138,20 +140,19 @@ export default function UserProfile() {
         <Container className="root-container">
           <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}>
 
-            {/* USER PROFILE GRID */}
+            {/* USER PROFILE GRID----------------------------------------------------- */}
             <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
-                <div className="handleimage">
                   <h1 className="userHandle">  {self.userhandle} </h1>
                   <Avatar 
                     alt="avatar"
                     src={self.avatar}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 150, height: 150 }}
                   />
-                  </div>
+                  <br/>
                   <p>
-                    <div>
+                    <div className="socialIcons">
                       {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
                       {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
                       {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
@@ -161,15 +162,17 @@ export default function UserProfile() {
                     <br />
                     <h3>Role:</h3>
                     {self.role}
-                    <br />
+                    {/* <br /> */}
                     <Divider />
                     <br />
                     <h3>Description:</h3>
                     {self.bio}
-                    <br />
+                    {/* <br /> */}
                     <Divider />
+                    <br />
                     <h3>Skills: </h3>
                     {self.skills && self.skills.join(" | ")}
+                    {/* <br /> */}
                     <Divider />
                     <br />
                     <Link to="/My-Profile/:id/edit" >
@@ -187,11 +190,12 @@ export default function UserProfile() {
             <Grid container xs={12} sm={7} lg={9}>
               <Stack spacing={1} flex="1 1 0">
 
-                {/* ACTIVE PROPOSALS */}
+                {/* ACTIVE PROPOSALS---------------------------------------------------- */}
                 <Card>
                   <CardContent>
-                    <h1 text-align="center" padding="20px">Your Active Proposals
-                    </h1>
+                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                    <Divider />
+                    <br />
                     <Grid container alignItems="stretch">
                       {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
@@ -200,10 +204,12 @@ export default function UserProfile() {
                   </CardContent>
                 </Card>
 
-                {/* ARCHIVED PROPOSALS */}
+                {/* ARCHIVED PROPOSALS------------------------------------------------ */}
                 <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
+                    <Divider />
+                    <br />
                     <Grid container alignItems="contain">
                       {selfInactiveProposalCards}
                     </Grid>

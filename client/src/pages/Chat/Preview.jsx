@@ -14,6 +14,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
+import TimeAgo from 'timeago-react';
+
 
 // import classNames from "classnames";
 
@@ -50,15 +52,31 @@ export default function Preview({previewData}) {
     //Helper variables
     //const previewClass = classNames('chat-preview', { "active": previewData._id==activeChatId});
     const partnerId = previewData.partner;
-    
 
-  
+    console.log(profiles)
+
+    let previewStyle = {}
+    if (previewData._id==activeChatId) {
+      previewStyle = {background: "#f5e0df"}
+    }
+    
+    //const latestMessage = previewData.lastMessage.text.substring(0, 15) + "..."
+
+    const timeAgoMessage = (
+      <TimeAgo
+        datetime={previewData.lastMessage.sentAt}
+        locale='en'
+      />
+    )
+
   return (
-    <ListItem button key="test3" onClick={() => setActiveChatId(previewData._id)}>
-    <ListItemIcon>
-    <Avatar alt="test3"  src={`${profiles[partnerId].avatar}`} />
-    </ListItemIcon>
-    <ListItemText primary={profiles[partnerId].userhandle}>{profiles[partnerId].userhandle}</ListItemText>
+    <ListItem button style={previewStyle} key="test3" onClick={() => setActiveChatId(previewData._id)}>
+      <ListItemIcon>
+      <Avatar alt="test3"  src={`${profiles[partnerId].avatar}`} />
+      </ListItemIcon>
+      <ListItemText primary={profiles[partnerId].userhandle}>{profiles[partnerId].userhandle}</ListItemText>
+      
+      <ListItemText style={{textAlign: "right", color: "lightgrey", whiteSpace: "nowrap"}} primary={timeAgoMessage}></ListItemText>
     </ListItem>  
 )
 }
