@@ -29,7 +29,7 @@ module.exports = (User, Proposal) => {
         const userId = req.session.userId;
 
         //Find all proposals where the user calling is the author
-        const callersProposals = await Proposal.find({author: userId})
+        const callersProposals = await Proposal.find({author: userId, status: "Active"})
 
         //If the caller has no proposals, return an empty array immediately
         if (callersProposals.length==0) return res.status(200).json([])
@@ -74,7 +74,7 @@ module.exports = (User, Proposal) => {
             recommendedUsers = recommendedUsers.concat(usersInRole)
         }
 
-        return res.status(200).json(recommendedUsers)
+        return res.status(200).json(recommendedUsers.slice(0, 3))
 
     })
 

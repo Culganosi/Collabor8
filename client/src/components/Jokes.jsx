@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Button } from "@material-ui/core";
 
-// https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&format=txt
 export default function Jokes() {
   const [joke, setJoke] = useState("");
 
   const callJokeApi = () => {
     axios
       .get(
-        "https://v2.jokeapi.dev/joke/Programming,Pun?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=twopart"
+        "https://v2.jokeapi.dev/joke/Programming?blacklistFlags=nsfw,religious,political,racist,sexist,explicit&type=twopart"
       )
       .then((res) => {
         console.log(res);

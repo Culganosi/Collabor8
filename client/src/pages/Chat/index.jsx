@@ -81,14 +81,17 @@ const Chat = () => {
         setChatPreviews(chatPrevRes.data);
   
         let defaultActiveChatId=""
-  
-        if (chatPrevRes.data.length > 0) {
-          defaultActiveChatId = chatPrevRes.data[0]._id
-        } else {
-          setActiveChatFull([])
+
+        //If we don't know which chat to go to
+        if (activeChatId=="") {
+
+            if (chatPrevRes.data.length > 0) {
+              //If options exist, choose the first one
+              setActiveChatId(chatPrevRes.data[0]._id)
+            } else {
+              setActiveChatFull([])
+            }
         }
-  
-        setActiveChatId(defaultActiveChatId)
   
         //If we haven't kept the active chat in local yet, choose the first one
 

@@ -71,6 +71,8 @@ module.exports = (User, Chat, Proposal) => {
     //For when the user enters the chat and sees a list of all their previous chats
     router.get('/self/chat-previews', async (req, res) => {
 
+        if (!req.session.userId) return res.status(403).json({message: "You're not logged in"})
+
         const userId = req.session.userId;
 
         const chatPreviews = []
@@ -93,6 +95,7 @@ module.exports = (User, Chat, Proposal) => {
                 return (!participant.equals(userId))
             })[0]
 
+
             const chatPreview = {
                 lastMessage, 
                 partner, 
@@ -100,7 +103,7 @@ module.exports = (User, Chat, Proposal) => {
             }
             chatPreviews.push(chatPreview)
         }
-        
+
         res.json(chatPreviews)
 
     });
