@@ -169,13 +169,13 @@ export default function UserProfile() {
                     {self.skills && self.skills.join(" | ")}
                     <Divider />
                     <br />
-                    {/* <Link to="/My-Profile/:id/edit" >
+                    <Link to="/My-Profile/:id/edit" >
                      <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button style={{ margin: 10 }} variant="contained">
                       Edit Profile
                     </Button>
                     </div>
-                    </Link> */}
+                    </Link>
                   </p>
                 </CardContent>
               </Card>

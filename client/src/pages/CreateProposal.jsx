@@ -1,7 +1,8 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import Paper from "@material-ui/core/Paper";
 import useStyles from "../styles";
 import { useState } from "react";
+import {Link} from "react-router-dom"
 import {
   Typography,
   Button,
@@ -16,30 +17,29 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
-
 export default function CreateProposal() {
-
   const navigate = useNavigate();
 
-
   const createProposal = () => {
-    const proposalData = {title, status: "Active", description, shortDescription, seeking}
-    axios.post("/proposals", proposalData)
-      .then((res) => {
-        console.log(res.data)
-        navigate("/My-Profile")
-    })
-    
-  }
+    const proposalData = {
+      title,
+      status: "Active",
+      description,
+      shortDescription,
+      seeking,
+    };
+    axios.post("/proposals", proposalData).then((res) => {
+      console.log(res.data);
+      navigate("/My-Profile");
+    });
+  };
 
   const classes = useStyles();
 
-  const [title, setTitle] = React.useState("")
+  const [title, setTitle] = React.useState("");
   const [seeking, setSeeking] = React.useState([]);
-  const [description, setDescription] = React.useState("")
-  const [shortDescription, setShortDescription] = React.useState("")
-
-
+  const [description, setDescription] = React.useState("");
+  const [shortDescription, setShortDescription] = React.useState("");
 
   return (
     <div className={classes.container}>
@@ -48,33 +48,38 @@ export default function CreateProposal() {
           Create a proposal
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          Fill out the following details to upload your proposal for other interested collaborators
+          Fill out the following details to upload your proposal for other
+          interested collaborators
         </Typography>
       </Container>
 
-          <Box border={2} padding={5} margin={6} borderRadius={16}>
+      <Box border={2} padding={5} margin={6} borderRadius={16}>
         <Grid container justify="center">
           <Grid item xs={8}>
             <Paper className={classes.createprofile} elevation={8}>
               <CardContent className={classes.cardContent}>
-          <Container>
-      <CardContent className={classes.cardContent}>
-      <CardMedia className={classes.createPropMedia} image="https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2017Q2/project-planning-header@2x.png" title="Title" />
-      </CardContent>
+                <Container>
+                  <CardContent className={classes.cardContent}>
+                    <CardMedia
+                      className={classes.createPropMedia}
+                      image="https://d2slcw3kip6qmk.cloudfront.net/marketing/blog/2017Q2/project-planning-header@2x.png"
+                      title="Title"
+                    />
+                  </CardContent>
 
-      <Grid container justify="center" alignItems="stretch">
-      <Grid item style={{ marginBottom: 25 }}>
-      <Button
-        variant="outlined"
-        color="secondary"
-        component="label"
-        >
-        Upload Profile Picture
-        <input type="file" hidden />
-      </Button>
-    </Grid>
-    </Grid>
-          </Container>
+                  <Grid container justify="center" alignItems="stretch">
+                    <Grid item style={{ marginBottom: 25 }}>
+                      <Button
+                        variant="outlined"
+                        color="secondary"
+                        component="label"
+                      >
+                        Upload Profile Picture
+                        <input type="file" hidden />
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Container>
                 <Typography
                   className={classes.title}
                   variant="h5"
@@ -113,7 +118,9 @@ export default function CreateProposal() {
                     color="secondary"
                     style={{ width: "75%" }}
                     value={shortDescription}
-                    onChange={(event) => setShortDescription(event.target.value)}
+                    onChange={(event) =>
+                      setShortDescription(event.target.value)
+                    }
                   />
                 </div>
 
@@ -121,26 +128,31 @@ export default function CreateProposal() {
                   Looking for:
                 </Typography>
                 <Grid container>
-                <Grid item xs={10}>
-
-                <ToggleButtonGroup
-                  fullWidth='true'
-                  color="warning"
-                  value={seeking}
-                  orientation={'horizontal'}
-                  size={'medium'}
-                  exclusive
-                  onChange={(event) => setSeeking([event.target.value])}
-                  
-                  >
-                  <ToggleButton value="front">UX/UI designer</ToggleButton>
-                  <ToggleButton value="front2">Front-end developer</ToggleButton>
-                  <ToggleButton value="front3">Back-end developer</ToggleButton>
-                  <ToggleButton value="front4">Full-stack developer</ToggleButton>
-                </ToggleButtonGroup>
-              
-                    </Grid>
+                  <Grid item xs={10}>
+                    <ToggleButtonGroup
+                      fullWidth="true"
+                      color="warning"
+                      value={seeking}
+                      orientation={"horizontal"}
+                      size={"medium"}
+                      exclusive
+                      onChange={(event) => setSeeking([event.target.value])}
+                    >
+                      <ToggleButton value="UX/UI designer">
+                        UX/UI designer
+                      </ToggleButton>
+                      <ToggleButton value="Front-end developer">
+                        Front-end developer
+                      </ToggleButton>
+                      <ToggleButton value="Back-end developer">
+                        Back-end developer
+                      </ToggleButton>
+                      <ToggleButton value="Full-stack developer">
+                        Full-stack developer
+                      </ToggleButton>
+                    </ToggleButtonGroup>
                   </Grid>
+                </Grid>
                 <Typography
                   className={classes.title}
                   variant="h6"
@@ -157,7 +169,7 @@ export default function CreateProposal() {
                     variant="outlined"
                     color="secondary"
                     value={description}
-                    onChange={(event) => setDescription(event.target.value)} 
+                    onChange={(event) => setDescription(event.target.value)}
                     style={{ width: "75%" }}
                   />
                 </div>
@@ -165,21 +177,27 @@ export default function CreateProposal() {
               <div>
                 <Grid container spacing={2} justifyContent="center">
                   <Grid item>
-                    <Button variant="contained" color="secondary" onClick={() => createProposal()}>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => createProposal()}
+                    >
                       Create Proposal
                     </Button>
                   </Grid>
                   <Grid item>
-                    <Button variant="outlined" color="secondary">
-                      Cancel
-                    </Button>
+                    <Link to="/Home">
+                      <Button variant="outlined" color="secondary">
+                        Cancel
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
               </div>
             </Paper>
           </Grid>
         </Grid>
-        </Box>
+      </Box>
     </div>
   );
 }
