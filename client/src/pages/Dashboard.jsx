@@ -198,6 +198,8 @@ export default function Dashboard() {
                     </Grid>
                 </Grid>
             </Container> */}
+
+
              <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1} columns={16}>
         <Grid item xs={4}>
@@ -230,10 +232,67 @@ export default function Dashboard() {
           </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item>xs=8</Item>
+          <Item>
+            {/* USERS COLUMN-------------------------------- */}
+                        <Card>
+                            <CardContent>
+                                <p>
+                                    <br />
+                                    {profiles.length > 0 ? <h1>Users to consider for your active proposals:</h1> : 
+                                        <>
+                                        <h1>Publish your first proposal to get recommendations for collaborators</h1>
+                                        <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
+                                            <div style={{display: 'flex', justifyContent: 'center'}}>
+                                            <Button style={{ margin: 17}} variant="contained" color="secondary">
+                                                Post a proposal
+                                            </Button>
+                                            </div>
+                                        </Link>
+                                        </>
+
+                                    }
+                                    <br />
+                                    <Container className={classes.cardGrid} maxWidth="xl">
+                                        <Grid container spacing={2}>
+                                            {listOfUserCards}
+                                        </Grid>
+                                    </Container>
+
+                                    {profiles.length > 0 ?
+                                        <Link to="/People" style={{ textDecoration: 'none' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                <Button style={{ margin: 17 }} variant="outlined" color="secondary">
+                                                    Look at more users
+                                                </Button>
+                                            </div>
+                                        </Link>
+                                        : <></>}
+                                </p>
+                            </CardContent>
+                        </Card>
+        </Item>
         </Grid>
         <Grid item xs={4}>
-          <Item>xs=8</Item>
+          <Item>
+
+{/* MEMES COLUMN---------------------------------- */}
+                        <Card>
+                            <CardContent>
+                                <p>
+                                    <br /> 
+                                    <h1>Relaxing corner</h1>
+                                    <br />
+                                    <Cats />
+                                    <br />
+                                    <Jokes />
+                                </p>
+                            </CardContent>
+                        </Card>
+               
+
+
+
+          </Item>
         </Grid>
       </Grid>
     </Box>
