@@ -14,6 +14,8 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 
+import TimeAgo from 'timeago-react';
+
 
 // import classNames from "classnames";
 
@@ -60,6 +62,13 @@ export default function Preview({previewData}) {
     
     //const latestMessage = previewData.lastMessage.text.substring(0, 15) + "..."
 
+    const timeAgoMessage = (
+      <TimeAgo
+        datetime={previewData.lastMessage.sentAt}
+        locale='en'
+      />
+    )
+
   return (
     <ListItem button style={previewStyle} key="test3" onClick={() => setActiveChatId(previewData._id)}>
       <ListItemIcon>
@@ -67,7 +76,7 @@ export default function Preview({previewData}) {
       </ListItemIcon>
       <ListItemText primary={profiles[partnerId].userhandle}>{profiles[partnerId].userhandle}</ListItemText>
       
-      <ListItemText style={{textAlign: "right", color: "lightgrey", whiteSpace: "nowrap"}} primary={previewData.lastMessage.sentAt}></ListItemText>
+      <ListItemText style={{textAlign: "right", color: "lightgrey", whiteSpace: "nowrap"}} primary={timeAgoMessage}></ListItemText>
     </ListItem>  
 )
 }

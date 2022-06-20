@@ -16,6 +16,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Fab from '@material-ui/core/Fab';
 import SendIcon from '@material-ui/icons/Send';
 import axios from "axios";
+import Moment from 'react-moment';
 
 import { DataContext } from "./../../DataContext"
 
@@ -77,6 +78,8 @@ export default function MessageLine({ message }) {
 
     else {
 
+      const formattedDate = (<Moment format="MMM d, hh:mm">{sentAt}</Moment>)
+
     return (
     <ListItem key="1">
       <Grid container>
@@ -90,7 +93,7 @@ export default function MessageLine({ message }) {
               </ListItemText>
         </Grid>
         <Grid item xs={12}>
-          <ListItemText align={linePosition} secondary={sentAt}></ListItemText>
+          <ListItemText align={linePosition} secondary={formattedDate}></ListItemText>
         </Grid>
       </Grid>
     </ListItem>
