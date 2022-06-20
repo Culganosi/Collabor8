@@ -54,14 +54,30 @@ export default function MessageLine({ message }) {
   //Pull variable from context
   const { profiles, self } = useContext(DataContext);
 
-  const { author, sentAt, text } = message
+  const { author, sentAt, text, type } = message
 
   let linePosition = "left"
   if (author == self._id) {
     linePosition = "right"
   }
 
-  return (
+
+    //If this is the initial message, style it differently
+
+    if (type=="init") {
+      const creationMessage = `~Connection created on ${sentAt}~`
+      return (
+        <Grid item xs={12}>
+          <ListItemText align={linePosition} style={{textAlign: 'center'}} secondary={creationMessage}></ListItemText>
+        </Grid>
+      )
+    } 
+    
+    //Otherwise display a normal message
+
+    else {
+
+    return (
     <ListItem key="1">
       <Grid container>
         <Grid item xs={12}>
@@ -77,9 +93,13 @@ export default function MessageLine({ message }) {
           <ListItemText align={linePosition} secondary={sentAt}></ListItemText>
         </Grid>
       </Grid>
-
     </ListItem>
-  )
+
+    )
+
+    }
+
+
 }
 
 

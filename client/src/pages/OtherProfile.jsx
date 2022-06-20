@@ -95,8 +95,9 @@ export default function OtherProfile() {
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("/chats", {recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}`, type: "init"})
-    .then(() => {
+    axios.post("/chats", {recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}`})
+    .then((res) => {
+        setActiveChatId(res.data.chatId)
         navigate("/chat")
     })
   }
