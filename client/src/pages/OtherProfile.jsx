@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   Container,
   Grid,
@@ -30,6 +30,8 @@ import useStyles from "../styles";
 import ProposalCard from "../components/ProposalCard";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import {DataContext} from "./../DataContext"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -66,34 +68,78 @@ const styles = makeStyles((theme) => ({
 }));
 
 export default function OtherProfile() {
+
+  /*
+  - If messages the user before - select that chat as the chosen one and proceed to the chat
+  - If never messaged the user before - send the init message, get the chat ID, set that as active chat ID, proceed to chat
+  */
+
+  const {setActiveChatId} = useContext(DataContext);
+
   const params = useParams();
   const userId = params.id;
 
   const [otherUser, setOtherUser] = useState({});
   const [userProposals, setUserProposals] = useState([]);
 
+  const [chatId, setChatId] = useState("")
+
+  const navigate = useNavigate();
+
+  //----------------HELPER FUNCTIONS
+
+  const goToChat = () => {
+    setActiveChatId(chatId)
+    navigate("/Chat")
+  }
+
+  const makeNewChat = () => {
+
+  }
+
+
+  //-----------------REFRESH
+
+  //Load info about the user and about the proposals
   useEffect(() => {
-    async function getData() {
-      const userResponse = await axios.get(`/users/${userId}`);
-      setOtherUser(userResponse.data);
 
-      const proposalsRes = await axios.get("/proposals");
-      const proposals = proposalsRes.data;
+      Promise.all([
+        axios.get(`/users/${userId}`),
+        axios.get('/proposals')
+      ])
+      .then((all) => {
+        setOtherUser(all[0].data)
 
-      const tempUserProposals = [];
+        const proposals = all[1].data
+        const tempUserProposals = [];
+        for (let proposalId of all[0].data.activeProposals) {
+          tempUserProposals.push(proposals[proposalId]);
+        }
+        setUserProposals(tempUserProposals);
+      })
 
-      for (let proposalId of userResponse.data.activeProposals) {
-        tempUserProposals.push(proposals[proposalId]);
-      }
-
-      setUserProposals(tempUserProposals);
-    }
-
-    getData();
   }, []);
 
+  //See if the person logged in has a chat connection to the otherUser
+  useEffect(() => {
+    axios.get("/chats/self/chat-previews")
+    .then(res => {
+      console.log("The response")
+      console.log(res.data)
+      const chatPreviews = res.data
+
+      for (let chat of chatPreviews) {
+        if (chat.partner == otherUser._id) {
+          setChatId(chat._id)
+        }
+      }
+
+    })
+  }, [otherUser])
+
+
+
   const userProposalsCards = userProposals.map((proposal) => {
-    console.log(proposal);
     return (
       <Grid item={proposal}>
         <ProposalCard
@@ -147,7 +193,11 @@ export default function OtherProfile() {
                     sx={{ width: 56, height: 56 }}
                   />
 
+                  {chatId? 
+
+                  //If the user logged in already has a connection with the otherUser
                   <Button
+                    onClick={goToChat}
                     style={{ margin: 2 }}
                     style={{
                       borderRadius: 10,
@@ -160,8 +210,12 @@ export default function OtherProfile() {
                     Send a Message
                     <EmailIcon />
                   </Button>
-                  <br />
+
+                 :
+
+                 //If no chat connection exists yet
                   <Button
+                    onClick={makeNewChat}
                     style={{ margin: 2 }}
                     style={{
                       borderRadius: 10,
@@ -174,6 +228,8 @@ export default function OtherProfile() {
                     Make a connection
                     <EmailIcon />
                   </Button>
+
+                  }
 
                   <p>
                     <div>
