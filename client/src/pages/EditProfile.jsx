@@ -162,7 +162,7 @@ export default function EditProfile() {
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Enter a short description"
+                    label=""
                     multiline
                     rows={1}
                     defaultValue=""
@@ -185,7 +185,7 @@ export default function EditProfile() {
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Enter your Bio"
+                    label=""
                     multiline
                     rows={6}
                     defaultValue={oldProfile.bio}
