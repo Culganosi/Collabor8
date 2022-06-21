@@ -29,6 +29,10 @@
   display: flex;
   justify-content: space-around;
 }
+/* .avatar {
+  display: flex;
+  justify-content: center;
+} */
 
 /* .archived {
   display: flex;

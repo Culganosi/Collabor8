@@ -56,16 +56,16 @@ export default function UserProfile() {
   const { proposals, setProposals, self, setSelf } = useContext(DataContext);
   const [selfProposals, setSelfProposals] = useState([])
 
-  
+
   useEffect(() => {
     //If the self variable is {}, load the info again
 
     //if(Object.keys(self).length==0) {
-      axios.get("/users/self")
-        .then((res) => {
-          // console.log(res.data.skills)
-          setSelf(res.data)
-        })
+    axios.get("/users/self")
+      .then((res) => {
+        // console.log(res.data.skills)
+        setSelf(res.data)
+      })
     //}
 
     axios.get("/proposals/self")
@@ -76,7 +76,7 @@ export default function UserProfile() {
   }, [])
 
 
-//FUNCTIONS TO FETCH ACTIVE & INACTIVE PROPOSALS ----------------------------------------
+  //FUNCTIONS TO FETCH ACTIVE & INACTIVE PROPOSALS ----------------------------------------
   const selfActiveProposals = []
   const selfInactiveProposals = []
 
@@ -146,8 +146,8 @@ export default function UserProfile() {
 
 
 
-            {/* USER PROFILE GRID----------------------------------------------------- */}
-            {/* <Grid container item xs={1} sm={2} lg={3} >
+      {/* USER PROFILE GRID----------------------------------------------------- */}
+      {/* <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
                   <h1 className="userHandle">  {self.userhandle} </h1>
@@ -169,17 +169,17 @@ export default function UserProfile() {
                     <h3>Role:</h3>
                     {self.role}
                     {/* <br /> */}
-                    {/* <Divider /> */}
-                    {/* <br /> */}
-                    {/* <h3>Description:</h3> */}
-                    {/* {self.bio} */} 
-                    {/* <br /> */}
-                    {/* <Divider />
+      {/* <Divider /> */}
+      {/* <br /> */}
+      {/* <h3>Description:</h3> */}
+      {/* {self.bio} */}
+      {/* <br /> */}
+      {/* <Divider />
                     <br />
                     <h3>Skills: </h3>
                     {self.skills && self.skills.join(" | ")} */}
-                    {/* <br /> */}
-                    {/* <Divider />
+      {/* <br /> */}
+      {/* <Divider />
                     <br />
                     <Link to="/My-Profile/:id/edit" >
                      <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -193,11 +193,11 @@ export default function UserProfile() {
               </Card>
             </Grid> */}
 
-            {/* <Grid container xs={12} sm={7} lg={9}>
+      {/* <Grid container xs={12} sm={7} lg={9}>
               <Stack spacing={1} flex="1 1 0"> */}
 
-                {/* ACTIVE PROPOSALS---------------------------------------------------- */}
-                {/* <Card>
+      {/* ACTIVE PROPOSALS---------------------------------------------------- */}
+      {/* <Card>
                   <CardContent>
                     <h1 text-align="center" padding="20px">Your Active Proposals</h1>
                     <Divider />
@@ -206,12 +206,12 @@ export default function UserProfile() {
                       {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
                       {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
-                    {/* </Grid>
+      {/* </Grid>
                   </CardContent>
-                </Card> */} 
+                </Card> */}
 
-                {/* ARCHIVED PROPOSALS------------------------------------------------ */}
-                {/* <Card>
+      {/* ARCHIVED PROPOSALS------------------------------------------------ */}
+      {/* <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
                     <Divider />
@@ -221,6 +221,11 @@ export default function UserProfile() {
                     </Grid>
                   </CardContent>
                 </Card>
+
+
+
+
+
               </Stack>
             </Grid>
 
@@ -229,25 +234,24 @@ export default function UserProfile() {
       </div> */}
 
 
+      {/* <div class="body"> */}
 
-<Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={16}  justifyContent="center"
->
-        <Grid item xs={3}>
-          <Item>
-
-
-
-            {/* USER PROFILE GRID----------------------------------------------------- */}
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid container spacing={2} columns={16} justifyContent="center"
+        >
+          <Grid item xs={3}>
+            <Item>
+              {/* USER PROFILE GRID----------------------------------------------------- */}
               <Card>
                 <CardContent>
                   <h1 className="userHandle">  {self.userhandle} </h1>
-                  <Avatar 
+                  <Avatar
+                  className="avatar"
                     alt="avatar"
                     src={self.avatar}
                     sx={{ width: 150, height: 150 }}
                   />
-                  <br/>
+                  <br />
                   <p>
                     <div className="socialIcons">
                       {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
@@ -260,10 +264,10 @@ export default function UserProfile() {
                     <h3>Role:</h3>
                     {self.role}
                     <br />
-                     <Divider />
+                    <Divider />
                     <br />
                     <h3>Description:</h3>
-                    {self.bio} 
+                    {self.bio}
                     <br />
                     <Divider />
                     <br />
@@ -273,35 +277,50 @@ export default function UserProfile() {
                     <Divider />
                     <br />
                     <Link to="/My-Profile/:id/edit" >
-                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button style={{ margin: 10 }} variant="contained">
-                      Edit Profile
-                    </Button>
-                    </div>
+                      <div style={{ display: 'flex', justifyContent: 'center' }}>
+                        <Button style={{ margin: 10 }} variant="contained">
+                          Edit Profile
+                        </Button>
+                      </div>
                     </Link>
                   </p>
                 </CardContent>
               </Card>
+            </Item>
+          </Grid>
+          
+          <Grid item xs={7}>
+            <Item>
+              {/* ACTIVE PROPOSALS---------------------------------------------------- */}
+              <Card>
+                <CardContent>
+                  <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                  <Divider />
+                  <br />
+                  <Grid container alignItems="stretch">
+                    {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
+                    {selfActiveProposalCards.map(activepropcard => activepropcard)}
+                    {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
+                  </Grid>
+                </CardContent>
+              </Card>
+              {/* ARCHIVED PROPOSALS------------------------------------------------ */}
+              <Card>
+                <CardContent>
+                  <h1>Your Archived Proposals</h1>
+                  <Divider />
+                  <br />
+                  <Grid container alignItems="contain">
+                    {selfInactiveProposalCards}
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Item>
+          </Grid>
 
-            
-
-
-          </Item>
         </Grid>
-        <Grid item xs={7}>
-          <Item>xs=8</Item>
-        </Grid>
-       
-      </Grid>
-    </Box>
-
-
-
-
-
-
-
-
+      </Box>
+      {/* </div> */}
     </>
   )
 }
