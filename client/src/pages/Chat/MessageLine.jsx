@@ -57,10 +57,20 @@ export default function MessageLine({ message }) {
 
   const { author, sentAt, text, type } = message
 
+  //Style self and other differently
+
   let linePosition = "left"
   if (author == self._id) {
     linePosition = "right"
   }
+
+  let messageLineColor="black"
+  let messageLineBGColor="lightgrey"
+  if (author == self._id) {
+    messageLineColor="white"
+    messageLineBGColor="#4A5AB9" //"#303FA0"
+  }
+
 
 
     const formattedDate = (<Moment format="MMM DD, hh:mm">{sentAt}</Moment>)
@@ -79,14 +89,13 @@ export default function MessageLine({ message }) {
     else {
 
 
-
     return (
     <ListItem key="1">
       <Grid container>
         <Grid item xs={12}>
           <ListItemText align={linePosition}
             primary={
-              <Typography variant="h6" theme={theme} style={{ color: "black" }}>
+              <Typography variant="h6" theme={theme} style={{ color: messageLineColor, maxWidth: "60%", display: "inline-block", padding: "5px 15px", borderRadius: "10px", textAlign: "left", background: messageLineBGColor}}>
                 {text}
               </Typography>
             }>
