@@ -106,11 +106,6 @@ export default function CreateProfile() {
 
   
   const handleFireBaseUpload = e => {
-    // e.preventDefault()
-    // if(imageAsFile === '') {
-    //   console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
-    //   return;
-    // }
     //Random name for storing image file
     const randomFileName = (Math.random() + 1).toString(36)
     //Upload the image
