@@ -50,6 +50,7 @@ function App() {
     {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
+    {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
