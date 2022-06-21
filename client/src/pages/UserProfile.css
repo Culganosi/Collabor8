@@ -30,6 +30,13 @@ justify-content:flex-end;
   display: flex;
   justify-content: space-around;
 }
+.otherSocialIcons {
+  display:flex;
+  justify-content: space-evenly ;
+}
+.svg_icons {
+  transform: scale(1.8);
+}
 .columns {
   display:flex;
   justify-content: center;

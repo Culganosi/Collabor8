@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import "./UserProfile.css"
 import {
   Container,
   Grid,
@@ -31,7 +32,7 @@ import ProposalCard from "../components/ProposalCard";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {DataContext} from "./../DataContext"
+import { DataContext } from "./../DataContext"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -66,7 +67,13 @@ const styles = makeStyles((theme) => ({
     padding: theme.spacing(2, 1, 1, 1),
   },
 }));
-
+//styling for when there re no active proposals 
+const styleObj = {
+  fontSize: 30,
+  color: "#DB7093",
+  textAlign: "center",
+  paddingTop: "70px",
+}
 export default function OtherProfile() {
 
   /*
@@ -74,7 +81,7 @@ export default function OtherProfile() {
   - If never messaged the user before - send the init message, get the chat ID, set that as active chat ID, proceed to chat
   */
 
-  const {setActiveChatId} = useContext(DataContext);
+  const { setActiveChatId } = useContext(DataContext);
 
   const params = useParams();
   const userId = params.id;
@@ -95,11 +102,11 @@ export default function OtherProfile() {
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("/chats", {recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}`})
-    .then((res) => {
+    axios.post("/chats", { recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}` })
+      .then((res) => {
         setActiveChatId(res.data.chatId)
         navigate("/chat")
-    })
+      })
   }
 
 
@@ -108,10 +115,10 @@ export default function OtherProfile() {
   //Load info about the user and about the proposals
   useEffect(() => {
 
-      Promise.all([
-        axios.get(`/users/${userId}`),
-        axios.get('/proposals')
-      ])
+    Promise.all([
+      axios.get(`/users/${userId}`),
+      axios.get('/proposals')
+    ])
       .then((all) => {
         setOtherUser(all[0].data)
         const proposals = all[1].data
@@ -127,14 +134,14 @@ export default function OtherProfile() {
   //See if the person logged in has a chat connection to the otherUser
   useEffect(() => {
     axios.get("/chats/self/chat-previews")
-    .then(res => {
-      const chatPreviews = res.data
-      for (let chat of chatPreviews) {
-        if (chat.partner == otherUser._id) {
-          setChatId(chat._id)
+      .then(res => {
+        const chatPreviews = res.data
+        for (let chat of chatPreviews) {
+          if (chat.partner == otherUser._id) {
+            setChatId(chat._id)
+          }
         }
-      }
-    })
+      })
   }, [otherUser])
 
 
@@ -187,20 +194,22 @@ export default function OtherProfile() {
               <Card>
                 <CardContent>
                   <h1> {otherUser.userhandle} </h1>
+                  <br />
                   <Avatar
                     alt="Username"
                     src={otherUser.avatar}
-                    sx={{ width: 56, height: 56 }}
+                    sx={{ width: 100, height: 100 }}
                   />
+                  <br/>
                   <p>
-                    <div>
+                    <div className="socialIcons">
                       {otherUser.socialMedia &&
                         otherUser.socialMedia.Portfolio && (
                           <Link
                             href={otherUser.socialMedia.Portfolio}
                             target="blank"
                           >
-                            <ScreenshotMonitorIcon />
+                            <ScreenshotMonitorIcon className="svg_icons"/>
                           </Link>
                         )}
                       {otherUser.socialMedia && otherUser.socialMedia.GitHub && (
@@ -208,7 +217,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.GitHub}
                           target="blank"
                         >
-                          <GitHubIcon />
+                          <GitHubIcon className="svg_icons"/>
                         </Link>
                       )}
                       {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && (
@@ -216,7 +225,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.LinkedIn}
                           target="blank"
                         >
-                          <LinkedInIcon />
+                          <LinkedInIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia && otherUser.socialMedia.Twitter && (
@@ -224,7 +233,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.Twitter}
                           target="blank"
                         >
-                          <TwitterIcon />
+                          <TwitterIcon className="svg_icons"/>
                         </Link>
                       )}
                       {otherUser.socialMedia &&
@@ -233,7 +242,7 @@ export default function OtherProfile() {
                             href={otherUser.socialMedia.Instagram}
                             target="blank"
                           >
-                            <InstagramIcon />
+                            <InstagramIcon className="svg_icons"/>
                           </Link>
                         )}
                     </div>
@@ -247,43 +256,46 @@ export default function OtherProfile() {
                     <h3>Skills: </h3>
                     {otherUser.skills && otherUser.skills.join(" | ")}
                     <br />
-                    {chatId? 
+                    <br />
+                    
+                    {chatId ?
 
 
-//If the user logged in already has a connection with the otherUser
-<Button
-  onClick={goToChat}
-  style={{ margin: 2,
-    borderRadius: 10,
-    backgroundColor: "#21b6ae",
-    padding: "5px 10px",
-    fontSize: "10px",
-  }}
-  variant="contained"
->
-  Send a Message
-  <EmailIcon />
-</Button>
+                      //If the user logged in already has a connection with the otherUser
+                      <Button
+                        onClick={goToChat}
+                        style={{
+                          margin: 2,
+                          borderRadius: 10,
+                          backgroundColor: "#21b6ae",
+                          padding: "5px 10px",
+                          fontSize: "10px",
+                        }}
+                        variant="contained"
+                      >
+                        Send a Message
+                        <EmailIcon />
+                      </Button>
 
-:
+                      :
 
-//If no chat connection exists yet
-<Button
-  onClick={makeNewChat}
-  style={{
-    margin: 2,
-    borderRadius: 10,
-    backgroundColor: "#21b6ae",
-    padding: "5px 10px",
-    fontSize: "10px",
-  }}
-  variant="contained"
->
-  Make a connection
-  <EmailIcon />
-</Button>
+                      //If no chat connection exists yet
+                      <Button
+                        onClick={makeNewChat}
+                        style={{
+                          margin: 2,
+                          borderRadius: 10,
+                          backgroundColor: "#21b6ae",
+                          padding: "5px 10px",
+                          fontSize: "10px",
+                        }}
+                        variant="contained"
+                      >
+                        Make a connection
+                        <EmailIcon />
+                      </Button>
 
-}
+                    }
                   </p>
 
                 </CardContent>
@@ -300,25 +312,14 @@ export default function OtherProfile() {
                     <Grid container alignItems="stretch">
                       {userProposalsCards}
                       {userProposals.length == 0 ? (
-                        <p>
+                        <h4 style={styleObj}>
                           {otherUser.userhandle} hasn't published any proposals
                           yet{" "}
-                        </p>
+                        </h4>
                       ) : (
                         <></>
-                      )}
-
-                      {/* <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>{userProposalsCards}</h4>
-                        </CardContent>
-                        <CardActions>
-                          {userProposalsCards}
-                          {userProposals.length==0 ? <p>No proposals here yet</p> : <></>} 
-                        </CardActions>
-
-
-                      </Grid> */}
+                      )
+                      }
                     </Grid>
                   </CardContent>
                 </Card>
