@@ -140,6 +140,12 @@ export default function UserProfile() {
         <Container className="root-container">
           <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}> */}
 
+
+
+
+
+
+
             {/* USER PROFILE GRID----------------------------------------------------- */}
             {/* <Grid container item xs={1} sm={2} lg={3} >
               <Card>
@@ -228,7 +234,59 @@ export default function UserProfile() {
       <Grid container spacing={2} columns={16}  justifyContent="center"
 >
         <Grid item xs={3}>
-          <Item>xs=8</Item>
+          <Item>
+
+
+
+            {/* USER PROFILE GRID----------------------------------------------------- */}
+              <Card>
+                <CardContent>
+                  <h1 className="userHandle">  {self.userhandle} </h1>
+                  <Avatar 
+                    alt="avatar"
+                    src={self.avatar}
+                    sx={{ width: 150, height: 150 }}
+                  />
+                  <br/>
+                  <p>
+                    <div className="socialIcons">
+                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon /></Link>}
+                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon /></Link>}
+                    </div>
+                    <br />
+                    <h3>Role:</h3>
+                    {self.role}
+                    <br />
+                     <Divider />
+                    <br />
+                    <h3>Description:</h3>
+                    {self.bio} 
+                    <br />
+                    <Divider />
+                    <br />
+                    <h3>Skills: </h3>
+                    {self.skills && self.skills.join(" | ")}
+                    {/* <br /> */}
+                    <Divider />
+                    <br />
+                    <Link to="/My-Profile/:id/edit" >
+                     <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button style={{ margin: 10 }} variant="contained">
+                      Edit Profile
+                    </Button>
+                    </div>
+                    </Link>
+                  </p>
+                </CardContent>
+              </Card>
+
+            
+
+
+          </Item>
         </Grid>
         <Grid item xs={7}>
           <Item>xs=8</Item>
