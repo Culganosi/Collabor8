@@ -60,13 +60,13 @@ export default function UserProfile() {
   useEffect(() => {
     //If the self variable is {}, load the info again
 
-    if(Object.keys(self).length==0) {
+    //if(Object.keys(self).length==0) {
       axios.get("/users/self")
         .then((res) => {
           // console.log(res.data.skills)
           setSelf(res.data)
         })
-    }
+    //}
 
     axios.get("/proposals/self")
       .then(res => {
