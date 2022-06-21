@@ -87,10 +87,10 @@ export default function CreateProfile() {
                 <Box>
                   <Typography
                     className={classes.title}
-                    variant="h5"
+                    variant="h6"
                     color="secondary"
                   >
-                    Select preferred Role
+                    Which role best describes you?
                   </Typography>
 
                   <Grid container>
@@ -131,12 +131,12 @@ export default function CreateProfile() {
                   variant="h6"
                   color="secondary"
                 >
-                  Short Bio
+                  Describe yourself in one sentence!
                 </Typography>
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Enter a short description"
+                    label="Write a short and sweet intro"
                     multiline
                     rows={1}
                     defaultValue=""
@@ -149,17 +149,18 @@ export default function CreateProfile() {
                 </div>
                 <SocialListItem setSocialMedia={setSocialMedia} />
 
+                <br />
                 <Typography
                   className={classes.title}
                   variant="h6"
                   color="secondary"
                 >
-                  Bio
+                  And now write as much as you want to help Collab||8'ors know you better!
                 </Typography>
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Enter your Bio"
+                    label="Tell us more about yourself"
                     multiline
                     rows={6}
                     defaultValue={bio}

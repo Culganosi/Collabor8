@@ -56,10 +56,10 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                     <Grid item style={{ marginBottom: 15 }}>
                       <Typography
                         className={classes.title}
-                        variant="h5"
+                        variant="h6"
                         color="secondary"
                       >
-                        Select Skills
+                        What are some key skills you want to show off?
                       </Typography>
                     </Grid>
 
@@ -70,12 +70,11 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                         sx={{ m: 3 }}
                         variant="standard"
                       >
-                        <Grid container spacing={2}>
+                        <Grid container spacing={6}>
                           <Grid item>
 
-
                           <FormLabel component="legend">Front-End</FormLabel>
-                          <FormGroup>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
@@ -144,7 +143,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                      
                           <Grid item>
                           <FormLabel component="legend">Back-End</FormLabel>
-                          <FormGroup>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
@@ -193,7 +192,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
 
                           
                           <FormLabel component="legend">UX/UI</FormLabel>
-                          <FormGroup>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
@@ -230,7 +229,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                         
                           <Grid item>
                           <FormLabel component="legend">Other</FormLabel>
-                          <FormGroup>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
