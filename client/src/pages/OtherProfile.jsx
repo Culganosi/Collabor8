@@ -192,45 +192,6 @@ export default function OtherProfile() {
                     src={otherUser.avatar}
                     sx={{ width: 56, height: 56 }}
                   />
-
-                  {chatId? 
-
-                  //If the user logged in already has a connection with the otherUser
-                  <Button
-                    onClick={goToChat}
-                    style={{ margin: 2 }}
-                    style={{
-                      borderRadius: 10,
-                      backgroundColor: "#21b6ae",
-                      padding: "5px 10px",
-                      fontSize: "10px",
-                    }}
-                    variant="contained"
-                  >
-                    Send a Message
-                    <EmailIcon />
-                  </Button>
-
-                 :
-
-                 //If no chat connection exists yet
-                  <Button
-                    onClick={makeNewChat}
-                    style={{
-                      margin: 2,
-                      borderRadius: 10,
-                      backgroundColor: "#21b6ae",
-                      padding: "5px 10px",
-                      fontSize: "10px",
-                    }}
-                    variant="contained"
-                  >
-                    Make a connection
-                    <EmailIcon />
-                  </Button>
-
-                  }
-
                   <p>
                     <div>
                       {otherUser.socialMedia &&
@@ -285,7 +246,46 @@ export default function OtherProfile() {
                     <br />
                     <h3>Skills: </h3>
                     {otherUser.skills && otherUser.skills.join(" | ")}
+                    <br />
+                    {chatId? 
+
+
+//If the user logged in already has a connection with the otherUser
+<Button
+  onClick={goToChat}
+  style={{ margin: 2,
+    borderRadius: 10,
+    backgroundColor: "#21b6ae",
+    padding: "5px 10px",
+    fontSize: "10px",
+  }}
+  variant="contained"
+>
+  Send a Message
+  <EmailIcon />
+</Button>
+
+:
+
+//If no chat connection exists yet
+<Button
+  onClick={makeNewChat}
+  style={{
+    margin: 2,
+    borderRadius: 10,
+    backgroundColor: "#21b6ae",
+    padding: "5px 10px",
+    fontSize: "10px",
+  }}
+  variant="contained"
+>
+  Make a connection
+  <EmailIcon />
+</Button>
+
+}
                   </p>
+
                 </CardContent>
               </Card>
             </Grid>
