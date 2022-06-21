@@ -33,7 +33,7 @@ function SocialListItem({setSocialMedia}) {
 
         <Grid item>
           <Typography className={classes.title} variant="h6" color="secondary">
-            LinkedIn URL
+            LinkedIn
           </Typography>
           <Box component="form" noValidate autoComplete="off">
             <TextField

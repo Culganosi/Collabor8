@@ -149,9 +149,8 @@ export default function CreateProfile() {
       <Box border={2} padding={5} margin={6} borderRadius={16}>
         <Grid container justify="center" alignItems="stretch">
           <Grid item>
-            <Paper className={classes.card} elevation={4}>
+            <Paper className={classes.card} elevation={2} style={{padding: "20px 30px"}}>
               <CardContent>
-
 
                 {/* Avatar selection here */}
 
@@ -164,8 +163,6 @@ export default function CreateProfile() {
                     The avatar is the window to the soul
                   </Typography>
 
-
-
                   {/* Display either the preview or the circular button */}
                   {imageAsPreview ? 
                   <img src={imageAsPreview} className="avatar-preview" onClick={handleCircleClick}/> :
@@ -176,27 +173,6 @@ export default function CreateProfile() {
                   <form>
                     <input type="file" inputProps={{ accept: 'image/*' }} name="avatar" onChange={handleImageAsFile}  style={{display: "none"}} ref={fileInputRef} />
                   </form>
-
-
-
-                {/* <CardMedia
-                  className={classes.createProfMedia}
-                  image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg"
-                /> */}
-                {/* <Grid container justify="center">
-                  <Grid item>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      component="label"
-                      style={{ marginTop: "30px" }}
-                    >
-                      Upload Profile Picture
-                      <input type="file" hidden />
-                    </Button>
-                  </Grid>
-                </Grid> */}
-
 
 
                 <Box>
@@ -235,11 +211,18 @@ export default function CreateProfile() {
                     </Grid>
                   </Grid>
 
+                  <br />
                   <SkillListItem
                     skillsObject={skillsObject}
                     setSkillsObject={setSkillsObject}
                   />
                 </Box>
+
+                <br />
+
+                <SocialListItem setSocialMedia={setSocialMedia} />
+
+                <br />
 
                 <Typography
                   className={classes.title}
@@ -252,7 +235,7 @@ export default function CreateProfile() {
                   <TextField
                     id="filled-multiline-static"
                     inputProps={{ maxLength: 100 }}
-                    label="Write a short-n-sweet intro"
+                    label="Write a short & sweet intro"
                     multiline
                     rows={1}
                     defaultValue=""
@@ -263,7 +246,6 @@ export default function CreateProfile() {
                     onChange={(event) => setShortBio(event.target.value)}
                   />
                 </div>
-                <SocialListItem setSocialMedia={setSocialMedia} />
 
                 <br />
                 <Typography
@@ -286,6 +268,8 @@ export default function CreateProfile() {
                     onChange={(event) => setBio(event.target.value)}
                   />
                 </div>
+
+                
               </CardContent>
               <div>
                 <Grid container spacing={2} justifyContent="center">

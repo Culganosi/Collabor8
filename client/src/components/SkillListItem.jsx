@@ -13,6 +13,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
+
 export default function SkillListItem({skillsObject, setSkillsObject}) {
 
   
@@ -64,8 +65,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                     </Grid>
 
                     <Grid container wrap="nowrap">
-                      <FormControl
-                        required
+                      <FormControl                        
                         component="fieldset"
                         sx={{ m: 3 }}
                         variant="standard"
@@ -73,12 +73,13 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                         <Grid container spacing={6}>
                           <Grid item>
 
-                          <FormLabel component="legend">Front-End</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
+                          <FormLabel component="legend" style={{color: "blueviolet"}}>Front-end</FormLabel>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "11px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
                                   checked={html}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="html"
                                 />
@@ -89,6 +90,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={css}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="css"
                                 />
@@ -99,6 +101,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={sass}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="sass"
                                 />
@@ -109,6 +112,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={jquery}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="jquery"
                                 />
@@ -120,6 +124,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={reactjs}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="reactjs"
                                 />
@@ -131,6 +136,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={angularjs}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="angularjs"
                                 />
@@ -142,12 +148,13 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                         
                      
                           <Grid item>
-                          <FormLabel component="legend">Back-End</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
+                          <FormLabel component="legend" style={{color: "blueviolet"}}>Back-end</FormLabel>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "11px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
                                   checked={nodejs}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="nodejs"
                                 />
@@ -158,6 +165,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={express}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="express"
                                 />
@@ -167,6 +175,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                             <FormControlLabel
                               control={
                                 <Checkbox
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   checked={sql}
                                   onChange={handleSkill}
                                   name="sql"
@@ -178,6 +187,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={mongodb}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="mongodb"
                                 />
@@ -191,16 +201,13 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                           <Grid item>
 
                           
-                          <FormLabel component="legend">UX/UI</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
+                          <FormLabel component="legend" style={{color: "blueviolet"}}>UX/UI</FormLabel>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "11px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
-                                style ={{
-                                  color: "pink",
-                                  borderSize: "1px"
-                                }}
                                   checked={photoshop}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="photoshop"
                                 />
@@ -211,6 +218,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={figma}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="figma"
                                 />
@@ -220,6 +228,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                             <FormControlLabel
                               control={
                                 <Checkbox
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   checked={uxresearch}
                                   onChange={handleSkill}
                                   name="exresearch"
@@ -232,11 +241,12 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                        
                         
                           <Grid item>
-                          <FormLabel component="legend">Other</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "10px"}}>
+                          <FormLabel component="legend" style={{color: "blueviolet"}}>Other</FormLabel>
+                          <FormGroup style={{marginTop: "10px", marginLeft: "11px"}}>
                             <FormControlLabel
                               control={
                                 <Checkbox
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   checked={git}
                                   onChange={handleSkill}
                                   name="git"
@@ -248,6 +258,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={tdd}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="tdd"
                                 />
@@ -258,6 +269,7 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                               control={
                                 <Checkbox
                                   checked={vscode}
+                                  style={{color: "blueviolet", marginRight: "5px"}}
                                   onChange={handleSkill}
                                   name="vscode"
                                 />
