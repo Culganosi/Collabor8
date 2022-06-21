@@ -2,7 +2,7 @@ import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import useStyles from "../styles";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Typography,
   Button,
@@ -18,6 +18,12 @@ import SkillListItem from "../components/SkillListItem";
 import SocialListItem from "../components/SocialListItem";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+//Import firebase config
+import {storage} from "./../config"
+
+//CSS STYLE IMPORT
+import "./CreateProfile.css"
 
 export default function CreateProfile() {
   const navigate = useNavigate();
@@ -51,6 +57,46 @@ export default function CreateProfile() {
     });
   };
 
+
+  ///-----------For image upload
+
+  const [imageAsFile, setImageAsFile] = useState('')
+  const [imageAsUrl, setImageAsUrl] = useState('')
+  const [imageAsPreview, setImageAsPreview] = useState('')
+  const fileInputRef = useRef()
+
+
+  //When the circular button is clicked, redirect to click the file upload instead
+  const handleCircleClick = (event) => {
+    event.preventDefault();
+    fileInputRef.current.click();
+  }
+
+  //When user chooses a new image, store it if it's valid
+  const handleImageAsFile = (e) => {
+    const image = e.target.files[0]
+    if (image && image.type.substr(0, 5)==="image") {
+      setImageAsFile(imageFile => (image))
+    }
+  }
+
+  //When the user's uploaded image changes
+  //read it into a data string and store it
+  useEffect(() => {
+    if (imageAsFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageAsPreview (reader.result)
+      }
+      reader.readAsDataURL(imageAsFile)
+    }
+  }, [imageAsFile])
+  
+
+
+
+  ///
+
   return (
     <div className={classes.container}>
       <Container max-Width="sm">
@@ -67,11 +113,39 @@ export default function CreateProfile() {
           <Grid item>
             <Paper className={classes.card} elevation={4}>
               <CardContent>
-                <CardMedia
+
+
+                {/* Avatar selection here */}
+
+                <Typography
+                    className={classes.title}
+                    style={{marginBottom: "10px"}}
+                    variant="h6"
+                    color="secondary"
+                  >
+                    The avatar is the window to the soul
+                  </Typography>
+
+
+
+                  {/* Display either the preview or the circular button */}
+                  {imageAsPreview ? 
+                  <img src={imageAsPreview} className="avatar-preview" onClick={handleCircleClick}/> :
+                  <button className="avatar-button" onClick={handleCircleClick}>Add an avatar</button>
+                  }
+
+                  {/* This is actually hidden */}
+                  <form>
+                    <input type="file" inputProps={{ accept: 'image/*' }} name="avatar" onChange={handleImageAsFile}  style={{display: "none"}} ref={fileInputRef} />
+                  </form>
+
+
+
+                {/* <CardMedia
                   className={classes.createProfMedia}
                   image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg"
-                />
-                <Grid container justify="center">
+                /> */}
+                {/* <Grid container justify="center">
                   <Grid item>
                     <Button
                       variant="outlined"
@@ -83,16 +157,19 @@ export default function CreateProfile() {
                       <input type="file" hidden />
                     </Button>
                   </Grid>
-                </Grid>
+                </Grid> */}
+
+
+
                 <Box>
                   <Typography
                     className={classes.title}
+                    style={{marginBottom: "10px"}}
                     variant="h6"
                     color="secondary"
                   >
                     Which role best describes you?
                   </Typography>
-
                   <Grid container>
                     <Grid item xs={10}>
                       <ToggleButtonGroup
@@ -104,16 +181,16 @@ export default function CreateProfile() {
                         exclusive
                         onChange={(event) => setRole(event.target.value)}
                       >
-                        <ToggleButton value="UX/UI designer">
+                        <ToggleButton value="UX/UI designer" style={{borderRadius: "15px", marginRight: "10px"}}>
                           UX/UI designer
                         </ToggleButton>
-                        <ToggleButton value="Front-end developer">
+                        <ToggleButton value="Front-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                           Front-end developer
                         </ToggleButton>
-                        <ToggleButton value="Back-end developer">
+                        <ToggleButton value="Back-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                           Back-end developer
                         </ToggleButton>
-                        <ToggleButton value="Full-stack developer">
+                        <ToggleButton value="Full-stack developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                           Full-stack developer
                         </ToggleButton>
                       </ToggleButtonGroup>
@@ -131,12 +208,13 @@ export default function CreateProfile() {
                   variant="h6"
                   color="secondary"
                 >
-                  Describe yourself in one sentence!
+                  Describe yourself in 100 characters or less!
                 </Typography>
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Write a short and sweet intro"
+                    inputProps={{ maxLength: 100 }}
+                    label="Write a short-n-sweet intro"
                     multiline
                     rows={1}
                     defaultValue=""
@@ -160,7 +238,7 @@ export default function CreateProfile() {
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label="Tell us more about yourself"
+                    label="Share more about your background and interests, what collaborations you're seeking, or anything else!"
                     multiline
                     rows={6}
                     defaultValue={bio}

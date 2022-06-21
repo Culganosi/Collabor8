@@ -196,6 +196,10 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
                             <FormControlLabel
                               control={
                                 <Checkbox
+                                style ={{
+                                  color: "pink",
+                                  borderSize: "1px"
+                                }}
                                   checked={photoshop}
                                   onChange={handleSkill}
                                   name="photoshop"

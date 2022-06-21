@@ -36,9 +36,6 @@ function ImageUpload () {
       }) })
   }
 
-
-
-
   
   //When the circular button is clicked, redirect to click the file upload instead
   const handleCircleClick = (event) => {
