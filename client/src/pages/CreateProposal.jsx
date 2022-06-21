@@ -23,9 +23,7 @@ import {storage} from "./../config"
 //CSS STYLE IMPORT
 import "./CreateProposal.css"
 
-
 export default function CreateProposal() {
-
 
   const [title, setTitle] = React.useState("");
   const [seeking, setSeeking] = React.useState([]);
@@ -35,8 +33,8 @@ export default function CreateProposal() {
   const [imageAsFile, setImageAsFile] = useState('')
   const [imageAsUrl, setImageAsUrl] = useState('')
   const [imageAsPreview, setImageAsPreview] = useState('')
-
   const fileInputRef = useRef()
+  //Other
   const navigate = useNavigate();
   const classes = useStyles();
 
@@ -63,9 +61,8 @@ export default function CreateProposal() {
       navigate("/My-Profile");
     });
   };
-
-
    
+  
   ///-----------For image upload
 
   //When the circular button is clicked, redirect to click the file upload instead
@@ -169,8 +166,7 @@ export default function CreateProposal() {
                     Image
                   </Typography>
 
-
-                                    {/* Display either the preview or the circular button */}
+                  {/* Display either the preview or the circular button */}
                   {imageAsPreview ? 
                   <img src={imageAsPreview} className="proposal-image-preview" onClick={handlePreviewClick}/> :
                   <button className="proposal-image-button" onClick={handlePreviewClick}>Upload an image</button>
