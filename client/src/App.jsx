@@ -17,11 +17,11 @@ import Login from "./pages/Login";
 import OtherProfile from "./pages/OtherProfile";
 import UserProfile from "./pages/UserProfile";
 import SignIn from "./pages/SignIn"
-import Messages from "./pages/Messages"
 import CreateProposal from "./pages/CreateProposal";
 import Register from "./pages/Register";
 import styled from "styled-components";
 import Chat from "./pages/Chat/index";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
 
@@ -46,11 +46,11 @@ function App() {
         activeChatFull, setActiveChatFull,
       }}>
     <>
-    <Wrapper className='App'>
+    {/* <Wrapper className='App'> */}
     {location.pathname === '/' ? null : <Nav />}
 
     <CssBaseline />
-
+    {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
@@ -67,24 +67,24 @@ function App() {
         <Route path="/My-Profile/:id" element={<OwnProp />} />
         <Route path="/My-Profile/:id/edit" element={<EditModal />} />
         <Route path="/Logout" element={<Dashboard />} />
-        <Route path="/Messages" element={<Messages />} />
         <Route path="/Chat" element={<Chat />} />
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
+        <Route path="/Edit-Profile" element={<EditProfile />} />
       </Routes>
-      </Wrapper>
+      {/* </Wrapper> */}
     </>
     <Footer />
 
     </DataContext.Provider>
   );
 }
-const Wrapper = styled.div`
-position: relative;
-background: #1f1144;
-canvas {
-  height: 500px;
-}
-`;
+// const Wrapper = styled.div`
+// position: relative;
+// background: #1f1144;
+// canvas {
+//   height: 500px;
+// }
+// `;
 
 export default App;

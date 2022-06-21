@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
+
+  cardUser: {
+    height: '100%',
+  },
+
   cardMedia:{
     paddingTop: '56.25%'
   },
@@ -39,13 +44,13 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '30%'
 
   },
-  cardMediaUser:{
-    borderRadius: '100%',
-    width: '50%',
-    height: 320,
-    marginLeft: '25%',
-    marginBottom: 10
-  },
+  // cardMediaUser:{
+  //   borderRadius: '100%',
+  //   width: '50%',
+  //   height: 320,
+  //   marginLeft: '25%',
+  //   marginBottom: 10
+  // },
   proposalImg:{
     borderRadius: '100%',
     width: '50%',

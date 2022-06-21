@@ -86,16 +86,16 @@ export default function BrowseUsers() {
         </Container>
       </div>
       <Box border={2} padding={5} margin={2} borderRadius={16}>
-        <Container className={classes.cardGrid} maxWidth="xl">
+    
 
-          <Grid container spacing={4}>
+          <Grid container spacing={4} >
 
             {listOfUserCards}
 
           
           </Grid>
 
-        </Container>
+    
       </Box>
     </main>
   );

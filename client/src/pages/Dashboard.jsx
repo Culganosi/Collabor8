@@ -9,6 +9,8 @@ import ProposalCard from "../components/ProposalCard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
 import UserCard from "../components/UserCard";
+import Cats from "../components/Cats";
+import Jokes from "../components/Jokes";
 
 const useStyles = makeStyles({
 
@@ -35,7 +37,7 @@ const useStyles = makeStyles({
 export default function Dashboard() {
     const classes = useStyles();
 
-    //FETCH PROPOSALS---------------------------------------
+    //FETCH PROPOSALS--------------------------------------------------
     const [proposals, setProposals] = useState([])
     const [profiles, setProfiles] = useState([])
 
@@ -64,7 +66,7 @@ export default function Dashboard() {
             );
         });
     }
-    //FETCH USERS ---------------------------------------
+    //FETCH USERS -------------------------------------------------------
     useEffect(() => {
         axios.get("/recommend/users")
             .then(res => {
@@ -89,8 +91,6 @@ export default function Dashboard() {
             </Grid>
         )
     })
-    //FETCH CAT API ------------------------------------------------
-
 
     const Item = styled(Paper)(({ theme }) => ({
         backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -99,6 +99,7 @@ export default function Dashboard() {
         textAlign: 'center',
         color: theme.palette.text.secondary,
     }));
+
     return (
         <>
             <div className={classes.headercontainer}>
@@ -111,96 +112,97 @@ export default function Dashboard() {
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
                 Browse through the follwing proposals and users that you might be interested to work with.
             </Typography>
-
-            <Container maxWidth={200}>
-                <Grid container spacing={3}>
-                    {/* PROPOSALS COLUMN --------------------------*/}
-                    <Grid container item xs={4}  >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    <h1>Latest proposals that are seeking your skills:</h1>
-                                    <br />
-                                    <Container className={classes.cardMedia} maxWidth="xl">
-                                        <Grid container spacing={1}>
-                                            {listOfProposalCards}
-                                        </Grid>
-                                    </Container>
-
-                                    <Link to="/Proposals" style={{ textDecoration: 'none' }}>
-                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                            <Button style={{ margin: 17 }} variant="outlined" color="secondary" >
-                                                Look at more proposals
-                                            </Button>
-                                        </div>
-                                    </Link>
-
-                                </p>
-                            </CardContent>
-                        </Card>
+            <div >
+                <Box sx={{ flexGrow: 1 }} > 
+              {/* sx={{  alignContent: 'stretch'}} */}
+                    <Grid container spacing={1} columns={16} >
+                        <Grid item xs={4}>
+                            <Item>
+                                {/* PROPOSALS COLUMN -------------------------------------*/}
+                                <Card>
+                                    <CardContent>
+                                        <p>
+                                            <br />
+                                            <h1>Latest proposals that are seeking your skills:</h1>
+                                            <Divider />
+                                            <br />
+                                            <Container className={classes.cardMedia} maxWidth="xl">
+                                                <Grid container spacing={1}>
+                                                    {listOfProposalCards}
+                                                </Grid>
+                                            </Container>
+                                            <Link to="/Proposals" style={{ textDecoration: 'none' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                    <Button style={{ margin: 17 }} variant="outlined" color="secondary" >
+                                                        Look at more proposals
+                                                    </Button>
+                                                </div>
+                                            </Link>
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Item>
+                                {/* USERS COLUMN-------------------------------------------*/}
+                                <Card>
+                                    <CardContent>
+                                        <p>
+                                            <br />
+                                            {profiles.length > 0 ? <> <h1>Users to consider for your active proposals:</h1> <Divider />  </>:
+                                                <>
+                                                    <h1>Publish your first proposal to get recommendations for collaborators</h1>
+                                                    <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
+                                                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                            <Button style={{ margin: 17 }} variant="contained" color="secondary">
+                                                                Post a proposal
+                                                            </Button>
+                                                        </div>
+                                                    </Link>
+                                                </>
+                                            }
+                                            <br />
+                                            <Container className={classes.cardGrid} maxWidth="xl">
+                                                <Grid container spacing={2}>
+                                                    {listOfUserCards}
+                                                </Grid>
+                                            </Container>
+                                            {profiles.length > 0 ?
+                                                <Link to="/People" style={{ textDecoration: 'none' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                                                        <Button style={{ margin: 17 }} variant="outlined" color="secondary">
+                                                            Look at more users
+                                                        </Button>
+                                                    </div>
+                                                </Link>
+                                                : <></>}
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </Item>
+                        </Grid>
+                        <Grid item xs={4}>
+                            <Item>
+                                {/* MEMES COLUMN------------------------------------------ */}
+                                <Card>
+                                    <CardContent>
+                                        <p>
+                                            <br />
+                                            <h1>Relaxing corner</h1>
+                                            <Divider />
+                                            <br />
+                                            <Cats />
+                                            <br />
+                                            <Jokes />
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </Item>
+                        </Grid>
                     </Grid>
-                    {/* USERS COLUMN-------------------------------- */}
-                    <Grid container item xs={4} >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    {profiles.length > 0 ? <h1>Users to consider for your active proposals:</h1> : 
-                                        <>
-                                        <h1>Publish your first proposal to get recommendations for collaborators</h1>
-                                        <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
-                                            <div style={{display: 'flex', justifyContent: 'center'}}>
-                                            <Button style={{ margin: 17}} variant="contained" color="secondary">
-                                                Post a proposal
-                                            </Button>
-                                            </div>
-                                        </Link>
-                                        </>
-
-                                    }
-                                    <br />
-                                    <Container className={classes.cardGrid} maxWidth="xl">
-                                        <Grid container spacing={2}>
-                                            {listOfUserCards}
-                                        </Grid>
-                                    </Container>
-
-                                    {profiles.length > 0 ?
-                                        <Link to="/People" style={{ textDecoration: 'none' }}>
-                                            <div style={{ display: 'flex', justifyContent: 'center' }}>
-                                                <Button style={{ margin: 17 }} variant="outlined" color="secondary">
-                                                    Look at more users
-                                                </Button>
-                                            </div>
-                                        </Link>
-                                        : <></>}
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                    {/* MEMES COLUMN---------------------------------- */}
-                    <Grid container item xs={4}  >
-                        <Card>
-                            <CardContent>
-                                <p>
-                                    <br />
-                                    <h1>Just cat memes and other memes:</h1>
-                                    <br />
-                                    <div>
-                                        <button >Get random cat!</button>
-                                    </div>
-
-                                    <h3>Look at the kitties: </h3>
-                                    <br />
-                                    <img src="https://cdn2.thecatapi.com/images/MjA2NjQzMw.jpg" />
-
-                                </p>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-                </Grid>
-            </Container>
+                </Box>
+            </div>
         </>
     )
 }

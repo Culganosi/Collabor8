@@ -128,9 +128,29 @@ module.exports = (User, Proposal) => {
 
     //Permanently delete a proposal
     router.delete("/:proposalId", async (req, res) => {
+
           console.log("In DELETE /proposals/:id")
 
-         Proposal.findByIdAndRemove(req.params.proposalId)
+          const targetProposalId = req.params.proposalId
+
+          const targetProposal = await Proposal.findById(targetProposalId)
+          const proposalAuthorId = targetProposal.author
+
+          const targetAuthor = await User.findById(proposalAuthorId)
+          
+          if (targetAuthor.activeProposals.includes(targetProposalId)) {
+               const index = targetAuthor.activeProposals.indexOf(targetProposalId);
+               targetAuthor.activeProposals.splice(index, 1)
+               await targetAuthor.save()
+          } 
+
+          if (targetAuthor.inactiveProposals.includes(targetProposalId)) {
+               const index = targetAuthor.inactiveProposals.indexOf(targetProposalId);
+               targetAuthor.inactiveProposals.splice(index, 1)
+               await targetAuthor.save()
+          } 
+
+         Proposal.findByIdAndRemove(targetProposalId)
          .then(() => res.status(200).json({message: "success"}))
          .catch((error) => res.status(400).json({message: error.message}))
     })

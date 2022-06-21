@@ -7,7 +7,7 @@ import { DataContext } from "./../DataContext";
 import OtherProfile from "./OtherProfile";
 import { Link } from "react-router-dom";
 import {useParams, useNavigate} from 'react-router-dom';
-
+import EmailIcon from "@mui/icons-material/Email";
 
 import {
   Typography,
@@ -17,23 +17,49 @@ import {
   Grid,
 } from "@material-ui/core";
 
+
+
 export default function OthersProp() {
 
   const classes = useStyles();
 
+  const {setActiveChatId} = useContext(DataContext);
 
 
   const [proposal, setProposal] = useState({})
   const [author, setAuthor] = useState({});
+  const [chatId, setChatId] = useState("")
+
+  const navigate = useNavigate();
 
   const params = useParams();
   const proposalId = params.id
 
+
+  //-----------------HELPER FUNCTIONS
+
+  const goToChat = () => {
+    setActiveChatId(chatId)
+    navigate("/Chat")
+  }
+
+  const makeNewChat = () => {
+    //Axios post with new message, then navigate to chat
+    axios.post("/chats", {recipientId: author._id, firstMessageText: `Connection created on ${Date.now()}`})
+    .then((res) => {
+        setActiveChatId(res.data.chatId)
+        navigate("/chat")
+    })
+  }
+
   
+  //------------------REFRESH
+
+  //Get info about the proposal and author
   useEffect(() => {
 
     async function getInfo () {
-      
+
       const proposalResponse = await axios.get(`/proposals/${proposalId}`)
       setProposal(proposalResponse.data)
 
@@ -47,9 +73,23 @@ export default function OthersProp() {
 
   }, []);
 
-  // const proposal = {
+    //See if the person logged in has a chat connection to the author
+    useEffect(() => {
+      axios.get("/chats/self/chat-previews")
+      .then(res => {
+        console.log("The response")
+        console.log(res.data)
+        const chatPreviews = res.data
+        for (let chat of chatPreviews) {
+          if (chat.partner == author._id) {
+            setChatId(chat._id)
+          }
+        }
+      })
+    }, [author])
 
-  // }
+
+    //----------------RENDER
 
 return (
   <Box p={5}>
@@ -79,9 +119,44 @@ return (
               <Typography className={classes.bio}></Typography>
               <Box textAlign="center">
 
-                <Button variant="contained" color="secondary">
-                  Message User
+              {chatId? 
+
+                //If the user logged in already has a connection with the otherUser
+                <Button
+                  onClick={goToChat}
+                  style={{ margin: 2 }}
+                  style={{
+                    borderRadius: 10,
+                    backgroundColor: "#21b6ae",
+                    padding: "5px 10px",
+                    fontSize: "10px",
+                  }}
+                  variant="contained"
+                >
+                  Send a Message
+                  <EmailIcon />
                 </Button>
+
+                :
+
+                //If no chat connection exists yet
+                <Button
+                  onClick={makeNewChat}
+                  style={{ margin: 2 }}
+                  style={{
+                    borderRadius: 10,
+                    backgroundColor: "#21b6ae",
+                    padding: "5px 10px",
+                    fontSize: "10px",
+                  }}
+                  variant="contained"
+                >
+                  Make a connection
+                  <EmailIcon />
+                </Button>
+
+                }
+
               </Box>
             </CardContent>
           </Paper>

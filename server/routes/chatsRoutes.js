@@ -29,7 +29,8 @@ module.exports = (User, Chat, Proposal) => {
             messages: [{
                 author: authorId,
                 text: firstMessageText,
-                sentAt: Date.now()
+                sentAt: Date.now(),
+                type: "init"
             }],
             lastMessageAt: Date.now()
         })
@@ -109,6 +110,7 @@ module.exports = (User, Chat, Proposal) => {
                 return (!participant.equals(userId))
             })[0]
 
+
             const chatPreview = {
                 lastMessage, 
                 partner, 
@@ -116,7 +118,7 @@ module.exports = (User, Chat, Proposal) => {
             }
             chatPreviews.push(chatPreview)
         }
-        
+
         res.json(chatPreviews)
 
     });

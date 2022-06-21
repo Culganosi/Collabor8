@@ -1,0 +1,15 @@
+.proposal-image-button {
+    width: 400px;
+    height: 225px;
+    border: none;
+    background: rgb(240, 221, 236);
+    border-radius: 15px;
+    color: rgb(54, 54, 103);
+}
+
+.proposal-image-preview {
+    width: 400px;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 15px;
+}

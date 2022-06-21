@@ -12,20 +12,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+
 import CameraIcon from "@mui/icons-material/Camera";
 import MailIcon from "@mui/icons-material/Mail";
 import Badge from "@mui/material/Badge";
 import { Link } from "react-router-dom";
-import {DataContext} from "./../DataContext";
+import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Login", "Register", "Messages", "Chat"];
+const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat", "Edit-Profile"];
 const settings = ["Logout"];
 
 const ResponsiveAppBar = () => {
   const navigate=useNavigate();
   const {self, setSelf} = useContext(DataContext);
-
 
   const logout = () => {
     axios
@@ -195,7 +195,7 @@ const ResponsiveAppBar = () => {
             >
                 <MenuItem key={settings} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link style={{textDecoration: "none", color: "white"}} onClick ={() => this.logout()} to={`/Logout`}>Logout</Link>
+                    <Link style={{textDecoration: "none", color: "white"}} onClick ={() => logout()} to={`/Logout`}>Logout</Link>
                   </Typography>
                 </MenuItem>
             </Menu>

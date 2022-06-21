@@ -7,6 +7,7 @@ const chatSchema = new mongoose.Schema ({
         author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', immutable: true},
         sentAt: {type: Date, immutable: true},
         text: {type: String, immutable: true},
+        type: {type: String, immutable: true}
     }]
 
 })

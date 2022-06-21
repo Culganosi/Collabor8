@@ -21,6 +21,14 @@
 .userHandle {
   font-weight: 400;
 }
+.handleimage {
+  display:flex;
+
+}
+.socialIcons {
+  display: flex;
+  justify-content: space-around;
+}
 
 /* .archived {
   display: flex;

@@ -1,0 +1,15 @@
+.avatar-button {
+    width: 150px;
+    height: 150px;
+    border: none;
+    background: rgb(240, 221, 236);
+    border-radius: 50%;
+    color: rgb(54, 54, 103);
+}
+
+.avatar-preview {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}

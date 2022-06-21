@@ -51,7 +51,7 @@ const Chat = () => {
 
   const {self, setSelf, setChatPreviews, setProfiles, setActiveChatId, activeChatId, activeChatFull, setActiveChatFull} = useContext(DataContext);
  
-  const [newMessage, setNewMessage] = useState()
+  const [newMessage, setNewMessage] = useState("")
 
   const [conn, setConn] = useState(null)
 
@@ -81,14 +81,17 @@ const Chat = () => {
         setChatPreviews(chatPrevRes.data);
   
         let defaultActiveChatId=""
-  
-        if (chatPrevRes.data.length > 0) {
-          defaultActiveChatId = chatPrevRes.data[0]._id
-        } else {
-          setActiveChatFull([])
+
+        //If we don't know which chat to go to
+        if (activeChatId=="") {
+
+            if (chatPrevRes.data.length > 0) {
+              //If options exist, choose the first one
+              setActiveChatId(chatPrevRes.data[0]._id)
+            } else {
+              setActiveChatFull([])
+            }
         }
-  
-        setActiveChatId(defaultActiveChatId)
   
         //If we haven't kept the active chat in local yet, choose the first one
 
@@ -267,10 +270,21 @@ const Chat = () => {
                 <Divider />
                 <Grid container style={{padding: '20px'}}>
                     <Grid item xs={11}>
-                        <TextField id="outlined-basic-email" label="Type Something" fullWidth  onChange={(event) => setNewMessage(event.target.value)} />
+                        <TextField id="outlined-basic-email" label="Type Something" fullWidth value={newMessage} 
+                        onChange={(event) => setNewMessage(event.target.value)} 
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            submitNewMessage()
+                            setNewMessage("")
+                          }
+                        }}
+                        />
                     </Grid>
                     <Grid xs={1} align="right">
-                        <Fab color="primary" aria-label="add"><SendIcon onClick={() => submitNewMessage()} /></Fab>
+                        <Fab color="primary" aria-label="add"><SendIcon onClick={() => {
+                          submitNewMessage()
+                          setNewMessage("")
+                        }} /></Fab>
                     </Grid>
                 </Grid>
             </Grid>
