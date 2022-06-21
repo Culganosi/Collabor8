@@ -5,6 +5,7 @@ module.exports = (User) => {
 
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
+        console.log("In GET /users")
         let {filterInput, sortInput} = req.body;
 
         if (!filterInput) {
@@ -42,7 +43,7 @@ module.exports = (User) => {
                 rearrangedData[user._id] = user;
             })
 
-            res.json(rearrangedData)}
+            res.status(200).json(rearrangedData)}
             
         )
         .catch(dbError => res.status(500).json({error: dbError.message}))
@@ -54,7 +55,10 @@ module.exports = (User) => {
     //NOTE: This route must stay above the next one so that "self" is not interpreted as an ID
     router.get('/self', async (req, res) => {
 
-        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
+        console.log("In GET /users/self")
+        if (!req.session.userId) {
+            return res.status(403).json({message: "You are not logged in"})
+        }
 
          //Use the ID stored in the cookie to find user
         const selfUser = await User.findById(req.session.userId)
@@ -68,7 +72,7 @@ module.exports = (User) => {
 
     //Get detailed info on one user for the individual profile page
     router.get('/:userId', async (req, res) => {
-
+        console.log("In GET /users/:id")
         const userData = await User.findById(req.params.userId, {"__v": 0}).sort("-createdAt")
         res.json(userData)
     })
@@ -76,6 +80,11 @@ module.exports = (User) => {
     //Edit user information (also works for filling out the profile after registration)
     router.patch("/self", async (req, res) => {
 
+        console.log("In PATCH /users/self")
+        if (!req.session.userId) {
+            return res.status(403).json({message: "You are not logged in"})
+        }
+        
         //All the things that have to be changed are in the request body
         const inputFields = req.body;
 
@@ -83,8 +92,12 @@ module.exports = (User) => {
 
         //Find user by ID (via cookie) and update the fields provided
         User.updateOne({"_id": req.session.userId}, inputFields)
-        .then(() => res.status(200).json({message: "success"}))
-        .catch((error) => res.status(400).json({message: error.message}))
+        .then(() => {
+            return res.status(200).json({message: "success"})
+        })
+        .catch((error) => {
+            return res.status(400).json({message: error.message})
+        })
 
     })
 
