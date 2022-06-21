@@ -78,7 +78,7 @@ export default function Dashboard() {
 
     const listOfUserCards = profiles.map(profile => {
         return (
-            <Grid item={profile} xs={12}>
+            <Grid item={profile} xs={12} >
                 <UserCard
                     key={profile._id}
                     _id={profile._id}
