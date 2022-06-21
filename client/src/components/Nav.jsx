@@ -20,8 +20,8 @@ import { Link } from "react-router-dom";
 import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
-const pages = [ "Home", "People", "Proposals", "Create-Profile", "My-Profile", "Create-Proposal", "Chat", "Edit-Profile"];
-const settings = ["Logout"];
+const pages = ["People", "Proposals", "Create-Proposal"];
+const settings = ["My-Profile", "Logout"];
 
 const ResponsiveAppBar = () => {
   const navigate=useNavigate();
@@ -86,6 +86,7 @@ const ResponsiveAppBar = () => {
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",
+              paddingRight: '15px'
             }}
           >
             Collab||8
@@ -163,8 +164,9 @@ const ResponsiveAppBar = () => {
             size="large"
             aria-label="show 4 new mails"
             color="inherit"
+            style={{ paddingRight: '15px'}}
           >
-            <Badge badgeContent={4} color="error">
+            <Badge badgeContent={0} color="error">
               <MailIcon />
             </Badge>
           </IconButton>

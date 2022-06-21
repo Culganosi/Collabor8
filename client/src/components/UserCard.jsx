@@ -35,8 +35,7 @@ const useStyles = makeStyles({
     }
   },
   title: {
-    width: "auto",
-    alignItems: "stretch",
+    width: "100%",
 
   },
 
@@ -63,7 +62,6 @@ export default function UserCard({
   const classes = useStyles();
 
   return (
-  
       <Card component="li" className={classes.root}>
         <CardActionArea
           component="div"
@@ -90,7 +88,7 @@ export default function UserCard({
               {role}
             </Typography>
           </CardContent>
-        </CardActionArea>
+            </CardActionArea>
         <Divider />
         <Grid container>
           <Grid item>
@@ -98,11 +96,12 @@ export default function UserCard({
               className={classes.skills}
               variant="subtitle1"
               color="secondary"
-            >
+              >
               {skills.join(" | ")}
             </Typography>
             <Typography className={classes.bio}>{shortBio}</Typography>
             <CardContent className={classes.card}>
+              
               <Link
                 to={`/People/${_id}`}
                 style={{ textDecoration: "none" }}
