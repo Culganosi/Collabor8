@@ -216,8 +216,8 @@ export default function OtherProfile() {
                  //If no chat connection exists yet
                   <Button
                     onClick={makeNewChat}
-                    style={{ margin: 2 }}
                     style={{
+                      margin: 2,
                       borderRadius: 10,
                       backgroundColor: "#21b6ae",
                       padding: "5px 10px",
