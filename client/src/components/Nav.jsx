@@ -78,7 +78,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/Home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -132,23 +132,6 @@ const ResponsiveAppBar = () => {
             </Menu>
           </Box>
           <CameraIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Collab||8
-          </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
@@ -156,7 +139,7 @@ const ResponsiveAppBar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link style={{textDecoration: "none", color: "pink"}} to={`/${page}`}>{page}</Link>
+                <Link style={{textDecoration: "none", color: "#FFFFFF"}} to={`/${page}`}>{page}</Link>
               </Button>
             ))}
           </Box>
