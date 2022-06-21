@@ -28,7 +28,6 @@ import "./CreateProfile.css"
 export default function CreateProfile() {
   const navigate = useNavigate();
   const classes = useStyles();
-  // const { self, setSelf } = useContext(DataContext);
   const [role, setRole] = React.useState("");
   const [bio, setBio] = React.useState("");
   const [shortBio, setShortBio] = React.useState("");
@@ -37,6 +36,24 @@ export default function CreateProfile() {
     default: false,
   });
 
+  //Image upload variables
+  const [imageAsFile, setImageAsFile] = useState('')
+  const [imageAsUrl, setImageAsUrl] = useState('')
+  const [imageAsPreview, setImageAsPreview] = useState('')
+  const fileInputRef = useRef()
+  
+
+
+
+  //Only call "create profile" once the image has uploaded
+  useEffect(() => {
+    if (imageAsUrl) {
+      createProfile()
+    }
+  }, [imageAsUrl])
+
+
+  //Send the input to the database
   const createProfile = () => {
     const skills = [];
     for (let skill of Object.keys(skillsObject)) {
@@ -49,6 +66,7 @@ export default function CreateProfile() {
       shortBio,
       bio,
       socialMedia,
+      avatar: imageAsUrl
     };
 
     axios.patch("users/self", userData).then((res) => {
@@ -59,12 +77,6 @@ export default function CreateProfile() {
 
 
   ///-----------For image upload
-
-  const [imageAsFile, setImageAsFile] = useState('')
-  const [imageAsUrl, setImageAsUrl] = useState('')
-  const [imageAsPreview, setImageAsPreview] = useState('')
-  const fileInputRef = useRef()
-
 
   //When the circular button is clicked, redirect to click the file upload instead
   const handleCircleClick = (event) => {
@@ -91,6 +103,32 @@ export default function CreateProfile() {
       reader.readAsDataURL(imageAsFile)
     }
   }, [imageAsFile])
+
+  
+  const handleFireBaseUpload = e => {
+    // e.preventDefault()
+    // if(imageAsFile === '') {
+    //   console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
+    //   return;
+    // }
+    //Random name for storing image file
+    const randomFileName = (Math.random() + 1).toString(36)
+    //Upload the image
+    const uploadTask = storage.ref(`/images/${randomFileName}`).put(imageAsFile)
+    //Get the URL of the image
+    uploadTask.on('state_changed', 
+    (snapShot) => {
+      console.log(snapShot)
+    }, (err) => {
+      console.log(err)
+    },
+    () => {
+      storage.ref('images').child(randomFileName).getDownloadURL()
+      .then(fireBaseUrl => {
+        setImageAsUrl(fireBaseUrl)
+      }) })
+  }
+
   
 
 
@@ -131,7 +169,7 @@ export default function CreateProfile() {
                   {/* Display either the preview or the circular button */}
                   {imageAsPreview ? 
                   <img src={imageAsPreview} className="avatar-preview" onClick={handleCircleClick}/> :
-                  <button className="avatar-button" onClick={handleCircleClick}>Add an avatar</button>
+                  <button className="avatar-button" onClick={handleCircleClick}>Upload an image</button>
                   }
 
                   {/* This is actually hidden */}
@@ -255,7 +293,7 @@ export default function CreateProfile() {
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => createProfile()}
+                      onClick={() => handleFireBaseUpload()}
                     >
                       Create Profile
                     </Button>
