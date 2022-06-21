@@ -7,12 +7,18 @@ module.exports = (User, Chat, Proposal) => {
 
     //Get chat history
     router.get("/:chatId", async (req, res) => {
+        console.log("In GET /chats/:id")
        const chatId = req.params.chatId;
        const chatHistory = await Chat.findById(chatId, {"__v": 0});
        res.json(chatHistory);
     })
 
     router.post("/", async (req, res) => {
+        console.log("In POST /chats/")
+
+        if(!req.session.userId) {
+            return res.status(403).json({message: "You're not logged in"})
+        }
 
         const authorId = req.session.userId;
 
@@ -41,11 +47,16 @@ module.exports = (User, Chat, Proposal) => {
         await author.save()
         await recipient.save()
 
-        res.status(201).json({message: "success", chatId: insertedChat._id})
+        return res.status(201).json({message: "success", chatId: insertedChat._id})
     })
 
     //Add new messages to the chat
     router.patch("/:chatId", async (req, res) => {
+
+        console.log("In PATCH /chats/:id")
+        if(!req.session.userId) {
+            return res.status(403).json({message: "You're not logged in"})
+        }
 
         const author = req.session.userId;
 
@@ -72,7 +83,10 @@ module.exports = (User, Chat, Proposal) => {
     //For when the user enters the chat and sees a list of all their previous chats
     router.get('/self/chat-previews', async (req, res) => {
 
-        if (!req.session.userId) return res.status(403).json({message: "You're not logged in"})
+        console.log("In GET /chats/self/chat-previews")
+        if(!req.session.userId) {
+            return res.status(403).json({message: "You're not logged in"})
+        }
 
         const userId = req.session.userId;
 

@@ -75,32 +75,21 @@ app.use(function(req, res, next) {
 
   io.on ('connection', (socket) => {
 
-	// console.log("Someone has connected");
-	// //console.log(socket) // prints details about the connection
-
     socket.emit('INITIAL_CONNECTION', "HELLO USER");
 
     socket.on("sendUserId", userId => {
-       // console.log(`User joined: ${userId}`)
         userIdSocketId[userId] = socket.id
-       // console.log(userIdSocketId)
     })
 
     //Receive new message from client
     socket.on("newMessage", (data) => {
 
-        //console.log("A message was sent to the server")
-
         const {recipientId} = data;
         const recipientSockedId = userIdSocketId[recipientId]
 
         if (recipientSockedId) {
-           // console.log(`${recipientId} is connected, so sending message`)
-            //console.log(`Sending ${data.text} to ${recipientId}`)
             socket.broadcast.to(recipientSockedId).emit('receiveMessage', data)
-        } else {
-           // console.log(`${recipientId} is not connected`)
-        }
+        } 
     
     });
 

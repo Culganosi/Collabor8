@@ -248,23 +248,23 @@ const Chat = () => {
 
 
 
-  ////--------------------
+  ////-------------------- RENDER
+
   const classes = useStyles();
 
   return (
     <>
       <Box p={2}>
-        <Grid container>
+        {/* <Grid container>
             <Grid item xs={12} >
                 <Typography variant="h5" className="header-message">Chat</Typography>
             </Grid>
-         </Grid> 
+         </Grid>  */}
         <Grid container component={Paper} className={classes.chatSection}>
 
             <Sidebar />
 
             <Grid item xs={9}>
-
                 <Conversation />
                 
                 <Divider />

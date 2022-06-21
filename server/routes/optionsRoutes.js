@@ -17,9 +17,7 @@ module.exports = (Option) => {
 
        res.json(polishedData)
 
-
     })
-
 
     return router;
 

@@ -9,6 +9,8 @@ module.exports = (User, Proposal) => {
     //Get minimal info about proposals for the "browse proposals" page
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
+          console.log("In GET /proposals")
+
 
           let {filterInput, sortInput} = req.body;
           if (!filterInput) {
@@ -24,7 +26,6 @@ module.exports = (User, Proposal) => {
           if  (filterInput.seeking) {
                filterInput.seeking = {$all : filterInput.seeking}
           }
-          console.log(filterInput)
           //Filter only for active proposals
           if(filterInput) {
                filterInput.status = "Active";
@@ -50,29 +51,35 @@ module.exports = (User, Proposal) => {
 
     })
 
-
-        //Return all the proposals of the Self user, including inactive ones
+     //Return all the proposals of the Self user, including inactive ones
      router.get('/self', async (req, res) => {
+          console.log("In GET /proposals/self")
 
-          if(!req.session.userId) res.status(403).json({message: "You're not logged in"})
+          if(!req.session.userId) {
+               return res.status(403).json({message: "You're not logged in"})
+          }
           
           const userId = req.session.userId;
           const selfProposals = await Proposal.find({author: userId}, {description: 0})
-          res.status(200).json(selfProposals)
+          return res.status(200).json(selfProposals)
      })
-
 
     //View a specific proposal on its own page
     router.get("/:proposalId", async (req, res) => {
+          console.log("In GET /proposals/:id")
+
           const targetProposal = await Proposal.findById(req.params.proposalId, {"__v": 0})
           res.json(targetProposal)
     })
 
     //Create a new proposal and add it to the list of the authors either active or inactive proposals
     router.post("/", async (req, res) => {
-          const inputInfo = req.body
+          console.log("In POST /proposals")
+          if(!req.session.userId) {
+               return res.status(403).json({message: "You're not logged in"})
+          }
 
-          if(!req.session.userId) res.status(403).json({message: "You must be logged in to post"})
+          const inputInfo = req.body
 
           //We get the author from cookie info
           const authorId = req.session.userId;
@@ -110,6 +117,9 @@ module.exports = (User, Proposal) => {
     //Edit proposal (change to active/inactive, or change content details)
     //See Patch route for users for comments
     router.patch("/:proposalId", async (req, res) => {
+
+          console.log("In PATCH /proposals/:id")
+
           const inputFields = req.body;
           Proposal.updateOne({"_id": req.params.proposalId}, inputFields)
           .then(() => res.status(200).json({message: "success"}))
@@ -118,7 +128,29 @@ module.exports = (User, Proposal) => {
 
     //Permanently delete a proposal
     router.delete("/:proposalId", async (req, res) => {
-         Proposal.findByIdAndRemove(req.params.proposalId)
+
+          console.log("In DELETE /proposals/:id")
+
+          const targetProposalId = req.params.proposalId
+
+          const targetProposal = await Proposal.findById(targetProposalId)
+          const proposalAuthorId = targetProposal.author
+
+          const targetAuthor = await User.findById(proposalAuthorId)
+          
+          if (targetAuthor.activeProposals.includes(targetProposalId)) {
+               const index = targetAuthor.activeProposals.indexOf(targetProposalId);
+               targetAuthor.activeProposals.splice(index, 1)
+               await targetAuthor.save()
+          } 
+
+          if (targetAuthor.inactiveProposals.includes(targetProposalId)) {
+               const index = targetAuthor.inactiveProposals.indexOf(targetProposalId);
+               targetAuthor.inactiveProposals.splice(index, 1)
+               await targetAuthor.save()
+          } 
+
+         Proposal.findByIdAndRemove(targetProposalId)
          .then(() => res.status(200).json({message: "success"}))
          .catch((error) => res.status(400).json({message: error.message}))
     })
