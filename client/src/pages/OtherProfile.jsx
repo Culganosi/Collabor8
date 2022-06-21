@@ -114,7 +114,6 @@ export default function OtherProfile() {
       ])
       .then((all) => {
         setOtherUser(all[0].data)
-
         const proposals = all[1].data
         const tempUserProposals = [];
         for (let proposalId of all[0].data.activeProposals) {

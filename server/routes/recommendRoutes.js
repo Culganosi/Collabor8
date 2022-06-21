@@ -7,8 +7,10 @@ module.exports = (User, Proposal) => {
 
     //Get proposals that require a role that the user calling this has 
     router.get("/proposals", async (req, res) => {
-
-        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
+        console.log("In GET /recommend/proposals")
+        if (!req.session.userId) {
+            return res.status(403).json({message: "You are not logged in"})
+        }
         const userId = req.session.userId;
 
         //Find the role of the user making the call
@@ -24,8 +26,10 @@ module.exports = (User, Proposal) => {
 
 
     router.get("/users", async (req, res) => {
-
-        if (!req.session.userId) return res.status(403).json({message: "You are not logged in"})
+        console.log("In GET /recommend/users")
+        if (!req.session.userId) {
+            return res.status(403).json({message: "You are not logged in"})
+        }
         const userId = req.session.userId;
 
         //Find all proposals where the user calling is the author
@@ -69,8 +73,6 @@ module.exports = (User, Proposal) => {
             const usersInRole = await User.find(
                 {role, _id: {"$ne": userId}}, 
                 {userhandle: 1, avatar: 1, role: 1, skills: 1, shortBio: 1, createdAt: 1}).limit(limit)
-            console.log(role)
-            console.log(usersInRole)
             recommendedUsers = recommendedUsers.concat(usersInRole)
         }
 

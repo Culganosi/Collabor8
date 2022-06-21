@@ -63,7 +63,7 @@ export default function MessageLine({ message }) {
   }
 
 
-    const formattedDate = (<Moment format="MMM d, hh:mm">{sentAt}</Moment>)
+    const formattedDate = (<Moment format="MMM DD, hh:mm">{sentAt}</Moment>)
     //If this is the initial message, style it differently
 
     if (type=="init") {
