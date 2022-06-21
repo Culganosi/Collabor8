@@ -35,10 +35,8 @@ export default function ProposalCard({
           <Typography gutterBottom variant="h5">
             {title}
           </Typography>
-          <Typography>{seeking}</Typography>
-          <Typography>{author}</Typography>
-          <Typography>{shortDescription}</Typography>
-          <Typography>{createdAt}</Typography>
+          <Typography variant="h6">{seeking}</Typography>
+          <Typography variant="body2">{shortDescription}</Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
