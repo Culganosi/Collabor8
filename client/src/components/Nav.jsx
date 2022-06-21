@@ -20,9 +20,11 @@ import { Link } from "react-router-dom";
 import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
+
 const pages = ["People", "Proposals", "Create-Proposal"];
 
 const ResponsiveAppBar = () => {
+  
   const navigate=useNavigate();
   const {self, setSelf} = useContext(DataContext);
 
@@ -123,7 +125,7 @@ const ResponsiveAppBar = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
+                    <Link style={{textDecoration: "none", color: "#E75480"}} to={`/${page}`}>{page}</Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -154,25 +156,26 @@ const ResponsiveAppBar = () => {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                <Link style={{textDecoration: "none", color: "white"}} to={`/${page}`}>{page}</Link>
+                <Link style={{textDecoration: "none", color: "pink"}} to={`/${page}`}>{page}</Link>
               </Button>
             ))}
           </Box>
           <IconButton
             size="large"
-            aria-label="show 4 new mails"
             color="inherit"
             style={{ paddingRight: '15px'}}
+            textDecoration="none"
           >
-            <Badge badgeContent={0} color="error">
+        
               <a
               href="/Chat"
               to="/Chat"
               color="inherit"
+              textDecoration="none"
               >
-              <MailIcon />
+              <MailIcon style={{color: "#FFFFFF"}} />
            </a>
-            </Badge>
+     
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
@@ -202,12 +205,12 @@ const ResponsiveAppBar = () => {
               {/* {settings.map((setting) => ( */}
                 <MenuItem onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                <Link style={{textDecoration: "none", color: "white"}} to={`/My-Profile`}>My Profile</Link>
+                <Link style={{textDecoration: "none", color: "#E75480"}} to={`/My-Profile`}>My Profile</Link>
                   </Typography>
                   </MenuItem>
                   <MenuItem>
                   <Typography textAlign="center" display="block">
-                  <Link style={{textDecoration: "none", color: "white"}} onClick ={() => logout()} to={`/Logout`}>Logout</Link>
+                  <Link style={{textDecoration: "none", color: "#E75480"}} onClick ={() => logout()} to={`/Logout`}>Logout</Link>
                   </Typography>
                 
                 </MenuItem>
