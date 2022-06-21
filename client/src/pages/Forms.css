@@ -54,3 +54,19 @@
   color:white;
   /* background-color:rgba(0,0,0,0.6);  */
 }
+
+.background {
+position: relative;
+background: #1f1144;
+}
+canvas {
+  height:500px;
+}
+
+/* const Wrapper = styled.div`
+position: relative;
+background: #1f1144;
+canvas {
+  height: 500px;
+}
+`; */

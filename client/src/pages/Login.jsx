@@ -47,19 +47,20 @@ export default function Login() {
       .catch(err => console.log(err))
   }
 
-  const Wrapper = styled.div`
-position: relative;
-background: #1f1144;
-canvas {
-  height: 500px;
-}
-`;
+//   const Wrapper = styled.div`
+// position: relative;
+// background: #1f1144;
+// canvas {
+//   height: 500px;
+// }
+// `;
 
 
 
   return (
     <>
-      <Wrapper>
+    <div className="background">
+      {/* <Wrapper> */}
         <div className={classes.headercontainer}>
           <Container max-Width="sm">
             <Typography variant="h2" align="center" color="secondary" className="title" gutterBottom>
@@ -68,6 +69,8 @@ canvas {
 
           </Container>
         </div>
+        {/* </Wrapper> */}
+
         <Box>
           <div className="form-container">
             <form className="form">
@@ -77,6 +80,7 @@ canvas {
                   label="Username"
                   helperText="Please enter your username"
                   multiline
+                  defaultValue=""
                   maxRows={1}
                   value={userhandle}
                   onChange={(event) => setUserhandle(event.target.value)}
@@ -87,6 +91,7 @@ canvas {
                   id="outlined-multiline-flexible"
                   label="Password"
                   helperText="Please enter your password"
+                  defaultValue=""
                   multiline
                   maxRows={1}
                   value={password}
@@ -119,7 +124,7 @@ canvas {
 
 
         </Box>
-      </Wrapper>
+        </div>
     </>
 
   );
