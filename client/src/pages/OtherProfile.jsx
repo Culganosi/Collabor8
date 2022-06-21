@@ -28,7 +28,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import ScreenshotMonitorIcon from "@mui/icons-material/ScreenshotMonitor";
 import EmailIcon from "@mui/icons-material/Email";
 import useStyles from "../styles";
-import ProposalCard from "../components/ProposalCard";
+import ProposalCardProfile from "../components/ProposalCardProfile";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -67,7 +67,7 @@ const styles = makeStyles((theme) => ({
     padding: theme.spacing(2, 1, 1, 1),
   },
 }));
-//styling for when there re no active proposals 
+//styling for when there are no active proposals 
 const styleObj = {
   fontSize: 30,
   color: "#DB7093",
@@ -149,7 +149,7 @@ export default function OtherProfile() {
   const userProposalsCards = userProposals.map((proposal) => {
     return (
       <Grid item={proposal}>
-        <ProposalCard
+        <ProposalCardProfile
           key={proposal._id}
           _id={proposal._id}
           author={proposal.author}

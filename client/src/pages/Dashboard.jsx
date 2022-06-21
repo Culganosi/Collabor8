@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import "./Dashboard.css"
 // import useStyles from '../styles';
 import { makeStyles } from "@material-ui/core/styles";
-import ProposalCard from "../components/ProposalCard";
+import ProposalCardDashboard from "../components/ProposalCardDashboard";
 import axios from "axios";
 import { DataContext } from "./../DataContext";
 import UserCard from "../components/UserCard";
@@ -53,7 +53,7 @@ export default function Dashboard() {
         listOfProposalCards = proposals.map((proposal) => {
             return (
                 <Grid item={proposal} xs={12}>
-                    <ProposalCard
+                    <ProposalCardDashboard
                         key={proposal._id}
                         _id={proposal._id}
                         author={proposal.author}
