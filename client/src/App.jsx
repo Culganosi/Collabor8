@@ -47,10 +47,10 @@ function App() {
       }}>
     <>
     {/* <Wrapper className='App'> */}
-    {location.pathname === '/' ? null : <Nav />}
+    {/* {location.pathname === '/' ? null : <Nav />} */}
 
     <CssBaseline />
-    {/* <Nav /> */}
+    <Nav />
       <Routes>
         <Route path="/" element={<Splash />} />
         <Route path="/People" element={<BrowseUsers />} />
@@ -66,7 +66,7 @@ function App() {
         <Route path="/Proposals/:id" element={<OthersProp />} />
         <Route path="/My-Profile/:id" element={<OwnProp />} />
         <Route path="/My-Profile/:id/edit" element={<EditModal />} />
-        <Route path="/Logout" element={<Dashboard />} />
+        <Route path="/Logout" element={<Splash />} />
         <Route path="/Chat" element={<Chat />} />
         <Route path="/Home/People/:id" element={<OtherProfile />} />
         <Route path="/Home/Proposals/:id" element={<OthersProp />} />
