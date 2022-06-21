@@ -6,17 +6,12 @@ function SocialListItem({setSocialMedia}) {
 
   const classes = useStyles();
 
-  // const [socialMedia, setSocialMedia] = React.useState({
-  //   Portfolio: "htto://google.com",
-  //   GitHub: "http://GitHub.com",
-  // });
-
   return (
     <Container style={{padding: 0}}>
       <Grid container spacing={2}>
         <Grid item>
           <Typography className={classes.title} variant="h6" color="secondary">
-            Github URL
+            Github
           </Typography>
           <Box component="form" noValidate autoComplete="off">
             <TextField
@@ -33,7 +28,7 @@ function SocialListItem({setSocialMedia}) {
 
         <Grid item>
           <Typography className={classes.title} variant="h6" color="secondary">
-            LinkedIn URL
+            LinkedIn
           </Typography>
           <Box component="form" noValidate autoComplete="off">
             <TextField
@@ -55,7 +50,7 @@ function SocialListItem({setSocialMedia}) {
               variant="h6"
               color="secondary"
             >
-              Portfolio URL
+              Portfolio
             </Typography>
             <Box component="form" noValidate autoComplete="off">
               <TextField
@@ -76,7 +71,7 @@ function SocialListItem({setSocialMedia}) {
               variant="h6"
               color="secondary"
             >
-              Twitter URL
+              Twitter
             </Typography>
             <Box component="form" noValidate autoComplete="off">
               <TextField

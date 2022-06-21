@@ -18,9 +18,9 @@ function ImageUpload () {
       console.error(`not an image, the image file is a ${typeof(imageAsFile)}`)
       return;
     }
-
+    //Random name for storing image file
     const randomFileName = (Math.random() + 1).toString(36)
-
+    //Upload the image
     const uploadTask = storage.ref(`/images/${randomFileName}`).put(imageAsFile)
 
     uploadTask.on('state_changed', 
@@ -35,9 +35,6 @@ function ImageUpload () {
         setImageAsUrl(fireBaseUrl)
       }) })
   }
-
-
-
 
   
   //When the circular button is clicked, redirect to click the file upload instead
