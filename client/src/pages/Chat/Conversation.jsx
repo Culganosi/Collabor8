@@ -43,7 +43,6 @@ export default function Conversation() {
 
   const classes = useStyles();
 
-
     //Variables
     const {activeChatFull} = useContext(DataContext);
 
