@@ -31,7 +31,7 @@ const ResponsiveAppBar = () => {
       .post(`/auth/out`)
       .then((res) => {
         setSelf({});
-        navigate("/Home");
+        navigate("/");
       })
       .catch((err) => console.log(err.message));
   };
@@ -134,7 +134,6 @@ const ResponsiveAppBar = () => {
             variant="h5"
             noWrap
             component="a"
-            href="/Home"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
