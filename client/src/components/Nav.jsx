@@ -166,7 +166,13 @@ const ResponsiveAppBar = () => {
             style={{ paddingRight: '15px'}}
           >
             <Badge badgeContent={0} color="error">
+              <a
+              href="/Chat"
+              to="/Chat"
+              color="inherit"
+              >
               <MailIcon />
+           </a>
             </Badge>
           </IconButton>
           <Box sx={{ flexGrow: 0 }}>

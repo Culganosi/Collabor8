@@ -69,20 +69,6 @@ export default function BrowseUsers() {
             Looking for somebody to work with on your project? You're in the
             right place. Click on a profile below to see a more detailed view.
           </Typography>
-          <div>
-            <Grid container spacing={2} justifyContent="center">
-              <Grid item>
-                <Button variant="contained" color="secondary">
-                  Search Users
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="outlined" color="secondary">
-                  Or don't
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
         </Container>
       </div>
       <Box border={2} padding={4} margin={2} borderRadius={16}>

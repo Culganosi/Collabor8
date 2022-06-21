@@ -54,20 +54,6 @@ export default function BrowseProp() {
             Please browse our list of active proposals and choose one that best
             suits your needs.
           </Typography>
-          <div>
-            <Grid container spacing={2} justifyContent="center">
-              <Grid item>
-                <Button variant="contained" color="secondary">
-                  Search Proposals
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button variant="outlined" color="secondary">
-                  Or don't
-                </Button>
-              </Grid>
-            </Grid>
-          </div>
         </Container>
       </div>
       <Box border={2} padding={5} margin={2} borderRadius={16}>
