@@ -77,6 +77,7 @@ canvas {
                   label="Username"
                   helperText="Please enter your username"
                   multiline
+                  defaultValue=""
                   maxRows={1}
                   value={userhandle}
                   onChange={(event) => setUserhandle(event.target.value)}
@@ -87,6 +88,7 @@ canvas {
                   id="outlined-multiline-flexible"
                   label="Password"
                   helperText="Please enter your password"
+                  defaultValue=""
                   multiline
                   maxRows={1}
                   value={password}

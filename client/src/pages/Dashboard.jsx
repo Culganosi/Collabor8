@@ -118,7 +118,7 @@ export default function Dashboard() {
                     <Grid container spacing={1} columns={16} >
                         <Grid item xs={4}>
                             <Item>
-                                {/* PROPOSALS COLUMN -------------------------------------*/}
+                                {/* PROPOSALS COLUMN ---------------------------------------*/}
                                 <Card>
                                     <CardContent>
                                         <p>

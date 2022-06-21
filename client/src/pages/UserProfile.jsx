@@ -136,12 +136,12 @@ export default function UserProfile() {
         </Container>
       </div>
 
-      <div class="body">
+      {/* <div class="body">
         <Container className="root-container">
-          <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}>
+          <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}> */}
 
             {/* USER PROFILE GRID----------------------------------------------------- */}
-            <Grid container item xs={1} sm={2} lg={3} >
+            {/* <Grid container item xs={1} sm={2} lg={3} >
               <Card>
                 <CardContent>
                   <h1 className="userHandle">  {self.userhandle} </h1>
@@ -163,17 +163,17 @@ export default function UserProfile() {
                     <h3>Role:</h3>
                     {self.role}
                     {/* <br /> */}
-                    <Divider />
-                    <br />
-                    <h3>Description:</h3>
-                    {self.bio}
+                    {/* <Divider /> */}
                     {/* <br /> */}
-                    <Divider />
+                    {/* <h3>Description:</h3> */}
+                    {/* {self.bio} */} 
+                    {/* <br /> */}
+                    {/* <Divider />
                     <br />
                     <h3>Skills: </h3>
-                    {self.skills && self.skills.join(" | ")}
+                    {self.skills && self.skills.join(" | ")} */}
                     {/* <br /> */}
-                    <Divider />
+                    {/* <Divider />
                     <br />
                     <Link to="/My-Profile/:id/edit" >
                      <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -185,13 +185,13 @@ export default function UserProfile() {
                   </p>
                 </CardContent>
               </Card>
-            </Grid>
+            </Grid> */}
 
-            <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0">
+            {/* <Grid container xs={12} sm={7} lg={9}>
+              <Stack spacing={1} flex="1 1 0"> */}
 
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
-                <Card>
+                {/* <Card>
                   <CardContent>
                     <h1 text-align="center" padding="20px">Your Active Proposals</h1>
                     <Divider />
@@ -200,12 +200,12 @@ export default function UserProfile() {
                       {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
                       {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
-                    </Grid>
+                    {/* </Grid>
                   </CardContent>
-                </Card>
+                </Card> */} 
 
                 {/* ARCHIVED PROPOSALS------------------------------------------------ */}
-                <Card>
+                {/* <Card>
                   <CardContent>
                     <h1>Your Archived Proposals</h1>
                     <Divider />
@@ -220,7 +220,30 @@ export default function UserProfile() {
 
           </Grid>
         </Container>
-      </div>
+      </div> */}
+
+
+
+<Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2} columns={16}  justifyContent="center"
+>
+        <Grid item xs={3}>
+          <Item>xs=8</Item>
+        </Grid>
+        <Grid item xs={7}>
+          <Item>xs=8</Item>
+        </Grid>
+       
+      </Grid>
+    </Box>
+
+
+
+
+
+
+
+
     </>
   )
 }
