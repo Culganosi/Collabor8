@@ -34,17 +34,11 @@ export default function Register() {
       .catch(err => console.log(err))
   }
 
-  const Wrapper = styled.div`
-  position: relative;
-  background: #1f1144;
-  canvas {
-    height: 500px;
-  }
-  `;
+ 
 
   return (
     <>
-      <Wrapper>
+    <div className="background">
         <div className={classes.headercontainer}>
           <Container max-Width="sm">
             <Typography variant="h2" align="center" color="secondary" gutterBottom>
@@ -90,7 +84,7 @@ export default function Register() {
             </form>
           </div>
         </Box>
-      </Wrapper>
-    </>
+        </div>    
+        </>
   );
 }

@@ -23,16 +23,19 @@
 }
 .handleimage {
   display:flex;
+justify-content:flex-end;  
 
 }
 .socialIcons {
   display: flex;
   justify-content: space-around;
 }
-/* .avatar {
-  display: flex;
+.columns {
+  display:flex;
   justify-content: center;
-} */
+  align-self:stretch;
+}
+
 
 /* .archived {
   display: flex;

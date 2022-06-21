@@ -135,122 +135,23 @@ export default function UserProfile() {
           </Typography>
         </Container>
       </div>
-
-      {/* <div class="body">
-        <Container className="root-container">
-          <Grid container spacing={3} sx={{ width: '120vw', height: '120vh' }}> */}
-
-
-
-
-
-
-
-      {/* USER PROFILE GRID----------------------------------------------------- */}
-      {/* <Grid container item xs={1} sm={2} lg={3} >
-              <Card>
-                <CardContent>
-                  <h1 className="userHandle">  {self.userhandle} </h1>
-                  <Avatar 
-                    alt="avatar"
-                    src={self.avatar}
-                    sx={{ width: 150, height: 150 }}
-                  />
-                  <br/>
-                  <p>
-                    <div className="socialIcons">
-                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon /></Link>}
-                    </div>
-                    <br />
-                    <h3>Role:</h3>
-                    {self.role}
-                    {/* <br /> */}
-      {/* <Divider /> */}
-      {/* <br /> */}
-      {/* <h3>Description:</h3> */}
-      {/* {self.bio} */}
-      {/* <br /> */}
-      {/* <Divider />
-                    <br />
-                    <h3>Skills: </h3>
-                    {self.skills && self.skills.join(" | ")} */}
-      {/* <br /> */}
-      {/* <Divider />
-                    <br />
-                    <Link to="/My-Profile/:id/edit" >
-                     <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <Button style={{ margin: 10 }} variant="contained">
-                      Edit Profile
-                    </Button>
-                    </div>
-                    </Link>
-                  </p>
-                </CardContent>
-              </Card>
-            </Grid> */}
-
-      {/* <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0"> */}
-
-      {/* ACTIVE PROPOSALS---------------------------------------------------- */}
-      {/* <Card>
-                  <CardContent>
-                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
-                    <Divider />
-                    <br />
-                    <Grid container alignItems="stretch">
-                      {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
-                      {selfActiveProposalCards.map(activepropcard => activepropcard)}
-                      {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
-      {/* </Grid>
-                  </CardContent>
-                </Card> */}
-
-      {/* ARCHIVED PROPOSALS------------------------------------------------ */}
-      {/* <Card>
-                  <CardContent>
-                    <h1>Your Archived Proposals</h1>
-                    <Divider />
-                    <br />
-                    <Grid container alignItems="contain">
-                      {selfInactiveProposalCards}
-                    </Grid>
-                  </CardContent>
-                </Card>
-
-
-
-
-
-              </Stack>
-            </Grid>
-
-          </Grid>
-        </Container>
-      </div> */}
-
-
       {/* <div class="body"> */}
-
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2} columns={16} justifyContent="center"
-        >
+      <Box sx={{ flexGrow: 1 }} >
+        <div className="columns">
+        <Grid container spacing={2} columns={16} justifyContent="center">
           <Grid item xs={3}>
             <Item>
               {/* USER PROFILE GRID----------------------------------------------------- */}
               <Card>
                 <CardContent>
+                  <div className="handleimg">
                   <h1 className="userHandle">  {self.userhandle} </h1>
                   <Avatar
-                  className="avatar"
                     alt="avatar"
                     src={self.avatar}
                     sx={{ width: 150, height: 150 }}
                   />
+                  </div>
                   <br />
                   <p>
                     <div className="socialIcons">
@@ -317,8 +218,8 @@ export default function UserProfile() {
               </Card>
             </Item>
           </Grid>
-
         </Grid>
+        </div>
       </Box>
       {/* </div> */}
     </>
