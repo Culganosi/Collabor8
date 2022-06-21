@@ -23,12 +23,12 @@ const useStyles = makeStyles({
     flexDirection: "column",
     paddingTop: "10px",
     paddingBottom: "10px",
+    paddingLeft: "15px",
     ["@media (min-width:600px)"]: {
       flexDirection: "row",
     },
   },
   media: {
-    width: "auto",
     borderRadius: "55%",
     ["@media (min-width:600px)"]: {
       width: "100px",
