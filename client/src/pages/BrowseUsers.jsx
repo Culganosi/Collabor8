@@ -58,7 +58,7 @@ export default function BrowseUsers() {
             color="secondary"
             gutterBottom
           >
-            Browse Users
+            Browse users
           </Typography>
           <Typography
             variant="h5"

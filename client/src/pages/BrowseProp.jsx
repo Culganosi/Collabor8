@@ -43,7 +43,7 @@ export default function BrowseProp() {
             color="secondary"
             gutterBottom
           >
-            Browse Proposals
+            Browse proposals
           </Typography>
           <Typography
             variant="h5"
