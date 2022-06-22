@@ -93,20 +93,16 @@ export default function OthersProp() {
     //----------------RENDER
 
 return (
-    <div className={classes.container}>
-
-        <Grid container justify="center">
-          <Grid item xs={9}>
-            <Paper className={classes.createprofile} elevation={2}>
-              <CardContent className={classes.cardContent} style={{display: "flex", justifyContent: "space-between"}}>
-
-                
-                <div>
-
+  <Box p={5} >
+    <div className={classes.container} >
+    <Container max-Width="sm">
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} sm={6} md={4} lg={4} style={{ display: 'flex', justifyContent: "center" }}>
+          <Paper className={classes.content} elevation={8} style={{ display: 'flex', justifyContent: "center" }}>
+            <CardContent>
               <img src={author.avatar}
                 className={classes.userprofileavatar}
                 alt="user profile"
-                style={{width: 200, height: 200, objectFit: "cover"}}
               />
 
               <Typography className={classes.title} component="h5" variant="h5" color="secondary" style={{ display: 'flex', justifyContent: "center" }}>
@@ -164,20 +160,54 @@ return (
                 }
 
               </Box>
-
-
-
-                </div>
-
-                <div>Test2</div>
-
-              </CardContent>
-              </Paper>
-          </Grid>
+            </CardContent>
+          </Paper>
         </Grid>
 
+        <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Paper className={classes.content} elevation={8}>
+            <CardContent className={classes.cardContent} style={{display: "flex"}}>
 
-  </div>
-)}
+              <div>
+
+              <p>Test para</p>
+
+              </div>
+
+
+
+
+
+              <div>
+
+
+              <Typography component="h5" variant="h5" color="secondary">
+                {proposal.title}
+              </Typography>
+
+              <img src={proposal.image}
+                className={classes.proposalImg}
+                alt="proposal img"
+              />
+              
+              <Typography className={classes.title} variant="h6" color="textSecondary">
+                Looking for: {proposal.seeking && proposal.seeking.join(", ")}
+              </Typography>
+              <Typography className={classes.bio}>
+                {proposal.description}
+              </Typography>
+
+
+              </div>
+              
+            </CardContent>
+          </Paper>
+        </Grid>
+      {/* </Grid> */}
+      </Container>
+    </div>
+  </Box>
+);
+}
 
 
