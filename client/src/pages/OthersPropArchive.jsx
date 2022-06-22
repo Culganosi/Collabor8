@@ -93,42 +93,35 @@ export default function OthersProp() {
     //----------------RENDER
 
 return (
-    <div className={classes.container}>
+  <Box p={5} >
+    <div className={classes.container} >
+    <Container max-Width="sm">
+      <Grid container spacing={3} justify="center">
+        <Grid item xs={12} sm={6} md={4} lg={4} style={{ display: 'flex', justifyContent: "center" }}>
 
-        <Grid container justify="center">
-          <Grid item xs={9}>
-            <Paper className={classes.createprofile} elevation={2}>
-              <CardContent className={classes.cardContent} style={{display: "flex", justifyContent: "space-between"}}>
-
-
-                {/* LEFT SIDE */}
-                
-                <div style={{borderRight: "1px solid lightgrey", paddingRight: "80px"}}>
-
+          
+          <Paper className={classes.content} elevation={8} style={{ display: 'flex', justifyContent: "center" }}>
+            <CardContent>
               <img src={author.avatar}
                 className={classes.userprofileavatar}
                 alt="user profile"
-                style={{
-                  width: 120, height: 120, objectFit: "cover", margin: 0, padding: 0
-              }}
               />
-              
 
-              <Link to={`/People/${author._id}`} style={{textDecoration: "none"}}>
-              <Typography className={classes.title} component="h5" variant="h5" color="secondary" style={{ textAlign: "center"}}>
+              <Typography className={classes.title} component="h5" variant="h5" color="secondary" style={{ display: 'flex', justifyContent: "center" }}>
+              <Link to={`/People/${author._id}`}>
                 {author.userhandle}
-              </Typography>
               </Link>
+              </Typography>
 
               <Typography
                 className={classes.title}
                 variant="h6"
                 color="textSecondary"
-                style={{ textAlign: "center", padding: 0, marginTop: 15}}>
+                style={{ display: 'flex', justifyContent: "center" }}>
                 {author.role}
               </Typography>
-              {/* <Typography className={classes.bio}></Typography> */}
-              <Box textAlign="center" style={{padding: 0, marginTop: 15}}>
+              <Typography className={classes.bio}></Typography>
+              <Box textAlign="center">
 
               {chatId? 
 
@@ -138,15 +131,14 @@ return (
                   style={{ margin: 2 }}
                   style={{
                     borderRadius: 10,
-                    backgroundColor: "#4A5AB9",
-                    color: "white",
+                    backgroundColor: "#21b6ae",
                     padding: "5px 10px",
                     fontSize: "10px",
                   }}
                   variant="contained"
                 >
-                  Message
-                  {/* <EmailIcon /> */}
+                  Send a Message
+                  <EmailIcon />
                 </Button>
 
                 :
@@ -157,37 +149,47 @@ return (
                   style={{ margin: 2 }}
                   style={{
                     borderRadius: 10,
-                    backgroundColor: "#303FA0",
-                    color: "white",
+                    backgroundColor: "#21b6ae",
                     padding: "5px 10px",
                     fontSize: "10px",
                   }}
                   variant="contained"
                 >
-                  Connect
-                  {/* <EmailIcon /> */}
+                  Make a connection
+                  <EmailIcon />
                 </Button>
 
                 }
 
               </Box>
+            </CardContent>
+          </Paper>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={4} lg={4}>
+          <Paper className={classes.content} elevation={8}>
+            <CardContent className={classes.cardContent} style={{display: "flex"}}>
+
+              <div>
+
+              <p>Test para</p>
+
+              </div>
 
 
 
-                </div>
 
 
-                {/* RIGHT SIDE */}
-                <div style={{paddingLeft: "80px"}}>
+              <div>
 
-                <Typography component="h5" variant="h4" color="secondary" style={{textAlign: "left", marginBottom: 15}}>
+
+              <Typography component="h5" variant="h5" color="secondary">
                 {proposal.title}
-                </Typography>
+              </Typography>
 
               <img src={proposal.image}
                 className={classes.proposalImg}
                 alt="proposal img"
-                style={{borderRadius: "10px", width: "400px", height: "225px", objectFit: "cover", padding: 0, margin: 0}}
               />
               
               <Typography className={classes.title} variant="h6" color="textSecondary">
@@ -198,15 +200,16 @@ return (
               </Typography>
 
 
-                </div>
-
-              </CardContent>
-              </Paper>
-          </Grid>
+              </div>
+              
+            </CardContent>
+          </Paper>
         </Grid>
-
-
-  </div>
-)}
+      {/* </Grid> */}
+      </Container>
+    </div>
+  </Box>
+);
+}
 
 

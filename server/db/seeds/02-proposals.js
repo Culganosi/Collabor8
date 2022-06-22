@@ -22,7 +22,7 @@ const seedProposals = [
         status: "Active",
         title: "Hobby-matching",
         description: "I want to build an app that is similar to meetup.com but users can find and chat with users with similar hobbies directly and create and schedule events in their area. I have already done a lot of work on planning the functionality and design of the app according to the best user experience practices and accessibility standards. I'm looking for a full-stack developer to work on bringing this vision to life. If you're interested, please get in touch!",
-        seeking: ["Front-end developer", "Back-end developer", "Full-stack developer"],
+        seeking: ["Full-stack developer"],
         shortDescription: "Like meetup.com but with direct matching",
         image: "https://toggl.com/blog/wp-content/uploads/2018/10/productive-hobbies-940x588.jpg"
     },
@@ -31,7 +31,7 @@ const seedProposals = [
         status: "Inactive",
         title: "Concerts near you",
         description: "An app that is like Google maps but specifically for concert events and has an integrated calendar.",
-        seeking: ["Back-end developer", "UX/UI designer"],
+        seeking: ["Back-end developer"],
         shortDescription: "A Google Maps, calendar and Spotify mashup",
         image: "https://torontoguardian.com/wp-content/uploads/2022/01/concert-gef7d57588_1280-1.jpg"
     },
