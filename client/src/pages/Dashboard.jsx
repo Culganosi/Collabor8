@@ -119,9 +119,9 @@ export default function Dashboard() {
                     {/* <Grid container spacing={1} columns={16} > */}
                     <Grid container direction='row' spacing={2} alignItems="stretch">
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
-                            {/* <Item> */}
+                            <Item>
                                 {/* PROPOSALS COLUMN ---------------------------------------*/}
-                                {/* <Card> */}
+                                <Card>
                                     {/* <CardContent> */}
                                         <p>
                                             <br />
@@ -141,15 +141,15 @@ export default function Dashboard() {
                                                 </div>
                                             </Link>
                                         </p>
-                                    {/* </CardContent>
+                                    {/* </CardContent>*/}
                                 </Card>
-                            </Item> */}
+                            </Item> 
                         </Grid>
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
-                            {/* <Item> */}
+                            <Item>
                                 {/* USERS COLUMN-------------------------------------------*/}
-                                {/* <Card>
-                                    <CardContent> */}
+                                 <Card>
+                                    {/* <CardContent> */}
                                         <p>
                                             <br />
                                             {profiles.length > 0 ? <> <h1>Users to consider for your active proposals:</h1> <Divider />  </>:
@@ -180,15 +180,15 @@ export default function Dashboard() {
                                                 </Link>
                                                 : <></>}
                                         </p>
-                                    {/* </CardContent>
+                                    {/* </CardContent>*/}
                                 </Card>
-                            </Item> */}
+                            </Item> 
                         </Grid>
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
-                            {/* <Item> */}
+                            <Item>
                                 {/* MEMES COLUMN------------------------------------------ */}
-                                {/* <Card>
-                                    <CardContent> */}
+                               <Card>
+                                    {/*  <CardContent> */}
                                         <p>
                                             <br />
                                             <h1>Relaxing corner</h1>
@@ -198,9 +198,9 @@ export default function Dashboard() {
                                             <br />
                                             <Jokes />
                                         </p>
-                                    {/* </CardContent>
+                                    {/* </CardContent> */}
                                 </Card>
-                            </Item> */}
+                            </Item> 
                         </Grid>
                     </Grid>
                 </Box>
