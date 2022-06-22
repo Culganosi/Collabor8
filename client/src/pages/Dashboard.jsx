@@ -118,10 +118,10 @@ export default function Dashboard() {
               {/* sx={{  alignContent: 'stretch'}} */}
                     {/* <Grid container spacing={1} columns={16} > */}
                     <Grid container direction='row' spacing={2} alignItems="stretch">
-                        <Grid item xs={4} style={{height:'100%', width:'50%'}}>
+                        <Grid item xs={4} style={{height:'100%', width:'50%', minHeight: "2000px"}}>
                             <Item>
                                 {/* PROPOSALS COLUMN ---------------------------------------*/}
-                                <Card>
+                                <Card style={{minHeight: "1600px"}}>
                                     <CardContent>
                                         <p>
                                             <br />
@@ -148,7 +148,7 @@ export default function Dashboard() {
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
                                 {/* USERS COLUMN-------------------------------------------*/}
-                                <Card>
+                                <Card style={{minHeight: "1600px"}}>
                                     <CardContent>
                                         <p>
                                             <br />
@@ -187,7 +187,7 @@ export default function Dashboard() {
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
                                 {/* MEMES COLUMN------------------------------------------ */}
-                                <Card>
+                                <Card style={{minHeight: "1600px"}}>
                                     <CardContent>
                                         <p>
                                             <br />
