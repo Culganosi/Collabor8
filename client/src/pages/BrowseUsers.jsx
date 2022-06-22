@@ -31,7 +31,7 @@ export default function BrowseUsers() {
 
   const listOfUserCards = Object.values(profiles).map(profile => {
     return (
-      <Grid item={profile} style={{maxWidth: '400px', maxHeight: '400px'}}>
+      <Grid item={profile} style={{maxWidth: '400px', minHeight: '400px'}}>
         <UserCard 
           key={profile._id}
           _id={profile._id}

@@ -13,7 +13,7 @@ export default function Splashtext() {
     <Wrapper>
       <Title>Welcome to COLLAB||8</Title>
       <Description>
-        Find the designers abd developers you need to make it work bla bla bla
+        A collaborative tool for web developers and designers
         <br />
         <br />
 

@@ -46,44 +46,34 @@ function App() {
         activeChatFull, setActiveChatFull,
       }}>
     <>
-    {/* <Wrapper className='App'> */}
-    {/* {location.pathname === '/' ? null : <Nav />} */}
 
     <CssBaseline />
-    <Nav />
+    {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/People" element={<BrowseUsers />} />
-        <Route path="/Proposals" element={<BrowseProp />} />
-        <Route path="/Create-Profile" element={<CreateProfile />} />
-        <Route path="/My-Profile" element={<UserProfile />} />
-        <Route path="/Home" element={<Dashboard />} />
-        <Route path="/Create-Proposal" element={<CreateProposal />} />
+        <Route path="/People" element={<> <Nav/> <BrowseUsers /> </>} />
+        <Route path="/Proposals" element={<> <Nav/> <BrowseProp /> </>} />
+        <Route path="/Create-Profile" element={<> <Nav/> <CreateProfile /> </>} />
+        <Route path="/My-Profile" element={<> <Nav/> <UserProfile /> </>} />
+        <Route path="/Home" element={<> <Nav/> <Dashboard /> </>} />
+        <Route path="/Create-Proposal" element={<> <Nav/> <CreateProposal /> </>} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
-        <Route path="/People/:id" element={<OtherProfile />} />
-        <Route path="/People/:userId/:id" element={<OthersProp />} />
-        <Route path="/Proposals/:id" element={<OthersProp />} />
-        <Route path="/My-Profile/:id" element={<OwnProp />} />
-        <Route path="/My-Profile/:id/edit" element={<EditModal />} />
-        <Route path="/Chat" element={<Chat />} />
-        <Route path="/Home/People/:id" element={<OtherProfile />} />
-        <Route path="/Home/Proposals/:id" element={<OthersProp />} />
-        <Route path="/Edit-Profile" element={<EditProfile />} />
+        <Route path="/People/:id" element={<> <Nav/> <OtherProfile /> </>} />
+        <Route path="/People/:userId/:id" element={<> <Nav/> <OthersProp /> </>} />
+        <Route path="/Proposals/:id" element={<> <Nav/> <OthersProp /> </>} />
+        <Route path="/My-Profile/:id" element={<> <Nav/> <OwnProp /> </>} />
+        <Route path="/My-Profile/:id/edit" element={<> <Nav/> <EditModal /> </>} />
+        <Route path="/Chat" element={<> <Nav/> <Chat /> </>} />
+        <Route path="/Home/People/:id" element={<> <Nav/> <OtherProfile /> </>} />
+        <Route path="/Home/Proposals/:id" element={<> <Nav/> <OthersProp /> </>} />
+        <Route path="/Edit-Profile" element={<> <Nav/> <EditProfile /> </>} />
       </Routes>
-      {/* </Wrapper> */}
     </>
     <Footer />
 
     </DataContext.Provider>
   );
 }
-// const Wrapper = styled.div`
-// position: relative;
-// background: #1f1144;
-// canvas {
-//   height: 500px;
-// }
-// `;
 
 export default App;

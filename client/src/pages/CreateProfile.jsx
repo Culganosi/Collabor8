@@ -71,7 +71,7 @@ export default function CreateProfile() {
 
     axios.patch("users/self", userData).then((res) => {
       console.log(res.data);
-      navigate("/My-Profile");
+      navigate("/Home");
     });
   };
 

@@ -23,7 +23,8 @@ const useStyles = makeStyles({
         border: "1px solid black",
         fontSize: 30,
         textAlign: "center",
-        invisible: "true"
+        invisible: "true",
+        alignItems: "stretch"
 
     },
     containerTall: {
@@ -115,8 +116,9 @@ export default function Dashboard() {
             <div >
                 <Box sx={{ flexGrow: 1 }} > 
               {/* sx={{  alignContent: 'stretch'}} */}
-                    <Grid container spacing={1} columns={16} >
-                        <Grid item xs={4}>
+                    {/* <Grid container spacing={1} columns={16} > */}
+                    <Grid container direction='row' spacing={2} alignItems="stretch">
+                        <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
                                 {/* PROPOSALS COLUMN ---------------------------------------*/}
                                 <Card>
@@ -143,7 +145,7 @@ export default function Dashboard() {
                                 </Card>
                             </Item>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
                                 {/* USERS COLUMN-------------------------------------------*/}
                                 <Card>
@@ -182,7 +184,7 @@ export default function Dashboard() {
                                 </Card>
                             </Item>
                         </Grid>
-                        <Grid item xs={4}>
+                        <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
                                 {/* MEMES COLUMN------------------------------------------ */}
                                 <Card>
