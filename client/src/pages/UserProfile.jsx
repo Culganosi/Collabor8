@@ -124,7 +124,95 @@ export default function UserProfile() {
               <Item>
                 {/* USER PROFILE GRID----------------------------------------------------- */}
                 <Card>
-                  <CardContent>
+
+                <CardContent>
+                  <h1 style={{color: "#F50057"}}> {self.userhandle} </h1>
+                  <br />
+                  <div className="avatar">
+                  <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
+
+                    alt="Username"
+                    src={self.avatar}
+                    sx={{ width: 120, height: 120 }}
+                    classes={classes.chip}
+                  />
+                  </div>
+                  <br />
+                  <p>
+                    <div className="socialIcons">
+                      {self.socialMedia &&
+                        self.socialMedia.Portfolio && (
+                          <Link
+                            href={self.socialMedia.Portfolio}
+                            target="blank"
+                          >
+                            <ScreenshotMonitorIcon className="svg_icons" />
+                          </Link>
+                        )}
+                      {self.socialMedia && self.socialMedia.GitHub && (
+                        <Link
+                          href={self.socialMedia.GitHub}
+                          target="blank"
+                        >
+                          <GitHubIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia && self.socialMedia.LinkedIn && (
+                        <Link
+                          href={self.socialMedia.LinkedIn}
+                          target="blank"
+                        >
+                          <LinkedInIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia && self.socialMedia.Twitter && (
+                        <Link
+                          href={self.socialMedia.Twitter}
+                          target="blank"
+                        >
+                          <TwitterIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia &&
+                        self.socialMedia.Instagram && (
+                          <Link
+                            href={self.socialMedia.Instagram}
+                            target="blank"
+                          >
+                            <InstagramIcon className="svg_icons" />
+                          </Link>
+                        )}
+                    </div>
+                    <br />
+                    <h2 style={{color: "#303FA0"}}>{self.role}</h2>
+                    <Typography variant="body1">
+
+                    <p style={{color: "#4A5AB9", marginTop: 7}}>{self.skills && self.skills.join(" | ")}</p>
+
+                    <Divider />
+                    <br />
+
+                    <h4 style={{textAlign: "left"}}>{self.shortBio}</h4>
+                    {/* <Divider /> */}
+                    <p style={{textAlign: "left"}}>{self.bio}</p>
+                    </Typography>
+                    </p>
+                    <br />
+
+                      <Link to="/My-Profile/:id/edit" style={{textDecoration: "none"}}>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <Button style={{ margin: 10 }} variant="contained">
+                            Edit Profile
+                          </Button>
+                        </div>
+                      </Link>
+
+                </CardContent>
+
+
+
+
+                  {/* <CardContent>
                     <h1 className="userHandle">  {self.userhandle} </h1>
                     <br />
                     <div className="avatar">
@@ -158,7 +246,7 @@ export default function UserProfile() {
                       <Divider />
 
                       {self.skills && self.skills.join(" | ")}
-                      {/* <br /> */}
+                      {/* <br /> *
                       <br />
                       <Link to="/My-Profile/:id/edit" >
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -168,7 +256,10 @@ export default function UserProfile() {
                         </div>
                       </Link>
                     </p>
-                  </CardContent>
+                  </CardContent> */}
+
+
+
                 </Card>
               </Item>
             </Grid>

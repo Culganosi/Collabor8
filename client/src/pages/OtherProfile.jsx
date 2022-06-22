@@ -261,7 +261,9 @@ export default function OtherProfile() {
                     </div>
                     <br />
                     <h2 style={{color: "#303FA0"}}>{otherUser.role}</h2>
-                    <p style={{color: "#4A5AB9"}}>{otherUser.skills && otherUser.skills.join(" | ")}</p>
+                    <Typography variant="body1">
+
+                    <p style={{color: "#4A5AB9", marginTop: 7}}>{otherUser.skills && otherUser.skills.join(" | ")}</p>
 
                     <Divider />
                     <br />
@@ -269,6 +271,7 @@ export default function OtherProfile() {
                     <h4 style={{textAlign: "left"}}>{otherUser.shortBio}</h4>
                     {/* <Divider /> */}
                     <p style={{textAlign: "left"}}>{otherUser.bio}</p>
+                    </Typography>
                     <br />
 
                     {chatId ?

@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema ({
     chats: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Chat'}],
 
     //A list of objects
-
     socialMedia: Object
 })
 
