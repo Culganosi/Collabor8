@@ -56,13 +56,16 @@ export default function UserCard({
         className={classes.card}
         aria-disabled="true"
         tabIndex="-1"
+        style={{display: "flex", justifyContent: "flex-start"}}
       >
         <Box
           component="img"
           src={avatar}
           sx={{
-            height: 233,
-            width: 300,
+            height: 90,
+            width: 90,
+            borderRadius: "50%",
+            objectFit: "cover",
             maxHeight: { xs: 233, md: 167 },
             maxWidth: { xs: 300, md: 250 },
             
@@ -70,14 +73,17 @@ export default function UserCard({
         />
 
         <CardContent>
-          <Typography variant="h5" color="secondary">
-            {userhandle}
-          </Typography>
+        <Link to={`/People/${_id}`} style={{ textDecoration: "none" }}>
+            <Typography variant="h5" color="secondary" style={{textAlign: "left"}}>
+              {userhandle}
+            </Typography>
+          </Link>
           <Typography
             className={classes.title}
             variant="subtitle1"
             color="textSecondary"
             noWrap={false}
+            style={{textAlign: "left"}}
             
           >
             {role}
@@ -85,6 +91,8 @@ export default function UserCard({
         </CardContent>
       </CardActionArea>
       <Divider />
+
+
       <Grid
         container
         direction="column"
@@ -92,28 +100,18 @@ export default function UserCard({
         
       >
         <Grid item>
+          <div  style={{display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "10px 20px 10px"}}>
+          <Typography className={classes.bio} style={{textAlign: "left"}}>{shortBio}</Typography>
           <Typography
             className={classes.skills}
             variant="subtitle1"
             color="secondary"
+            style={{textAlign: "left"}}
           >
             {skills.join(" | ")}
           </Typography>
-          <Typography className={classes.bio}>{shortBio}</Typography>
-          <CardContent>
-            <Link
-              to={`/People/${_id}`}
-              style={{ textDecoration: "none" }}
-              element={<OtherProfile />}
-            >
-              <Box display="flex" flexDirection="column" justifyContent="flex-end">
-
-              <Button variant="contained" color="secondary">
-                See User Profile
-              </Button>
-              </Box>
-            </Link>
-          </CardContent>
+          {/* <CardContent> */}
+          </div>
         </Grid>
       </Grid>
     </Card>
