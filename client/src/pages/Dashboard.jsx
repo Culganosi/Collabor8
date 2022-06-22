@@ -122,7 +122,7 @@ export default function Dashboard() {
                             <Item>
                                 {/* PROPOSALS COLUMN ---------------------------------------*/}
                                 <Card>
-                                    {/* <CardContent> */}
+                                    <CardContent>
                                         <p>
                                             <br />
                                             <h1>Latest proposals that are seeking your skills:</h1>
@@ -141,7 +141,7 @@ export default function Dashboard() {
                                                 </div>
                                             </Link>
                                         </p>
-                                    {/* </CardContent>*/}
+                                    </CardContent>
                                 </Card>
                             </Item> 
                         </Grid>
@@ -149,7 +149,7 @@ export default function Dashboard() {
                             <Item>
                                 {/* USERS COLUMN-------------------------------------------*/}
                                  <Card>
-                                    {/* <CardContent> */}
+                                    <CardContent>
                                         <p>
                                             <br />
                                             {profiles.length > 0 ? <> <h1>Users to consider for your active proposals:</h1> <Divider />  </>:
@@ -180,7 +180,7 @@ export default function Dashboard() {
                                                 </Link>
                                                 : <></>}
                                         </p>
-                                    {/* </CardContent>*/}
+                                    </CardContent>
                                 </Card>
                             </Item> 
                         </Grid>
@@ -188,7 +188,7 @@ export default function Dashboard() {
                             <Item>
                                 {/* MEMES COLUMN------------------------------------------ */}
                                <Card>
-                                    {/*  <CardContent> */}
+                                     <CardContent>
                                         <p>
                                             <br />
                                             <h1>Relaxing corner</h1>
@@ -198,7 +198,7 @@ export default function Dashboard() {
                                             <br />
                                             <Jokes />
                                         </p>
-                                    {/* </CardContent> */}
+                                    </CardContent>
                                 </Card>
                             </Item> 
                         </Grid>
