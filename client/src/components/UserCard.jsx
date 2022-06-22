@@ -51,7 +51,7 @@ export default function UserCard({
   const classes = useStyles();
 
   return (
-    <Card style={{maxHeight:'400px', height: '100%'}}>
+    <Card style={{maxHeight:'330px', height: '100%'}}>
       <CardActionArea
         className={classes.card}
         aria-disabled="true"
@@ -83,7 +83,7 @@ export default function UserCard({
             variant="subtitle1"
             color="textSecondary"
             noWrap={false}
-            style={{textAlign: "left"}}
+            style={{textAlign: "left", fontWeight: "bold"}}
             
           >
             {role}
