@@ -125,7 +125,7 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            <h1>Latest proposals that are seeking your skills:</h1>
+                                            <h1 className="dashTitles">Latest proposals that are seeking your skills:</h1>
                                             <Divider />
                                             <br />
                                             <Container className={classes.cardMedia} maxWidth="xl">
@@ -143,7 +143,7 @@ export default function Dashboard() {
                                         </p>
                                     </CardContent>
                                 </Card>
-                            </Item>
+                            </Item> 
                         </Grid>
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
@@ -152,9 +152,9 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            {profiles.length > 0 ? <> <h1>Users to consider for your active proposals:</h1> <Divider />  </>:
+                                            {profiles.length > 0 ? <> <h1 className="dashTitles" >Users to consider for your active proposals:</h1> <Divider />  </>:
                                                 <>
-                                                    <h1>Publish your first proposal to get recommendations for collaborators</h1>
+                                                    <h1 className="dashTitles" >Publish your first proposal to get recommendations for collaborators</h1>
                                                     <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
                                                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                             <Button style={{ margin: 17 }} variant="contained" color="secondary">
@@ -182,7 +182,7 @@ export default function Dashboard() {
                                         </p>
                                     </CardContent>
                                 </Card>
-                            </Item>
+                            </Item> 
                         </Grid>
                         <Grid item xs={4} style={{height:'100%', width:'50%'}}>
                             <Item>
@@ -191,7 +191,7 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            <h1>Relaxing corner</h1>
+                                            <h1 className="dashTitles">Relaxing corner</h1>
                                             <Divider />
                                             <br />
                                             <Cats />
@@ -200,7 +200,7 @@ export default function Dashboard() {
                                         </p>
                                     </CardContent>
                                 </Card>
-                            </Item>
+                            </Item> 
                         </Grid>
                     </Grid>
                 </Box>

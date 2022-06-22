@@ -17,6 +17,18 @@ h6,input, img {
 .DashboardContainer {
     max-width: 1500px;
 }
+
+
+.dashTitles {
+  font-weight: 600;
+  background-image: linear-gradient(to left, #e91e63, #cd92a6);
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;}
+
+
+
+
 /* .dash-container{
   width:100%;
   height:100vh;
