@@ -1,7 +1,5 @@
 /* CSS for Login & Register Pages */
-/* .title {
-  font-weight: d
-} */
+
 .form-group{
   margin-bottom:25px;
   display: flex;
@@ -27,7 +25,7 @@
   height:100vh;
   display:flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   background-size:cover;
   
 }
@@ -57,7 +55,10 @@
 
 .background {
 position: relative;
-background: #1f1144;
+/* background: #3b286f; */
+/* background: linear-gradient(112.5deg, rgb(95, 10, 135) 11.4%, rgb(164, 80, 139) 60.2%); */
+background: linear-gradient(76.8deg, rgb(121, 45, 129) 3.6%, rgb(36, 31, 98) 90.4%);
+
 }
 canvas {
   height:500px;

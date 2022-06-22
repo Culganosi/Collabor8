@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import "./UserProfile.css"
 import {
   Container,
   Grid,
@@ -27,11 +28,11 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import ScreenshotMonitorIcon from "@mui/icons-material/ScreenshotMonitor";
 import EmailIcon from "@mui/icons-material/Email";
 import useStyles from "../styles";
-import ProposalCard from "../components/ProposalCard";
+import ProposalCardProfile from "../components/ProposalCardProfile";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {DataContext} from "./../DataContext"
+import { DataContext } from "./../DataContext"
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -42,6 +43,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const styles = makeStyles((theme) => ({
+
   avatar: {
     verticalAlign: "middle",
     marginRight: theme.spacing(1),
@@ -65,8 +67,22 @@ const styles = makeStyles((theme) => ({
   cardContent: {
     padding: theme.spacing(2, 1, 1, 1),
   },
+  img: {
+display:"flex",
+alignItems: "center",
+justifycontent:"center",
+  }
 }));
 
+
+
+//styling for when there are no active proposals 
+const styleObj = {
+  fontSize: 30,
+  color: "#DB7093",
+  textAlign: "center",
+  paddingTop: "70px",
+}
 export default function OtherProfile() {
 
   /*
@@ -74,7 +90,7 @@ export default function OtherProfile() {
   - If never messaged the user before - send the init message, get the chat ID, set that as active chat ID, proceed to chat
   */
 
-  const {setActiveChatId} = useContext(DataContext);
+  const { setActiveChatId } = useContext(DataContext);
 
   const params = useParams();
   const userId = params.id;
@@ -95,11 +111,11 @@ export default function OtherProfile() {
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("/chats", {recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}`})
-    .then((res) => {
+    axios.post("/chats", { recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}` })
+      .then((res) => {
         setActiveChatId(res.data.chatId)
         navigate("/chat")
-    })
+      })
   }
 
 
@@ -108,10 +124,10 @@ export default function OtherProfile() {
   //Load info about the user and about the proposals
   useEffect(() => {
 
-      Promise.all([
-        axios.get(`/users/${userId}`),
-        axios.get('/proposals')
-      ])
+    Promise.all([
+      axios.get(`/users/${userId}`),
+      axios.get('/proposals')
+    ])
       .then((all) => {
         setOtherUser(all[0].data)
         const proposals = all[1].data
@@ -127,22 +143,21 @@ export default function OtherProfile() {
   //See if the person logged in has a chat connection to the otherUser
   useEffect(() => {
     axios.get("/chats/self/chat-previews")
-    .then(res => {
-      const chatPreviews = res.data
-      for (let chat of chatPreviews) {
-        if (chat.partner == otherUser._id) {
-          setChatId(chat._id)
+      .then(res => {
+        const chatPreviews = res.data
+        for (let chat of chatPreviews) {
+          if (chat.partner == otherUser._id) {
+            setChatId(chat._id)
+          }
         }
-      }
-    })
+      })
   }, [otherUser])
-
-
+  
 
   const userProposalsCards = userProposals.map((proposal) => {
     return (
       <Grid item={proposal}>
-        <ProposalCard
+        <ProposalCardProfile
           key={proposal._id}
           _id={proposal._id}
           author={proposal.author}
@@ -180,66 +195,34 @@ export default function OtherProfile() {
           </Typography>
         </Container>
       </div>
-      <div className="body">
-        <Container className="root-container">
-          <Grid container spacing={0} sx={{ width: "120vw", height: "120vh" }}>
-            <Grid container item xs={10} sm={2} lg={3}>
+      <Box sx={{ flexGrow: 1 }} >
+        <Grid container spacing={2} columns={16} justifyContent="center">
+          <Grid item xs={3}>
+            {/* OTHER USER PROFILE SECTION------------------------------------------ */}
+            <Item>
               <Card>
                 <CardContent>
                   <h1> {otherUser.userhandle} </h1>
-                  <Avatar
+                  <br />
+                  <div className="avatar">
+                  <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
+
                     alt="Username"
                     src={otherUser.avatar}
-                    sx={{ width: 56, height: 56 }}
+                    sx={{ width: 100, height: 100 }}
+                    classes={classes.chip}
                   />
-
-                  {chatId? 
-
-                  //If the user logged in already has a connection with the otherUser
-                  <Button
-                    onClick={goToChat}
-                    style={{ margin: 2 }}
-                    style={{
-                      borderRadius: 10,
-                      backgroundColor: "#21b6ae",
-                      padding: "5px 10px",
-                      fontSize: "10px",
-                    }}
-                    variant="contained"
-                  >
-                    Send a Message
-                    <EmailIcon />
-                  </Button>
-
-                 :
-
-                 //If no chat connection exists yet
-                  <Button
-                    onClick={makeNewChat}
-                    style={{
-                      margin: 2,
-                      borderRadius: 10,
-                      backgroundColor: "#21b6ae",
-                      padding: "5px 10px",
-                      fontSize: "10px",
-                    }}
-                    variant="contained"
-                  >
-                    Make a connection
-                    <EmailIcon />
-                  </Button>
-
-                  }
-
+                  </div>
+                  <br />
                   <p>
-                    <div>
+                    <div className="socialIcons">
                       {otherUser.socialMedia &&
                         otherUser.socialMedia.Portfolio && (
                           <Link
                             href={otherUser.socialMedia.Portfolio}
                             target="blank"
                           >
-                            <ScreenshotMonitorIcon />
+                            <ScreenshotMonitorIcon className="svg_icons" />
                           </Link>
                         )}
                       {otherUser.socialMedia && otherUser.socialMedia.GitHub && (
@@ -247,7 +230,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.GitHub}
                           target="blank"
                         >
-                          <GitHubIcon />
+                          <GitHubIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && (
@@ -255,7 +238,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.LinkedIn}
                           target="blank"
                         >
-                          <LinkedInIcon />
+                          <LinkedInIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia && otherUser.socialMedia.Twitter && (
@@ -263,7 +246,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.Twitter}
                           target="blank"
                         >
-                          <TwitterIcon />
+                          <TwitterIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia &&
@@ -272,61 +255,91 @@ export default function OtherProfile() {
                             href={otherUser.socialMedia.Instagram}
                             target="blank"
                           >
-                            <InstagramIcon />
+                            <InstagramIcon className="svg_icons" />
                           </Link>
                         )}
                     </div>
                     <br />
-
                     <h3>Role:</h3>
+                    <Divider />
                     {otherUser.role}
-                    <h3>Bio:</h3>
-                    {otherUser.bio}
                     <br />
                     <h3>Skills: </h3>
+                    <Divider />
                     {otherUser.skills && otherUser.skills.join(" | ")}
+                    <br />
+                    <h3>Bio:</h3>
+                    <Divider />
+                    {otherUser.bio}
+                    <br />
+
+                    {chatId ?
+                      //If the user logged in already has a connection with the otherUser
+                      <Button
+                        onClick={goToChat}
+                        style={{
+                          margin: 2,
+                          borderRadius: 10,
+                          backgroundColor: "#21b6ae",
+                          padding: "5px 10px",
+                          fontSize: "10px",
+                        }}
+                        variant="contained"
+                      >
+                        Send a Message
+                        <EmailIcon />
+                      </Button>
+
+                      :
+
+                      //If no chat connection exists yet
+                      <Button
+                        onClick={makeNewChat}
+                        style={{
+                          margin: 2,
+                          borderRadius: 10,
+                          backgroundColor: "#21b6ae",
+                          padding: "5px 10px",
+                          fontSize: "10px",
+                        }}
+                        variant="contained"
+                      >
+                        Make a connection
+                        <EmailIcon />
+                      </Button>
+                    }
                   </p>
+
                 </CardContent>
               </Card>
-            </Grid>
-
-            <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0">
-                <Card>
-                  <CardContent>
-                    <h1 text-align="center">
-                      {otherUser.userhandle}'s Active Proposals
-                    </h1>
-                    <Grid container alignItems="stretch">
-                      {userProposalsCards}
-                      {userProposals.length == 0 ? (
-                        <p>
-                          {otherUser.userhandle} hasn't published any proposals
-                          yet{" "}
-                        </p>
-                      ) : (
-                        <></>
-                      )}
-
-                      {/* <Grid item component={Card} xs>
-                        <CardContent>
-                          <h4>{userProposalsCards}</h4>
-                        </CardContent>
-                        <CardActions>
-                          {userProposalsCards}
-                          {userProposals.length==0 ? <p>No proposals here yet</p> : <></>} 
-                        </CardActions>
-
-
-                      </Grid> */}
-                    </Grid>
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
+              {/* USER'S ACTIVE PROPOSALS----------------------------------------------------------- */}
+            </Item>
           </Grid>
-        </Container>
-      </div>
+          <Grid item xs={7}>
+            <Item>
+              <Card>
+                <CardContent>
+                  <h1 text-align="center">
+                    {otherUser.userhandle}'s Active Proposals
+                  </h1>
+                  <Grid container alignItems="stretch">
+                    {userProposalsCards}
+                    {userProposals.length == 0 ? (
+                      <h4 style={styleObj}>
+                        {otherUser.userhandle} hasn't published any proposals
+                        yet{" "}
+                      </h4>
+                    ) : (
+                      <></>
+                    )
+                    }
+                  </Grid>
+                </CardContent>
+              </Card>
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }

@@ -16,7 +16,7 @@ import useStyles from "../styles";
 import {Link} from "react-router-dom"
 import OthersProp from "../pages/OthersProp";
 
-export default function ProposalCard({
+export default function ProposalCardProfile({
   _id,
   author,
   title,
@@ -28,7 +28,7 @@ export default function ProposalCard({
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} style={{width: "450px", margin: "0 20px"}}>
       <CardActionArea>
         <CardMedia className={classes.cardMedia} image={image} title="Title" />
         <CardContent className={classes.cardContent}>

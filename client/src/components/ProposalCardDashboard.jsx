@@ -16,7 +16,7 @@ import useStyles from "../styles";
 import {Link} from "react-router-dom"
 import OthersProp from "../pages/OthersProp";
 
-export default function ProposalCard({
+export default function ProposalCardDashboard({
   _id,
   author,
   title,
@@ -40,13 +40,15 @@ export default function ProposalCard({
         </CardContent>
       </CardActionArea>
 
+    <div style={{display: "flex", justifyContent: "center"}}>
       <CardActions>
-        <Link to={`${_id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/Proposals/${_id}`} style={{ textDecoration: 'none' }}>
         <Button size="small" variant="contained" color="secondary">
           See More Details
         </Button>
       </Link>
       </CardActions>
+      </div>
     </Card>
   );
 }

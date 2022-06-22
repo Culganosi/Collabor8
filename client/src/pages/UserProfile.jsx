@@ -9,7 +9,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import useStyles from "../styles";
 import { DataContext } from "./../DataContext";
-import ProposalCard from "../components/ProposalCard";
+import ProposalCardProfile from "../components/ProposalCardProfile";
 import ScreenshotMonitorIcon from '@mui/icons-material/ScreenshotMonitor';
 import { TextureLoader } from "three";
 
@@ -22,33 +22,14 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const styles = makeStyles((theme) => ({
-  avatar: {
-    verticalAlign: "middle",
-    marginRight: theme.spacing(1),
-  },
-  large: {
-    width: theme.spacing(12),
-    height: theme.spacing(12),
-    margin: theme.spacing(2, 2, 0),
-  },
-  card: {
-    margin: 16, //space b/w cards
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    borderRadius: 15,
-    maxWidth: "270px",
-    minWidth: "270px",
-    height: "330px",
-    backgroundColor: theme.palette.background.card,
-  },
-  cardContent: {
-    padding: theme.spacing(2, 1, 1, 1),
-  },
-}));
 
-
+//styling for when there are no active proposals 
+const styleObj = {
+  fontSize: 30,
+  color: "#DB7093",
+  textAlign: "center",
+  paddingTop: "70px",
+}
 
 export default function UserProfile() {
   const classes = useStyles();
@@ -91,7 +72,7 @@ export default function UserProfile() {
   const selfActiveProposalCards = selfActiveProposals.map((proposal) => {
     return (
       <Grid item={proposal} >
-        <ProposalCard
+        <ProposalCardProfile
           key={proposal._id}
           _id={proposal._id}
           author={proposal.author}
@@ -108,7 +89,7 @@ export default function UserProfile() {
   const selfInactiveProposalCards = selfInactiveProposals.map((proposal) => {
     return (
       <Grid item={proposal} >
-        <ProposalCard
+        <ProposalCardProfile
           key={proposal._id}
           _id={proposal._id}
           author={proposal.author}
@@ -138,89 +119,94 @@ export default function UserProfile() {
       {/* <div class="body"> */}
       <Box sx={{ flexGrow: 1 }} >
         <div className="columns">
-        <Grid container spacing={2} columns={16} justifyContent="center">
-          <Grid item xs={3}>
-            <Item>
-              {/* USER PROFILE GRID----------------------------------------------------- */}
-              <Card>
-                <CardContent>
-                  <div className="handleimg">
-                  <h1 className="userHandle">  {self.userhandle} </h1>
-                  <br />
-                  <Avatar
-                    alt="avatar"
-                    src={self.avatar}
-                    sx={{ width: 150, height: 150 }}
-                  />
-                  </div>
-                  <br />
-                  <p>
-                    <div className="otherSocialIcons">
-                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon className="svg_icons" /></Link>}
-                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon className="svg_icons" /></Link>}
-                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon className="svg_icons" /></Link>}
-                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon className="svg_icons" /></Link>}
-                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon className="svg_icons" /></Link>}
+          <Grid container spacing={2} columns={16} justifyContent="center">
+            <Grid item xs={3}>
+              <Item>
+                {/* USER PROFILE GRID----------------------------------------------------- */}
+                <Card>
+                  <CardContent>
+                    <h1 className="userHandle">  {self.userhandle} </h1>
+                    <br />
+                    <div className="avatar">
+                      <Avatar
+                        alt="avatar"
+                        src={self.avatar}
+                        sx={{ width: 150, height: 150 }}
+                      />
                     </div>
                     <br />
-                    <h3>Role:</h3>
-                    <Divider />
-                    {self.role}
-                    <br />
-                    <br />
-                    <h3>Description:</h3>
-                    <Divider />
-                    {self.bio}
-                    <br />
-                    <br />
-                    <h3>Skills: </h3>
-                    <Divider />
-
-                    {self.skills && self.skills.join(" | ")}
-                    {/* <br /> */}
-                    <br />
-                    <Link to="/My-Profile/:id/edit" >
-                      <div style={{ display: 'flex', justifyContent: 'center' }}>
-                        <Button style={{ margin: 10 }} variant="contained">
-                          Edit Profile
-                        </Button>
+                    <p>
+                      <div className="otherSocialIcons">
+                        {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon className="svg_icons" /></Link>}
+                        {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon className="svg_icons" /></Link>}
+                        {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon className="svg_icons" /></Link>}
+                        {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon className="svg_icons" /></Link>}
+                        {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon className="svg_icons" /></Link>}
                       </div>
-                    </Link>
-                  </p>
-                </CardContent>
-              </Card>
-            </Item>
+                      <br />
+                      <h3>Role:</h3>
+                      <Divider />
+                      {self.role}
+                      <br />
+                      <br />
+                      <h3>Description:</h3>
+                      <Divider />
+                      {self.bio}
+                      <br />
+                      <br />
+                      <h3>Skills: </h3>
+                      <Divider />
+
+                      {self.skills && self.skills.join(" | ")}
+                      {/* <br /> */}
+                      <br />
+                      <Link to="/My-Profile/:id/edit" >
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <Button style={{ margin: 10 }} variant="contained">
+                            Edit Profile
+                          </Button>
+                        </div>
+                      </Link>
+                    </p>
+                  </CardContent>
+                </Card>
+              </Item>
+            </Grid>
+
+            <Grid item xs={7}>
+              <Item>
+                {/* ACTIVE PROPOSALS---------------------------------------------------- */}
+                <Card>
+                  <CardContent>
+                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                    <Divider />
+                    <br />
+                    <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>Post your first proposal so others can see your work</h4>}
+                      {selfActiveProposalCards.map(activepropcard => activepropcard)}
+                      {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
+                    </Grid>
+                  </CardContent>
+                </Card>
+
+                {/* ARCHIVED PROPOSALS------------------------------------------------ */}
+
+                {selfInactiveProposalCards.length > 0 &&
+                  <Card>
+                    <CardContent>
+                      <h1>Your Archived Proposals</h1>
+                      <Divider />
+                      <br />
+                      <Grid container alignItems="contain">
+                        {selfInactiveProposalCards}
+                      </Grid>
+                    </CardContent>
+                  </Card>
+                }
+
+              </Item>
+            </Grid>
           </Grid>
-          
-          <Grid item xs={7}>
-            <Item>
-              {/* ACTIVE PROPOSALS---------------------------------------------------- */}
-              <Card>
-                <CardContent>
-                  <h1 text-align="center" padding="20px">Your Active Proposals</h1>
-                  <Divider />
-                  <br />
-                  <Grid container alignItems="stretch">
-                    {selfActiveProposalCards.length == 0 && <p>Post your first proposal so others can see your work</p>}
-                    {selfActiveProposalCards.map(activepropcard => activepropcard)}
-                    {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
-                  </Grid>
-                </CardContent>
-              </Card>
-              {/* ARCHIVED PROPOSALS------------------------------------------------ */}
-              <Card>
-                <CardContent>
-                  <h1>Your Archived Proposals</h1>
-                  <Divider />
-                  <br />
-                  <Grid container alignItems="contain">
-                    {selfInactiveProposalCards}
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Item>
-          </Grid>
-        </Grid>
         </div>
       </Box>
       {/* </div> */}
