@@ -202,7 +202,7 @@ export default function OtherProfile() {
             <Item>
               <Card>
                 <CardContent>
-                  <h1> {otherUser.userhandle} </h1>
+                  <h1 style={{color: "#F50057"}}> {otherUser.userhandle} </h1>
                   <br />
                   <div className="avatar">
                   <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
@@ -260,50 +260,30 @@ export default function OtherProfile() {
                         )}
                     </div>
                     <br />
-                    <h2>{otherUser.role}</h2>
-                    <p>{otherUser.skills && otherUser.skills.join(" | ")}</p>
+                    <h2 style={{color: "#303FA0"}}>{otherUser.role}</h2>
+                    <p style={{color: "#4A5AB9"}}>{otherUser.skills && otherUser.skills.join(" | ")}</p>
+
+                    <Divider />
                     <br />
 
                     <h4 style={{textAlign: "left"}}>{otherUser.shortBio}</h4>
-                    <br />
-                    <Divider />
+                    {/* <Divider /> */}
                     <p style={{textAlign: "left"}}>{otherUser.bio}</p>
                     <br />
 
                     {chatId ?
                       //If the user logged in already has a connection with the otherUser
-                      <Button
-                        onClick={goToChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Send a Message
-                        <EmailIcon />
+                      <Button size="small" variant="contained" color="secondary" onClick={goToChat}>
+                        Message
                       </Button>
 
                       :
-
-                      //If no chat connection exists yet
-                      <Button
-                        onClick={makeNewChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Make a connection
-                        <EmailIcon />
+                      
+                      //Otherwise, create connection
+                      <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
+                        Connect
                       </Button>
+
                     }
                   </p>
 
@@ -319,7 +299,9 @@ export default function OtherProfile() {
                   <h1 text-align="center">
                     {otherUser.userhandle}'s proposals
                   </h1>
-                  <Grid container alignItems="stretch">
+                  <Divider />
+                  <br />
+                  <Grid container alignItems="stretch" style={{ display: 'flex', justifyContent: 'center' }}>
                     {userProposalsCards}
                     {userProposals.length == 0 ? (
                       <h4 style={styleObj}>

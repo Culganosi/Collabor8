@@ -49,7 +49,7 @@ export default function ProposalCard({
         <Button size="small" variant="contained" color="secondary">
           See More Details
         </Button>
-      </Link>
+        </Link>
       </CardActions> */}
 
     </Card>

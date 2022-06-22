@@ -121,7 +121,7 @@ export default function UserProfile() {
         <div className="columns">
           <Grid container spacing={2} columns={16} justifyContent="center">
             <Grid item xs={3}>
-              <Item style={{minHeight: "750px"}}>
+              <Item>
                 {/* USER PROFILE GRID----------------------------------------------------- */}
                 <Card>
                   <CardContent>
@@ -174,7 +174,7 @@ export default function UserProfile() {
             </Grid>
 
             <Grid item xs={7}>
-              <Item style={{minHeight: "750px"}}>
+              <Item>
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
                 <Card>
                   <CardContent>
