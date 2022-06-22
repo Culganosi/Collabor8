@@ -91,7 +91,7 @@ export default function UserCard({
 
         
       >
-        <Grid item>
+        <Grid item style={{display: "flex", flexDirection: "column", justifyContent: "flex-start"}}>
           <Typography
             className={classes.skills}
             variant="subtitle1"
@@ -106,12 +106,12 @@ export default function UserCard({
               style={{ textDecoration: "none" }}
               element={<OtherProfile />}
             >
-              <Box display="flex" flexDirection="column" justifyContent="flex-end">
+              {/* <Box display="flex" flexDirection="column" justifyContent="flex-end"> */}
 
-              <Button variant="contained" color="secondary">
-                See User Profile
-              </Button>
-              </Box>
+                <Button variant="contained" color="secondary" style={{justifySelf: "end"}}>
+                  See User Profile
+                </Button>
+              {/* </Box> */}
             </Link>
           </CardContent>
         </Grid>
