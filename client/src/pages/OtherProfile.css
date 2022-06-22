@@ -13,3 +13,17 @@ h1 {
 .MuiPaper-root.MuiCard-root.MuiPaper-elevation1.MuiPaper-rounded {
   width: "inherit";
 }
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.svg_icons {
+  color: #F50057;
+}
+
+.svg_icons:hover {
+  color: #bc0d4a;
+}

@@ -39,7 +39,7 @@ export default function ProposalCard({
           </Typography>
           </Link>
           <Typography variant="h6">Seeking: {seeking}</Typography>
-          <Typography variant="body1" style={{marginTop: 10, marginBottom: 10}}>{shortDescription}</Typography>
+          <Typography variant="body1" style={{marginTop: 4, marginBottom: 4}}>{shortDescription}</Typography>
         </CardContent>
       </CardActionArea>
 

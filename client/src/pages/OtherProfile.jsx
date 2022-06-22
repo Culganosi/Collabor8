@@ -209,7 +209,7 @@ export default function OtherProfile() {
 
                     alt="Username"
                     src={otherUser.avatar}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 120, height: 120 }}
                     classes={classes.chip}
                   />
                   </div>
@@ -260,17 +260,14 @@ export default function OtherProfile() {
                         )}
                     </div>
                     <br />
-                    <h3>Role:</h3>
-                    <Divider />
-                    {otherUser.role}
+                    <h2>{otherUser.role}</h2>
+                    <p>{otherUser.skills && otherUser.skills.join(" | ")}</p>
                     <br />
-                    <h3>Skills: </h3>
-                    <Divider />
-                    {otherUser.skills && otherUser.skills.join(" | ")}
+
+                    <h4 style={{textAlign: "left"}}>{otherUser.shortBio}</h4>
                     <br />
-                    <h3>Bio:</h3>
                     <Divider />
-                    {otherUser.bio}
+                    <p style={{textAlign: "left"}}>{otherUser.bio}</p>
                     <br />
 
                     {chatId ?
@@ -320,7 +317,7 @@ export default function OtherProfile() {
               <Card>
                 <CardContent>
                   <h1 text-align="center">
-                    {otherUser.userhandle}'s Active Proposals
+                    {otherUser.userhandle}'s proposals
                   </h1>
                   <Grid container alignItems="stretch">
                     {userProposalsCards}
