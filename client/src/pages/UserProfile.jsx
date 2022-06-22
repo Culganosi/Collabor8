@@ -125,9 +125,9 @@ export default function UserProfile() {
                 {/* USER PROFILE GRID----------------------------------------------------- */}
                 <Card>
                   <CardContent>
-                    <div className="handleimg">
-                      <h1 className="userHandle">  {self.userhandle} </h1>
-                      <br />
+                    <h1 className="userHandle">  {self.userhandle} </h1>
+                    <br />
+                    <div className="avatar">
                       <Avatar
                         alt="avatar"
                         src={self.avatar}
@@ -176,19 +176,19 @@ export default function UserProfile() {
             <Grid item xs={7}>
               <Item>
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
-                 <Card>
-                <CardContent>
-                  <h1 text-align="center" padding="20px">Your Active Proposals</h1>
-                  <Divider />
-                  <br />
-                  <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-                    {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>Post your first proposal so others can see your work</h4>}
-                    {selfActiveProposalCards.map(activepropcard => activepropcard)}
-                    {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
-                </Grid>
-                </CardContent>
-                </Card> 
-                
+                <Card>
+                  <CardContent>
+                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                    <Divider />
+                    <br />
+                    <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
+                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>Post your first proposal so others can see your work</h4>}
+                      {selfActiveProposalCards.map(activepropcard => activepropcard)}
+                      {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
+                    </Grid>
+                  </CardContent>
+                </Card>
+
                 {/* ARCHIVED PROPOSALS------------------------------------------------ */}
 
                 {selfInactiveProposalCards.length > 0 &&

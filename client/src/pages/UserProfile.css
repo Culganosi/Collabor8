@@ -43,7 +43,12 @@ justify-content:flex-end;
   align-self:stretch;
 }
 
-
+.avatar{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content: center;
+}
 /* .archived {
   display: flex;
   justify-content: flex-end;

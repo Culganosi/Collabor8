@@ -43,6 +43,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const styles = makeStyles((theme) => ({
+
   avatar: {
     verticalAlign: "middle",
     marginRight: theme.spacing(1),
@@ -66,7 +67,15 @@ const styles = makeStyles((theme) => ({
   cardContent: {
     padding: theme.spacing(2, 1, 1, 1),
   },
+  img: {
+display:"flex",
+alignItems: "center",
+justifycontent:"center",
+  }
 }));
+
+
+
 //styling for when there are no active proposals 
 const styleObj = {
   fontSize: 30,
@@ -143,8 +152,7 @@ export default function OtherProfile() {
         }
       })
   }, [otherUser])
-
-
+  
 
   const userProposalsCards = userProposals.map((proposal) => {
     return (
@@ -187,21 +195,25 @@ export default function OtherProfile() {
           </Typography>
         </Container>
       </div>
-
-      {/* <div className="body">
-        <Container className="root-container">
-          <Grid container spacing={0} sx={{ width: "120vw", height: "120vh" }}>
-            <Grid container item xs={10} sm={2} lg={3}>
+      <Box sx={{ flexGrow: 1 }} >
+        <Grid container spacing={2} columns={16} justifyContent="center">
+          <Grid item xs={3}>
+            {/* OTHER USER PROFILE SECTION------------------------------------------ */}
+            <Item>
               <Card>
                 <CardContent>
                   <h1> {otherUser.userhandle} </h1>
                   <br />
-                  <Avatar
+                  <div className="avatar">
+                  <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
+
                     alt="Username"
                     src={otherUser.avatar}
                     sx={{ width: 100, height: 100 }}
+                    classes={classes.chip}
                   />
-                  <br/>
+                  </div>
+                  <br />
                   <p>
                     <div className="socialIcons">
                       {otherUser.socialMedia &&
@@ -210,7 +222,7 @@ export default function OtherProfile() {
                             href={otherUser.socialMedia.Portfolio}
                             target="blank"
                           >
-                            <ScreenshotMonitorIcon className="svg_icons"/>
+                            <ScreenshotMonitorIcon className="svg_icons" />
                           </Link>
                         )}
                       {otherUser.socialMedia && otherUser.socialMedia.GitHub && (
@@ -218,7 +230,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.GitHub}
                           target="blank"
                         >
-                          <GitHubIcon className="svg_icons"/>
+                          <GitHubIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && (
@@ -234,7 +246,7 @@ export default function OtherProfile() {
                           href={otherUser.socialMedia.Twitter}
                           target="blank"
                         >
-                          <TwitterIcon className="svg_icons"/>
+                          <TwitterIcon className="svg_icons" />
                         </Link>
                       )}
                       {otherUser.socialMedia &&
@@ -243,25 +255,25 @@ export default function OtherProfile() {
                             href={otherUser.socialMedia.Instagram}
                             target="blank"
                           >
-                            <InstagramIcon className="svg_icons"/>
+                            <InstagramIcon className="svg_icons" />
                           </Link>
                         )}
                     </div>
                     <br />
-
                     <h3>Role:</h3>
+                    <Divider />
                     {otherUser.role}
-                    <h3>Bio:</h3>
-                    {otherUser.bio}
                     <br />
                     <h3>Skills: </h3>
+                    <Divider />
                     {otherUser.skills && otherUser.skills.join(" | ")}
                     <br />
+                    <h3>Bio:</h3>
+                    <Divider />
+                    {otherUser.bio}
                     <br />
-                    
+
                     {chatId ?
-
-
                       //If the user logged in already has a connection with the otherUser
                       <Button
                         onClick={goToChat}
@@ -295,195 +307,39 @@ export default function OtherProfile() {
                         Make a connection
                         <EmailIcon />
                       </Button>
-
                     }
                   </p>
 
                 </CardContent>
               </Card>
-            </Grid>
-
-            <Grid container xs={12} sm={7} lg={9}>
-              <Stack spacing={1} flex="1 1 0">
-                <Card>
-                  <CardContent>
-                    <h1 text-align="center">
-                      {otherUser.userhandle}'s Active Proposals
-                    </h1>
-                    <Grid container alignItems="stretch">
-                      {userProposalsCards}
-                      {userProposals.length == 0 ? (
-                        <h4 style={styleObj}>
-                          {otherUser.userhandle} hasn't published any proposals
-                          yet{" "}
-                        </h4>
-                      ) : (
-                        <></>
-                      )
-                      }
-                    </Grid>
-                  </CardContent>
-                </Card>
-              </Stack>
-            </Grid>
+              {/* USER'S ACTIVE PROPOSALS----------------------------------------------------------- */}
+            </Item>
           </Grid>
-        </Container>
-      </div> */}
-    
-    <Box sx={{ flexGrow: 1 }} >
-    <Grid container spacing={2} columns={16} justifyContent="center">
-            <Grid item xs={3}>
-              <Item>
-
+          <Grid item xs={7}>
+            <Item>
               <Card>
                 <CardContent>
-                  <h1> {otherUser.userhandle} </h1>
-                  <br />
-                  <Avatar
-                    alt="Username"
-                    src={otherUser.avatar}
-                    sx={{ width: 100, height: 100 }}
-                  />
-                  <br/>
-                  <p>
-                    <div className="socialIcons">
-                      {otherUser.socialMedia &&
-                        otherUser.socialMedia.Portfolio && (
-                          <Link
-                            href={otherUser.socialMedia.Portfolio}
-                            target="blank"
-                          >
-                            <ScreenshotMonitorIcon className="svg_icons"/>
-                          </Link>
-                        )}
-                      {otherUser.socialMedia && otherUser.socialMedia.GitHub && (
-                        <Link
-                          href={otherUser.socialMedia.GitHub}
-                          target="blank"
-                        >
-                          <GitHubIcon className="svg_icons"/>
-                        </Link>
-                      )}
-                      {otherUser.socialMedia && otherUser.socialMedia.LinkedIn && (
-                        <Link
-                          href={otherUser.socialMedia.LinkedIn}
-                          target="blank"
-                        >
-                          <LinkedInIcon className="svg_icons" />
-                        </Link>
-                      )}
-                      {otherUser.socialMedia && otherUser.socialMedia.Twitter && (
-                        <Link
-                          href={otherUser.socialMedia.Twitter}
-                          target="blank"
-                        >
-                          <TwitterIcon className="svg_icons"/>
-                        </Link>
-                      )}
-                      {otherUser.socialMedia &&
-                        otherUser.socialMedia.Instagram && (
-                          <Link
-                            href={otherUser.socialMedia.Instagram}
-                            target="blank"
-                          >
-                            <InstagramIcon className="svg_icons"/>
-                          </Link>
-                        )}
-                    </div>
-                    <br />
-
-                    <h3>Role:</h3>
-                    {otherUser.role}
-                    <h3>Bio:</h3>
-                    {otherUser.bio}
-                    <br />
-                    <h3>Skills: </h3>
-                    {otherUser.skills && otherUser.skills.join(" | ")}
-                    <br />
-                    <br />
-                    
-                    {chatId ?
-
-
-                      //If the user logged in already has a connection with the otherUser
-                      <Button
-                        onClick={goToChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Send a Message
-                        <EmailIcon />
-                      </Button>
-
-                      :
-
-                      //If no chat connection exists yet
-                      <Button
-                        onClick={makeNewChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Make a connection
-                        <EmailIcon />
-                      </Button>
-
+                  <h1 text-align="center">
+                    {otherUser.userhandle}'s Active Proposals
+                  </h1>
+                  <Grid container alignItems="stretch">
+                    {userProposalsCards}
+                    {userProposals.length == 0 ? (
+                      <h4 style={styleObj}>
+                        {otherUser.userhandle} hasn't published any proposals
+                        yet{" "}
+                      </h4>
+                    ) : (
+                      <></>
+                    )
                     }
-                  </p>
-
+                  </Grid>
                 </CardContent>
               </Card>
-
-
-
-                </Item>
-                
-                </Grid>
-
-                <Grid item xs={7}>
-              <Item>
-              <Card>
-                  <CardContent>
-                    <h1 text-align="center">
-                      {otherUser.userhandle}'s Active Proposals
-                    </h1>
-                    <Grid container alignItems="stretch">
-                      {userProposalsCards}
-                      {userProposals.length == 0 ? (
-                        <h4 style={styleObj}>
-                          {otherUser.userhandle} hasn't published any proposals
-                          yet{" "}
-                        </h4>
-                      ) : (
-                        <></>
-                      )
-                      }
-                    </Grid>
-                  </CardContent>
-                </Card>
-
-                </Item>
-                </Grid>
-
-                </Grid>
-
-</Box>
-
-
-
-
-
+            </Item>
+          </Grid>
+        </Grid>
+      </Box>
     </>
   );
 }
