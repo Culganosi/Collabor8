@@ -146,6 +146,7 @@ export default function UserProfile() {
                 <CardContent>
                   <div className="handleimg">
                   <h1 className="userHandle">  {self.userhandle} </h1>
+                  <br />
                   <Avatar
                     alt="avatar"
                     src={self.avatar}
@@ -154,28 +155,29 @@ export default function UserProfile() {
                   </div>
                   <br />
                   <p>
-                    <div className="socialIcons">
-                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon /></Link>}
-                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon /></Link>}
+                    <div className="otherSocialIcons">
+                      {self.socialMedia && self.socialMedia.Portfolio && <Link href={self.socialMedia.Portfolio} target="blank"><ScreenshotMonitorIcon className="svg_icons" /></Link>}
+                      {self.socialMedia && self.socialMedia.GitHub && <Link href={self.socialMedia.GitHub} target="blank"><GitHubIcon className="svg_icons" /></Link>}
+                      {self.socialMedia && self.socialMedia.LinkedIn && <Link href={self.socialMedia.LinkedIn} target="blank"><LinkedInIcon className="svg_icons" /></Link>}
+                      {self.socialMedia && self.socialMedia.Twitter && <Link href={self.socialMedia.Twitter} target="blank"><TwitterIcon className="svg_icons" /></Link>}
+                      {self.socialMedia && self.socialMedia.Instagram && <Link href={self.socialMedia.Instagram} target="blank"><InstagramIcon className="svg_icons" /></Link>}
                     </div>
                     <br />
                     <h3>Role:</h3>
+                    <Divider />
                     {self.role}
                     <br />
-                    <Divider />
                     <br />
                     <h3>Description:</h3>
+                    <Divider />
                     {self.bio}
                     <br />
-                    <Divider />
                     <br />
                     <h3>Skills: </h3>
+                    <Divider />
+
                     {self.skills && self.skills.join(" | ")}
                     {/* <br /> */}
-                    <Divider />
                     <br />
                     <Link to="/My-Profile/:id/edit" >
                       <div style={{ display: 'flex', justifyContent: 'center' }}>

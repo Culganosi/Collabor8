@@ -27,11 +27,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: "space-between"
   },
-
-  cardUser: {
-    height: '100%',
-  },
-
   cardMedia:{
     paddingTop: '56.25%'
   },
@@ -126,7 +121,9 @@ const useStyles = makeStyles((theme) => ({
     padding:'8%',
     height: 'auto',
   },
-  
+  loginColor : {
+    color: "#e91e63",
+  }
 }));
 
 export default useStyles;

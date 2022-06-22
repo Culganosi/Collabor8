@@ -31,7 +31,7 @@ export default function BrowseUsers() {
 
   const listOfUserCards = Object.values(profiles).map(profile => {
     return (
-      <Grid item={profile} xs={12} sm={6} md={4}>
+      <Grid item={profile} style={{maxWidth: '400px', maxHeight: '400px'}}>
         <UserCard 
           key={profile._id}
           _id={profile._id}
@@ -71,11 +71,14 @@ export default function BrowseUsers() {
           </Typography>
         </Container>
       </div>
-      <Box border={2} padding={4} margin={2} borderRadius={16}>
+      <Box border={2} padding={6} margin={2} borderRadius={16}>
     
 
-          <Grid container spacing={4}>
+          <Grid container spacing={5} justify="center" align="center">
+          
+
             {listOfUserCards}
+        
           </Grid>
 
     

@@ -8,47 +8,36 @@ import {
   CardContent,
   CardMedia,
   CardActionArea,
-  Grid
+  Grid,
+  Avatar,
+  Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@mui/material/Divider";
 
 const useStyles = makeStyles({
   root: {
+    maxWidth: 900,
     listStyle: "none",
   },
   card: {
     display: "flex",
     alignItems: "stretch",
-    flexDirection: "column",
+
     paddingTop: "10px",
     paddingBottom: "10px",
-    paddingLeft: "15px",
+    paddingLeft: "10px",
+    
     ["@media (min-width:600px)"]: {
       flexDirection: "row",
     },
   },
-  media: {
-    borderRadius: "55%",
-    ["@media (min-width:600px)"]: {
-      width: "100px",
-    }
-  },
   title: {
     width: "100%",
-
   },
-
-  topRight: {
-    paddingLeft: "80px"
-  },
-  bio: {
-    paddingLeft: "25px",
-  } ,
   skills: {
-    paddingLeft: "25px",
-    paddingTop: "25px"
-  }
+    paddingTop: "15px",
+  },
 });
 
 export default function UserCard({
@@ -62,58 +51,71 @@ export default function UserCard({
   const classes = useStyles();
 
   return (
-      <Card component="li" className={classes.root}>
-        <CardActionArea
-          component="div"
-          className={classes.card}
-          aria-disabled="true"
-          role="presentation"
-          tabIndex="-1"
-        >
-          <CardMedia
-            className={classes.media}
-            image={avatar}
-          />
+    <Card style={{maxHeight:'400px', height: '100%'}}>
+      <CardActionArea
+        className={classes.card}
+        aria-disabled="true"
+        tabIndex="-1"
+      >
+        <Box
+          component="img"
+          src={avatar}
+          sx={{
+            height: 233,
+            width: 300,
+            maxHeight: { xs: 233, md: 167 },
+            maxWidth: { xs: 300, md: 250 },
+            
+          }}
+        />
 
-          <CardContent className={classes.topRight}>
-            <Typography component="h4" variant="h5" color="secondary">
-              {userhandle}
-            </Typography>
-            <Typography
-              className={classes.title}
-              variant="h6"
-              color="textSecondary"
-              noWrap
-            > 
-              {role}
-            </Typography>
+        <CardContent>
+          <Typography variant="h5" color="secondary">
+            {userhandle}
+          </Typography>
+          <Typography
+            className={classes.title}
+            variant="subtitle1"
+            color="textSecondary"
+            noWrap={false}
+            
+          >
+            {role}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+      <Divider />
+      <Grid
+        container
+        direction="column"
+
+        
+      >
+        <Grid item>
+          <Typography
+            className={classes.skills}
+            variant="subtitle1"
+            color="secondary"
+          >
+            {skills.join(" | ")}
+          </Typography>
+          <Typography className={classes.bio}>{shortBio}</Typography>
+          <CardContent>
+            <Link
+              to={`/People/${_id}`}
+              style={{ textDecoration: "none" }}
+              element={<OtherProfile />}
+            >
+              <Box display="flex" flexDirection="column" justifyContent="flex-end">
+
+              <Button variant="contained" color="secondary">
+                See User Profile
+              </Button>
+              </Box>
+            </Link>
           </CardContent>
-            </CardActionArea>
-        <Divider />
-        <Grid container>
-          <Grid item>
-            <Typography
-              className={classes.skills}
-              variant="subtitle1"
-              color="secondary"
-              >
-              {skills.join(" | ")}
-            </Typography>
-            <Typography className={classes.bio}>{shortBio}</Typography>
-            <CardContent className={classes.card}>
-              
-              <Link
-                to={`/People/${_id}`}
-                style={{ textDecoration: "none" }}
-                element={<OtherProfile />}
-              >
-                <Button variant="contained" color="secondary">
-                  See User Profile
-                </Button>
-              </Link>
-            </CardContent>
-          </Grid>
         </Grid>
-      </Card>
+      </Grid>
+    </Card>
   );
 }
