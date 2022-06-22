@@ -12,6 +12,7 @@ import useStyles from '../styles';
 import { Container, Typography } from '@material-ui/core'
 import purplewave from "../images/purplewave.webp";
 import styled from "styled-components"
+import Background from "../components/Background";
 
 export default function Login() {
   const classes = useStyles();
@@ -59,8 +60,10 @@ export default function Login() {
 
   return (
     <>
+
     <div className="background">
       {/* <Wrapper> */}
+
         <div className={classes.headercontainer}>
           <Container max-Width="sm">
             <Typography variant="h2" align="center" color="secondary" className="title" gutterBottom>
@@ -76,14 +79,18 @@ export default function Login() {
             <form className="form">
               <div className="form-group">
                 <TextField
-                  id="outlined-multiline-flexible"
+                  id="filled-multiline-static"
                   label="Username"
                   helperText="Please enter your username"
                   multiline
                   defaultValue=""
                   maxRows={1}
+                  variant="outlined"
+                  color="secondary"
+                  type="text"
                   value={userhandle}
                   onChange={(event) => setUserhandle(event.target.value)}
+                  
                 />
               </div>
               <div className="form-group">
@@ -93,7 +100,9 @@ export default function Login() {
                   helperText="Please enter your password"
                   defaultValue=""
                   multiline
+                  color="secondary"
                   maxRows={1}
+                  type="password"
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
                 />
@@ -107,12 +116,13 @@ export default function Login() {
               >
                 Submit</Button>
 
-
-              <Grid item>
+              {/* <Grid item>
                 <Link href="/Register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
-              </Grid>
+              </Grid> */}
+              <br />
+              <br />
 
               <h4>Temporary shortcuts - login as: </h4>
               <button type="button" onClick={() => shortcutLogin("kmyrtle0")}>kmyrtle0</button>
@@ -121,9 +131,8 @@ export default function Login() {
 
             </form>
           </div>
-
-
         </Box>
+
         </div>
     </>
 
