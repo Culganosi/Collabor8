@@ -21,7 +21,7 @@ import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
 
-const pages = ["People", "Proposals", "Create new proposal"];
+const pages = ["People", "Proposals", "Create-proposal"];
 
 const ResponsiveAppBar = () => {
   

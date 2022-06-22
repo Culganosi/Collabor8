@@ -25,10 +25,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 //styling for when there are no active proposals 
 const styleObj = {
-  fontSize: 30,
+  fontSize: 25,
   color: "#DB7093",
   textAlign: "center",
-  paddingTop: "70px",
+  paddingTop: "30px",
 }
 
 export default function UserProfile() {
@@ -109,10 +109,10 @@ export default function UserProfile() {
       <div className={classes.container}>
         <Container max-Width="sm">
           <Typography variant="h2" align="center" color="secondary" gutterBottom>
-            My User Profile
+            Your personal profile
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            View your active and archived proposals. Edit profile that other users may see
+            Review your information and proposals and make changes as needed
           </Typography>
         </Container>
       </div>
@@ -178,7 +178,7 @@ export default function UserProfile() {
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
                 <Card>
                   <CardContent>
-                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                    <h1 text-align="center" padding="20px">Your active proposals</h1>
                     <Divider />
                     <br />
                     <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
@@ -194,7 +194,7 @@ export default function UserProfile() {
                 {selfInactiveProposalCards.length > 0 &&
                   <Card>
                     <CardContent>
-                      <h1>Your Archived Proposals</h1>
+                      <h1>Your irchived proposals</h1>
                       <Divider />
                       <br />
                       <Grid container alignItems="contain">
