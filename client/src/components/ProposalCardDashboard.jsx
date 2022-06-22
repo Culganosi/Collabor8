@@ -42,7 +42,7 @@ export default function ProposalCardDashboard({
 
     <div style={{display: "flex", justifyContent: "center"}}>
       <CardActions>
-        <Link to={`${_id}`} style={{ textDecoration: 'none' }}>
+        <Link to={`/Proposals/${_id}`} style={{ textDecoration: 'none' }}>
         <Button size="small" variant="contained" color="secondary">
           See More Details
         </Button>
