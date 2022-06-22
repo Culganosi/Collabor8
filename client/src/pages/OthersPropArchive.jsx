@@ -98,6 +98,8 @@ return (
     <Container max-Width="sm">
       <Grid container spacing={3} justify="center">
         <Grid item xs={12} sm={6} md={4} lg={4} style={{ display: 'flex', justifyContent: "center" }}>
+
+          
           <Paper className={classes.content} elevation={8} style={{ display: 'flex', justifyContent: "center" }}>
             <CardContent>
               <img src={author.avatar}
