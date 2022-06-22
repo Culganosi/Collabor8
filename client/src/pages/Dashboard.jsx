@@ -158,7 +158,7 @@ export default function Dashboard() {
                                                     <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
                                                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                             <Button style={{ margin: 17 }} variant="contained" color="secondary">
-                                                                Post a proposal
+                                                                Publish a proposal
                                                             </Button>
                                                         </div>
                                                     </Link>

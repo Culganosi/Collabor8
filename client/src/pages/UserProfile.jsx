@@ -25,10 +25,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 //styling for when there are no active proposals 
 const styleObj = {
-  fontSize: 25,
+  fontSize: 20,
   color: "#DB7093",
   textAlign: "center",
-  paddingTop: "30px",
+  paddingTop: "25px",
 }
 
 export default function UserProfile() {
@@ -121,7 +121,7 @@ export default function UserProfile() {
         <div className="columns">
           <Grid container spacing={2} columns={16} justifyContent="center">
             <Grid item xs={3}>
-              <Item>
+              <Item style={{minHeight: "750px"}}>
                 {/* USER PROFILE GRID----------------------------------------------------- */}
                 <Card>
                   <CardContent>
@@ -174,7 +174,7 @@ export default function UserProfile() {
             </Grid>
 
             <Grid item xs={7}>
-              <Item>
+              <Item style={{minHeight: "750px"}}>
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
                 <Card>
                   <CardContent>
@@ -182,7 +182,7 @@ export default function UserProfile() {
                     <Divider />
                     <br />
                     <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>Post your first proposal so others can see your work</h4>}
+                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>You have no active proposals, publish one to share your ideas!</h4>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
                       {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
                     </Grid>
@@ -194,10 +194,10 @@ export default function UserProfile() {
                 {selfInactiveProposalCards.length > 0 &&
                   <Card>
                     <CardContent>
-                      <h1>Your irchived proposals</h1>
+                      <h1>Your inactive proposals</h1>
                       <Divider />
                       <br />
-                      <Grid container alignItems="contain">
+                      <Grid container alignItems="contain" style={{ display: 'flex', justifyContent: 'center' }}>
                         {selfInactiveProposalCards}
                       </Grid>
                     </CardContent>
