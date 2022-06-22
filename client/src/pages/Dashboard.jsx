@@ -125,7 +125,7 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            <h1 className="dashTitles">Latest proposals that are seeking your skills:</h1>
+                                            <h1 className="dashTitles">Latest proposals that are seeking a {proposals.length>0 && proposals[0].seeking[0]}</h1>
                                             <Divider />
                                             <br />
                                             <Container className={classes.cardMedia} maxWidth="xl">
