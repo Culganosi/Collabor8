@@ -18,7 +18,7 @@ module.exports = (User, Proposal) => {
         const userRole = targetUser.role
 
         //Find proposals that seek that role, are active, and the author is not the user making the call
-        const recommendedProposals = await Proposal.find({seeking: userRole, author: { "$ne": userId }, status: "Active" }).limit(3)
+        const recommendedProposals = await Proposal.find({seeking: userRole, author: { "$ne": userId }, status: "Active" }).sort("-createdAt").limit(3)
 
         return res.status(200).json(recommendedProposals)
 
@@ -72,7 +72,7 @@ module.exports = (User, Proposal) => {
         for (let role of uniqueRoles) {
             const usersInRole = await User.find(
                 {role, _id: {"$ne": userId}}, 
-                {userhandle: 1, avatar: 1, role: 1, skills: 1, shortBio: 1, createdAt: 1}).limit(limit)
+                {userhandle: 1, avatar: 1, role: 1, skills: 1, shortBio: 1, createdAt: 1}).sort("-createdAt").limit(limit)
             recommendedUsers = recommendedUsers.concat(usersInRole)
         }
 
