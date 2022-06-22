@@ -34,7 +34,7 @@ module.exports = (User) => {
 
         User
         .find(filterInput, fieldsToReturn) //Return all but only include these fields
-        .sort(sortInput)
+        .sort("-createdAt")
         .then((userData) => {
             
             //Make the data an object indexable by ID
