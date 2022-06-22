@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {DataContext} from "./DataContext"
 import { CssBaseline } from "@material-ui/core";
@@ -35,6 +35,11 @@ function App() {
   //Which chat will display in the Conversation component
   const [activeChatId, setActiveChatId] = useState(""); //---This is the ID
   const [activeChatFull, setActiveChatFull] = useState([]); //---This is the whole history of the active chat
+
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
 
 

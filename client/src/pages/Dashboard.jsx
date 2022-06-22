@@ -108,11 +108,11 @@ export default function Dashboard() {
                     <Typography variant="h2" align="center" color="secondary" gutterBottom>
                         Dashboard
                     </Typography>
+                    <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                        Your own personalized space.
+                    </Typography>
                 </Container>
             </div>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                Browse through the follwing proposals and users that you might be interested to work with.
-            </Typography>
             <div >
                 <Box sx={{ flexGrow: 1 }} > 
               {/* sx={{  alignContent: 'stretch'}} */}
@@ -125,7 +125,7 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            <h1 className="dashTitles">Latest proposals that are seeking your skills:</h1>
+                                            <h1 className="dashTitles">Latest proposals that are seeking a {proposals.length>0 && proposals[0].seeking[0]}</h1>
                                             <Divider />
                                             <br />
                                             <Container className={classes.cardMedia} maxWidth="xl">
@@ -152,13 +152,13 @@ export default function Dashboard() {
                                     <CardContent>
                                         <p>
                                             <br />
-                                            {profiles.length > 0 ? <> <h1 className="dashTitles" >Users to consider for your active proposals:</h1> <Divider />  </>:
+                                            {profiles.length > 0 ? <> <h1 className="dashTitles" >Users who might be a great fit for your active proposals</h1> <Divider />  </>:
                                                 <>
                                                     <h1 className="dashTitles" >Publish your first proposal to get recommendations for collaborators</h1>
                                                     <Link to="/Create-Proposal" style={{ textDecoration: 'none' }}>
                                                         <div style={{ display: 'flex', justifyContent: 'center' }}>
                                                             <Button style={{ margin: 17 }} variant="contained" color="secondary">
-                                                                Post a proposal
+                                                                Publish a proposal
                                                             </Button>
                                                         </div>
                                                     </Link>

@@ -202,14 +202,14 @@ export default function OtherProfile() {
             <Item>
               <Card>
                 <CardContent>
-                  <h1> {otherUser.userhandle} </h1>
+                  <h1 style={{color: "#F50057"}}> {otherUser.userhandle} </h1>
                   <br />
                   <div className="avatar">
                   <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
 
                     alt="Username"
                     src={otherUser.avatar}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{ width: 120, height: 120 }}
                     classes={classes.chip}
                   />
                   </div>
@@ -260,53 +260,33 @@ export default function OtherProfile() {
                         )}
                     </div>
                     <br />
-                    <h3>Role:</h3>
+                    <h2 style={{color: "#303FA0"}}>{otherUser.role}</h2>
+                    <Typography variant="body1">
+
+                    <p style={{color: "#4A5AB9", marginTop: 7}}>{otherUser.skills && otherUser.skills.join(" | ")}</p>
+
                     <Divider />
-                    {otherUser.role}
                     <br />
-                    <h3>Skills: </h3>
-                    <Divider />
-                    {otherUser.skills && otherUser.skills.join(" | ")}
-                    <br />
-                    <h3>Bio:</h3>
-                    <Divider />
-                    {otherUser.bio}
+
+                    <h4 style={{textAlign: "left"}}>{otherUser.shortBio}</h4>
+                    {/* <Divider /> */}
+                    <p style={{textAlign: "left"}}>{otherUser.bio}</p>
+                    </Typography>
                     <br />
 
                     {chatId ?
                       //If the user logged in already has a connection with the otherUser
-                      <Button
-                        onClick={goToChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Send a Message
-                        <EmailIcon />
+                      <Button size="small" variant="contained" color="secondary" onClick={goToChat}>
+                        Message
                       </Button>
 
                       :
-
-                      //If no chat connection exists yet
-                      <Button
-                        onClick={makeNewChat}
-                        style={{
-                          margin: 2,
-                          borderRadius: 10,
-                          backgroundColor: "#21b6ae",
-                          padding: "5px 10px",
-                          fontSize: "10px",
-                        }}
-                        variant="contained"
-                      >
-                        Make a connection
-                        <EmailIcon />
+                      
+                      //Otherwise, create connection
+                      <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
+                        Connect
                       </Button>
+
                     }
                   </p>
 
@@ -320,9 +300,11 @@ export default function OtherProfile() {
               <Card>
                 <CardContent>
                   <h1 text-align="center">
-                    {otherUser.userhandle}'s Active Proposals
+                    {otherUser.userhandle}'s proposals
                   </h1>
-                  <Grid container alignItems="stretch">
+                  <Divider />
+                  <br />
+                  <Grid container alignItems="stretch" style={{ display: 'flex', justifyContent: 'center' }}>
                     {userProposalsCards}
                     {userProposals.length == 0 ? (
                       <h4 style={styleObj}>

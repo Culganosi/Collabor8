@@ -10,9 +10,9 @@ module.exports = (User, Proposal) => {
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
           console.log("In GET /proposals")
-
-
+          
           let {filterInput, sortInput} = req.body;
+
           if (!filterInput) {
                filterInput={}
           }
@@ -35,7 +35,7 @@ module.exports = (User, Proposal) => {
 
           Proposal
           .find(filterInput, fieldsToReturn) 
-          .sort(sortInput)
+          .sort("-createdAt")
           .then((proposalData) => {
 
                //Make the data an object indexable by ID

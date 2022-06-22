@@ -21,7 +21,7 @@ import { DataContext } from "./../DataContext";
 import { useNavigate } from "react-router-dom";
 
 
-const pages = ["People", "Proposals", "Create-Proposal"];
+const pages = ["People", "Proposals", "Create-proposal"];
 
 const ResponsiveAppBar = () => {
   
@@ -45,7 +45,10 @@ const ResponsiveAppBar = () => {
       .then(res => {
         setSelf(res.data)
       })
-      .catch(() => console.log("Not logged in"))
+      .catch(() => {
+        console.log("Not logged in")
+        navigate("/")
+      })
     }
   }, [self])
 

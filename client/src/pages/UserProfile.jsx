@@ -25,10 +25,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 //styling for when there are no active proposals 
 const styleObj = {
-  fontSize: 30,
+  fontSize: 20,
   color: "#DB7093",
   textAlign: "center",
-  paddingTop: "70px",
+  paddingTop: "25px",
 }
 
 export default function UserProfile() {
@@ -109,10 +109,10 @@ export default function UserProfile() {
       <div className={classes.container}>
         <Container max-Width="sm">
           <Typography variant="h2" align="center" color="secondary" gutterBottom>
-            My User Profile
+            Your personal profile
           </Typography>
           <Typography variant="h5" align="center" color="textSecondary" paragraph>
-            View your active and archived proposals. Edit profile that other users may see
+            Review your information and proposals and make changes as needed
           </Typography>
         </Container>
       </div>
@@ -124,7 +124,95 @@ export default function UserProfile() {
               <Item>
                 {/* USER PROFILE GRID----------------------------------------------------- */}
                 <Card>
-                  <CardContent>
+
+                <CardContent>
+                  <h1 style={{color: "#F50057"}}> {self.userhandle} </h1>
+                  <br />
+                  <div className="avatar">
+                  <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
+
+                    alt="Username"
+                    src={self.avatar}
+                    sx={{ width: 120, height: 120 }}
+                    classes={classes.chip}
+                  />
+                  </div>
+                  <br />
+                  <p>
+                    <div className="socialIcons">
+                      {self.socialMedia &&
+                        self.socialMedia.Portfolio && (
+                          <Link
+                            href={self.socialMedia.Portfolio}
+                            target="blank"
+                          >
+                            <ScreenshotMonitorIcon className="svg_icons" />
+                          </Link>
+                        )}
+                      {self.socialMedia && self.socialMedia.GitHub && (
+                        <Link
+                          href={self.socialMedia.GitHub}
+                          target="blank"
+                        >
+                          <GitHubIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia && self.socialMedia.LinkedIn && (
+                        <Link
+                          href={self.socialMedia.LinkedIn}
+                          target="blank"
+                        >
+                          <LinkedInIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia && self.socialMedia.Twitter && (
+                        <Link
+                          href={self.socialMedia.Twitter}
+                          target="blank"
+                        >
+                          <TwitterIcon className="svg_icons" />
+                        </Link>
+                      )}
+                      {self.socialMedia &&
+                        self.socialMedia.Instagram && (
+                          <Link
+                            href={self.socialMedia.Instagram}
+                            target="blank"
+                          >
+                            <InstagramIcon className="svg_icons" />
+                          </Link>
+                        )}
+                    </div>
+                    <br />
+                    <h2 style={{color: "#303FA0"}}>{self.role}</h2>
+                    <Typography variant="body1">
+
+                    <p style={{color: "#4A5AB9", marginTop: 7}}>{self.skills && self.skills.join(" | ")}</p>
+
+                    <Divider />
+                    <br />
+
+                    <h4 style={{textAlign: "left"}}>{self.shortBio}</h4>
+                    {/* <Divider /> */}
+                    <p style={{textAlign: "left"}}>{self.bio}</p>
+                    </Typography>
+                    </p>
+                    <br />
+
+                      <Link to="/My-Profile/:id/edit" style={{textDecoration: "none"}}>
+                        <div style={{ display: 'flex', justifyContent: 'center' }}>
+                          <Button style={{ margin: 10 }} variant="contained">
+                            Edit Profile
+                          </Button>
+                        </div>
+                      </Link>
+
+                </CardContent>
+
+
+
+
+                  {/* <CardContent>
                     <h1 className="userHandle">  {self.userhandle} </h1>
                     <br />
                     <div className="avatar">
@@ -158,7 +246,7 @@ export default function UserProfile() {
                       <Divider />
 
                       {self.skills && self.skills.join(" | ")}
-                      {/* <br /> */}
+                      {/* <br /> *
                       <br />
                       <Link to="/My-Profile/:id/edit" >
                         <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -168,7 +256,10 @@ export default function UserProfile() {
                         </div>
                       </Link>
                     </p>
-                  </CardContent>
+                  </CardContent> */}
+
+
+
                 </Card>
               </Item>
             </Grid>
@@ -178,11 +269,11 @@ export default function UserProfile() {
                 {/* ACTIVE PROPOSALS---------------------------------------------------- */}
                 <Card>
                   <CardContent>
-                    <h1 text-align="center" padding="20px">Your Active Proposals</h1>
+                    <h1 text-align="center" padding="20px">Your active proposals</h1>
                     <Divider />
                     <br />
                     <Grid container style={{ display: 'flex', justifyContent: 'center' }}>
-                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>Post your first proposal so others can see your work</h4>}
+                      {selfActiveProposalCards.length == 0 && <h4 style={styleObj}>You have no active proposals, publish one to share your ideas!</h4>}
                       {selfActiveProposalCards.map(activepropcard => activepropcard)}
                       {/* maps through array of JSX objects & instead of rendering it, it tells it to just return it as that  */}
                     </Grid>
@@ -194,10 +285,10 @@ export default function UserProfile() {
                 {selfInactiveProposalCards.length > 0 &&
                   <Card>
                     <CardContent>
-                      <h1>Your Archived Proposals</h1>
+                      <h1>Your inactive proposals</h1>
                       <Divider />
                       <br />
-                      <Grid container alignItems="contain">
+                      <Grid container alignItems="contain" style={{ display: 'flex', justifyContent: 'center' }}>
                         {selfInactiveProposalCards}
                       </Grid>
                     </CardContent>

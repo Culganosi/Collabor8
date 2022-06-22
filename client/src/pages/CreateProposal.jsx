@@ -121,8 +121,7 @@ export default function CreateProposal() {
           Create a proposal
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          Fill out the following details to upload your proposal for other
-          interested collaborators
+          Fill out the details to publish your brilliant idea
         </Typography>
       </Container>
 

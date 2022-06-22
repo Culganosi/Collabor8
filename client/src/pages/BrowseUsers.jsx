@@ -58,7 +58,7 @@ export default function BrowseUsers() {
             color="secondary"
             gutterBottom
           >
-            Browse Users
+            Browse users
           </Typography>
           <Typography
             variant="h5"
@@ -67,7 +67,7 @@ export default function BrowseUsers() {
             paragraph
           >
             Looking for somebody to work with on your project? You're in the
-            right place. Click on a profile below to see a more detailed view.
+            right place.
           </Typography>
         </Container>
       </div>

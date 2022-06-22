@@ -15,6 +15,13 @@ import {
 } from "@material-ui/core";
 
 export default function OwnProp() {
+
+  //Scroll to top when entering page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+
   const classes = useStyles();
 
   const [proposal, setProposal] = useState({})

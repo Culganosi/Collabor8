@@ -43,7 +43,7 @@ export default function BrowseProp() {
             color="secondary"
             gutterBottom
           >
-            Browse Proposals
+            Browse proposals
           </Typography>
           <Typography
             variant="h5"
@@ -51,8 +51,7 @@ export default function BrowseProp() {
             color="textSecondary"
             paragraph
           >
-            Please browse our list of active proposals and choose one that best
-            suits your needs.
+            Check out the creative ideas of other Collab||8ors
           </Typography>
         </Container>
       </div>

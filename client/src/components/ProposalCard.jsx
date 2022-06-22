@@ -32,21 +32,26 @@ export default function ProposalCard({
       <CardActionArea>
         <CardMedia className={classes.cardMedia} image={image} title="Title" />
         <CardContent className={classes.cardContent}>
-          <Typography gutterBottom variant="h5">
+
+          <Link to={`${_id}`} style={{ textDecoration: 'none'}}>
+          <Typography color="secondary" variant="h4" className={classes.title} style={{marginTop: 0, paddingTop: 0}}>
             {title}
           </Typography>
+          </Link>
           <Typography variant="h6">Seeking: {seeking}</Typography>
-          <Typography variant="body2">{shortDescription}</Typography>
+          <Typography variant="body1" style={{marginTop: 4, marginBottom: 4}}>{shortDescription}</Typography>
         </CardContent>
       </CardActionArea>
 
-      <CardActions>
+
+      {/* <CardActions>
         <Link to={`${_id}`} style={{ textDecoration: 'none' }}>
         <Button size="small" variant="contained" color="secondary">
           See More Details
         </Button>
-      </Link>
-      </CardActions>
+        </Link>
+      </CardActions> */}
+
     </Card>
   );
 }
