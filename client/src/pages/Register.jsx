@@ -60,18 +60,34 @@ export default function Register() {
                 <TextField
                   id="outlined-multiline-flexible"
                   label="Username"
+                  color="warning"
+                  variant="filled"
                   helperText="Please type in a username"
                   multiline
                   maxRows={1}
                   value={userhandle}
+                  InputLabelProps={{
+                    style: { color: '#CF9FFF' },
+                  }}
+                  InputProps={{
+                    style: {color: "#ffffff"}
+                  }}
                   onChange={(event) => setUserhandle(event.target.value)}
                 />
               </div>
               <div className="form-group">
                 <TextField
+                  variant="filled"
+                  color="warning"
                   id="outlined-multiline-flexible"
                   label="Password"
                   helperText="Please enter your password"
+                  InputLabelProps={{
+                    style: { color: '#CF9FFF' },
+                  }}
+                  InputProps={{
+                    style: {color: "#ffffff"}
+                  }}
                   multiline
                   maxRows={1}
                   value={password}
@@ -80,7 +96,7 @@ export default function Register() {
               </div>
 
               <Button
-                variant="outlined"
+                variant="contained"
                 size="large"
                 color="secondary"
                 onClick={() => register()}
