@@ -6,6 +6,14 @@ module.exports = (User) => {
     //Get basic (incomplete) info on all users for the browse users page
     router.get('/', async (req, res) => {
         console.log("In GET /users")
+
+        //User must be logged in
+        if (!req.session.userId) {
+            return res.status(403).json({message: "You're not logged in"})
+        }
+
+        const selfId = req.session.userId;
+
         let {filterInput, sortInput} = req.body;
 
         if (!filterInput) {
@@ -29,6 +37,9 @@ module.exports = (User) => {
         if (filterInput?.skills) {
             filterInput.skills = {$all : filterInput.skills}
         }
+        
+        //Exclude the user who is logged in
+        filterInput._id = {"$ne": selfId}
 
         const fieldsToReturn = {userhandle: 1, avatar: 1, shortBio: 1, skills: 1, createdAt: 1, role: 1}
 
