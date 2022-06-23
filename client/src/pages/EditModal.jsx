@@ -96,7 +96,7 @@ export default function EditModal() {
 
     axios.patch(`/proposals/${proposalId}`, newData).then((res) => {
       console.log(res.data);
-      navigate(`/My-Profile/${proposalId}`);
+      navigate(`/My-Profile/`);
     });
   };
 
@@ -170,29 +170,30 @@ export default function EditModal() {
     <div className={classes.container}>
       <Container max-Width="sm">
         <Typography variant="h2" align="center" color="secondary" gutterBottom>
-          Edit Proposal
+          Edit your proposal
         </Typography>
         <Typography variant="h5" align="center" color="textSecondary" paragraph>
-          Make changes below to update the details of your proposal
+          Make changes below to update the details
         </Typography>
       </Container>
 
       <Box p={5}>
         <Grid container justify="center">
           <Grid item xs={8}>
-            <Paper className={classes.ownprofile} elevation={8}>
+            <Paper className={classes.ownprofile} elevation={8} style={{padding: "80px"}}>
               <CardContent className={classes.cardContent}>
 
 
                 <Typography component="h5" variant="h5" color="secondary">
-                  Title of the Proposal
+                  Title
                 </Typography>
                 <TextField
                   id="filled-multiline-static" //"filled-basic"
                   defaultValue={oldProposal.title}
                   multiline
-                  variant="filled"
+                  variant="outlined"
                   color="secondary"
+                  style={{ width: "100%" }}
                   onChange={(event) => setTitle(event.target.value)}
                 />
 
@@ -229,7 +230,7 @@ export default function EditModal() {
 
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
                   Short description
@@ -240,8 +241,8 @@ export default function EditModal() {
                     multiline
                     rows={1}
                     defaultValue={oldProposal.shortDescription}
-                    variant="filled"
-                    style={{ width: "75%" }}
+                    variant="outlined"
+                    style={{ width: "100%" }}
                     onChange={(event) =>
                       setShortDescription(event.target.value)
                     }
@@ -249,7 +250,7 @@ export default function EditModal() {
                 </div>
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
                   Looking for:
@@ -259,23 +260,23 @@ export default function EditModal() {
                   <Grid item xs={10}>
                     <ToggleButtonGroup
                       fullWidth="true"
-                      color="warning"
+                      color="primary"
                       value={seekingRole}
                       orientation={"horizontal"}
                       size={"medium"}
                       exclusive
                       onChange={(event) => setSeekingRole(event.target.value)}
                     >
-                      <ToggleButton value="UX/UI designer">
+                      <ToggleButton value="UX/UI designer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         UX/UI designer
                       </ToggleButton>
-                      <ToggleButton value="Front-end developer">
+                      <ToggleButton value="Front-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Front-end developer
                       </ToggleButton>
-                      <ToggleButton value="Back-end developer">
+                      <ToggleButton value="Back-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Back-end developer
                       </ToggleButton>
-                      <ToggleButton value="Full-stack developer">
+                      <ToggleButton value="Full-stack developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Full-stack developer
                       </ToggleButton>
                     </ToggleButtonGroup>
@@ -284,7 +285,7 @@ export default function EditModal() {
 
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
                   Description
@@ -295,12 +296,12 @@ export default function EditModal() {
                     multiline
                     rows={6}
                     defaultValue={oldProposal.description}
-                    variant="filled"
-                    style={{ width: "75%" }}
+                    variant="outlined"
+                    style={{ width: "100%" }}
                     onChange={(event) => setDescription(event.target.value)}
                   />
                 </div>
-                <FormGroup>
+                <FormGroup style={{marginTop: 20}}>
                   <FormControlLabel  
                     control={
                       <Switch checked={checked} onChange={toggleChecked} />
@@ -310,14 +311,19 @@ export default function EditModal() {
                 </FormGroup>
               </CardContent>
               <div>
-                <Grid container spacing={2} justifyContent="center">
+                <Grid container spacing={2} justifyContent="center" justifyContent="flex-end" style={{paddingRight: 15, marginTop: 5}}>
                   <Grid item>
                     <Button
-                      variant="contained"
-                      color="secondary"
+                      variant="outlined"
+                      color="primary"
                       onClick={() => submitDeleteProposal()}
                     >
                       Delete Proposal
+                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Button variant="outlined" color="secondary" onClick={() => navigate(-1)}>
+                      Cancel
                     </Button>
                   </Grid>
                   <Grid item>
@@ -327,11 +333,6 @@ export default function EditModal() {
                       onClick={() => handleEditProposal()}
                     >
                       Save Changes
-                    </Button>
-                  </Grid>
-                  <Grid item>
-                    <Button variant="outlined" color="secondary" onClick={() => navigate(-1)}>
-                      Cancel
                     </Button>
                   </Grid>
                 </Grid>
