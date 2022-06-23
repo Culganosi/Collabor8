@@ -3,3 +3,17 @@
   top:0;
 
 }
+.welcome {
+  text-shadow: #6374AB 30px -8px 2px;
+  /* margin: 40px auto; */
+  /* font-family: 'Ubuntu', sans-serif; */
+  font-size: 100px;
+  font-weight: bold;
+  margin-bottom:0;
+  padding-bottom:0;
+  
+ color: transparent;
+   /* text-align: center;
+  letter-spacing: 5px;
+  text-shadow: 0 0 8px #316472; */
+} 

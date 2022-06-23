@@ -11,24 +11,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 export default function Splashtext() {
   return (
     <Wrapper>
-      <Title>Welcome to COLLAB||8</Title>
+      <h1 className="welcome">COLLAB||8</h1> 
       <Description>
         A collaborative tool for web developers and designers
         <br />
         <br />
-
-        <Button
-          size="small"
-          style={{ fontSize: 24 }}
-          href="/Login"
-          variant="contained"
-          color="secondary"
-        >
-          Login
-        </Button>
+        <br/>
         <br />
-        <br />
-
         <Button
           size="small"
           style={{ fontSize: 24 }}
@@ -38,6 +27,20 @@ export default function Splashtext() {
         >
           Register
         </Button>
+        <br />
+        <br />
+        <Button
+          size="small"
+          style={{ fontSize: 24 }}
+          href="/Login"
+          variant="outlined"
+          color="secondary"
+        >
+          Login
+        </Button>
+        
+
+        
       </Description>
     </Wrapper>
   );
@@ -54,11 +57,11 @@ const Wrapper = styled.div`
   padding: 140px 20px 100px;
 `;
 
-const Title = styled.h1`
-  color: rgba(255, 255, 255, 1);
-  font-weight: bold;
-  font-size: 50px;
-`;
+// const Title = styled.h1`
+//   color: rgba(255, 255, 255, 1);
+//   font-weight: bold;
+//   font-size: 50px;
+// `;
 
 const Description = styled.p`
   max-width: 300px;
@@ -67,4 +70,6 @@ const Description = styled.p`
   font-size: 17px;
   line-height: 130%;
   margin: 0 auto;
+  margin-top:-20px;
+  padding:0;
 `;
