@@ -101,22 +101,21 @@ export default function OthersProp() {
 
 return (
     <div className={classes.container}>
-
+      
         <Grid container justify="center">
           <Grid item xs={9}>
-            <Paper className={classes.createprofile} elevation={2}>
+            <Paper className={classes.createprofile} elevation={8}>
               <CardContent className={classes.cardContent} style={{display: "flex", justifyContent: "space-between"}}>
-
 
                 {/* LEFT SIDE */}
                 
-                <div style={{borderRight: "1px solid lightgrey", paddingRight: "80px"}}>
+                <div style={{borderRight: "1px solid lightgrey", paddingRight: "80px", width: 400, display: "flex", flexDirection: "column", alignItems: "center"}}>
 
               <img src={author.avatar}
-                className={classes.userprofileavatar}
+                
                 alt="user profile"
                 style={{
-                  width: 120, height: 120, objectFit: "cover", margin: 0, padding: 0
+                  width: 120, height: 120, objectFit: "cover", margin: "0 auto", padding: "0px 0px", borderRadius: "50%"
               }}
               />
               
@@ -129,9 +128,9 @@ return (
 
               <Typography
                 className={classes.title}
-                variant="h6"
+                variant="h7"
                 color="textSecondary"
-                style={{ textAlign: "center", padding: 0, marginTop: 15}}>
+                style={{ textAlign: "center", padding: 0, marginTop: 0}}>
                 {author.role}
               </Typography>
               {/* <Typography className={classes.bio}></Typography> */}
@@ -152,8 +151,6 @@ return (
               }
 
               </Box>
-
-
 
                 </div>
 
