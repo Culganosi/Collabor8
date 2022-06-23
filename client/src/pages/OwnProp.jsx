@@ -56,7 +56,6 @@ export default function OwnProp() {
                 <i>{proposal.shortDescription}</i>
               </Typography>
 
-
               <CardMedia className={classes.cardMedia} image={proposal.image} title="Title" 
               style={{borderRadius: "10px", width: "500px", height: "281px", objectFit: "cover", padding: 0, margin: 0}}/>
 
@@ -64,6 +63,11 @@ export default function OwnProp() {
               <Typography className={classes.title} variant="h6" color="textSecondary">
                 Looking for: {proposal.seeking && proposal.seeking.join(", ")}
               </Typography>
+
+              <Typography className={classes.bio} variant="h7" color="textSecondary">
+                Status: {proposal.status}
+              </Typography>
+              
               <Typography className={classes.bio}>
                 {proposal.description}
               </Typography>
