@@ -38,6 +38,14 @@ export default function UserProfile() {
   const [selfProposals, setSelfProposals] = useState([])
 
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+
+
   useEffect(() => {
     //If the self variable is {}, load the info again
 

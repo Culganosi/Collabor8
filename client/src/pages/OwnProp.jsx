@@ -11,6 +11,7 @@ import {
   Box,
   CardContent,
   CardMedia,
+  Container,
   Grid,
 } from "@material-ui/core";
 
@@ -38,25 +39,41 @@ export default function OwnProp() {
 
 
   return (
+    <div className={classes.container}>
+
+
     <Box p={5}>
 
       <Grid container justify="center">
         <Grid item xs={8}>
-          <Paper className={classes.ownprofile} elevation={8}>
+          <Paper className={classes.ownprofile} elevation={8} style={{padding: "80px"}}>
             <CardContent className={classes.cardContent}>
-              <CardMedia className={classes.cardMedia} image={proposal.image} title="Title" />
-              <Typography component="h5" variant="h5" color="secondary">
+              <Typography component="h4" variant="h4" color="secondary">
                 {proposal.title}
               </Typography>
+
+              <Typography className={classes.bio} style={{marginTop: -15}} color="primary" variant="h6">
+                <i>{proposal.shortDescription}</i>
+              </Typography>
+
+              <CardMedia className={classes.cardMedia} image={proposal.image} title="Title" 
+              style={{borderRadius: "10px", width: "500px", height: "281px", objectFit: "cover", padding: 0, margin: 0}}/>
+
+
               <Typography className={classes.title} variant="h6" color="textSecondary">
                 Looking for: {proposal.seeking && proposal.seeking.join(", ")}
               </Typography>
+
+              <Typography className={classes.bio} variant="h7" color="textSecondary">
+                Status: {proposal.status}
+              </Typography>
+              
               <Typography className={classes.bio}>
                 {proposal.description}
               </Typography>
 
               <Link to="edit" element={<EditModal />} >
-              <Button variant="contained" color="secondary">
+              <Button variant="outlined" color="secondary">
                 Edit Proposal
               </Button>
               </Link>
@@ -67,6 +84,7 @@ export default function OwnProp() {
     </Grid>
     
     </Box >
+    </div>
   );
 }
 

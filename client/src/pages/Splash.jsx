@@ -16,6 +16,12 @@ import CollabLogoIntro from "../media/CollabLogoIntro";
 import LogoAnimation from "../components/LogoAnimation";
 export default function Splash() {
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+  
+
   return (
     <>
       <Wrapper className='App'>

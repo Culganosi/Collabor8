@@ -121,6 +121,13 @@ export default function OtherProfile() {
 
   //-----------------REFRESH
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+
   //Load info about the user and about the proposals
   useEffect(() => {
 
@@ -286,8 +293,8 @@ export default function OtherProfile() {
                       <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
                         Connect
                       </Button>
-
                     }
+                    
                   </p>
 
                 </CardContent>

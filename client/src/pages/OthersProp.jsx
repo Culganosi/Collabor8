@@ -56,6 +56,13 @@ export default function OthersProp() {
   
   //------------------REFRESH
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+
   //Get info about the proposal and author
   useEffect(() => {
 
@@ -94,22 +101,21 @@ export default function OthersProp() {
 
 return (
     <div className={classes.container}>
-
+      
         <Grid container justify="center">
           <Grid item xs={9}>
-            <Paper className={classes.createprofile} elevation={2}>
+            <Paper className={classes.createprofile} elevation={8}>
               <CardContent className={classes.cardContent} style={{display: "flex", justifyContent: "space-between"}}>
-
 
                 {/* LEFT SIDE */}
                 
-                <div style={{borderRight: "1px solid lightgrey", paddingRight: "80px"}}>
+                <div style={{borderRight: "1px solid lightgrey", paddingRight: "80px", width: 400, display: "flex", flexDirection: "column", alignItems: "center"}}>
 
               <img src={author.avatar}
-                className={classes.userprofileavatar}
+                
                 alt="user profile"
                 style={{
-                  width: 120, height: 120, objectFit: "cover", margin: 0, padding: 0
+                  width: 120, height: 120, objectFit: "cover", margin: "0 auto", padding: "0px 0px", borderRadius: "50%"
               }}
               />
               
@@ -122,57 +128,29 @@ return (
 
               <Typography
                 className={classes.title}
-                variant="h6"
+                variant="h7"
                 color="textSecondary"
-                style={{ textAlign: "center", padding: 0, marginTop: 15}}>
+                style={{ textAlign: "center", padding: 0, marginTop: 0}}>
                 {author.role}
               </Typography>
               {/* <Typography className={classes.bio}></Typography> */}
               <Box textAlign="center" style={{padding: 0, marginTop: 15}}>
 
-              {chatId? 
+              {chatId ?
+                      //If the user logged in already has a connection with the otherUser
+                      <Button size="small" variant="contained" color="secondary" onClick={goToChat}>
+                        Message
+                      </Button>
 
-                //If the user logged in already has a connection with the otherUser
-                <Button
-                  onClick={goToChat}
-                  style={{ margin: 2 }}
-                  style={{
-                    borderRadius: 10,
-                    backgroundColor: "#4A5AB9",
-                    color: "white",
-                    padding: "5px 10px",
-                    fontSize: "10px",
-                  }}
-                  variant="contained"
-                >
-                  Message
-                  {/* <EmailIcon /> */}
-                </Button>
-
-                :
-
-                //If no chat connection exists yet
-                <Button
-                  onClick={makeNewChat}
-                  style={{ margin: 2 }}
-                  style={{
-                    borderRadius: 10,
-                    backgroundColor: "#303FA0",
-                    color: "white",
-                    padding: "5px 10px",
-                    fontSize: "10px",
-                  }}
-                  variant="contained"
-                >
-                  Connect
-                  {/* <EmailIcon /> */}
-                </Button>
-
-                }
+                      :
+                      
+                      //Otherwise, create connection
+                      <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
+                        Connect
+                      </Button>
+              }
 
               </Box>
-
-
 
                 </div>
 
@@ -184,6 +162,10 @@ return (
                 {proposal.title}
                 </Typography>
 
+                <Typography className={classes.bio} style={{marginTop: -25}} color="primary" variant="h6">
+                <i>{proposal.shortDescription}</i>
+                </Typography>
+
               <img src={proposal.image}
                 className={classes.proposalImg}
                 alt="proposal img"
@@ -193,6 +175,7 @@ return (
               <Typography className={classes.title} variant="h6" color="textSecondary">
                 Looking for: {proposal.seeking && proposal.seeking.join(", ")}
               </Typography>
+
               <Typography className={classes.bio}>
                 {proposal.description}
               </Typography>

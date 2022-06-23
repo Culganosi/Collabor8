@@ -43,6 +43,11 @@ export default function CreateProfile() {
   const fileInputRef = useRef()
   
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+  
 
 
   //Only call "create profile" once the image has uploaded

@@ -10,6 +10,12 @@ module.exports = (User, Proposal) => {
     //See GET /users for comments because it's the same concepts
      router.get("/", async (req, res) => {
           console.log("In GET /proposals")
+
+          //User must be logged in
+          if (!req.session.userId) {
+               return res.status(403).json({message: "You're not logged in"})
+          }
+          const selfId = req.session.userId;
           
           let {filterInput, sortInput} = req.body;
 
@@ -30,6 +36,9 @@ module.exports = (User, Proposal) => {
           if(filterInput) {
                filterInput.status = "Active";
           }
+
+           //Exclude proposals by the user who is logged in
+           filterInput.author = {"$ne": selfId}
 
           const fieldsToReturn = {title: 1, author: 1, createdAt: 1, seeking: 1, shortDescription: 1, image: 1}
 

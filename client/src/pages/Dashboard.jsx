@@ -42,6 +42,12 @@ export default function Dashboard() {
     const [proposals, setProposals] = useState([])
     const [profiles, setProfiles] = useState([])
 
+        //Scroll to top when entering page
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+
 
     useEffect(() => {
         axios.get("/recommend/proposals").then((res) => {

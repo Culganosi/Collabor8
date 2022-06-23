@@ -18,6 +18,12 @@ export default function BrowseUsers() {
   
   const {profiles, setProfiles} = useContext(DataContext);
 
+  //Scroll to top when entering page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+
 
   useEffect(() => {
     axios.get("/users")

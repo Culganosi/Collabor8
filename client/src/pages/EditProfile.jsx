@@ -24,6 +24,13 @@ export default function EditProfile() {
   const navigate = useNavigate();
   const classes = useStyles();
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+
   
   useEffect(() => {
     // axios.get(`/users/${usersId}`).then((res) => {
