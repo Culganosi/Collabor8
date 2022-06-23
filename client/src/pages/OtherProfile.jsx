@@ -293,8 +293,8 @@ export default function OtherProfile() {
                       <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
                         Connect
                       </Button>
-
                     }
+                    
                   </p>
 
                 </CardContent>

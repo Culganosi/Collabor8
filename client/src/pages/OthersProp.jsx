@@ -137,45 +137,19 @@ return (
               {/* <Typography className={classes.bio}></Typography> */}
               <Box textAlign="center" style={{padding: 0, marginTop: 15}}>
 
-              {chatId? 
+              {chatId ?
+                      //If the user logged in already has a connection with the otherUser
+                      <Button size="small" variant="contained" color="secondary" onClick={goToChat}>
+                        Message
+                      </Button>
 
-                //If the user logged in already has a connection with the otherUser
-                <Button
-                  onClick={goToChat}
-                  style={{
-                    borderRadius: 10,
-                    margin: 2,
-                    backgroundColor: "#4A5AB9",
-                    color: "white",
-                    padding: "5px 10px",
-                    fontSize: "10px",
-                  }}
-                  variant="contained"
-                >
-                  Message
-                  {/* <EmailIcon /> */}
-                </Button>
-
-                :
-
-                //If no chat connection exists yet
-                <Button
-                  onClick={makeNewChat}
-                  style={{
-                    margin: 2,
-                    borderRadius: 10,
-                    backgroundColor: "#303FA0",
-                    color: "white",
-                    padding: "5px 10px",
-                    fontSize: "10px",
-                  }}
-                  variant="contained"
-                >
-                  Connect
-                  {/* <EmailIcon /> */}
-                </Button>
-
-                }
+                      :
+                      
+                      //Otherwise, create connection
+                      <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
+                        Connect
+                      </Button>
+              }
 
               </Box>
 
