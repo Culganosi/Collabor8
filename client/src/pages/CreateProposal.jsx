@@ -125,12 +125,11 @@ export default function CreateProposal() {
         </Typography>
       </Container>
 
-      <Box border={2} padding={5} margin={6} borderRadius={16}>
-        <Grid container justify="center">
+      <Box border={2} padding={5} margin={6} borderRadius={16} borderColor="#363667">
+        <Grid container justify="center" alignItems="stretch">
           <Grid item xs={8}>
-            <Paper className={classes.createprofile} elevation={8}>
+            <Paper className={classes.createprofile} elevation={8}  style={{padding: "80px"}}>
               <CardContent className={classes.cardContent}>
-               
                 <Typography
                   className={classes.title}
                   variant="h5"
@@ -146,7 +145,7 @@ export default function CreateProposal() {
                     rows={1}
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                     value={title}
                     onChange={(event) => setTitle(event.target.value)}
                   />
@@ -178,13 +177,14 @@ export default function CreateProposal() {
 
 
 
-
+                <br />
                 <Typography
                   className={classes.title}
                   variant="h5"
                   color="secondary"
+                  style={{marginBottom: "10px"}}
                 >
-                  What is the proposal about, in 100 characters or less?
+                  Add an elevator pitch - 100 characters or less
                 </Typography>
                 <div>
                   <TextField
@@ -195,7 +195,7 @@ export default function CreateProposal() {
                     rows={1}
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                     value={shortDescription}
                     onChange={(event) =>
                       setShortDescription(event.target.value)
@@ -204,42 +204,47 @@ export default function CreateProposal() {
                 </div>
 
                 <br />
-
-                <Typography component="h5" variant="h5" color="secondary">
+                  <br />
+                <Typography component="h5" variant="h5" color="secondary" style={{marginBottom: "10px"}}>
                   Who are you seeking to collaborate with?
                 </Typography>
                 <Grid container>
                   <Grid item xs={10}>
                     <ToggleButtonGroup
                       fullWidth="true"
-                      color="warning"
+                      color="primary"
                       value={seeking}
                       orientation={"horizontal"}
                       size={"medium"}
                       exclusive
                       onChange={(event) => setSeeking([event.target.value])}
                     >
-                      <ToggleButton value="UX/UI designer">
+                      <ToggleButton value="UX/UI designer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         UX/UI designer
                       </ToggleButton>
-                      <ToggleButton value="Front-end developer">
+                      <ToggleButton value="Front-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Front-end developer
                       </ToggleButton>
-                      <ToggleButton value="Back-end developer">
+                      <ToggleButton value="Back-end developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Back-end developer
                       </ToggleButton>
-                      <ToggleButton value="Full-stack developer">
+                      <ToggleButton value="Full-stack developer" style={{borderRadius: "15px", marginRight: "10px"}}>
                         Full-stack developer
                       </ToggleButton>
                     </ToggleButtonGroup>
                   </Grid>
                 </Grid>
+
+
+                <br />
                 <Typography
                   className={classes.title}
                   variant="h5"
                   color="secondary"
+                  style={{marginBottom: "10px"}}
                 >
-                  A more detailed description
+              
+                  Expand on your idea in more detail
                 </Typography>
                 <div>
                   <TextField
@@ -251,12 +256,12 @@ export default function CreateProposal() {
                     color="secondary"
                     value={description}
                     onChange={(event) => setDescription(event.target.value)}
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                   />
                 </div>
               </CardContent>
               <div>
-                <Grid container spacing={2} justifyContent="center">
+                <Grid container spacing={2} justifyContent="flex-end" style={{paddingRight: 15, marginTop: 5}}>
                   <Grid item>
                     <Button
                       variant="contained"

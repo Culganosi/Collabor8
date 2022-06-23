@@ -10,7 +10,7 @@ function SocialListItem({setSocialMedia}) {
     <Container style={{padding: 0}}>
       <Grid container spacing={2}>
         <Grid item>
-          <Typography className={classes.title} variant="h6" color="secondary">
+          <Typography className={classes.title} variant="h5" color="secondary">
             Github
           </Typography>
           <Box component="form" noValidate autoComplete="off">
@@ -27,7 +27,7 @@ function SocialListItem({setSocialMedia}) {
         </Grid>
 
         <Grid item>
-          <Typography className={classes.title} variant="h6" color="secondary">
+          <Typography className={classes.title} variant="h5" color="secondary">
             LinkedIn
           </Typography>
           <Box component="form" noValidate autoComplete="off">
@@ -47,7 +47,7 @@ function SocialListItem({setSocialMedia}) {
           <Grid item>
             <Typography
               className={classes.title}
-              variant="h6"
+              variant="h5"
               color="secondary"
             >
               Portfolio
@@ -68,7 +68,7 @@ function SocialListItem({setSocialMedia}) {
           <Grid item>
             <Typography
               className={classes.title}
-              variant="h6"
+              variant="h5"
               color="secondary"
             >
               Twitter

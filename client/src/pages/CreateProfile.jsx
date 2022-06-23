@@ -141,10 +141,10 @@ export default function CreateProfile() {
         </Typography>
       </Container>
 
-      <Box border={2} padding={5} margin={6} borderRadius={16}>
+      <Box border={2} padding={5} margin={6} borderRadius={16} borderColor="#363667">
         <Grid container justify="center" alignItems="stretch">
           <Grid item>
-            <Paper className={classes.card} elevation={2} style={{padding: "20px 30px"}}>
+            <Paper className={classes.card} elevation={8} style={{padding: "80px"}}>
               <CardContent>
 
                 {/* Avatar selection here */}
@@ -152,7 +152,7 @@ export default function CreateProfile() {
                 <Typography
                     className={classes.title}
                     style={{marginBottom: "10px"}}
-                    variant="h6"
+                    variant="h5"
                     color="secondary"
                   >
                     The avatar is the window to the soul
@@ -174,7 +174,7 @@ export default function CreateProfile() {
                   <Typography
                     className={classes.title}
                     style={{marginBottom: "10px"}}
-                    variant="h6"
+                    variant="h5"
                     color="secondary"
                   >
                     Which role best describes you?
@@ -183,7 +183,7 @@ export default function CreateProfile() {
                     <Grid item xs={10}>
                       <ToggleButtonGroup
                         fullWidth="true"
-                        color="warning"
+                        color="primary"
                         value={role}
                         orientation={"horizontal"}
                         size={"medium"}
@@ -221,7 +221,7 @@ export default function CreateProfile() {
 
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
                   Describe yourself in 100 characters or less!
@@ -236,7 +236,7 @@ export default function CreateProfile() {
                     defaultValue=""
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                     value={shortBio}
                     onChange={(event) => setShortBio(event.target.value)}
                   />
@@ -245,7 +245,7 @@ export default function CreateProfile() {
                 <br />
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
                   And now write as much as you want to help Collab||8'ors know you better!
@@ -259,7 +259,7 @@ export default function CreateProfile() {
                     defaultValue={bio}
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                     onChange={(event) => setBio(event.target.value)}
                   />
                 </div>
@@ -267,7 +267,7 @@ export default function CreateProfile() {
                 
               </CardContent>
               <div>
-                <Grid container spacing={2} justifyContent="center">
+                <Grid container spacing={2} justifyContent="flex-end" style={{paddingRight: 15, marginTop: 5}}>
                   <Grid item>
                     <Button
                       variant="contained"

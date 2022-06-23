@@ -2,9 +2,9 @@
     width: 150px;
     height: 150px;
     border: none;
-    background: rgb(240, 221, 236);
+    background: #d7e8f1;
     border-radius: 50%;
-    color: rgb(54, 54, 103);
+    color: #363667;
 }
 
 .avatar-preview {
