@@ -8,16 +8,19 @@ import MovingSphere from "./MovingSphere";
 import Splashtext from "./Splashtext";
 // import Register from "./components/Register";
 // import Login from "./components/Login";
-// import '~video-react/dist/video-react.css'; // import css
-// <link rel="stylesheet" href="/css/video-react.css" />
-// import { Player } from 'video-react';
-// import CollabLogoIntro from "../media/CollabLogoIntro";
 
+import '~video-react/dist/video-react.css'; // import css
+// <link rel="stylesheet" href="/css/video-react.css" />
+import { Player } from 'video-react';
+import CollabLogoIntro from "../media/CollabLogoIntro";
+import LogoAnimation from "../components/LogoAnimation";
 export default function Splash() {
 
   return (
     <>
       <Wrapper className='App'>
+         {/* <LogoAnimation />    animation for logo */}
+         <CollabLogoIntro />
         <Background />
         <Splashtext /> 
         <Canvas className="canvas">

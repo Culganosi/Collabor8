@@ -10,7 +10,7 @@ import axios from "axios";
 import { DataContext } from "./../DataContext"
 import useStyles from '../styles';
 import { Container, Typography } from '@material-ui/core'
-import purplewave from "../images/purplewave.webp";
+import purplewave from "../media/purplewave.webp";
 import styled from "styled-components"
 
 export default function Register() {
