@@ -36,7 +36,7 @@ export default function LogoAnimation() {
         style={{
           position: "absolute",
           // height:"100vh",
-          width: "130rem",
+          // width: "130rem",
           left: 0,
           top: 0,
           zIndex:100,
