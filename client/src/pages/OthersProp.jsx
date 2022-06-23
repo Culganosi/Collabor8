@@ -56,6 +56,13 @@ export default function OthersProp() {
   
   //------------------REFRESH
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+
   //Get info about the proposal and author
   useEffect(() => {
 
@@ -135,9 +142,9 @@ return (
                 //If the user logged in already has a connection with the otherUser
                 <Button
                   onClick={goToChat}
-                  style={{ margin: 2 }}
                   style={{
                     borderRadius: 10,
+                    margin: 2,
                     backgroundColor: "#4A5AB9",
                     color: "white",
                     padding: "5px 10px",
@@ -154,8 +161,8 @@ return (
                 //If no chat connection exists yet
                 <Button
                   onClick={makeNewChat}
-                  style={{ margin: 2 }}
                   style={{
+                    margin: 2,
                     borderRadius: 10,
                     backgroundColor: "#303FA0",
                     color: "white",

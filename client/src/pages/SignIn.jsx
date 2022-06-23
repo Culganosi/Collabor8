@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   CssBaseline,
   Avatar,
@@ -17,6 +17,12 @@ import useStyles from "../styles";
 
 export default function SignIn() {
   const classes = useStyles();
+  
+  //Scroll to top when entering page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
 
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>

@@ -1,5 +1,5 @@
 import "./Forms.css";
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Button from "@material-ui/core/Button";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -14,6 +14,14 @@ import purplewave from "../media/purplewave.webp";
 import styled from "styled-components"
 
 export default function Register() {
+
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+
+    
+    
   const classes = useStyles();
 
   const navigate = useNavigate();

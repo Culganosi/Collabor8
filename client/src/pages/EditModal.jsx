@@ -54,6 +54,12 @@ export default function EditModal() {
     });
   }, []);
 
+    //Scroll to top when entering page
+    useEffect(() => {
+      window.scrollTo(0, 0)
+    }, [])
+  
+
 
  //Only call "submit edit proposal" once the image is there
  useEffect(() => {

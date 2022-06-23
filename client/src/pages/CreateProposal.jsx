@@ -38,7 +38,12 @@ export default function CreateProposal() {
   const navigate = useNavigate();
   const classes = useStyles();
 
+  //Scroll to top when entering page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
+  
  //Only call "create profile" once the image has uploaded
  useEffect(() => {
   if (imageAsUrl) {
