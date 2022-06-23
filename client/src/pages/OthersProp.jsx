@@ -165,6 +165,10 @@ return (
                 {proposal.title}
                 </Typography>
 
+                <Typography className={classes.bio} style={{marginTop: -25}} color="primary" variant="h6">
+                <i>{proposal.shortDescription}</i>
+                </Typography>
+
               <img src={proposal.image}
                 className={classes.proposalImg}
                 alt="proposal img"
@@ -174,6 +178,7 @@ return (
               <Typography className={classes.title} variant="h6" color="textSecondary">
                 Looking for: {proposal.seeking && proposal.seeking.join(", ")}
               </Typography>
+
               <Typography className={classes.bio}>
                 {proposal.description}
               </Typography>
