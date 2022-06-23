@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import styled from "styled-components";
-import React , {Suspense} from "react";
+import React , {Suspense, Component} from "react";
 import { OrbitControls } from "@react-three/drei";
 // import { Fragment } from "react";
 import Background from "./Background";
@@ -8,7 +8,10 @@ import MovingSphere from "./MovingSphere";
 import Splashtext from "./Splashtext";
 // import Register from "./components/Register";
 // import Login from "./components/Login";
-
+// import '~video-react/dist/video-react.css'; // import css
+// <link rel="stylesheet" href="/css/video-react.css" />
+// import { Player } from 'video-react';
+// import CollabLogoIntro from "../media/CollabLogoIntro";
 
 export default function Splash() {
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import purplewave from "../images/purplewave.webp";
+import purplewave from "../media/purplewave.webp";
 
 export default function Background() {
   return (
