@@ -154,7 +154,7 @@ export default function OtherProfile() {
   }, [otherUser])
   
 
-  const userProposalsCards = userProposals.map((proposal) => {
+  const userProposalsCards = userProposals.filter(proposal => proposal).map((proposal) => {
     return (
       <Grid item={proposal}>
         <ProposalCardProfile
