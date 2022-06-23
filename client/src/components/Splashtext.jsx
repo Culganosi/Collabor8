@@ -62,7 +62,7 @@ const Wrapper = styled.div`
 // `;
 
 const Description = styled.p`
-  max-width: 350px;
+  max-width: 400px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: normal;
   font-size: 17px;
