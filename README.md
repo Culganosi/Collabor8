@@ -2,9 +2,9 @@
 
 Collab||8 is a platform where web developers and designers can share their ideas and find people with complementary skills to collaborate with.
 
-Users can create proposals for project ideas that they would like to bring to life and chat with others in real-time to discuss potential partnerships. 
+Users can create proposals for project ideas that they would like to bring to life and chat with others in real-time to discuss potential partnerships.
 
-A personalized dashboard will also recommend the user the newest proposals that seek their expertise and other others who may be a great fit for collaboration.
+A personalized dashboard will also recommend to each Collab||8or the newest proposals that seek their expertise and other others who may be a great fit for collaboration.
 
 ## Live app
 
@@ -17,7 +17,6 @@ Coming soon!
 !["My Profile"](https://github.com/Culganosi/Collabor8/blob/master/docs/MyProfile.png)
 !["Browse Proposals"](https://github.com/Culganosi/Collabor8/blob/master/docs/BrowseProposals.png)
 
-
 ## Stack
 
 NodeJS, Express, MongoDB Atlas, ReactJS, Material UI, Socket.io, Firebase, ThreeJS, Blender, Cat API, Joke API
@@ -25,6 +24,7 @@ NodeJS, Express, MongoDB Atlas, ReactJS, Material UI, Socket.io, Firebase, Three
 ## Dependecies
 
 ### Front-end
+
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@material-ui/core": "^4.12.4",
@@ -55,12 +55,11 @@ NodeJS, Express, MongoDB Atlas, ReactJS, Material UI, Socket.io, Firebase, Three
     "video-react": "^0.15.0",
     "web-vitals": "^2.1.4"
 
-
 ### Back-end
+
     "bcryptjs": "^2.4.3",
     "cookie-session": "^2.0.0",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "mongoose": "^6.3.6",
     "socket.io": "2.3.0"
-
