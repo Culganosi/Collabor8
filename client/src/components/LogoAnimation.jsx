@@ -1,6 +1,6 @@
 import React from 'react'
-import CollabLogoIntro from "../media/CollabLogoIntro.mp4";
-
+// import CollabLogoIntro from "../media/CollabLogoIntro.mp4";
+import IntroCollabPurple from "../media/IntroCollabPurple.mp4"
 // import { Player } from 'video-react';
 // import CollabLogoIntro from "../media/CollabLogoIntro.mp4";
 import "./LogoAnimation.css"
@@ -43,7 +43,7 @@ export default function LogoAnimation() {
           margin:0
         }}
       >
-        <source src={CollabLogoIntro} type="video/mp4" />
+        <source src={IntroCollabPurple} type="video/mp4" />
       </video>
       </>
     );

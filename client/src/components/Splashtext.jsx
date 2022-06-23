@@ -13,7 +13,7 @@ export default function Splashtext() {
     <Wrapper>
       <h1 className="welcome">COLLAB||8</h1> 
       <Description>
-        <h2>A collaborative tool for web developers and designers</h2>
+        <h2>A collaborative platform for web developers and designers</h2>
         <br/>
         <br />
         <Button
@@ -47,12 +47,12 @@ export default function Splashtext() {
 //styling for the splash page textbox that contains title & description
 const Wrapper = styled.div`
   position: relative;
-  max-width: 500px;
+  max-width: 600px;
   display: grid;
   gap: 50px;
   text-align: center;
   margin: 0 auto;
-  padding: 120px 20px 50px;
+  padding: 120px 0px 50px;
 `;
 
 // const Title = styled.h1`
