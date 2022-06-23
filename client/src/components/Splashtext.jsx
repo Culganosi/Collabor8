@@ -13,22 +13,20 @@ export default function Splashtext() {
     <Wrapper>
       <h1 className="welcome">COLLAB||8</h1> 
       <Description>
-        A collaborative tool for web developers and designers
-        <br />
-        <br />
+        <h2>A collaborative tool for web developers and designers</h2>
         <br/>
         <br />
         <Button
           size="small"
-          style={{ fontSize: 24 }}
+          style={{ fontSize: 24,margin:"0px 0px"}}
           href="/Register"
           variant="contained"
           color="secondary"
         >
           Register
         </Button>
-        <br />
-        <br />
+        {/* <br />
+        <br /> */}
         <Button
           size="small"
           style={{ fontSize: 24 }}
@@ -54,7 +52,7 @@ const Wrapper = styled.div`
   gap: 50px;
   text-align: center;
   margin: 0 auto;
-  padding: 140px 20px 100px;
+  padding: 120px 20px 50px;
 `;
 
 // const Title = styled.h1`
@@ -64,12 +62,12 @@ const Wrapper = styled.div`
 // `;
 
 const Description = styled.p`
-  max-width: 300px;
+  max-width: 350px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: normal;
   font-size: 17px;
-  line-height: 130%;
+  line-height: 180%;
   margin: 0 auto;
-  margin-top:-20px;
+  margin-top:-30px;
   padding:0;
 `;

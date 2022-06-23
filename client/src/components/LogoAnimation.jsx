@@ -10,28 +10,26 @@ import "./LogoAnimation.css"
 {/* <link rel="stylesheet" href="/css/video-react.css" /> */}
 // Has to be muted even if no sound autoplay true muted true 
 //position:100, muted: true 
+
 // export default function LogoAnimation() {
   
-
 //   return (
-
 // <Player className="logo"
 // playsInline
 // src={CollabLogoIntro}
 // // position={100}
 // muted={true}
 //  />
- 
-
-
 //     )
 // }
 
 
 export default function LogoAnimation() {    
   return (
+    <>
       <video
-      className="logo"
+        className="logo"
+        // onClick={() => removeVideo()}
         autoPlay
         muted
         loop
@@ -47,5 +45,6 @@ export default function LogoAnimation() {
       >
         <source src={CollabLogoIntro} type="video/mp4" />
       </video>
+      </>
     );
   }
