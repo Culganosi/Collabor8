@@ -41,7 +41,8 @@ export default function LogoAnimation() {
           width: "130rem",
           left: 0,
           top: 0,
-          zIndex:100
+          zIndex:100,
+          margin:0
         }}
       >
         <source src={CollabLogoIntro} type="video/mp4" />
