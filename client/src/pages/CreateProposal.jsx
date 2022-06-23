@@ -197,7 +197,7 @@ export default function CreateProposal() {
                     inputProps={{ maxLength: 100 }}
                     label="Provide a one-line description"
                     multiline
-                    rows={1}
+                    rows={2}
                     variant="outlined"
                     color="secondary"
                     style={{ width: "100%" }}

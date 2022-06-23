@@ -237,7 +237,7 @@ export default function CreateProfile() {
                     inputProps={{ maxLength: 100 }}
                     label="Write a short & sweet intro"
                     multiline
-                    rows={1}
+                    rows={2}
                     defaultValue=""
                     variant="outlined"
                     color="secondary"
