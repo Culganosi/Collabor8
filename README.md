@@ -4,7 +4,7 @@ Collab||8 is a platform where web developers and designers can share their ideas
 
 Users can create proposals for project ideas that they would like to bring to life and chat with others in real-time to discuss potential partnerships.
 
-A personalized dashboard will also recommend to each Collab||8or the newest proposals that seek their expertise and other others who may be a great fit for collaboration.
+A personalized dashboard will also recommend to each Collab||8or the newest proposals that seek their expertise and other users who may be a great fit for collaboration.
 
 ## Live app
 
