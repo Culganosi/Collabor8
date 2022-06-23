@@ -8,15 +8,21 @@ import MovingSphere from "./MovingSphere";
 import Splashtext from "./Splashtext";
 // import Register from "./components/Register";
 // import Login from "./components/Login";
-
+// import '~video-react/dist/video-react.css'; // import css
+// <link rel="stylesheet" href="/css/video-react.css" />
+import { Player } from 'video-react';
+// import CollabLogoIntro from "../media/CollabLogoIntro";
+import LogoAnimation from "../components/LogoAnimation";
+import ".//Splashtext.css"
 
 export default function Splash() {
 
   return (
     <>
       <Wrapper className='App'>
+      <LogoAnimation />
         <Background />
-        <Splashtext /> 
+        <Splashtext className="textsplash"/> 
         <Canvas className="canvas">
         <OrbitControls enableZoom={false} />
         <ambientLight intensity={0.2} />
@@ -33,6 +39,7 @@ export default function Splash() {
 const Wrapper = styled.div`
 position: relative;
 background: #1f1144;
+padding:0;
 canvas {
   height: 500px;
 }

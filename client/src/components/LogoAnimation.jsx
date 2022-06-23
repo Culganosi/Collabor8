@@ -1,44 +1,50 @@
-import '~video-react/dist/video-react.css'; // import css
-<link rel="stylesheet" href="/css/video-react.css" />
-import { Player } from 'video-react';
-import CollabLogoIntro from "../media/CollabLogoIntro";
+import React from 'react'
+import CollabLogoIntro from "../media/CollabLogoIntro.mp4";
+
+// import { Player } from 'video-react';
+// import CollabLogoIntro from "../media/CollabLogoIntro.mp4";
+import "./LogoAnimation.css"
+// import "./../../node_modules/video-react/dist/video-react.css"; // import css
+
+// import '~video-react/dist/video-react.css'; // import css
+{/* <link rel="stylesheet" href="/css/video-react.css" /> */}
 // Has to be muted even if no sound autoplay true muted true 
 //position:100, muted: true 
-import React from 'react'
+// export default function LogoAnimation() {
+  
 
-export default function LogoAnimation() {
-  componentDidMount() {
-    this.setState({isLoading: true})
-  }
+//   return (
+
+// <Player className="logo"
+// playsInline
+// src={CollabLogoIntro}
+// // position={100}
+// muted={true}
+//  />
+ 
 
 
+//     )
+// }
+
+
+export default function LogoAnimation() {    
   return (
-
-<Player>
-{/* <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" /> */}
-{/* <CollabLogoIntro position="100" muted="true" /> */}
-<source src="../media/CollabLogoIntro" />
-</Player>
-
-
-    )
-}
-
-
-//CSS to add later 
-// img{  
-//   width:auto;
-//   height:100vh;
-//   animation:fadeout 5s ease-out 10s forwards;
-// }
-
-// @keyframes fadeout{
-//   0%{
-//     opacity:1
-//   }
-//   99%{
-//     opacity:0;
-//     display:block;
-//   }
-//   100%{opacity:0;display:none;}
-// }
+      <video
+      className="logo"
+        autoPlay
+        muted
+        loop
+        style={{
+          position: "absolute",
+          // height:"100vh",
+          width: "130rem",
+          left: 0,
+          top: 0,
+          zIndex:100
+        }}
+      >
+        <source src={CollabLogoIntro} type="video/mp4" />
+      </video>
+    );
+  }
