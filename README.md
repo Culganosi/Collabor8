@@ -12,6 +12,11 @@ Coming soon!
 
 ## Screenshots
 
+!["Splash Page"](https://github.com/Culganosi/Collabor8/blob/master/docs/Screen%20Shot%202022-06-23%20at%201.05.35%20PM.png)
+!["Dashboard"](https://github.com/Culganosi/Collabor8/blob/master/docs/Dashboard.png)
+!["My Profile"](https://github.com/Culganosi/Collabor8/blob/master/docs/MyProfile.png)
+!["Browse Proposals"](https://github.com/Culganosi/Collabor8/blob/master/docs/BrowseProposals.png)
+
 
 ## Stack
 
