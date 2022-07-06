@@ -102,12 +102,12 @@ app.use(function(req, res, next) {
 
 
 //-----Redirect to routes and pass them things imported above
-app.use("/chats", chatsRoutes(User, Chat))
-app.use("/auth", authRoutes(User, bcrypt))
-app.use("/options", optionsRoutes(Option))
-app.use("/proposals", proposalsRoutes(User, Proposal))
-app.use("/recommend", recommendRoutes(User, Proposal))
-app.use("/users", usersRoutes(User))
+app.use("/api/chats", chatsRoutes(User, Chat))
+app.use("/api/auth", authRoutes(User, bcrypt))
+app.use("/api/options", optionsRoutes(Option))
+app.use("/api/proposals", proposalsRoutes(User, Proposal))
+app.use("/api/recommend", recommendRoutes(User, Proposal))
+app.use("/api/users", usersRoutes(User))
 
 
 
@@ -133,7 +133,6 @@ app.get("/", (req, res) => {
             "PATCH /proposals",
             "DELETE /proposals/:proposalId",
         ],
-        "options route": [ "GET /options"],
         "authentication routes": [
             "POST /auth/register",
             "POST /auth/in",
