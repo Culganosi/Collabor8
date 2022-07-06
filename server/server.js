@@ -128,9 +128,9 @@ app.get("/", (req, res) => {
         ],
         "proposal routes": [
             "GET /proposals",
-            "GET /proposals/:proposalId",
             "POST /proposals",
-            "PATCH /proposals",
+            "GET /proposals/:proposalId",
+            "PATCH /proposals/::proposalId",
             "DELETE /proposals/:proposalId",
         ],
         "authentication routes": [
