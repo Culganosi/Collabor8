@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "postinstall": "npm install --prefix ./server"
+    }
+  }
+  
