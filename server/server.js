@@ -138,7 +138,8 @@ app.get("/", (req, res) => {
             "POST /auth/register",
             "POST /auth/in",
             "POST /auth/out",
-        ]
+        ],
+        "extra message": "hello"
     })
 })
 
