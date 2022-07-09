@@ -1,7 +1,7 @@
 {
   "name": "muidemo",
   "version": "0.1.0",
-  "proxy": "http://localhost:3001/",
+  "proxy": "https://collabor8-api.herokuapp.com/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.3",
