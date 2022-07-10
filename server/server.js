@@ -61,11 +61,12 @@ app.use(cookieSession({
 
 //app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
+
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     res.header("Access-Control-Allow-Origin", "https://localhost:3000");  
-    res.header("Access-Control-Allow-Origin", "https://6999-2607-fea8-3edf-f09f-992f-130-facc-2b11.ngrok.io/");  
-    res.header("Access-Control-Allow-Origin", "https://6999-2607-fea8-3edf-f09f-992f-130-facc-2b11.ngrok.io/");  
+    res.header("Access-Control-Allow-Origin", "https://collabor8-now.herokuapp.com/");  
+    res.header("Access-Control-Allow-Origin", "http://collabor8-now.herokuapp.com/");  
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
   });
