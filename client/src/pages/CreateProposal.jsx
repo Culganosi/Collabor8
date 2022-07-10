@@ -18,7 +18,7 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 
 //Import firebase config
-import {storage} from "./../config"
+import {storage} from "./../firebase-config"
 
 //CSS STYLE IMPORT
 import "./CreateProposal.css"
@@ -62,7 +62,6 @@ export default function CreateProposal() {
       image: imageAsUrl
     };
     axios.post("/proposals", proposalData).then((res) => {
-      console.log(res.data);
       navigate("/My-Profile");
     });
   };

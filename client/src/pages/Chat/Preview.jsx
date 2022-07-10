@@ -53,8 +53,6 @@ export default function Preview({previewData}) {
     //const previewClass = classNames('chat-preview', { "active": previewData._id==activeChatId});
     const partnerId = previewData.partner;
 
-    console.log(profiles)
-
     let previewStyle = {}
     if (previewData._id==activeChatId) {
       previewStyle = {background: "#f5e0df"}

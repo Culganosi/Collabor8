@@ -18,7 +18,6 @@ export default function SkillListEdit({skillsObject, setSkillsObject, oldProfile
 
     useEffect(() => {
         if(Object.keys(oldProfile) > 0) {
-            console.log(oldProfile.skills)
             setOldSkills(oldProfile.skills)
         }
     }, [oldProfile])

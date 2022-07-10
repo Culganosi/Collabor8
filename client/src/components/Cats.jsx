@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import { Container, Grid, Item, MenuList, MenuItem, Card, Divider, CardContent, Typography, Button, Box, CardActions, CardActionArea, CardMedia, Popover } from '@material-ui/core';
-import {CAT_API_KEY} from "./../config"
 import axios from "axios";
 import "./Cats.css";
 
@@ -13,7 +12,7 @@ export default function Cats() {
         axios.get("https://api.thecatapi.com/v1/images/search?mime_types=gif", {
             headers: {
                 // "Content-Type": "application/json",
-                'x-api-key': CAT_API_KEY
+                'x-api-key': process.env.REACT_APP_CAT_API_KEY
               }
         })
         .then(res => {

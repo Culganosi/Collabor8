@@ -177,7 +177,7 @@ const Chat = () => {
 
   //Set up connection
   useEffect(() => {
-    const connection = socketIoClient('http://localhost:3001');
+    const connection = socketIoClient('https://collabor8-api.herokuapp.com/');
     setConn(connection);
   },[])
 

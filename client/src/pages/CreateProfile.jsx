@@ -20,7 +20,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 //Import firebase config
-import {storage} from "./../config"
+import {storage} from "./../firebase-config"
 
 //CSS STYLE IMPORT
 import "./CreateProfile.css"
@@ -75,7 +75,6 @@ export default function CreateProfile() {
     };
 
     axios.patch("users/self", userData).then((res) => {
-      console.log(res.data);
       navigate("/Home");
     });
   };
@@ -118,7 +117,6 @@ export default function CreateProfile() {
     //Get the URL of the image
     uploadTask.on('state_changed', 
     (snapShot) => {
-      console.log(snapShot)
     }, (err) => {
       console.log(err)
     },

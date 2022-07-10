@@ -19,7 +19,7 @@ import {
   MenuItem,
 } from "@material-ui/core";
 //Import firebase config
-import {storage} from "./../config"
+import {storage} from "./../firebase-config"
 import "./CreateProposal.css"
 
 export default function EditModal() {
@@ -95,7 +95,6 @@ export default function EditModal() {
     };
 
     axios.patch(`/proposals/${proposalId}`, newData).then((res) => {
-      console.log(res.data);
       navigate(`/My-Profile/`);
     });
   };
