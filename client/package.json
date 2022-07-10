@@ -4,6 +4,7 @@
   "proxy": "https://collabor8-api.herokuapp.com/",
   "private": true,
   "engines": {
+    "npm": "8.3.1",
     "node": "16.14.0"
   },
   "dependencies": {
