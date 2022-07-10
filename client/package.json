@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "proxy": "https://collabor8-api.herokuapp.com/",
   "private": true,
+  "engines": {
+    "node": "16.14.0"
+  },
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
