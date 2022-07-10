@@ -114,7 +114,7 @@ app.use("/users", usersRoutes(User))
 //----The home route
 app.get("/", (req, res) => {
     res.json({
-        message: "Welcome to the Collab||8 server! 🎉",
+        message: "Welcome to the Collab||8 server! 🎉🎉",
         "user routes": [
             "GET /users",
             "GET /users/:userId",
