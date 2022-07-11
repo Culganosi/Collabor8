@@ -1,14 +1,6 @@
 {
   "name": "muidemo",
   "version": "0.1.0",
-  "proxy": {
-    "/api": {
-      "target": "https://collabor8-api.herokuapp.com/",
-      "pathRewrite": {
-        "^/api": "/"
-      }
-    }
-  },
   "private": true,
   "engines": {
     "npm": "8.3.1",
@@ -68,5 +60,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "http-proxy-middleware": "^2.0.6"
   }
 }

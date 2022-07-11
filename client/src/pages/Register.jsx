@@ -34,7 +34,7 @@ export default function Register() {
 
   //FUNCTION TO REGISTER IN
   const register = () => {
-    axios.post("api/auth/register", { userhandle, password })
+    axios.post("/api/auth/register", { userhandle, password })
       .then(response => {
         setSelf(response.data)
       })

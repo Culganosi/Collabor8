@@ -74,7 +74,7 @@ export default function CreateProfile() {
       avatar: imageAsUrl
     };
 
-    axios.patch("api/users/self", userData).then((res) => {
+    axios.patch("/api/users/self", userData).then((res) => {
       navigate("/Home");
     });
   };

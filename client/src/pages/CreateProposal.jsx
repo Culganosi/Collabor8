@@ -61,7 +61,7 @@ export default function CreateProposal() {
       status: "Active",
       image: imageAsUrl
     };
-    axios.post("api/proposals", proposalData).then((res) => {
+    axios.post("/api/proposals", proposalData).then((res) => {
       navigate("/My-Profile");
     });
   };

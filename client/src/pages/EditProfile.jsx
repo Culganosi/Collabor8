@@ -54,7 +54,7 @@ export default function EditProfile() {
         socialMedia,
       };
       
-      axios.patch("api/users/self", newData).then((res) => {
+      axios.patch("/api/users/self", newData).then((res) => {
         console.log(res.data);
         navigate("/My-Profile");
       });

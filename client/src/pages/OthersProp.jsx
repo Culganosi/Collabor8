@@ -46,7 +46,7 @@ export default function OthersProp() {
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("api/chats", {recipientId: author._id, firstMessageText: `Connection created on ${Date.now()}`})
+    axios.post("/api/chats", {recipientId: author._id, firstMessageText: `Connection created on ${Date.now()}`})
     .then((res) => {
         setActiveChatId(res.data.chatId)
         navigate("/chat")
@@ -68,12 +68,12 @@ export default function OthersProp() {
 
     async function getInfo () {
 
-      const proposalResponse = await axios.get(`api/proposals/${proposalId}`)
+      const proposalResponse = await axios.get(`/api/proposals/${proposalId}`)
       setProposal(proposalResponse.data)
 
       const authorId = proposalResponse.data.author
 
-      const authorResponse = await axios.get(`api/users/${authorId}`) 
+      const authorResponse = await axios.get(`/api/users/${authorId}`) 
       setAuthor(authorResponse.data)
     }
 
@@ -83,7 +83,7 @@ export default function OthersProp() {
 
     //See if the person logged in has a chat connection to the author
     useEffect(() => {
-      axios.get("api/chats/self/chat-previews")
+      axios.get("/api/chats/self/chat-previews")
       .then(res => {
         console.log("The response")
         console.log(res.data)

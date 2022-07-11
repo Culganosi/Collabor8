@@ -65,7 +65,7 @@ const Chat = () => {
   
         //Get most up to date info about users (e.g. if someone changed something)
         //TODO: We dno't need this on this page if people can not change userhandles... (meaning it would go in App.js?)
-        const usersRes = await axios.get("api/users");
+        const usersRes = await axios.get("/api/users");
         setProfiles(usersRes.data);
   
         //Make sure the Self is correct on refresh

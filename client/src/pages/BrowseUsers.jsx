@@ -26,7 +26,7 @@ export default function BrowseUsers() {
 
 
   useEffect(() => {
-    axios.get("api/users")
+    axios.get("/api/users")
     .then(res => {
       setProfiles(res.data)
       //Now the "profiles" state variables should hold the data (which is an object)

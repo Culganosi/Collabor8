@@ -46,7 +46,7 @@ export default function EditModal() {
   //-------Get existing data
 
   useEffect(() => {
-    axios.get(`api/proposals/${proposalId}`).then((res) => {
+    axios.get(`/api/proposals/${proposalId}`).then((res) => {
       setOldProposal(res.data);
       setSeekingRole(res.data.seeking[0]);
       setChecked(res.data.status == "Active")
@@ -94,14 +94,14 @@ export default function EditModal() {
       image: imageAsUrl
     };
 
-    axios.patch(`api/proposals/${proposalId}`, newData).then((res) => {
+    axios.patch(`/api/proposals/${proposalId}`, newData).then((res) => {
       navigate(`/My-Profile/`);
     });
   };
 
   //Submit deletion request
   const submitDeleteProposal = () => {
-    axios.delete(`api/proposals/${proposalId}`).then(() => {
+    axios.delete(`/api/proposals/${proposalId}`).then(() => {
       navigate(`/My-Profile/`);
     });
   };
