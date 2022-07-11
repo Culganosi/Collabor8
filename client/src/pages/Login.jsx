@@ -49,7 +49,7 @@ export default function Login() {
 
   //FUNCTION TO LOG IN
   const login = () => {
-    axios.post("api/auth/in", { userhandle, password })
+    axios.post("/auth/in", { userhandle, password })
       .then(response => {
         setSelf(response.data)
       })
