@@ -5,7 +5,7 @@
 	},
 	"proxies": {
 		"/api": {
-			"origin": "https://warbler-server-app.herokuapp.com" 
+			"origin": "https://collabor8-api.herokuapp.com/Login" 
 		}
 	}
 }
