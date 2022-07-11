@@ -4,7 +4,7 @@ function Logout() {
 
   const logout = () => {
     axios
-      .post(`/auth/out`)
+      .post(`api/auth/out`)
       .then((res) => {
         setSelf({});
         navigate("/Home");

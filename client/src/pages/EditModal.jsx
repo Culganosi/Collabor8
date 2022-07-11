@@ -46,7 +46,7 @@ export default function EditModal() {
   //-------Get existing data
 
   useEffect(() => {
-    axios.get(`/proposals/${proposalId}`).then((res) => {
+    axios.get(`api/proposals/${proposalId}`).then((res) => {
       setOldProposal(res.data);
       setSeekingRole(res.data.seeking[0]);
       setChecked(res.data.status == "Active")
@@ -94,14 +94,14 @@ export default function EditModal() {
       image: imageAsUrl
     };
 
-    axios.patch(`/proposals/${proposalId}`, newData).then((res) => {
+    axios.patch(`api/proposals/${proposalId}`, newData).then((res) => {
       navigate(`/My-Profile/`);
     });
   };
 
   //Submit deletion request
   const submitDeleteProposal = () => {
-    axios.delete(`/proposals/${proposalId}`).then(() => {
+    axios.delete(`api/proposals/${proposalId}`).then(() => {
       navigate(`/My-Profile/`);
     });
   };
@@ -310,7 +310,7 @@ export default function EditModal() {
                 </FormGroup>
               </CardContent>
               <div>
-                <Grid container spacing={2} justifyContent="center" justifyContent="flex-end" style={{paddingRight: 15, marginTop: 5}}>
+                <Grid container spacing={2} justifyContent="flex-end" style={{paddingRight: 15, marginTop: 5}}>
                   <Grid item>
                     <Button
                       variant="outlined"

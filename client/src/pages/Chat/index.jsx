@@ -65,11 +65,11 @@ const Chat = () => {
   
         //Get most up to date info about users (e.g. if someone changed something)
         //TODO: We dno't need this on this page if people can not change userhandles... (meaning it would go in App.js?)
-        const usersRes = await axios.get("/users");
+        const usersRes = await axios.get("api/users");
         setProfiles(usersRes.data);
   
         //Make sure the Self is correct on refresh
-        const selfUserRes = await axios.get('/users/self')
+        const selfUserRes = await axios.get('api/users/self')
         setSelf(selfUserRes.data);
 
         if(Object.keys(selfUserRes.data).length==0){
@@ -77,7 +77,7 @@ const Chat = () => {
         }
           
   
-        const chatPrevRes = await axios.get(`/chats/self/chat-previews`)
+        const chatPrevRes = await axios.get(`api/chats/self/chat-previews`)
         setChatPreviews(chatPrevRes.data);
   
         let defaultActiveChatId=""
@@ -107,7 +107,7 @@ const Chat = () => {
     useEffect(() => {
     async function refreshConvo () {
       if(activeChatId) {
-        const chatFullRes = await axios.get(`/chats/${activeChatId}`)
+        const chatFullRes = await axios.get(`api/chats/${activeChatId}`)
         setActiveChatFull(chatFullRes.data)
       }
     }
@@ -166,7 +166,7 @@ const Chat = () => {
 
 
     //Send message to database -> it will persist on refresh
-    axios.patch(`/chats/${activeChatId}`, {text: newMessage})
+    axios.patch(`api/chats/${activeChatId}`, {text: newMessage})
 
     //Refresh input field
     setNewMessage("")

@@ -31,7 +31,7 @@ export default function OwnProp() {
   const proposalId = params.id
 
   useEffect(() => {
-    axios.get(`/proposals/${proposalId}`)
+    axios.get(`api/proposals/${proposalId}`)
       .then((res) => {
         setProposal(res.data)
       })

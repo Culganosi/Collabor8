@@ -30,7 +30,7 @@ const ResponsiveAppBar = () => {
 
   const logout = () => {
     axios
-      .post(`/auth/out`)
+      .post(`api/auth/out`)
       .then((res) => {
         setSelf({});
         navigate("/");

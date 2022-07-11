@@ -111,7 +111,7 @@ export default function OtherProfile() {
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("/chats", { recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}` })
+    axios.post("api/chats", { recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}` })
       .then((res) => {
         setActiveChatId(res.data.chatId)
         navigate("/chat")
@@ -132,8 +132,8 @@ export default function OtherProfile() {
   useEffect(() => {
 
     Promise.all([
-      axios.get(`/users/${userId}`),
-      axios.get('/proposals')
+      axios.get(`api/users/${userId}`),
+      axios.get('api/proposals')
     ])
       .then((all) => {
         setOtherUser(all[0].data)
@@ -149,7 +149,7 @@ export default function OtherProfile() {
 
   //See if the person logged in has a chat connection to the otherUser
   useEffect(() => {
-    axios.get("/chats/self/chat-previews")
+    axios.get("api/chats/self/chat-previews")
       .then(res => {
         const chatPreviews = res.data
         for (let chat of chatPreviews) {

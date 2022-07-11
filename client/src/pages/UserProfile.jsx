@@ -50,14 +50,14 @@ export default function UserProfile() {
     //If the self variable is {}, load the info again
 
     //if(Object.keys(self).length==0) {
-    axios.get("/users/self")
+    axios.get("api/users/self")
       .then((res) => {
         // console.log(res.data.skills)
         setSelf(res.data)
       })
     //}
 
-    axios.get("/proposals/self")
+    axios.get("api/proposals/self")
       .then(res => {
         // console.log(res.data)
         setSelfProposals(res.data)

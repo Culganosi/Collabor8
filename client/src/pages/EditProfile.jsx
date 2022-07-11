@@ -34,7 +34,7 @@ export default function EditProfile() {
   
   useEffect(() => {
     // axios.get(`/users/${usersId}`).then((res) => {
-      axios.get('/users/self').then((res) => {
+      axios.get('api/users/self').then((res) => {
         setOldProfile(res.data);
         setRole(res.data.role);
       });
@@ -54,7 +54,7 @@ export default function EditProfile() {
         socialMedia,
       };
       
-      axios.patch("users/self", newData).then((res) => {
+      axios.patch("api/users/self", newData).then((res) => {
         console.log(res.data);
         navigate("/My-Profile");
       });

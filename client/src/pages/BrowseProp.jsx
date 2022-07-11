@@ -17,7 +17,7 @@ export default function BrowseProp() {
 
   const { proposals, setProposals } = useContext(DataContext);
   useEffect(() => {
-    axios.get("/proposals").then((res) => {
+    axios.get("api/proposals").then((res) => {
       setProposals(res.data);
     });
   }, []);

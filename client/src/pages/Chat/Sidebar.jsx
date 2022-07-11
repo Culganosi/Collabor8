@@ -53,10 +53,6 @@ export default function Sidebar() {
 //   </div>
 
 
-
-
-
-
     <Grid item xs={3} className={classes.borderRight500}>
       <List style={{maxHeight: 500, overflow: 'auto'}}>
 
