@@ -41,7 +41,7 @@ const ResponsiveAppBar = () => {
   //Get info about self
   useEffect(() => {
     if(Object.keys(self).length==0) {
-      axios.get("/users/self", { withCredentials: true })
+      axios.get("api/users/self", { withCredentials: true })
       .then(res => {
         setSelf(res.data)
       })

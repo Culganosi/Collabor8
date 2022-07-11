@@ -37,7 +37,7 @@ export default function Login() {
   //TEMP SHORTCUT TO LOG IN
   const shortcutLogin = (shortcutUserhandle) => {
     console.log(shortcutUserhandle)
-    axios.post("/auth/in", { userhandle: shortcutUserhandle, password: "123" })
+    axios.post("api/auth/in", { userhandle: shortcutUserhandle, password: "123" })
       .then(response => {
         setSelf(response.data)
       })

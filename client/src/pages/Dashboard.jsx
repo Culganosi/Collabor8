@@ -50,7 +50,7 @@ export default function Dashboard() {
 
 
     useEffect(() => {
-        axios.get("/recommend/proposals").then((res) => {
+        axios.get("api/recommend/proposals").then((res) => {
             setProposals(res.data);
         });
     }, []);
@@ -75,7 +75,7 @@ export default function Dashboard() {
     }
     //FETCH USERS -------------------------------------------------------
     useEffect(() => {
-        axios.get("/recommend/users")
+        axios.get("api/recommend/users")
             .then(res => {
                 setProfiles(res.data)
                 //Now the "profiles" state variables should hold the data (which is an object)
