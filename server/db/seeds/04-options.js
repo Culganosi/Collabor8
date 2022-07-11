@@ -9,7 +9,6 @@ const skills = {
     }
 }
 
-
 const roles = {
     title: "roles", 
     data: [

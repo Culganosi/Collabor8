@@ -1,6 +1,6 @@
 const seedProposals = [
     {
-        author: "the_fullstack_pancake",
+        author: "Sparkling-Alligator",
         "status": "Active",
         "title": "Chat web app",
         "seeking": [
@@ -22,7 +22,7 @@ const seedProposals = [
         ]
     },
     {
-        author: "Sparkling-Alligator",
+        author: "full_stack_pancake",
         "title": "Live video fitness",
         "status": "Active",
         "description": "I have in mind a fairly complex projects, the pitch being that it's an app where people who work from home can volunteer to host fitness classes or attend them, all for free. It will need to have a Zoom-like video sharing functionality, calendar integration, and potentially other cool features.\nI'm looking for a another full-stack developer that I can fully plan and execute this idea with from beginning to end. \nMessage me to discuss any potential interest and to share more ideas!",
@@ -30,46 +30,120 @@ const seedProposals = [
         "image": "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.pgcf5229kj?alt=media&token=d14ce5dc-8fc6-48a7-9007-4e63f69c1917",
         "seeking": [
             "Full-stack developer"
-          ],
-    }
+        ],
+    },
+    {
+        author: "troybarnes",
+        "title": "MovieSuggestions",
+        "status": "Active",
+        "description": "It is an app that suggests movies based on your preferences. You can link all your Netflix, Disney plus and Amazon account and it gives back suggestions based on the titles you have watched & favorited.",
+        "shortDescription": "Movie suggestion app based on your viewing history",
+        "image": "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.lydlqnsn8p?alt=media&token=9a230c70-6615-411a-a7c6-1af4f4567889",
+        "seeking": [
+            "Back-end developer"
+        ],
+    },
+    {
+        author: "troybarnes",
+        title: "ChoreCore",
+        status: "Active",
+        description: "A web app that suggests skilled workers near you, based on your location. There is also a rating system so you could get someone reliable.",
+        shortDescription: "Need help with small jobs around the house? This app is designed to help you get skilled people",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.25ekj28xkh?alt=media&token=979eaf7d-36dc-4201-97f2-44f861439f43",
+        seeking: [
+            "Full-stack developer"
+        ],
+    },
+    {
+        author: "Chewbacca",
+        title: "Wookie Translator",
+        status: "Active",
+        description: "GGGWARRRHHWWWW.",
+        shortDescription: "AAARARRRGWWWH.",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.zu4s8r7kdi?alt=media&token=0b96581b-f5fb-49eb-b30c-b548c4725189",
+        seeking: [
+            "Back-end developer"
+        ],
+    },
+    {
+        author: "sixseasons",
+        title: "ComicCom",
+        status: "Active",
+        description: "The app shows the upcoming comic-con events and has discussion rooms where users can talk about their interests.",
+        shortDescription: "Basically an online social media platform for people who love comic-con convention ",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.yjg9cgich6?alt=media&token=0b677d23-381b-4cbd-9c43-e1e0dd827228",
+        seeking: [
+            "UX/UI designer"
+        ],
+    },
+    {
+        author: "baconandeggs",
+        title: "RecipeGate",
+        status: "Active",
+        description: "You can enter in all your allergies, food intolerances, and health concerns and it gives back a list of recipes that other users have uploaded. The user can upload their own recipes as well as rate other recipes. ",
+        shortDescription: "An app that gives back recipes based on your health concern & allergies. ",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.c1fjwhfd1c?alt=media&token=e9f741b6-2d97-4a9b-939a-89683fa7ad0d",
+        seeking: [
+            "Full-stack developer"
+        ],
+    },
+    {
+        author: "Moe Szyslak",
+        title: "A website to promote Moe's Tavern",
+        status: "Active",
+        description: "Growing up, I had roundworm. Heck I was more worm than man some months. I dabbled in satanism until I was asked to leave. Oh and one month I ate nothing by aquarium fish.",
+        shortDescription: "I want to make a website to promote my bar but I need help designing it!",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.c8lku4p8k4?alt=media&token=d496ee5d-b64c-472e-890e-3a46984643b7",
+        seeking: [
+            "UX/UI designer"
+        ],
+    },
+    {
+        author: "baconandeggs",
+        title: "FoodandStuffButBetter",
+        status: "Active",
+        description: "I know I can make a lot of cash on this so come work on this amazing project and we can create an app that delivers meat straight to your door ",
+        shortDescription: "The title is pretty self explanatory. Have a good day.",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.ks7o7oi52n?alt=media&token=25650c1d-839a-4014-bb63-85c2dec719cf",
+        seeking: [
+            "Front-end developer"
+        ],
+    },
+    {
+        author: "Master Chief",
+        title: "Spartan Tinder",
+        status: "Active",
+        description: "We should definitely focus the app on Spartans or people that are attracted to helmets and not faces.",
+        shortDescription: "Spartans don't have a lot of time to look for love. Let's change that.",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.2xnqa1iaul?alt=media&token=392214cc-4d85-495c-821a-3ba3347fa199",
+        seeking: [
+            "Back-end developer"
+        ],
+    },
+    {
+        author: "NedQueens",
+        title: "Techdar",
+        status: "Active",
+        description: "I need someone who has more experience with databases. This will be a more complex project so I need people with previous experience.",
+        shortDescription: "It's basically reddit but only related to tech. ",
+        image: "https://firebasestorage.googleapis.com/v0/b/collab-or-8.appspot.com/o/images%2F1.g86rw4xyyi?alt=media&token=489ead65-fa7c-4ab9-ab2f-909b7881e6ce",
+        seeking: [
+            "Back-end developer"
+        ],
+    },
 
+    //Template
     // {
-    //     author: "kmyrtle0", //This will change to userIDs in the database
+    //     author: "",
+    //     title: "",
     //     status: "Active",
-    //     title: "Tinder for turtles",
-    //     description: "I want to make a social media dating app (for turtles!) with lots of cool features including video chats, romantic music playlists, ice breaker games and more. I'm good at front-end development and I already started fleshing out many ideas, but I'm looking for a partner who can focus more on organizing the database and buildig the server API. Message me to discuss more! :D",
-    //     seeking: ["Back-end developer"],
-    //     shortDescription: "A dating app for an untapped market",
-    //     image: "https://images.fineartamerica.com/images-medium-large-5/turtles-in-love-guillermo-julia.jpg"
-    // },
-    // {
-    //     author: "kmyrtle0",
-    //     status: "Active",
-    //     title: "Personal portfolio",
-    //     description: "I have built a draft of my personal portfolio, but I want someone with a good eye for design to have a look and give me some suggestions about how to make it appealing and easy to navigate. In return I'm open to lending my skills to any project of yours! Please get in touch!",
-    //     seeking: ["UX/UI designer"],
-    //     shortDescription: "Looking for critiques and suggestions from people with an eye for design!",
-    //     image: "https://alvarotrigo.com/blog/assets/imgs/2021-10-16/jack-web-developer-portfolio.jpeg"
-    // },
-    // {
-    //     author: "Sparkling-Alligator", 
-    //     status: "Active",
-    //     title: "Hobby-matching",
-    //     description: "I want to build an app that is similar to meetup.com but users can find and chat with users with similar hobbies directly and create and schedule events in their area. I have already done a lot of work on planning the functionality and design of the app according to the best user experience practices and accessibility standards. I'm looking for a full-stack developer to work on bringing this vision to life. If you're interested, please get in touch!",
-    //     seeking: ["Full-stack developer"],
-    //     shortDescription: "Like meetup.com but with direct matching",
-    //     image: "https://toggl.com/blog/wp-content/uploads/2018/10/productive-hobbies-940x588.jpg"
-    // },
-    // {
-    //     author: "kmyrtle0",
-    //     status: "Inactive",
-    //     title: "Concerts near you",
-    //     description: "An app that is like Google maps but specifically for concert events and has an integrated calendar.",
-    //     seeking: ["Back-end developer"],
-    //     shortDescription: "A Google Maps, calendar and Spotify mashup",
-    //     image: "https://torontoguardian.com/wp-content/uploads/2022/01/concert-gef7d57588_1280-1.jpg"
-    // },
-
+    //     description: "",
+    //     shortDescription: "",
+    //     image: "",
+    //     seeking: [
+    //         ""
+    //     ],
+    // }
 ]
 
 module.exports = seedProposals;

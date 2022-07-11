@@ -18,20 +18,6 @@
 //     ]
 // };
 
-// const chat2 = {
-//     participants: ["kmyrtle0", "lreardon2"], 
-//     messages: [
-//         {
-//             author: "lreardon2",
-//             text: "Hi kmyrtle0! I saw your proposal about getting feedback on the design of your portfolio - I would be happy to help!"
-//         },
-//         {
-//             author: "kmyrtle0",
-//             text: "Omg thanks a lot! Btw your Behance portfolio is amazing!"
-//         }
-//     ]
-// };
-
 
 const seedChats = []
 
