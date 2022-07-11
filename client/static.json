@@ -5,7 +5,7 @@
 	},
 	"proxies": {
 		"/api": {
-			"origin": "https://collabor8-api.herokuapp.com/Login" 
+			"origin": "https://collabor8-api.herokuapp.com/" 
 		}
 	}
 }
