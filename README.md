@@ -8,7 +8,7 @@ A personalized dashboard will also recommend to each Collab||8or the newest prop
 
 ## Live app
 
-Coming soon!
+Coming soon!!
 
 ## Screenshots
 
