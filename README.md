@@ -9,9 +9,10 @@ A personalized dashboard will also recommend to each Collab||8or the newest prop
 ## Live app
 
 The app is deployed on Heroku at [collabor8-now](https://collabor8-now.herokuapp.com/).
+
 The back-end API is deployed on Heroku at [collabor8-api](https://collabor8-api.herokuapp.com/).
 
-Some bug fixes of the site are in progress.
+**Note:** Some bug fixes of the site are in progress.
 
 ## Screenshots
 
