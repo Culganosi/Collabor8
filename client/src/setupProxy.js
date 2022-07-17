@@ -7,7 +7,7 @@ module.exports = function(app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'https://collabor8-api.herokuapp.com/',
+      target: process.env.REACT_APP_API_URL,
       changeOrigin: true,
       "pathRewrite": {
         "^/api": "/"
