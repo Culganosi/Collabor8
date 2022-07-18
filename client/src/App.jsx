@@ -56,26 +56,25 @@ function App() {
     {/* <Nav /> */}
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/People" element={<> <Nav/> <BrowseUsers /> </>} />
-        <Route path="/Proposals" element={<> <Nav/> <BrowseProp /> </>} />
-        <Route path="/Create-Profile" element={<> <Nav/> <CreateProfile /> </>} />
-        <Route path="/My-Profile" element={<> <Nav/> <UserProfile /> </>} />
-        <Route path="/Home" element={<> <Nav/> <Dashboard /> </>} />
-        <Route path="/Create-Proposal" element={<> <Nav/> <CreateProposal /> </>} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Register />} />
-        <Route path="/People/:id" element={<> <Nav/> <OtherProfile /> </>} />
-        <Route path="/People/:userId/:id" element={<> <Nav/> <OthersProp /> </>} />
-        <Route path="/Proposals/:id" element={<> <Nav/> <OthersProp /> </>} />
-        <Route path="/My-Profile/:id" element={<> <Nav/> <OwnProp /> </>} />
-        <Route path="/My-Profile/:id/edit" element={<> <Nav/> <EditModal /> </>} />
-        <Route path="/Chat" element={<> <Nav/> <Chat /> </>} />
-        <Route path="/Home/People/:id" element={<> <Nav/> <OtherProfile /> </>} />
-        <Route path="/Home/Proposals/:id" element={<> <Nav/> <OthersProp /> </>} />
-        <Route path="/Edit-Profile" element={<> <Nav/> <EditProfile /> </>} />
+        <Route path="/People" element={<> <Nav/> <BrowseUsers /><Footer /> </>} />
+        <Route path="/Proposals" element={<> <Nav/> <BrowseProp /><Footer /> </>} />
+        <Route path="/Create-Profile" element={<> <Nav/> <CreateProfile /><Footer /> </>} />
+        <Route path="/My-Profile" element={<> <Nav/> <UserProfile /><Footer /> </>} />
+        <Route path="/Home" element={<> <Nav/> <Dashboard /><Footer /></>} />
+        <Route path="/Create-Proposal" element={<> <Nav/> <CreateProposal /><Footer /> </>} />
+        <Route path="/Login" element={<><Login /><Footer /></>} />
+        <Route path="/Register" element={<><Register /><Footer /></>} />
+        <Route path="/People/:id" element={<> <Nav/> <OtherProfile /><Footer /> </>} />
+        <Route path="/People/:userId/:id" element={<> <Nav/> <OthersProp /><Footer /></>} />
+        <Route path="/Proposals/:id" element={<> <Nav/> <OthersProp /><Footer /></>} />
+        <Route path="/My-Profile/:id" element={<> <Nav/> <OwnProp /><Footer /></>} />
+        <Route path="/My-Profile/:id/edit" element={<> <Nav/> <EditModal /><Footer /></>} />
+        <Route path="/Chat" element={<> <Nav/> <Chat /><Footer /></>} />
+        <Route path="/Home/People/:id" element={<> <Nav/> <OtherProfile /><Footer /> </>} />
+        <Route path="/Home/Proposals/:id" element={<> <Nav/> <OthersProp /><Footer /></>} />
+        <Route path="/Edit-Profile" element={<> <Nav/> <EditProfile /><Footer /> </>} />
       </Routes>
     </>
-    <Footer />
 
     </DataContext.Provider>
   );
