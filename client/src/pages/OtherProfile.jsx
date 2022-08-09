@@ -129,23 +129,10 @@ export default function OtherProfile() {
   useEffect(() => {
     Promise.all([
       axios.get(`/api/users/${userId}`),
-      //axios.get("/api/proposals"),
       axios.get(`/api/proposals/author/${userId}`),
     ]).then((all) => {
       setOtherUser(all[0].data);
-
-      console.log(all[1].data);
-      // const proposals = all[1].data;
-      // const tempUserProposals = [];
-
-      // console.log(all[0].data.activeProposals);
-
-      // for (let proposalId of all[0].data.activeProposals) {
-      //   tempUserProposals.push(proposals[proposalId]);
-      // }
-      // setUserProposals(tempUserProposals);
-
-      //setUserProposals(all[1].data);
+      setUserProposals(all[1].data);
     });
   }, []);
 
@@ -162,23 +149,21 @@ export default function OtherProfile() {
   }, [otherUser]);
 
   //TODO: Fix the route
-  const userProposalsCards = userProposals
-    .filter((proposal) => proposal)
-    .map((proposal) => {
-      return (
-        <Grid item={proposal}>
-          <ProposalCardProfile
-            key={proposal._id}
-            _id={proposal._id}
-            author={proposal.author}
-            title={proposal.title}
-            shortDescription={proposal.shortDescription}
-            image={proposal.image}
-            seeking={proposal.seeking}
-          />
-        </Grid>
-      );
-    });
+  const userProposalsCards = userProposals.map((proposal) => {
+    return (
+      <Grid item={proposal}>
+        <ProposalCardProfile
+          key={proposal._id}
+          _id={proposal._id}
+          author={proposal.author}
+          title={proposal.title}
+          shortDescription={proposal.shortDescription}
+          image={proposal.image}
+          seeking={proposal.seeking}
+        />
+      </Grid>
+    );
+  });
 
   const classes = useStyles();
 
