@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./UserProfile.css"
+import "./UserProfile.css";
 import {
   Container,
   Grid,
@@ -32,7 +32,7 @@ import ProposalCardProfile from "../components/ProposalCardProfile";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { DataContext } from "./../DataContext"
+import { DataContext } from "./../DataContext";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -43,7 +43,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const styles = makeStyles((theme) => ({
-
   avatar: {
     verticalAlign: "middle",
     marginRight: theme.spacing(1),
@@ -68,23 +67,20 @@ const styles = makeStyles((theme) => ({
     padding: theme.spacing(2, 1, 1, 1),
   },
   img: {
-display:"flex",
-alignItems: "center",
-justifycontent:"center",
-  }
+    display: "flex",
+    alignItems: "center",
+    justifycontent: "center",
+  },
 }));
 
-
-
-//styling for when there are no active proposals 
+//styling for when there are no active proposals
 const styleObj = {
   fontSize: 30,
   color: "#DB7093",
   textAlign: "center",
   paddingTop: "70px",
-}
+};
 export default function OtherProfile() {
-
   /*
   - If messages the user before - select that chat as the chosen one and proceed to the chat
   - If never messaged the user before - send the init message, get the chat ID, set that as active chat ID, proceed to chat
@@ -98,70 +94,61 @@ export default function OtherProfile() {
   const [otherUser, setOtherUser] = useState({});
   const [userProposals, setUserProposals] = useState([]);
 
-  const [chatId, setChatId] = useState("")
+  const [chatId, setChatId] = useState("");
 
   const navigate = useNavigate();
 
   //----------------HELPER FUNCTIONS
 
   const goToChat = () => {
-    setActiveChatId(chatId)
-    navigate("/Chat")
-  }
+    setActiveChatId(chatId);
+    navigate("/Chat");
+  };
 
   const makeNewChat = () => {
     //Axios post with new message, then navigate to chat
-    axios.post("/api/chats", { recipientId: otherUser._id, firstMessageText: `Connection created on ${Date.now()}` })
-      .then((res) => {
-        setActiveChatId(res.data.chatId)
-        navigate("/chat")
+    axios
+      .post("/api/chats", {
+        recipientId: otherUser._id,
+        firstMessageText: `Connection created on ${Date.now()}`,
       })
-  }
-
+      .then((res) => {
+        setActiveChatId(res.data.chatId);
+        navigate("/chat");
+      });
+  };
 
   //-----------------REFRESH
 
-    //Scroll to top when entering page
-    useEffect(() => {
-      window.scrollTo(0, 0)
-    }, [])
-
-    
+  //Scroll to top when entering page
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   //Load info about the user and about the proposals
   useEffect(() => {
-
     Promise.all([
       axios.get(`/api/users/${userId}`),
-      axios.get('/api/proposals')
-    ])
-      .then((all) => {
-        setOtherUser(all[0].data)
-        const proposals = all[1].data
-        const tempUserProposals = [];
-        for (let proposalId of all[0].data.activeProposals) {
-          tempUserProposals.push(proposals[proposalId]);
-        }
-        setUserProposals(tempUserProposals);
-      })
-
+      axios.get(`/api/proposals/author/${userId}`),
+    ]).then((all) => {
+      setOtherUser(all[0].data);
+      setUserProposals(all[1].data);
+    });
   }, []);
 
   //See if the person logged in has a chat connection to the otherUser
   useEffect(() => {
-    axios.get("/api/chats/self/chat-previews")
-      .then(res => {
-        const chatPreviews = res.data
-        for (let chat of chatPreviews) {
-          if (chat.partner == otherUser._id) {
-            setChatId(chat._id)
-          }
+    axios.get("/api/chats/self/chat-previews").then((res) => {
+      const chatPreviews = res.data;
+      for (let chat of chatPreviews) {
+        if (chat.partner == otherUser._id) {
+          setChatId(chat._id);
         }
-      })
-  }, [otherUser])
-  
+      }
+    });
+  }, [otherUser]);
 
-  const userProposalsCards = userProposals.filter(proposal => proposal).map((proposal) => {
+  const userProposalsCards = userProposals.map((proposal) => {
     return (
       <Grid item={proposal}>
         <ProposalCardProfile
@@ -202,23 +189,27 @@ export default function OtherProfile() {
           </Typography>
         </Container>
       </div>
-      <Box sx={{ flexGrow: 1 }} >
+      <Box sx={{ flexGrow: 1 }}>
         <Grid container spacing={2} columns={16} justifyContent="center">
           <Grid item xs={3}>
             {/* OTHER USER PROFILE SECTION------------------------------------------ */}
             <Item>
               <Card>
                 <CardContent>
-                  <h1 style={{color: "#F50057"}}> {otherUser.userhandle} </h1>
+                  <h1 style={{ color: "#F50057" }}> {otherUser.userhandle} </h1>
                   <br />
                   <div className="avatar">
-                  <Avatar style={{ justifyContent: "center", display: "flex", alignItems:"center" }}
-
-                    alt="Username"
-                    src={otherUser.avatar}
-                    sx={{ width: 120, height: 120 }}
-                    classes={classes.chip}
-                  />
+                    <Avatar
+                      style={{
+                        justifyContent: "center",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                      alt="Username"
+                      src={otherUser.avatar}
+                      sx={{ width: 120, height: 120 }}
+                      classes={classes.chip}
+                    />
                   </div>
                   <br />
                   <p>
@@ -267,36 +258,45 @@ export default function OtherProfile() {
                         )}
                     </div>
                     <br />
-                    <h2 style={{color: "#303FA0"}}>{otherUser.role}</h2>
+                    <h2 style={{ color: "#303FA0" }}>{otherUser.role}</h2>
                     <Typography variant="body1">
+                      <p style={{ color: "#4A5AB9", marginTop: 7 }}>
+                        {otherUser.skills && otherUser.skills.join(" | ")}
+                      </p>
 
-                    <p style={{color: "#4A5AB9", marginTop: 7}}>{otherUser.skills && otherUser.skills.join(" | ")}</p>
+                      <Divider />
+                      <br />
 
-                    <Divider />
-                    <br />
-
-                    <h4 style={{textAlign: "left"}}>{otherUser.shortBio}</h4>
-                    {/* <Divider /> */}
-                    <p style={{textAlign: "left"}}>{otherUser.bio}</p>
+                      <h4 style={{ textAlign: "left" }}>
+                        {otherUser.shortBio}
+                      </h4>
+                      {/* <Divider /> */}
+                      <p style={{ textAlign: "left" }}>{otherUser.bio}</p>
                     </Typography>
                     <br />
 
-                    {chatId ?
+                    {chatId ? (
                       //If the user logged in already has a connection with the otherUser
-                      <Button size="small" variant="contained" color="secondary" onClick={goToChat}>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                        onClick={goToChat}
+                      >
                         Message
                       </Button>
-
-                      :
-                      
+                    ) : (
                       //Otherwise, create connection
-                      <Button size="small" variant="contained" color="secondary" onClick={makeNewChat}>
+                      <Button
+                        size="small"
+                        variant="contained"
+                        color="secondary"
+                        onClick={makeNewChat}
+                      >
                         Connect
                       </Button>
-                    }
-                    
+                    )}
                   </p>
-
                 </CardContent>
               </Card>
               {/* USER'S ACTIVE PROPOSALS----------------------------------------------------------- */}
@@ -311,7 +311,11 @@ export default function OtherProfile() {
                   </h1>
                   <Divider />
                   <br />
-                  <Grid container alignItems="stretch" style={{ display: 'flex', justifyContent: 'center' }}>
+                  <Grid
+                    container
+                    alignItems="stretch"
+                    style={{ display: "flex", justifyContent: "center" }}
+                  >
                     {userProposalsCards}
                     {userProposals.length == 0 ? (
                       <h4 style={styleObj}>
@@ -320,8 +324,7 @@ export default function OtherProfile() {
                       </h4>
                     ) : (
                       <></>
-                    )
-                    }
+                    )}
                   </Grid>
                 </CardContent>
               </Card>

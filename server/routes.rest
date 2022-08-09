@@ -106,6 +106,10 @@ GET http://localhost:3001/proposals/self/
 # Returns details of a proposal to be shown on the individual proposal page
 GET http://localhost:3001/proposals/62a7a11dcc37ccbcbce7b419
 
+### 
+# Return active proposals of an author
+GET http://localhost:3001/proposals/author/62cbd5d936f9f9845ba6c2c6
+
 ###
 
 #When the user creates a new proposal
