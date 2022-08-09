@@ -157,9 +157,42 @@ module.exports = (User, Proposal) => {
     console.log("In PATCH /proposals/:id");
 
     const inputFields = req.body;
-    Proposal.updateOne({ _id: req.params.proposalId }, inputFields)
+    const proposalId = req.params.proposalId;
+
+    console.log(inputFields);
+
+    const targetProposal = await Proposal.findById(proposalId);
+    const targetAuthor = await User.findById(targetProposal.author, {
+      activeProposals: 1,
+      inactiveProposals: 1,
+    });
+    console.log(targetAuthor);
+
+    if (inputFields.status == "Active" && targetProposal.status == "Inactive") {
+      //Move: inactive --> active
+      targetAuthor.activeProposals.push(proposalId);
+      const indexInInactiveList =
+        targetAuthor.inactiveProposals.indexOf(proposalId);
+      targetAuthor.inactiveProposals.splice(indexInInactiveList, 1);
+      targetAuthor.save();
+    } else if (
+      inputFields.status == "Inactive" &&
+      targetProposal.status == "Active"
+    ) {
+      //Move: active --> inactive
+      targetAuthor.inactiveProposals.push(proposalId);
+      const indexInActiveList =
+        targetAuthor.activeProposals.indexOf(proposalId);
+      targetAuthor.activeProposals.splice(indexInActiveList, 1);
+      targetAuthor.save();
+    }
+
+    //Update information within the proposal document
+    Proposal.updateOne(targetProposal, inputFields)
       .then(() => res.status(200).json({ message: "success" }))
       .catch((error) => res.status(400).json({ message: error.message }));
+
+    //TODO: If status change, update in list of author, too
   });
 
   //Permanently delete a proposal

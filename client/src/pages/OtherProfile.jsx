@@ -148,7 +148,6 @@ export default function OtherProfile() {
     });
   }, [otherUser]);
 
-  //TODO: Fix the route
   const userProposalsCards = userProposals.map((proposal) => {
     return (
       <Grid item={proposal}>
