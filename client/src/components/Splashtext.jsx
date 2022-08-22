@@ -1,24 +1,35 @@
 import styled from "styled-components";
-// import Login from "./Login";
-// import { Link } from 'react-router-dom'
+import React, { useContext } from "react";
 import { Button } from "@material-ui/core";
-import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import Register from "./Register";
-// import {MDCRipple} from '@material/ripple';
-// const buttonRipple = new MDCRipple(document.querySelector('.mdc-button'));
+import axios from "axios";
+import { DataContext } from "./../DataContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Splashtext() {
+  const navigate = useNavigate();
+  const { setSelf } = useContext(DataContext);
+
+  //FUNCTION TO LOG IN AS DEMO USER
+  const demoLogin = () => {
+    axios
+      .post("/api/auth/in", { userhandle: "DemoUser", password: "123" })
+      .then((response) => {
+        setSelf(response.data);
+      })
+      .then(() => navigate("/Home"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <Wrapper>
-      <h1 className="welcome">COLLAB||8</h1> 
+      <h1 className="welcome">COLLAB||8</h1>
       <Description>
         <h2>A collaborative platform for web developers and designers</h2>
-        <br/>
+        <br />
         <br />
         <Button
           size="small"
-          style={{ fontSize: 24,margin:"0px 0px"}}
+          style={{ fontSize: 24, margin: "0px 0px" }}
           href="/Register"
           variant="contained"
           color="secondary"
@@ -36,9 +47,11 @@ export default function Splashtext() {
         >
           Login
         </Button>
-        
 
-        
+        <br />
+        <DemoLogin type="button" onClick={() => demoLogin()}>
+          Demo login
+        </DemoLogin>
       </Description>
     </Wrapper>
   );
@@ -55,12 +68,6 @@ const Wrapper = styled.div`
   padding: 120px 0px 50px;
 `;
 
-// const Title = styled.h1`
-//   color: rgba(255, 255, 255, 1);
-//   font-weight: bold;
-//   font-size: 50px;
-// `;
-
 const Description = styled.p`
   max-width: 400px;
   color: rgba(255, 255, 255, 0.7);
@@ -68,6 +75,15 @@ const Description = styled.p`
   font-size: 17px;
   line-height: 180%;
   margin: 0 auto;
-  margin-top:-30px;
-  padding:0;
+  margin-top: -30px;
+  padding: 0;
+`;
+
+const DemoLogin = styled.p`
+  margin-top: 15px;
+  opacity: 40%;
+  font-size: 20px;
+  &:hover {
+    opacity: 100%;
+  }
 `;
