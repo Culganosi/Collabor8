@@ -81,7 +81,7 @@ export default function Register() {
                   color="warning"
                   id="outlined-multiline-flexible"
                   label="Password"
-                  helperText="Please enter your password"
+                  helperText="Please type in a password"
                   InputLabelProps={{
                     style: { color: "#CF9FFF" },
                   }}
