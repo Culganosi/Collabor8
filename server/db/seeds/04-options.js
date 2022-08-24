@@ -30,9 +30,8 @@ const skills = {
       "Adobe XD",
       "UX research",
       "Wireframing",
-      "Information architecture",
     ],
-    Other: ["Git", "Test-driven development", "VSCode"],
+    Other: ["Git", "TDD", "VSCode"],
   },
 };
 
