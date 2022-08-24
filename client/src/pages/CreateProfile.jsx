@@ -250,10 +250,13 @@ export default function CreateProfile() {
                   </Grid>
 
                   <br />
-                  <SkillListItem
-                    skillsObject={skillsObject}
-                    setSkillsObject={setSkillsObject}
-                  />
+                  {options && (
+                    <SkillListItem
+                      skillsObject={skillsObject}
+                      setSkillsObject={setSkillsObject}
+                      skillsOptions={options.skills}
+                    />
+                  )}
                 </Box>
 
                 {options && (
