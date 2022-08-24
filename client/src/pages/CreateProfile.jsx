@@ -68,7 +68,7 @@ export default function CreateProfile() {
     for (let skill of Object.keys(skillsObject)) {
       if (skillsObject[skill] == true) skills.push(skill);
     }
-
+    skills.sort();
     const userData = {
       role,
       skills,
@@ -221,30 +221,18 @@ export default function CreateProfile() {
                         exclusive
                         onChange={(event) => setRole(event.target.value)}
                       >
-                        <ToggleButton
-                          value="UX/UI designer"
-                          style={{ borderRadius: "15px", marginRight: "10px" }}
-                        >
-                          UX/UI designer
-                        </ToggleButton>
-                        <ToggleButton
-                          value="Front-end developer"
-                          style={{ borderRadius: "15px", marginRight: "10px" }}
-                        >
-                          Front-end developer
-                        </ToggleButton>
-                        <ToggleButton
-                          value="Back-end developer"
-                          style={{ borderRadius: "15px", marginRight: "10px" }}
-                        >
-                          Back-end developer
-                        </ToggleButton>
-                        <ToggleButton
-                          value="Full-stack developer"
-                          style={{ borderRadius: "15px", marginRight: "10px" }}
-                        >
-                          Full-stack developer
-                        </ToggleButton>
+                        {options &&
+                          options.roles.map((role) => (
+                            <ToggleButton
+                              value={role}
+                              style={{
+                                borderRadius: "15px",
+                                marginRight: "10px",
+                              }}
+                            >
+                              {role}
+                            </ToggleButton>
+                          ))}
                       </ToggleButtonGroup>
                     </Grid>
                   </Grid>
