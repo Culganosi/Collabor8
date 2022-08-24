@@ -1,33 +1,27 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import useStyles from "../styles";
 import { useState } from "react";
-import {
-  Typography,
-  Button,
-  Grid,
-} from "@material-ui/core";
+import { Typography, Button, Grid } from "@material-ui/core";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
+///
 
-
-export default function SkillListItem({skillsObject, setSkillsObject}) {
-
-  
+export default function SkillListItem({ skillsObject, setSkillsObject }) {
   const classes = useStyles();
   // const { uxui, full, front, back } = state;
- // const error = [uxui, full, front, back].filter((v) => v).length !== 1;
+  // const error = [uxui, full, front, back].filter((v) => v).length !== 1;
 
   const handleSkill = (event) => {
-    setSkillsObject(prev => {
+    setSkillsObject((prev) => {
       return {
         ...prev,
         [event.target.name]: event.target.checked,
-      }
-    })
+      };
+    });
   };
 
   const {
@@ -49,238 +43,230 @@ export default function SkillListItem({skillsObject, setSkillsObject}) {
     tdd,
     vscode,
   } = skillsObject;
-  
-  
 
   return (
     <Grid container>
-                    <Grid item style={{ marginBottom: 15 }}>
-                      <Typography
-                        className={classes.title}
-                        variant="h5"
-                        color="secondary"
-                      >
-                        What are some key skills you want to show off?
-                      </Typography>
-                    </Grid>
+      <Grid item style={{ marginBottom: 15 }}>
+        <Typography className={classes.title} variant="h5" color="secondary">
+          What are some key skills you want to show off?
+        </Typography>
+      </Grid>
 
-                    <Grid container wrap="nowrap">
-                      <FormControl                        
-                        component="fieldset"
-                        sx={{ m: 3 }}
-                        variant="standard"
-                      >
-                        <Grid container spacing={6}>
-                          <Grid item>
+      <Grid container wrap="nowrap">
+        <FormControl component="fieldset" sx={{ m: 3 }} variant="standard">
+          <Grid container spacing={6}>
+            <Grid item>
+              <FormLabel component="legend" style={{ color: "#363667" }}>
+                Front-end
+              </FormLabel>
+              <FormGroup style={{ marginTop: "10px", marginLeft: "0px" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={html}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="html"
+                    />
+                  }
+                  label="HTML"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={css}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="css"
+                    />
+                  }
+                  label="CSS"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={sass}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="sass"
+                    />
+                  }
+                  label="Sass"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={jquery}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="jquery"
+                    />
+                  }
+                  label="jQuery"
+                />
 
-                          <FormLabel component="legend" style={{color: "#363667"}}>Front-end</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "0px"}}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={html}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="html"
-                                />
-                              }
-                              label="HTML"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={css}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="css"
-                                />
-                              }
-                              label="CSS"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={sass}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="sass"
-                                />
-                              }
-                              label="Sass"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={jquery}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="jquery"
-                                />
-                              }
-                              label="jQuery"
-                            />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={reactjs}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="reactjs"
+                    />
+                  }
+                  label="ReactJS"
+                />
 
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={reactjs}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="reactjs"
-                                />
-                              }
-                              label="ReactJS"
-                            />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={angularjs}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="angularjs"
+                    />
+                  }
+                  label="AngularJS"
+                />
+              </FormGroup>
+            </Grid>
 
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={angularjs}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="angularjs"
-                                />
-                              }
-                              label="AngularJS"
-                            />
-                          </FormGroup>
-                        </Grid>
-                        
-                     
-                          <Grid item>
-                          <FormLabel component="legend" style={{color: "#363667"}}>Back-end</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "0px"}}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={nodejs}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="nodejs"
-                                />
-                              }
-                              label="NodeJS"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={express}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="express"
-                                />
-                              }
-                              label="Express"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  checked={sql}
-                                  onChange={handleSkill}
-                                  name="sql"
-                                />
-                              }
-                              label="SQL"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={mongodb}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="mongodb"
-                                />
-                              }
-                              label="MongoDB"
-                            />
-                          </FormGroup>
-                        </Grid>
-                        
-                     
-                          <Grid item>
+            <Grid item>
+              <FormLabel component="legend" style={{ color: "#363667" }}>
+                Back-end
+              </FormLabel>
+              <FormGroup style={{ marginTop: "10px", marginLeft: "0px" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={nodejs}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="nodejs"
+                    />
+                  }
+                  label="NodeJS"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={express}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="express"
+                    />
+                  }
+                  label="Express"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      checked={sql}
+                      onChange={handleSkill}
+                      name="sql"
+                    />
+                  }
+                  label="SQL"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={mongodb}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="mongodb"
+                    />
+                  }
+                  label="MongoDB"
+                />
+              </FormGroup>
+            </Grid>
 
-                          
-                          <FormLabel component="legend" style={{color: "#363667"}}>UX/UI</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "0px"}}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={photoshop}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="photoshop"
-                                />
-                              }
-                              label="Photoshop"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={figma}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="figma"
-                                />
-                              }
-                              label="Figma"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  checked={uxresearch}
-                                  onChange={handleSkill}
-                                  name="exresearch"
-                                />
-                              }
-                              label="UX Research"
-                            />
-                          </FormGroup>
-                        </Grid>
-                       
-                        
-                          <Grid item>
-                          <FormLabel component="legend" style={{color: "#363667"}}>Other</FormLabel>
-                          <FormGroup style={{marginTop: "10px", marginLeft: "0px"}}>
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  checked={git}
-                                  onChange={handleSkill}
-                                  name="git"
-                                />
-                              }
-                              label="Git"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={tdd}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="tdd"
-                                />
-                              }
-                              label="TDD"
-                            />
-                            <FormControlLabel
-                              control={
-                                <Checkbox
-                                  checked={vscode}
-                                  style={{color: "#363667", marginRight: "5px"}}
-                                  onChange={handleSkill}
-                                  name="vscode"
-                                />
-                              }
-                              label="VS Code"
-                            />
-                          </FormGroup>
-                        </Grid>
-                        </Grid>
-                      </FormControl>
-                    </Grid>
-                  </Grid>
-  )
+            <Grid item>
+              <FormLabel component="legend" style={{ color: "#363667" }}>
+                UX/UI
+              </FormLabel>
+              <FormGroup style={{ marginTop: "10px", marginLeft: "0px" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={photoshop}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="photoshop"
+                    />
+                  }
+                  label="Photoshop"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={figma}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="figma"
+                    />
+                  }
+                  label="Figma"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      checked={uxresearch}
+                      onChange={handleSkill}
+                      name="exresearch"
+                    />
+                  }
+                  label="UX Research"
+                />
+              </FormGroup>
+            </Grid>
+
+            <Grid item>
+              <FormLabel component="legend" style={{ color: "#363667" }}>
+                Other
+              </FormLabel>
+              <FormGroup style={{ marginTop: "10px", marginLeft: "0px" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      checked={git}
+                      onChange={handleSkill}
+                      name="git"
+                    />
+                  }
+                  label="Git"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={tdd}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="tdd"
+                    />
+                  }
+                  label="TDD"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={vscode}
+                      style={{ color: "#363667", marginRight: "5px" }}
+                      onChange={handleSkill}
+                      name="vscode"
+                    />
+                  }
+                  label="VS Code"
+                />
+              </FormGroup>
+            </Grid>
+          </Grid>
+        </FormControl>
+      </Grid>
+    </Grid>
+  );
 }

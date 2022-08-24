@@ -1,37 +1,35 @@
-
 const skills = {
-    title: "skills",
-    data: {
-        frontend: ["HTML", "CSS", "SASS", "jQuery", "ReactJS", "VueJS", "AngularJS"],
-        backend: ["NodeJS", "Express", "SQL", "MongoDB"], 
-        uxui: ["Photoshop", "Figma", "UX research"],
-        other: ["Git", "test-driven development", "VS Code"]
-    }
-}
+  title: "skills",
+  data: {
+    "Front-end": [
+      "HTML",
+      "CSS",
+      "SASS",
+      "jQuery",
+      "ReactJS",
+      "VueJS",
+      "AngularJS",
+    ],
+    "Back-end": ["NodeJS", "Express", "SQL", "MongoDB"],
+    "UX/UI": ["Photoshop", "Figma", "UX research"],
+    Other: ["Git", "test-driven development", "VS Code"],
+  },
+};
 
 const roles = {
-    title: "roles", 
-    data: [
-        "UX/UI designer", 
-        "Full-stack developer", 
-        "Front-end developer", 
-        "Back-end developer"
-    ]
-}
+  title: "roles",
+  data: [
+    "UX/UI designer",
+    "Full-stack developer",
+    "Front-end developer",
+    "Back-end developer",
+  ],
+};
 
 const socialMedia = {
-    title: "socialMedia", 
-    data: ["Portfolio", "GitHub", "LinkedIn", "Twitter", "Instagram"]
-}
+  title: "socialMedia",
+  data: ["Portfolio", "GitHub", "LinkedIn", "Twitter"],
+};
 
-const proposalCategories = {
-    title: "categories", 
-    data: ["Category 1", "Category 2", "Category 3"]
-}
-
-
-
-const options = [skills, roles, socialMedia, proposalCategories];
+const options = [skills, roles, socialMedia];
 module.exports = options;
-
-
