@@ -2,7 +2,7 @@ import * as React from "react";
 import useStyles from "../styles";
 import { Typography, Box, TextField, Grid, Container } from "@material-ui/core";
 
-function SocialListItem({ setSocialMedia, socialMediaOptions }) {
+function SocialListItem({ setSocialMedia, socialMedia, socialMediaOptions }) {
   const classes = useStyles();
 
   return (
@@ -24,6 +24,7 @@ function SocialListItem({ setSocialMedia, socialMediaOptions }) {
                   label="Enter URL"
                   variant="outlined"
                   color="secondary"
+                  value={socialMedia[socialMediaName]}
                   onChange={(event) => {
                     setSocialMedia((prev) => {
                       return {

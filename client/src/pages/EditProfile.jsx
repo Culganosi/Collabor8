@@ -2,7 +2,7 @@ import * as React from "react";
 import Paper from "@material-ui/core/Paper";
 import axios from "axios";
 import useStyles from "../styles";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Typography,
   Button,
@@ -14,73 +14,139 @@ import {
   CardMedia,
 } from "@material-ui/core";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import SkillListEdit from "../components/SkillListEdit";
+import SkillListItem from "../components/SkillListItem";
 import SocialListItem from "../components/SocialListItem";
 import { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function EditProfile() {
+//
+//Import firebase config
+import { storage } from "./../firebase-config";
+
+//CSS STYLE IMPORT
+import "./CreateProfile.css";
+
+export default function CreateProfile() {
   const navigate = useNavigate();
   const classes = useStyles();
 
-    //Scroll to top when entering page
-    useEffect(() => {
-      window.scrollTo(0, 0)
-    }, [])
+  const [options, setOptions] = useState("");
 
-    
+  const [role, setRole] = useState("");
+  const [bio, setBio] = useState("");
+  const [shortBio, setShortBio] = useState("");
+  const [socialMedia, setSocialMedia] = useState({});
 
-  
+  const [skillsObject, setSkillsObject] = useState({
+    default: false,
+  });
+
+  //Image upload variables
+  const [imageAsFile, setImageAsFile] = useState("");
+  const [imageAsUrl, setImageAsUrl] = useState("");
+  const [imageAsPreview, setImageAsPreview] = useState("");
+  const fileInputRef = useRef();
+
+  //Scroll to top when entering page
+  //Load options from API
   useEffect(() => {
-    // axios.get(`/users/${usersId}`).then((res) => {
-      axios.get('api/users/self').then((res) => {
-        setOldProfile(res.data);
-        setRole(res.data.role);
-      });
-    }, []);
-    
-    const submitEditProfile = () => {
-      const skills = [];
-      for (let skill of Object.keys(skillsObject)) {
-        if (skillsObject[skill] == true) skills.push(skill);
-      }
-      
-      const newData = {
-        role,
-        skills,
-        shortBio,
-        bio,
-        socialMedia,
-      };
-      
-      axios.patch("/api/users/self", newData).then((res) => {
-        console.log(res.data);
-        navigate("/My-Profile");
-      });
-      
+    window.scrollTo(0, 0);
+    axios.get("/api/options").then((res) => {
+      console.log(res.data);
+      setOptions(res.data);
+    });
+
+    axios.get("api/users/self").then((res) => {
+      setBio(res.data.bio);
+      setShortBio(res.data.bio);
+      setRole(res.data.role);
+      setSocialMedia(res.data.socialMedia);
+    });
+  }, []);
+
+  //Only call "create profile" once the image has uploaded
+  useEffect(() => {
+    if (imageAsUrl) {
+      createProfile();
+    }
+  }, [imageAsUrl]);
+
+  //Send the input to the database
+  const createProfile = () => {
+    const skills = [];
+    for (let skill of Object.keys(skillsObject)) {
+      if (skillsObject[skill] == true) skills.push(skill);
+    }
+    skills.sort();
+    const userData = {
+      role,
+      skills,
+      shortBio,
+      bio,
+      socialMedia,
+      avatar: imageAsUrl,
     };
-    
-    const [oldProfile, setOldProfile] = useState({});
 
-    const params = useParams();
-    const userId = params.id;
+    axios.patch("/api/users/self", userData).then((res) => {
+      navigate("/Home");
+    });
+  };
 
-    const [role, setRole] = React.useState(oldProfile.role);
-    const [bio, setBio] = React.useState(oldProfile.bio);
-    const [shortBio, setShortBio] = React.useState(oldProfile.shortBio);
-    const [socialMedia, setSocialMedia] = React.useState(
-      oldProfile.setSocialMedia
-    );
+  ///-----------For image upload
 
-    const [skillsObject, setSkillsObject] = React.useState({});
+  //When the circular button is clicked, redirect to click the file upload instead
+  const handleCircleClick = (event) => {
+    event.preventDefault();
+    fileInputRef.current.click();
+  };
 
-      const [value, setValue] = React.useState("Controlled");
-      const handleChange = (event) => {
-        setValue(event.target.value);
+  //When user chooses a new image, store it if it's valid
+  const handleImageAsFile = (e) => {
+    const image = e.target.files[0];
+    if (image && image.type.substr(0, 5) === "image") {
+      setImageAsFile((imageFile) => image);
+    }
+  };
+
+  //When the user's uploaded image changes
+  //read it into a data string and store it
+  useEffect(() => {
+    if (imageAsFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageAsPreview(reader.result);
       };
+      reader.readAsDataURL(imageAsFile);
+    }
+  }, [imageAsFile]);
 
-    
+  const handleFireBaseUpload = (e) => {
+    //Random name for storing image file
+    const randomFileName = (Math.random() + 1).toString(36);
+    //Upload the image
+    const uploadTask = storage
+      .ref(`/images/${randomFileName}`)
+      .put(imageAsFile);
+    //Get the URL of the image
+    uploadTask.on(
+      "state_changed",
+      (snapShot) => {},
+      (err) => {
+        console.log(err);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(randomFileName)
+          .getDownloadURL()
+          .then((fireBaseUrl) => {
+            setImageAsUrl(fireBaseUrl);
+          });
+      }
+    );
+  };
+
+  ///
 
   return (
     <div className={classes.container}>
@@ -93,129 +159,175 @@ export default function EditProfile() {
         </Typography>
       </Container>
 
-      <Box border={2} padding={5} margin={6} borderRadius={16}>
+      <Box
+        border={2}
+        padding={5}
+        margin={6}
+        borderRadius={16}
+        borderColor="#363667"
+      >
         <Grid container justify="center" alignItems="stretch">
           <Grid item>
-            <Paper className={classes.card} elevation={4}>
+            <Paper
+              className={classes.card}
+              elevation={8}
+              style={{ padding: "80px" }}
+            >
               <CardContent>
-                <CardMedia
-                  className={classes.createProfMedia}
-                  image="https://i.pinimg.com/474x/50/9b/1d/509b1dcaadfdc98a39c5e0bec21fc197.jpg"
-                />
-                <Grid container justify="center">
-                  <Grid item>
-                    <Button
-                      variant="outlined"
-                      color="secondary"
-                      component="label"
-                      style={{ marginTop: "30px" }}
-                    >
-                      Change Profile Picture
-                      <input type="file" hidden />
-                    </Button>
-                  </Grid>
-                </Grid>
+                {/* Avatar selection here */}
+
+                <Typography
+                  className={classes.title}
+                  style={{ marginBottom: "10px" }}
+                  variant="h5"
+                  color="secondary"
+                >
+                  The avatar is the window to the soul
+                </Typography>
+
+                {/* Display either the preview or the circular button */}
+                {imageAsPreview ? (
+                  <img
+                    src={imageAsPreview}
+                    className="avatar-preview"
+                    onClick={handleCircleClick}
+                  />
+                ) : (
+                  <button className="avatar-button" onClick={handleCircleClick}>
+                    Upload an image
+                  </button>
+                )}
+
+                {/* This is actually hidden */}
+                <form>
+                  <input
+                    type="file"
+                    inputProps={{ accept: "image/*" }}
+                    name="avatar"
+                    onChange={handleImageAsFile}
+                    style={{ display: "none" }}
+                    ref={fileInputRef}
+                  />
+                </form>
+
                 <Box>
                   <Typography
                     className={classes.title}
+                    style={{ marginBottom: "10px" }}
                     variant="h5"
                     color="secondary"
                   >
-                    Preferred Role
+                    Which role best describes you?
                   </Typography>
-
                   <Grid container>
                     <Grid item xs={10}>
                       <ToggleButtonGroup
                         fullWidth="true"
-                        color="warning"
+                        color="primary"
                         value={role}
                         orientation={"horizontal"}
                         size={"medium"}
                         exclusive
                         onChange={(event) => setRole(event.target.value)}
                       >
-                        <ToggleButton value="UX/UI designer">
-                          UX/UI designer
-                        </ToggleButton>
-                        <ToggleButton value="Front-end developer">
-                          Front-end developer
-                        </ToggleButton>
-                        <ToggleButton value="Back-end developer">
-                          Back-end developer
-                        </ToggleButton>
-                        <ToggleButton value="Full-stack developer">
-                          Full-stack developer
-                        </ToggleButton>
+                        {options &&
+                          options.roles.map((role) => (
+                            <ToggleButton
+                              value={role}
+                              style={{
+                                borderRadius: "15px",
+                                marginRight: "10px",
+                              }}
+                            >
+                              {role}
+                            </ToggleButton>
+                          ))}
                       </ToggleButtonGroup>
                     </Grid>
                   </Grid>
-              
-                  <SkillListEdit
-                    skillsObject={skillsObject}
-                    setSkillsObject={setSkillsObject}
-                    oldProfile={oldProfile}
-                  />
 
+                  <br />
+                  {options && (
+                    <SkillListItem
+                      skillsObject={skillsObject}
+                      setSkillsObject={setSkillsObject}
+                      skillsOptions={options.skills}
+                    />
+                  )}
                 </Box>
+
+                {options && (
+                  <SocialListItem
+                    socialMedia={socialMedia}
+                    setSocialMedia={setSocialMedia}
+                    socialMediaOptions={options.socialMedia}
+                  />
+                )}
+
+                <br />
 
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
-                  Short Bio
+                  Describe yourself in 100 characters or less!
                 </Typography>
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label=""
+                    inputProps={{ maxLength: 100 }}
                     multiline
-                    rows={1}
+                    rows={2}
                     defaultValue=""
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
-                    value={oldProfile.shortBio}
+                    style={{ width: "100%" }}
+                    value={shortBio}
                     onChange={(event) => setShortBio(event.target.value)}
                   />
                 </div>
-                <SocialListItem setSocialMedia={setSocialMedia} />
 
+                <br />
                 <Typography
                   className={classes.title}
-                  variant="h6"
+                  variant="h5"
                   color="secondary"
                 >
-                  Bio
+                  And now write as much as you want to help Collab||8'ors know
+                  you better!
                 </Typography>
                 <div>
                   <TextField
                     id="filled-multiline-static"
-                    label=""
                     multiline
                     rows={6}
-                    defaultValue={oldProfile.bio}
+                    defaultValue=""
+                    value={bio}
                     variant="outlined"
                     color="secondary"
-                    style={{ width: "75%" }}
+                    style={{ width: "100%" }}
                     onChange={(event) => setBio(event.target.value)}
                   />
                 </div>
               </CardContent>
               <div>
-                <Grid container spacing={2} justifyContent="center">
+                <Grid
+                  container
+                  spacing={2}
+                  justifyContent="flex-end"
+                  style={{ paddingRight: 15, marginTop: 5 }}
+                >
                   <Grid item>
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => submitEditProfile()}
+                      onClick={() => handleFireBaseUpload()}
                     >
-                      Save Changes
+                      Create Profile
                     </Button>
                   </Grid>
                   <Grid item>
-                  <Link to="/Home">
                     <Button
                       variant="outlined"
                       color="secondary"
@@ -223,7 +335,6 @@ export default function EditProfile() {
                     >
                       Cancel
                     </Button>
-                    </Link>
                   </Grid>
                 </Grid>
               </div>

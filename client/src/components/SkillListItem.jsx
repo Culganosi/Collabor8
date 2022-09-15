@@ -19,6 +19,7 @@ export default function SkillListItem({
   const classes = useStyles();
 
   const handleSkill = (event) => {
+    console.log(skillsObject);
     setSkillsObject((prev) => {
       return {
         ...prev,
@@ -27,25 +28,25 @@ export default function SkillListItem({
     });
   };
 
-  const {
-    html,
-    css,
-    sass,
-    jquery,
-    reactjs,
-    vuejs,
-    angularjs,
-    nodejs,
-    express,
-    sql,
-    mongodb,
-    photoshop,
-    figma,
-    uxresearch,
-    git,
-    tdd,
-    vscode,
-  } = skillsObject;
+  // const {
+  //   html,
+  //   css,
+  //   sass,
+  //   jquery,
+  //   reactjs,
+  //   vuejs,
+  //   angularjs,
+  //   nodejs,
+  //   express,
+  //   sql,
+  //   mongodb,
+  //   photoshop,
+  //   figma,
+  //   uxresearch,
+  //   git,
+  //   tdd,
+  //   vscode,
+  // } = skillsObject;
 
   return (
     <Grid container>
@@ -68,7 +69,7 @@ export default function SkillListItem({
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={html}
+                          checked={skillsObject[skill]}
                           style={{ color: "#363667", marginRight: "5px" }}
                           onChange={handleSkill}
                           name={skill}
