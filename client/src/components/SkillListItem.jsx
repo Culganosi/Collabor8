@@ -15,11 +15,9 @@ export default function SkillListItem({
   setSkillsObject,
   skillsOptions,
 }) {
-  console.log(skillsOptions);
   const classes = useStyles();
 
   const handleSkill = (event) => {
-    console.log(skillsObject);
     setSkillsObject((prev) => {
       return {
         ...prev,

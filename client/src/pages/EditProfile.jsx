@@ -52,7 +52,6 @@ export default function CreateProfile() {
   useEffect(() => {
     window.scrollTo(0, 0);
     axios.get("/api/options").then((res) => {
-      console.log(res.data);
       setOptions(res.data);
     });
 
@@ -61,6 +60,14 @@ export default function CreateProfile() {
       setShortBio(res.data.bio);
       setRole(res.data.role);
       setSocialMedia(res.data.socialMedia);
+
+      const oldSkills = {};
+
+      for (let skill of res.data.skills) {
+        oldSkills[skill] = true;
+      }
+
+      setSkillsObject(oldSkills);
     });
   }, []);
 
