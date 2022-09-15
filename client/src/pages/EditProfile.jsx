@@ -37,9 +37,7 @@ export default function CreateProfile() {
   const [shortBio, setShortBio] = useState("");
   const [socialMedia, setSocialMedia] = useState({});
 
-  const [skillsObject, setSkillsObject] = useState({
-    default: false,
-  });
+  const [skillsObject, setSkillsObject] = useState(undefined);
 
   //Image upload variables
   const [imageAsFile, setImageAsFile] = useState("");
@@ -61,13 +59,15 @@ export default function CreateProfile() {
       setRole(res.data.role);
       setSocialMedia(res.data.socialMedia);
 
-      const oldSkills = {};
+      const oldSkills = {
+        default: false,
+      };
 
       for (let skill of res.data.skills) {
         oldSkills[skill] = true;
       }
 
-      setSkillsObject(oldSkills);
+      setSkillsObject((prev) => oldSkills);
     });
   }, []);
 
@@ -254,7 +254,7 @@ export default function CreateProfile() {
                   </Grid>
 
                   <br />
-                  {options && (
+                  {options && skillsObject && (
                     <SkillListItem
                       skillsObject={skillsObject}
                       setSkillsObject={setSkillsObject}
