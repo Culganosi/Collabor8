@@ -108,7 +108,7 @@ export default function CreateProfile() {
     fileInputRef.current.click();
   };
 
-  //When user chooses a new image, store it if it's valid
+  //When user chooses a new image, store it if it's validy
   const handleImageAsFile = (e) => {
     const image = e.target.files[0];
     if (image && image.type.substr(0, 5) === "image") {

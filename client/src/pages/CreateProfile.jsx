@@ -250,6 +250,7 @@ export default function CreateProfile() {
                 {options && (
                   <SocialListItem
                     setSocialMedia={setSocialMedia}
+                    socialMedia={socialMedia}
                     socialMediaOptions={options.socialMedia}
                   />
                 )}
