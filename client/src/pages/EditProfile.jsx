@@ -331,7 +331,7 @@ export default function CreateProfile() {
                       color="secondary"
                       onClick={() => handleFireBaseUpload()}
                     >
-                      Create Profile
+                      Edit Profile
                     </Button>
                   </Grid>
                   <Grid item>
