@@ -21,7 +21,7 @@ function SocialListItem({ setSocialMedia, socialMedia, socialMediaOptions }) {
               <Box component="form" noValidate autoComplete="off">
                 <TextField
                   id="outlined-basic"
-                  label="Enter URL"
+                  label={socialMedia[socialMediaName] ? "" : "Enter URL"}
                   variant="outlined"
                   color="secondary"
                   value={socialMedia[socialMediaName]}

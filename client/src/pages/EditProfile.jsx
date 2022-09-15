@@ -58,6 +58,7 @@ export default function CreateProfile() {
       setShortBio(res.data.bio);
       setRole(res.data.role);
       setSocialMedia(res.data.socialMedia);
+      setImageAsPreview(res.data.avatar);
 
       const oldSkills = {
         default: false,
@@ -67,7 +68,7 @@ export default function CreateProfile() {
         oldSkills[skill] = true;
       }
 
-      setSkillsObject((prev) => oldSkills);
+      setSkillsObject(oldSkills);
     });
   }, []);
 
@@ -95,7 +96,7 @@ export default function CreateProfile() {
     };
 
     axios.patch("/api/users/self", userData).then((res) => {
-      navigate("/Home");
+      navigate("/My-Profile");
     });
   };
 
@@ -191,19 +192,11 @@ export default function CreateProfile() {
                 >
                   The avatar is the window to the soul
                 </Typography>
-
-                {/* Display either the preview or the circular button */}
-                {imageAsPreview ? (
-                  <img
-                    src={imageAsPreview}
-                    className="avatar-preview"
-                    onClick={handleCircleClick}
-                  />
-                ) : (
-                  <button className="avatar-button" onClick={handleCircleClick}>
-                    Upload an image
-                  </button>
-                )}
+                <img
+                  src={imageAsPreview}
+                  className="avatar-preview"
+                  onClick={handleCircleClick}
+                />
 
                 {/* This is actually hidden */}
                 <form>
@@ -331,7 +324,7 @@ export default function CreateProfile() {
                       color="secondary"
                       onClick={() => handleFireBaseUpload()}
                     >
-                      Edit Profile
+                      Save Changes
                     </Button>
                   </Grid>
                   <Grid item>
